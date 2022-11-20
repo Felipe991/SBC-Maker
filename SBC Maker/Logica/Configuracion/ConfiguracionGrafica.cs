@@ -12,16 +12,16 @@
         }
 
         public int Zoom { get => zoom; set => zoom = value; }
-        public void addPosicion(int x, int y, string nombreRegla)
+        public void addPosicion(int x, int y, Nodo nodo)
         {
-            this.posiciones.Add(new Posicion(x, y, nombreRegla));
+            this.posiciones.Add(new Posicion(x, y, nodo));
         }
         
-        public void deletePosicion(string nombreRegla)
+        public void deletePosicion(Nodo nodo)
         { 
           for(int i = 0; i < posiciones.Count; i++)
             {
-                if (posiciones[i].NombreRegla.Equals(nombreRegla))
+                if (posiciones[i].Nodo.Equals(nodo))
                 {
                     posiciones.RemoveAt(i);
                     break;
@@ -29,15 +29,15 @@
             }
         }
 
-        public void modifyPos(int x, int y, string nombreRegla)
+        public void modifyPos(int x, int y, Nodo nodo)
         {
             for (int i = 0; i < posiciones.Count; i++)
             {
-                if (posiciones[i].NombreRegla.Equals(nombreRegla))
+                if (posiciones[i].Nodo.Equals(nodo))
                 {
                     posiciones[i].X = x;
                     posiciones[i].Y = y;
-                    posiciones[i].NombreRegla = nombreRegla;
+                    posiciones[i].Nodo = nodo;
                 }
             }
         }

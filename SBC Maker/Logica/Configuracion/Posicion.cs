@@ -4,17 +4,17 @@
     {
         private int x;
         private int y;
-        private string nombreRegla;
+        private Nodo nodo;
 
-        public Posicion(int x, int y, string nombreRegla)
+        public Posicion(int x, int y, Nodo nodo)
         {
             this.X = x;
             this.Y = y;
-            this.NombreRegla = nombreRegla;
+            this.nodo = nodo;
         }
 
         public int X { get => x; set => x = value; }
         public int Y { get => y; set => y = value; }
-        public string NombreRegla { get => nombreRegla; set => nombreRegla = value; }
+        public Nodo Nodo { get => nodo; set => nodo = value; }
     }
 }
