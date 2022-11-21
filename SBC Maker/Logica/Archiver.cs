@@ -2,5 +2,9 @@
 {
     public class Archiver
     {
+        public Archiver()
+        {
+
+        }
     }
 }
