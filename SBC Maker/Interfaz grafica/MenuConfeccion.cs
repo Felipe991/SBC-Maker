@@ -84,9 +84,7 @@ namespace SBC_Maker
 
         private void panel1_Paint_1(object sender, PaintEventArgs e)
         {
-            Reglas.Items.Add("Regla 1");
-            Reglas.Items.Add("Regla 2");
-            Reglas.Items.Add("Regla 3");
+
         }
 
         private void toolStripButton1_Click_1(object sender, EventArgs e)
