@@ -1,6 +1,6 @@
-﻿namespace SBC_Maker
+﻿namespace SBC_Maker.Interfaz_grafica
 {
-    partial class MenuPrincipal
+    partial class MenuRegla
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // MenuPrincipal
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 411);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "MenuPrincipal";
-            this.Text = "MenuPrincipal";
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "MenuRegla";
         }
 
         #endregion

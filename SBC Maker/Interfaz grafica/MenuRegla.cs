@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SBC_Maker
+namespace SBC_Maker.Interfaz_grafica
 {
-    public partial class MenuPrincipal : Form
+    public partial class MenuRegla : Form
     {
-        public MenuPrincipal()
+        public MenuRegla()
         {
             InitializeComponent();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
