@@ -1,3 +1,5 @@
+using SBC_Maker.Interfaz_grafica;
+
 namespace SBC_Maker.Logica
 {
     public static class Program
@@ -11,7 +13,7 @@ namespace SBC_Maker.Logica
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MenuConfeccion());
+            Application.Run(new MenuRegla ());
         }
     }
 }
