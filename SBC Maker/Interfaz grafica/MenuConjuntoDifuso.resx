@@ -57,4 +57,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="verGraficoButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vgAADr4B6kKxwAAAAkFJREFUSEvtlr1v00AYxsM3A0JAgYVKLAikQJrajiN/SRYw0BURU9+F0AGpS/8C
+        pvwPSOwIoYqPhYkdCRYQFbCwsaAygIRgYIbnubx2nRCXGpFMeaRX8T333vu7s+/s1Cg7VE/sUK+ZxjQ1
+        A09NM/D/luOs7rPD9Ko0tzRJ8ABq6r9Ec9fAFU0KHMfxXivQj1H/VTNeOSL2liqB+/3ddqD7jt/tiDNW
+        hKLuQ9R93Yj0UbGHtVNwPU4OIfepFeoPiO+Wr1LpGpKsdN0K1Ju61zkm9p/aCbgdd+cB27AD9azd7h7G
+        qi9aofoBwLKkGCVJsgd5D5jrebfKodTfwFaQttC/ibw7XI3YtVE4oZjYfcRb93Jvrl5P9tuRXmVtBiY8
+        bwZm2g6M23WNxdnPZ+WG6XlG07t5iv22n15i/2KUKkzgHibzzonVcfa1/OsXMO5XIYYZZWB4tzH7b7av
+        rrCNSawXimyaJEjgPxHvF6POCbGrg88sLR0ABLNXH5tYndgEM29QJNBfxDayPd1w3d6cNI0qgT3sQrSf
+        A/Jiwb9x0iSItgOPUyWwE6oIz+ru6XjloOksaKJgqoHdx0GM4uEvA3P3csMx3416Z8WuDgbgc56MDSV2
+        KViOTA5oBZ1z9P8BrL/myYCJXQ7G2NxHEEh/BkbMwKPg0l09/pVZtqvxW/SZZwZkGgXzA8BXJaN4jvkv
+        IvOzjwTFc5z5C9Fyfo4ptrM+5omd36YN3N5Hcj2VkNWqT+YjP7ieSsiq2Rh58BNVrfYbumInAvZr/jQA
+        AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="addFuncionButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wAAADsABataJCQAAAQpJREFUOE+tlUEKwjAQRYsrz+BNvIaCgug9PIhuPILgTg8kegcRQfwvJCU1mba0
+        +fCgTWa+zWQSK0NTsRUXcRcfD8+M7QQxvbQWD/EWN7EXGw/PV8EcMcSamoiD+IqTmAlLzBFD7FGQmwiz
+        l1i6t34ilhxMG+LT+bWFe0s19+REDrn18inuU7AES2ePJXLxcBvFjlHktpp1GZKLB53h2oDdbFOXIcID
+        L9dbtEOb+hjigZdrWHosiOIHgwA9B//j8UbhgVd5w+JLLr4pxduGZqQ+Yxsbj/oGWgmOj3WOKX68AbHI
+        IRePhsZcDuQmGnp9kZO9voL4dA46Rc5dsIwxR0yyTEsUd8BfQFX9ABa4aHwlZO/SAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

@@ -16,5 +16,6 @@ namespace SBC_Maker.Interfaz_grafica
         {
             InitializeComponent();
         }
+
     }
 }
