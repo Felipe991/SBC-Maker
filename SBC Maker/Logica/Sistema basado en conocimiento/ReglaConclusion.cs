@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SBC_Maker.Logica
 {
-    public class Conclusion : Regla
+    public class ReglaConclusion : Regla
     {
         private string indicacion;
-        public Conclusion(string nombre, string? explicacion,string indicacion) : base(nombre, explicacion)
+        public ReglaConclusion(string nombre, string? explicacion,string indicacion) : base(nombre, explicacion)
         {
             this.Indicacion = indicacion;
         }

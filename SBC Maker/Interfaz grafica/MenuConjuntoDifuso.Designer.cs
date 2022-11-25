@@ -28,13 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.formsPlot1 = new ScottPlot.FormsPlot();
             this.SuspendLayout();
+            // 
+            // formsPlot1
+            // 
+            this.formsPlot1.Location = new System.Drawing.Point(62, 13);
+            this.formsPlot1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.formsPlot1.Name = "formsPlot1";
+            this.formsPlot1.Size = new System.Drawing.Size(622, 295);
+            this.formsPlot1.TabIndex = 0;
             // 
             // MenuConjuntoDifuso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 459);
+            this.Controls.Add(this.formsPlot1);
             this.Name = "MenuConjuntoDifuso";
             this.Text = "MenuConjuntoDifuso";
             this.ResumeLayout(false);
@@ -42,5 +52,7 @@
         }
 
         #endregion
+
+        private ScottPlot.FormsPlot formsPlot1;
     }
 }
