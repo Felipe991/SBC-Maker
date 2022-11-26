@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SBC_Maker.Interfaz_grafica;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,5 +18,34 @@ namespace SBC_Maker
             InitializeComponent();
         }
 
+        private void MenuConjuntoDifuso_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addFuncionButton_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl());
+        }
     }
 }
