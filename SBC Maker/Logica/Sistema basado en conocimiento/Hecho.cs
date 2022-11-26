@@ -3,9 +3,9 @@
     public class Hecho
     {
         private string respuestaFinal;
-        private float? valorCrisp;
+        private Double? valorCrisp;
 
-        public Hecho(string respuestaFinal, float valorCrisp)
+        public Hecho(string respuestaFinal, Double valorCrisp)
         {
             this.respuestaFinal = respuestaFinal;
             this.valorCrisp = valorCrisp;
@@ -14,10 +14,10 @@
         public Hecho()
         {
             this.respuestaFinal = "";
-            this.valorCrisp = new float();
+            this.valorCrisp = new Double();
         }
 
         public string RespuestaFinal { get => respuestaFinal; set => respuestaFinal = value; }
-        public float? ValorCrisp { get => valorCrisp; set => valorCrisp = value; }
+        public Double? ValorCrisp { get => valorCrisp; set => valorCrisp = value; }
     }
 }

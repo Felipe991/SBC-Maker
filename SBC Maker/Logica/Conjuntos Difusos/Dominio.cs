@@ -3,11 +3,11 @@
     public class Dominio
     {
         private string nombreUnidad;
-        private float rangoSalto;
-        private float limiteInferior;
-        private float limiteSuperior;
+        private Double rangoSalto;
+        private Double limiteInferior;
+        private Double limiteSuperior;
 
-        public Dominio(string nombreUnidad, float rangoSalto, float limiteInferior, float limiteSuperior)
+        public Dominio(string nombreUnidad, Double rangoSalto, Double limiteInferior, Double limiteSuperior)
         {
             this.NombreUnidad = nombreUnidad;
             this.RangoSalto = rangoSalto;
@@ -16,8 +16,8 @@
         }
 
         public string NombreUnidad { get => nombreUnidad; set => nombreUnidad = value; }
-        public float RangoSalto { get => rangoSalto; set => rangoSalto = value; }
-        public float LimiteInferior { get => limiteInferior; set => limiteInferior = value; }
-        public float LimiteSuperior { get => limiteSuperior; set => limiteSuperior = value; }
+        public Double RangoSalto { get => rangoSalto; set => rangoSalto = value; }
+        public Double LimiteInferior { get => limiteInferior; set => limiteInferior = value; }
+        public Double LimiteSuperior { get => limiteSuperior; set => limiteSuperior = value; }
     }
 }

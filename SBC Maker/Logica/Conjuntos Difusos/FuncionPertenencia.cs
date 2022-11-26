@@ -10,7 +10,7 @@
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
-        public virtual float CalcularPertenencia(float x)
+        public virtual Double CalcularPertenencia(Double x)
         {
             return 0;
         }

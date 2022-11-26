@@ -8,12 +8,12 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
 {
     public class FuncionTrapezoidal : FuncionPertenencia
     {
-        private float limIzquierdo;
-        private float centroIzq;
-        private float centroDer;
-        private float limDerecho;
+        private Double limIzquierdo;
+        private Double centroIzq;
+        private Double centroDer;
+        private Double limDerecho;
 
-        public FuncionTrapezoidal(float a, float b, float c, float d, string nombre) : base(nombre)
+        public FuncionTrapezoidal(Double a, Double b, Double c, Double d, string nombre) : base(nombre)
         {
             this.limIzquierdo = a;
             this.centroIzq = b;
@@ -21,12 +21,12 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
             this.limDerecho = d;
         }
 
-        public float LimIzquierdo { get => limIzquierdo; set => limIzquierdo = value; }
-        public float CentroIzq { get => centroIzq; set => centroIzq = value; }
-        public float CentroDer { get => centroDer; set => centroDer = value; }
-        public float LimDerecho { get => limDerecho; set => limDerecho = value; }
+        public Double LimIzquierdo { get => limIzquierdo; set => limIzquierdo = value; }
+        public Double CentroIzq { get => centroIzq; set => centroIzq = value; }
+        public Double CentroDer { get => centroDer; set => centroDer = value; }
+        public Double LimDerecho { get => limDerecho; set => limDerecho = value; }
 
-        public override float CalcularPertenencia(float x)
+        public override Double CalcularPertenencia(Double x)
         {
             if (x <= limIzquierdo || x >= limDerecho) { return 0; }
             if (x >= centroIzq && x <= centroDer) { return 1; }

@@ -47,5 +47,10 @@ namespace SBC_Maker
         {
             flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl());
         }
+
+        private void formsPlot1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

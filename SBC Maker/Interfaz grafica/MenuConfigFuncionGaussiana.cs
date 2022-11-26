@@ -31,5 +31,10 @@ namespace SBC_Maker.Interfaz_grafica
         {
 
         }
+
+        private void formsPlot1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
