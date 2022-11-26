@@ -58,14 +58,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="addFuncionButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="eliminarButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAQpJREFUOE+tlUEKwjAQRYsrz+BNvIaCgug9PIhuPILgTg8kegcRQfwvJCU1mba0
-        +fCgTWa+zWQSK0NTsRUXcRcfD8+M7QQxvbQWD/EWN7EXGw/PV8EcMcSamoiD+IqTmAlLzBFD7FGQmwiz
-        l1i6t34ilhxMG+LT+bWFe0s19+REDrn18inuU7AES2ePJXLxcBvFjlHktpp1GZKLB53h2oDdbFOXIcID
-        L9dbtEOb+hjigZdrWHosiOIHgwA9B//j8UbhgVd5w+JLLr4pxduGZqQ+Yxsbj/oGWgmOj3WOKX68AbHI
-        IRePhsZcDuQmGnp9kZO9voL4dA46Rc5dsIwxR0yyTEsUd8BfQFX9ABa4aHwlZO/SAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAEBSURBVDhP7dQ/SwJxHMfxK0kIdAmEhhYfQQ8hH4G2BY4K
+        NuXi0hBoODhYo7QIEjSJo4uLTrW6+gQElwiKxsD3h9/dcX/qrrv5PvDC7/H7fb934vmzYnKMJ3ziHQPk
+        kDojTFHCGVa4Q2x01wYeAr4w9lzPsPNcyxB1HMBNH0tco5WQel5xCzdvuDBlqlSxMKVJD2v7s5vQPTZo
+        w80hrqANGpqEei4RioY2TfnvRPYUofdNyUO/qBM11UzpW/P2hOJdDG7U69ExZeQ+X7KB2cAUA4/wjQL0
+        D7iBkwrOTelbK2Nryt/zgmecQI1RTjGHTvE/o6ebQAfrT4wPPELfzI5l7QE932gwI9vSFQAAAABJRU5E
+        rkJggg==
 </value>
   </data>
 </root>

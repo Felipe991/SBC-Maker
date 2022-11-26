@@ -16,6 +16,16 @@ namespace SBC_Maker
         public MenuConjuntoDifuso()
         {
             InitializeComponent();
+            IniciarGrafico();
+        }
+
+        private void IniciarGrafico()
+        {
+            formsPlot1.Plot.XAxis.Label("Unidades");
+            formsPlot1.Plot.YAxis.Label("Pertenencia");
+            formsPlot1.Plot.SetAxisLimits(-10, 10, 0, 1.2);
+            formsPlot1.Plot.Title(textBoxNombre.Text);
+            formsPlot1.Refresh();
         }
 
         private void MenuConjuntoDifuso_Load(object sender, EventArgs e)
@@ -51,6 +61,33 @@ namespace SBC_Maker
         private void formsPlot1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Nombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxNombre_Leave(object sender, EventArgs e)
+        {
+            formsPlot1.Plot.Title(textBoxNombre.Text);
+            formsPlot1.Refresh();
+        }
+
+        private void textBoxNombreUnidad_Leave(object sender, EventArgs e)
+        {
+            formsPlot1.Plot.XAxis.Label(textBoxNombreUnidad.Text);
+            formsPlot1.Refresh();
         }
     }
 }

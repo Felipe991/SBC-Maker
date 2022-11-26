@@ -35,5 +35,10 @@ namespace SBC_Maker.Interfaz_grafica
                     break;
             }
         }
+
+        private void eliminarButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

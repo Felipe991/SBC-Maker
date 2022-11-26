@@ -30,6 +30,8 @@
         {
             this.GuardarButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelLimDerecho = new System.Windows.Forms.Label();
+            this.textBoxLimDerecho = new System.Windows.Forms.TextBox();
             this.labelParametros = new System.Windows.Forms.Label();
             this.labelCentro = new System.Windows.Forms.Label();
             this.textBoxMedia = new System.Windows.Forms.TextBox();
@@ -37,8 +39,6 @@
             this.textBoxLimIzquierdo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.formsPlot1 = new ScottPlot.FormsPlot();
-            this.labelLimDerecho = new System.Windows.Forms.Label();
-            this.textBoxLimDerecho = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +67,25 @@
             this.panel2.Size = new System.Drawing.Size(776, 117);
             this.panel2.TabIndex = 26;
             // 
+            // labelLimDerecho
+            // 
+            this.labelLimDerecho.AutoSize = true;
+            this.labelLimDerecho.Location = new System.Drawing.Point(422, 35);
+            this.labelLimDerecho.Name = "labelLimDerecho";
+            this.labelLimDerecho.Size = new System.Drawing.Size(110, 20);
+            this.labelLimDerecho.TabIndex = 11;
+            this.labelLimDerecho.Text = "Limite Derecho";
+            // 
+            // textBoxLimDerecho
+            // 
+            this.textBoxLimDerecho.Location = new System.Drawing.Point(570, 32);
+            this.textBoxLimDerecho.Name = "textBoxLimDerecho";
+            this.textBoxLimDerecho.Size = new System.Drawing.Size(150, 27);
+            this.textBoxLimDerecho.TabIndex = 10;
+            this.textBoxLimDerecho.Text = "10";
+            this.textBoxLimDerecho.Enter += new System.EventHandler(this.textBoxLimDerecho_Enter);
+            this.textBoxLimDerecho.Leave += new System.EventHandler(this.textBoxLimDerecho_Leave);
+            // 
             // labelParametros
             // 
             this.labelParametros.AutoSize = true;
@@ -92,6 +111,8 @@
             this.textBoxMedia.Size = new System.Drawing.Size(150, 27);
             this.textBoxMedia.TabIndex = 7;
             this.textBoxMedia.Text = "0";
+            this.textBoxMedia.Enter += new System.EventHandler(this.textBoxMedia_Enter);
+            this.textBoxMedia.Leave += new System.EventHandler(this.textBoxMedia_Leave);
             // 
             // labelLimiteIzquierdo
             // 
@@ -101,7 +122,6 @@
             this.labelLimiteIzquierdo.Size = new System.Drawing.Size(117, 20);
             this.labelLimiteIzquierdo.TabIndex = 6;
             this.labelLimiteIzquierdo.Text = "Limite Izquierdo";
-            this.labelLimiteIzquierdo.Click += new System.EventHandler(this.labelDesviacionEstandar_Click);
             // 
             // textBoxLimIzquierdo
             // 
@@ -110,6 +130,8 @@
             this.textBoxLimIzquierdo.Size = new System.Drawing.Size(150, 27);
             this.textBoxLimIzquierdo.TabIndex = 5;
             this.textBoxLimIzquierdo.Text = "-10";
+            this.textBoxLimIzquierdo.Enter += new System.EventHandler(this.textBoxLimIzquierdo_Enter);
+            this.textBoxLimIzquierdo.Leave += new System.EventHandler(this.textBoxLimIzquierdo_Leave);
             // 
             // panel1
             // 
@@ -121,30 +143,13 @@
             // 
             // formsPlot1
             // 
+            this.formsPlot1.Enabled = false;
             this.formsPlot1.Location = new System.Drawing.Point(5, 4);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.formsPlot1.Name = "formsPlot1";
             this.formsPlot1.Size = new System.Drawing.Size(766, 253);
             this.formsPlot1.TabIndex = 0;
             this.formsPlot1.Load += new System.EventHandler(this.formsPlot1_Load);
-            // 
-            // labelLimDerecho
-            // 
-            this.labelLimDerecho.AutoSize = true;
-            this.labelLimDerecho.Location = new System.Drawing.Point(422, 35);
-            this.labelLimDerecho.Name = "labelLimDerecho";
-            this.labelLimDerecho.Size = new System.Drawing.Size(110, 20);
-            this.labelLimDerecho.TabIndex = 11;
-            this.labelLimDerecho.Text = "Limite Derecho";
-            this.labelLimDerecho.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // textBoxLimDerecho
-            // 
-            this.textBoxLimDerecho.Location = new System.Drawing.Point(570, 32);
-            this.textBoxLimDerecho.Name = "textBoxLimDerecho";
-            this.textBoxLimDerecho.Size = new System.Drawing.Size(150, 27);
-            this.textBoxLimDerecho.TabIndex = 10;
-            this.textBoxLimDerecho.Text = "10";
             // 
             // MenuConfigFuncionTriangular
             // 

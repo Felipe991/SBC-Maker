@@ -1,4 +1,5 @@
 ﻿using SBC_Maker.Logica.Conjuntos_Difusos;
+using ScottPlot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,18 +12,31 @@ using System.Windows.Forms;
 
 namespace SBC_Maker.Interfaz_grafica
 {
-    public partial class MenuConfigFuncionTriangular : Form
+    public partial class MenuConfigFuncionTriangular : Form 
     {
         private FuncionTriangular funcTriangular;
+        private Utiles utiles = new Utiles();
+        private List<string> memoriaTextBoxes;
         public MenuConfigFuncionTriangular(string nombreFuncion)
         {
             InitializeComponent();
-            funcTriangular = new FuncionTriangular(int.Parse(textBoxLimIzquierdo.Text),
-                                                   int.Parse(textBoxMedia.Text),
-                                                   int.Parse(textBoxLimDerecho.Text),
+            iniciarMemoria();
+            
+            
+            funcTriangular = new FuncionTriangular(Double.Parse(textBoxLimIzquierdo.Text),
+                                                   Double.Parse(textBoxMedia.Text),
+                                                   Double.Parse(textBoxLimDerecho.Text),
                                                    nombreFuncion);
 
             IniciarGrafico();
+        }
+
+        private void iniciarMemoria()
+        {
+            memoriaTextBoxes = new List<string>();
+            memoriaTextBoxes.Add(textBoxLimIzquierdo.Text);
+            memoriaTextBoxes.Add(textBoxMedia.Text);
+            memoriaTextBoxes.Add(textBoxLimDerecho.Text);
         }
 
         private void MenuConfigFuncionTriangular_Load(object sender, EventArgs e)
@@ -34,52 +48,119 @@ namespace SBC_Maker.Interfaz_grafica
         {
             formsPlot1.Plot.XAxis.Label("Unidades");
             formsPlot1.Plot.YAxis.Label("Pertenencia");
-            formsPlot1.Plot.SetAxisLimits(-10, 10, 0, 1.2);
             formsPlot1.Plot.Title(funcTriangular.Nombre);
+            ActualizarValoresGrafico();
+        }
+
+        private void ActualizarValoresGrafico()
+        {
             Double[] valoresX = getValoresX();
             Double[] valoresY = getValoresY();
-            var plot = new ScottPlot.Plottable.ScatterPlot(valoresX, valoresY);
-            formsPlot1.plt.Add(plot);
+            formsPlot1.Plot.Clear();
+            formsPlot1.Plot.AddScatter(valoresX, valoresY, Color.Red);
             formsPlot1.Refresh();
         }
 
         private double[] getValoresX()
         {
             List<Double> valorsX = new List<Double>();
-
-            for (int i = (int)funcTriangular.LimiteIzquierdo; i <= funcTriangular.LimiteDerecho; i++)
-            {
-                valorsX.Add(i);
-            }
+            valorsX.Add(funcTriangular.LimiteIzquierdo);
+            valorsX.Add(funcTriangular.Centro);
+            valorsX.Add(funcTriangular.LimiteDerecho);
             return valorsX.ToArray();
         }
 
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
-            
-            for (int i = (int)funcTriangular.LimiteIzquierdo; i <= (int)funcTriangular.LimiteDerecho; i++)
-            {
-                valores.Add(funcTriangular.CalcularPertenencia((double)i));
-                System.Diagnostics.Debug.WriteLine(funcTriangular.CalcularPertenencia((double)i));
-            }
-
+            valores.Add(funcTriangular.CalcularPertenencia(funcTriangular.LimiteIzquierdo));
+            valores.Add(funcTriangular.CalcularPertenencia(funcTriangular.Centro));
+            valores.Add(funcTriangular.CalcularPertenencia(funcTriangular.LimiteDerecho));
             return valores.ToArray();
-        }
-
-        private void labelDesviacionEstandar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBoxLimIzquierdo_Leave(object sender, EventArgs e)
+        {
+            if (utiles.IsDouble(textBoxLimIzquierdo.Text))
+            {
+                Double textoParseado = Double.Parse(textBoxLimIzquierdo.Text);
+                if (!utiles.IsGreater(textoParseado, funcTriangular.Centro))
+                {
+                    funcTriangular.LimiteIzquierdo = textoParseado;
+                    ActualizarValoresGrafico();
+                    return;
+                }
+            }
+            textBoxLimIzquierdo.Text = memoriaTextBoxes[0];
+        }
+
+        private void textBoxMedia_Leave(object sender, EventArgs e)
+        {
+            if (utiles.IsDouble(textBoxMedia.Text))
+            {
+                Double textoParseado = Double.Parse(textBoxMedia.Text);
+                if (utiles.IsGreater(textoParseado, funcTriangular.LimiteIzquierdo)
+                    && !utiles.IsGreater(textoParseado, funcTriangular.LimiteDerecho))
+                {
+                    funcTriangular.Centro = textoParseado;
+                    ActualizarValoresGrafico();
+                    return;
+                }
+            }
+            textBoxMedia.Text = memoriaTextBoxes[1];
+        }
+
+        private void textBoxLimDerecho_Leave(object sender, EventArgs e)
+        {
+            if (utiles.IsDouble(textBoxLimDerecho.Text))
+            {
+                Double textoParseado = Double.Parse(textBoxLimDerecho.Text);
+                if (utiles.IsGreater(textoParseado, funcTriangular.Centro))
+                {
+                    funcTriangular.LimiteDerecho = textoParseado;
+                    ActualizarValoresGrafico();
+                    return;
+                }
+            }
+            textBoxLimDerecho.Text = memoriaTextBoxes[2];
+        }
+
+        private void textBoxLimIzquierdo_Enter(object sender, EventArgs e)
+        {
+            guardarMemoria(1, textBoxLimIzquierdo.Text);
+        }
+
+        private void textBoxMedia_Enter(object sender, EventArgs e)
+        {
+            guardarMemoria(2, textBoxMedia.Text);
+        }
+
+        private void textBoxLimDerecho_Enter(object sender, EventArgs e)
+        {
+            guardarMemoria(3, textBoxLimDerecho.Text);
+        }
+        
+        private void guardarMemoria(int numeroTextBox, string text)
+        {
+            switch (numeroTextBox)
+            {
+                case 1:
+                    memoriaTextBoxes[0] = text;
+                    break;
+                case 2:
+                    memoriaTextBoxes[1] = text;
+                    break;
+                case 3:
+                    memoriaTextBoxes[2] = text;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
