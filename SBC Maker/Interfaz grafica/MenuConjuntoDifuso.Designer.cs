@@ -39,11 +39,14 @@
             this.flowLayoutPanelFuncionesPertenencia = new System.Windows.Forms.FlowLayoutPanel();
             this.labelNombreUnidad = new System.Windows.Forms.Label();
             this.textBoxNombreUnidad = new System.Windows.Forms.TextBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.comboBoxMetodosResolucion = new System.Windows.Forms.ComboBox();
+            this.labelMetodoResolucion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CancelarButton
             // 
-            this.CancelarButton.Location = new System.Drawing.Point(447, 600);
+            this.CancelarButton.Location = new System.Drawing.Point(447, 676);
             this.CancelarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CancelarButton.Name = "CancelarButton";
             this.CancelarButton.Size = new System.Drawing.Size(86, 31);
@@ -53,7 +56,7 @@
             // 
             // GuardarButton
             // 
-            this.GuardarButton.Location = new System.Drawing.Point(540, 600);
+            this.GuardarButton.Location = new System.Drawing.Point(540, 676);
             this.GuardarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(86, 31);
@@ -67,7 +70,7 @@
             this.addFuncionButton.FlatAppearance.BorderSize = 0;
             this.addFuncionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addFuncionButton.Image = ((System.Drawing.Image)(resources.GetObject("addFuncionButton.Image")));
-            this.addFuncionButton.Location = new System.Drawing.Point(590, 319);
+            this.addFuncionButton.Location = new System.Drawing.Point(590, 395);
             this.addFuncionButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addFuncionButton.Name = "addFuncionButton";
             this.addFuncionButton.Size = new System.Drawing.Size(35, 32);
@@ -77,10 +80,10 @@
             // 
             // formsPlot1
             // 
-            this.formsPlot1.Location = new System.Drawing.Point(14, 66);
+            this.formsPlot1.Location = new System.Drawing.Point(14, 111);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(611, 251);
+            this.formsPlot1.Size = new System.Drawing.Size(611, 284);
             this.formsPlot1.TabIndex = 30;
             this.formsPlot1.Load += new System.EventHandler(this.formsPlot1_Load);
             // 
@@ -92,7 +95,6 @@
             this.textBoxNombre.Size = new System.Drawing.Size(194, 27);
             this.textBoxNombre.TabIndex = 33;
             this.textBoxNombre.Text = "Conjunto Difuso";
-            this.textBoxNombre.TextChanged += new System.EventHandler(this.Nombre_TextChanged);
             this.textBoxNombre.Leave += new System.EventHandler(this.textBoxNombre_Leave);
             // 
             // label1
@@ -107,17 +109,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 331);
+            this.label2.Location = new System.Drawing.Point(33, 407);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(177, 20);
             this.label2.TabIndex = 34;
             this.label2.Text = "Funciones de pertenencia";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // flowLayoutPanelFuncionesPertenencia
             // 
             this.flowLayoutPanelFuncionesPertenencia.AutoScroll = true;
-            this.flowLayoutPanelFuncionesPertenencia.Location = new System.Drawing.Point(33, 353);
+            this.flowLayoutPanelFuncionesPertenencia.Location = new System.Drawing.Point(33, 429);
             this.flowLayoutPanelFuncionesPertenencia.Name = "flowLayoutPanelFuncionesPertenencia";
             this.flowLayoutPanelFuncionesPertenencia.Size = new System.Drawing.Size(592, 227);
             this.flowLayoutPanelFuncionesPertenencia.TabIndex = 35;
@@ -130,7 +131,6 @@
             this.labelNombreUnidad.Size = new System.Drawing.Size(116, 20);
             this.labelNombreUnidad.TabIndex = 36;
             this.labelNombreUnidad.Text = "Nombre Unidad";
-            this.labelNombreUnidad.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBoxNombreUnidad
             // 
@@ -140,8 +140,30 @@
             this.textBoxNombreUnidad.Size = new System.Drawing.Size(194, 27);
             this.textBoxNombreUnidad.TabIndex = 37;
             this.textBoxNombreUnidad.Text = "Unidades";
-            this.textBoxNombreUnidad.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBoxNombreUnidad.Leave += new System.EventHandler(this.textBoxNombreUnidad_Leave);
+            // 
+            // comboBoxMetodosResolucion
+            // 
+            this.comboBoxMetodosResolucion.FormattingEnabled = true;
+            this.comboBoxMetodosResolucion.Items.AddRange(new object[] {
+            "Hacia arriba",
+            "Hacia abajo",
+            "Caso sensible"});
+            this.comboBoxMetodosResolucion.Location = new System.Drawing.Point(198, 64);
+            this.comboBoxMetodosResolucion.Name = "comboBoxMetodosResolucion";
+            this.comboBoxMetodosResolucion.Size = new System.Drawing.Size(194, 28);
+            this.comboBoxMetodosResolucion.TabIndex = 38;
+            this.comboBoxMetodosResolucion.Text = "Hacia arriba";
+            this.comboBoxMetodosResolucion.SelectedIndexChanged += new System.EventHandler(this.comboBoxMetodosResolucion_SelectedIndexChanged);
+            // 
+            // labelMetodoResolucion
+            // 
+            this.labelMetodoResolucion.AutoSize = true;
+            this.labelMetodoResolucion.Location = new System.Drawing.Point(33, 67);
+            this.labelMetodoResolucion.Name = "labelMetodoResolucion";
+            this.labelMetodoResolucion.Size = new System.Drawing.Size(159, 20);
+            this.labelMetodoResolucion.TabIndex = 39;
+            this.labelMetodoResolucion.Text = "Metodo de Resolucion";
             // 
             // MenuConjuntoDifuso
             // 
@@ -149,7 +171,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelarButton;
-            this.ClientSize = new System.Drawing.Size(639, 643);
+            this.ClientSize = new System.Drawing.Size(639, 737);
+            this.Controls.Add(this.labelMetodoResolucion);
+            this.Controls.Add(this.comboBoxMetodosResolucion);
             this.Controls.Add(this.textBoxNombreUnidad);
             this.Controls.Add(this.labelNombreUnidad);
             this.Controls.Add(this.flowLayoutPanelFuncionesPertenencia);
@@ -180,5 +204,8 @@
         private FlowLayoutPanel flowLayoutPanelFuncionesPertenencia;
         private Label labelNombreUnidad;
         private TextBox textBoxNombreUnidad;
+        private ColorDialog colorDialog1;
+        private ComboBox comboBoxMetodosResolucion;
+        private Label labelMetodoResolucion;
     }
 }

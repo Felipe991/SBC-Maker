@@ -25,16 +25,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FuncionPertenenciaUserControl));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonPintar = new System.Windows.Forms.Button();
             this.eliminarButton = new System.Windows.Forms.Button();
             this.textBoxNombreFuncionPertenencia = new System.Windows.Forms.TextBox();
             this.buttonConfiguracion = new System.Windows.Forms.Button();
             this.comboBoxFuncionesPertenencia = new System.Windows.Forms.ComboBox();
             this.labelNombreFuncion = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonPintar);
             this.panel1.Controls.Add(this.eliminarButton);
             this.panel1.Controls.Add(this.textBoxNombreFuncionPertenencia);
             this.panel1.Controls.Add(this.buttonConfiguracion);
@@ -45,6 +48,22 @@
             this.panel1.Size = new System.Drawing.Size(566, 44);
             this.panel1.TabIndex = 0;
             // 
+            // buttonPintar
+            // 
+            this.buttonPintar.BackColor = System.Drawing.Color.Transparent;
+            this.buttonPintar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonPintar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonPintar.FlatAppearance.BorderSize = 0;
+            this.buttonPintar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPintar.Image = ((System.Drawing.Image)(resources.GetObject("buttonPintar.Image")));
+            this.buttonPintar.Location = new System.Drawing.Point(485, 6);
+            this.buttonPintar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonPintar.Name = "buttonPintar";
+            this.buttonPintar.Size = new System.Drawing.Size(35, 32);
+            this.buttonPintar.TabIndex = 41;
+            this.buttonPintar.UseVisualStyleBackColor = false;
+            this.buttonPintar.Click += new System.EventHandler(this.buttonPintar_Click);
+            // 
             // eliminarButton
             // 
             this.eliminarButton.BackColor = System.Drawing.Color.Transparent;
@@ -52,7 +71,7 @@
             this.eliminarButton.FlatAppearance.BorderSize = 0;
             this.eliminarButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.eliminarButton.Image = ((System.Drawing.Image)(resources.GetObject("eliminarButton.Image")));
-            this.eliminarButton.Location = new System.Drawing.Point(475, 6);
+            this.eliminarButton.Location = new System.Drawing.Point(528, 5);
             this.eliminarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.eliminarButton.Name = "eliminarButton";
             this.eliminarButton.Size = new System.Drawing.Size(35, 32);
@@ -65,8 +84,9 @@
             this.textBoxNombreFuncionPertenencia.Location = new System.Drawing.Point(73, 9);
             this.textBoxNombreFuncionPertenencia.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxNombreFuncionPertenencia.Name = "textBoxNombreFuncionPertenencia";
-            this.textBoxNombreFuncionPertenencia.Size = new System.Drawing.Size(216, 27);
+            this.textBoxNombreFuncionPertenencia.Size = new System.Drawing.Size(187, 27);
             this.textBoxNombreFuncionPertenencia.TabIndex = 38;
+            this.textBoxNombreFuncionPertenencia.Leave += new System.EventHandler(this.textBoxNombreFuncionPertenencia_Leave);
             // 
             // buttonConfiguracion
             // 
@@ -75,8 +95,8 @@
             this.buttonConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonConfiguracion.FlatAppearance.BorderSize = 0;
             this.buttonConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonConfiguracion.Image = global::SBC_Maker.Properties.Resources.iconoConfiguracion.GetThumbnailImage(30, 30, null, IntPtr.Zero);
-            this.buttonConfiguracion.Location = new System.Drawing.Point(525, 6);
+            this.buttonConfiguracion.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfiguracion.Image")));
+            this.buttonConfiguracion.Location = new System.Drawing.Point(440, 5);
             this.buttonConfiguracion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonConfiguracion.Name = "buttonConfiguracion";
             this.buttonConfiguracion.Size = new System.Drawing.Size(35, 32);
@@ -91,11 +111,12 @@
             "Triangular",
             "Trapezoidal",
             "Gausiana"});
-            this.comboBoxFuncionesPertenencia.Location = new System.Drawing.Point(295, 8);
+            this.comboBoxFuncionesPertenencia.Location = new System.Drawing.Point(272, 8);
             this.comboBoxFuncionesPertenencia.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBoxFuncionesPertenencia.Name = "comboBoxFuncionesPertenencia";
             this.comboBoxFuncionesPertenencia.Size = new System.Drawing.Size(154, 28);
             this.comboBoxFuncionesPertenencia.TabIndex = 37;
+            this.comboBoxFuncionesPertenencia.Text = "Triangular";
             // 
             // labelNombreFuncion
             // 
@@ -127,5 +148,7 @@
         private ComboBox comboBoxFuncionesPertenencia;
         private Label labelNombreFuncion;
         private Button eliminarButton;
+        private Button buttonPintar;
+        private ColorDialog colorDialog1;
     }
 }

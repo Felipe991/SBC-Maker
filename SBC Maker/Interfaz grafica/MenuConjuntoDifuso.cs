@@ -1,4 +1,6 @@
 ﻿using SBC_Maker.Interfaz_grafica;
+using SBC_Maker.Logica;
+using ScottPlot.Plottable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +15,12 @@ namespace SBC_Maker
 {
     public partial class MenuConjuntoDifuso : Form
     {
+        private ConjuntoDifuso conjuntoDifuso;
         public MenuConjuntoDifuso()
         {
             InitializeComponent();
             IniciarGrafico();
+            conjuntoDifuso = new ConjuntoDifuso(textBoxNombre.Text,1);
         }
 
         private void IniciarGrafico()
@@ -33,47 +37,18 @@ namespace SBC_Maker
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void addFuncionButton_Click(object sender, EventArgs e)
         {
-            flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl());
+            int numeroFuncion = flowLayoutPanelFuncionesPertenencia.Controls.Count + 1;
+            FuncionPertenencia funcionPertenencia = new FuncionPertenencia("Funcion N°" + numeroFuncion);
+            ScatterPlot plot = null;
+            conjuntoDifuso.addFuncionPertenencia(funcionPertenencia);
+            flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(funcionPertenencia,plot));
+            formsPlot1.Plot.Add(plot);
+            formsPlot1.Refresh();
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Nombre_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -88,6 +63,11 @@ namespace SBC_Maker
         {
             formsPlot1.Plot.XAxis.Label(textBoxNombreUnidad.Text);
             formsPlot1.Refresh();
+        }
+
+        private void comboBoxMetodosResolucion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            conjuntoDifuso.MetodoResolucion = comboBoxMetodosResolucion.SelectedIndex;
         }
     }
 }

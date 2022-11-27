@@ -33,7 +33,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelParametros = new System.Windows.Forms.Label();
             this.labelMedia = new System.Windows.Forms.Label();
-            this.textBoxMedia = new System.Windows.Forms.TextBox();
+            this.textBoxCentro = new System.Windows.Forms.TextBox();
             this.labelDesviacionEstandar = new System.Windows.Forms.Label();
             this.textBoxDesviacionEstandar = new System.Windows.Forms.TextBox();
             this.GuardarButton = new System.Windows.Forms.Button();
@@ -63,7 +63,7 @@
             // 
             this.panel2.Controls.Add(this.labelParametros);
             this.panel2.Controls.Add(this.labelMedia);
-            this.panel2.Controls.Add(this.textBoxMedia);
+            this.panel2.Controls.Add(this.textBoxCentro);
             this.panel2.Controls.Add(this.labelDesviacionEstandar);
             this.panel2.Controls.Add(this.textBoxDesviacionEstandar);
             this.panel2.Location = new System.Drawing.Point(12, 282);
@@ -89,15 +89,15 @@
             this.labelMedia.TabIndex = 8;
             this.labelMedia.Text = "Media";
             // 
-            // textBoxMedia
+            // textBoxCentro
             // 
-            this.textBoxMedia.Location = new System.Drawing.Point(150, 75);
-            this.textBoxMedia.Name = "textBoxMedia";
-            this.textBoxMedia.Size = new System.Drawing.Size(150, 27);
-            this.textBoxMedia.TabIndex = 7;
-            this.textBoxMedia.Text = "0";
-            this.textBoxMedia.Enter += new System.EventHandler(this.textBoxMedia_Enter);
-            this.textBoxMedia.Leave += new System.EventHandler(this.textBoxMedia_Leave);
+            this.textBoxCentro.Location = new System.Drawing.Point(150, 75);
+            this.textBoxCentro.Name = "textBoxCentro";
+            this.textBoxCentro.Size = new System.Drawing.Size(150, 27);
+            this.textBoxCentro.TabIndex = 7;
+            this.textBoxCentro.Text = "5";
+            this.textBoxCentro.Enter += new System.EventHandler(this.textBoxMedia_Enter);
+            this.textBoxCentro.Leave += new System.EventHandler(this.textBoxMedia_Leave);
             // 
             // labelDesviacionEstandar
             // 
@@ -114,7 +114,7 @@
             this.textBoxDesviacionEstandar.Name = "textBoxDesviacionEstandar";
             this.textBoxDesviacionEstandar.Size = new System.Drawing.Size(150, 27);
             this.textBoxDesviacionEstandar.TabIndex = 5;
-            this.textBoxDesviacionEstandar.Text = "0,5";
+            this.textBoxDesviacionEstandar.Text = "0.5";
             this.textBoxDesviacionEstandar.Enter += new System.EventHandler(this.textBoxDesviacionEstandar_Enter);
             this.textBoxDesviacionEstandar.Leave += new System.EventHandler(this.textBoxDesviacionEstandar_Leave);
             // 
@@ -153,8 +153,10 @@
         private Label labelDesviacionEstandar;
         private TextBox textBoxDesviacionEstandar;
         private Label labelMedia;
-        private TextBox textBoxMedia;
+        private TextBox textBoxCentro;
         private Label labelParametros;
         private Button GuardarButton;
+        private Label labelFactorFuzzy;
+        private TextBox textBoxFactorFuzzy;
     }
 }

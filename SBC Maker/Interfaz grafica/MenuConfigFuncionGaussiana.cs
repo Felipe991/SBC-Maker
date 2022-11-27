@@ -16,20 +16,22 @@ namespace SBC_Maker.Interfaz_grafica
         private FuncionGaussiana funcGaussiana;
         private List<string> memoriaTextBoxes;
         private Utiles utiles = new Utiles();
+        
         public MenuConfigFuncionGaussiana(string nombreFuncion)
         {
             InitializeComponent();
             iniciarMemoria();
-            funcGaussiana = new FuncionGaussiana(Double.Parse(textBoxMedia.Text),
+            funcGaussiana = new FuncionGaussiana(Double.Parse(textBoxCentro.Text),
                                        Double.Parse(textBoxDesviacionEstandar.Text),
                                        nombreFuncion);
             IniciarGrafico();
         }
+        
         private void iniciarMemoria()
         {
             memoriaTextBoxes = new List<string>();
             memoriaTextBoxes.Add(textBoxDesviacionEstandar.Text);
-            memoriaTextBoxes.Add(textBoxMedia.Text);
+            memoriaTextBoxes.Add(textBoxCentro.Text);
         }
 
         private void IniciarGrafico()
@@ -52,8 +54,9 @@ namespace SBC_Maker.Interfaz_grafica
         private double[] getValoresX()
         {
             List<Double> valorsX = new List<Double>();
-            for (Double i = funcGaussiana.Media-(funcGaussiana.DesviacionEstandar*15);
-                i <= funcGaussiana.Media + (funcGaussiana.DesviacionEstandar * 15); i+=funcGaussiana.DesviacionEstandar/3)
+            for (Double i = funcGaussiana.Centro-(funcGaussiana.DesviacionEstandar*7);
+                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
+                i+=funcGaussiana.DesviacionEstandar/3)
             {
                 valorsX.Add(i);
             }
@@ -63,8 +66,9 @@ namespace SBC_Maker.Interfaz_grafica
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
-            for (Double i = funcGaussiana.Media - (funcGaussiana.DesviacionEstandar * 15);
-                i <= funcGaussiana.Media + (funcGaussiana.DesviacionEstandar * 15); i += funcGaussiana.DesviacionEstandar/3)
+            for (Double i = funcGaussiana.Centro - (funcGaussiana.DesviacionEstandar * 7);
+                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
+                i += funcGaussiana.DesviacionEstandar/3)
             {
                 valores.Add(funcGaussiana.CalcularPertenencia(i));
             }
@@ -83,7 +87,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxMedia_Enter(object sender, EventArgs e)
         {
-            memoriaTextBoxes[1] = textBoxMedia.Text;
+            memoriaTextBoxes[1] = textBoxCentro.Text;
         }
 
         private void textBoxDesviacionEstandar_Leave(object sender, EventArgs e)
@@ -103,14 +107,14 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxMedia_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxMedia.Text))
+            if (utiles.IsDouble(textBoxCentro.Text))
             {
-                Double textoParseado = Double.Parse(textBoxMedia.Text);
-                funcGaussiana.Media = textoParseado;
+                Double textoParseado = Double.Parse(textBoxCentro.Text);
+                funcGaussiana.Centro = textoParseado;
                 ActualizarValoresGrafico();
                 return;
             }
-            textBoxMedia.Text = memoriaTextBoxes[1];
+            textBoxCentro.Text = memoriaTextBoxes[1];
         }
     }
 }

@@ -13,7 +13,7 @@ namespace SBC_Maker.Logica
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MenuConfigFuncionGaussiana("XD"));
+            Application.Run(new MenuConjuntoDifuso());
             //Application.Run(new MenuConfigFuncionTriangular("XD"));
         }
     }

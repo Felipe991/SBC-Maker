@@ -8,21 +8,26 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
 {
     public class FuncionGaussiana : FuncionPertenencia
     {
-        private Double media;
+        private Double centro;
         private Double desviacionEstandar;
 
-        public FuncionGaussiana(Double media, Double desviacionEstandar, string nombre) : base(nombre)
+        public FuncionGaussiana(Double centro,
+                                Double desviacionEstandar,
+                                string nombre) : base(nombre)
         {
-            this.Media = media;
+            this.Centro = centro;
             this.DesviacionEstandar = desviacionEstandar;
         }
 
-        public Double Media { get => media; set => media = value; }
+        public Double Centro { get => centro; set => centro = value; }
         public Double DesviacionEstandar { get => desviacionEstandar; set => desviacionEstandar = value; }
 
         public override Double CalcularPertenencia(Double valor)
         {
-            return (Double)(Math.Exp(-Math.Pow(valor - Media, 2) / (2 * Math.Pow(DesviacionEstandar, 2))));
+            var v1 = (valor - centro);
+            var v2 = (v1 * v1) / (2 * (desviacionEstandar * desviacionEstandar));
+            var v3 = Math.Exp(-v2);
+            return v3;
         }
     }
 }
