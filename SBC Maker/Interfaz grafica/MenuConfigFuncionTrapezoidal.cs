@@ -1,4 +1,5 @@
 ﻿using SBC_Maker.Logica.Conjuntos_Difusos;
+using ScottPlot.Plottable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,20 +14,26 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class MenuConfigFuncionTrapezoidal : Form
     {
-        private FuncionTrapezoidal funcTrapezoidal;
+        public FuncionTrapezoidal funcTrapezoidal;
+        public ScatterPlot plotTrapezoidal; 
         private Utiles utiles = new Utiles();
         private List<string> memoriaTextBoxes;
-        public MenuConfigFuncionTrapezoidal(string nombreFuncion)
+        public MenuConfigFuncionTrapezoidal(FuncionTrapezoidal funcionTrapezoidal,ScatterPlot plotGrafico)
         {
+            this.funcTrapezoidal = funcionTrapezoidal;
+            this.plotTrapezoidal = plotGrafico;
             InitializeComponent();
-            iniciarMemoria();
-
-            funcTrapezoidal = new FuncionTrapezoidal(Double.Parse(textBoxLimIzquierdo.Text),
-                                       Double.Parse(textBoxCentroIzq.Text),
-                                       Double.Parse(textBoxCentroDer.Text),
-                                       Double.Parse(textBoxLimDerecho.Text),
-                                       nombreFuncion);
+            RellenarCampos();
+            IniciarMemoria();
             IniciarGrafico();
+        }
+
+        private void RellenarCampos()
+        {
+            textBoxLimIzquierdo.Text = funcTrapezoidal.LimIzquierdo.ToString();
+            textBoxCentroIzq.Text = funcTrapezoidal.CentroIzq.ToString();
+            textBoxCentroDer.Text = funcTrapezoidal.CentroDer.ToString();
+            textBoxLimDerecho.Text = funcTrapezoidal.LimDerecho.ToString();
         }
 
         private void IniciarGrafico()
@@ -42,7 +49,7 @@ namespace SBC_Maker.Interfaz_grafica
             Double[] valoresX = getValoresX();
             Double[] valoresY = getValoresY();
             formsPlot1.Plot.Clear();
-            formsPlot1.Plot.AddScatter(valoresX, valoresY, Color.Red);
+            formsPlot1.Plot.AddScatter(valoresX, valoresY, plotTrapezoidal.Color);
             formsPlot1.Refresh();
         }
 
@@ -74,7 +81,7 @@ namespace SBC_Maker.Interfaz_grafica
         {
 
         }
-        private void iniciarMemoria()
+        private void IniciarMemoria()
         {
             memoriaTextBoxes = new List<string>();
             memoriaTextBoxes.Add(textBoxLimIzquierdo.Text);
@@ -165,5 +172,14 @@ namespace SBC_Maker.Interfaz_grafica
             textBoxLimDerecho.Text = memoriaTextBoxes[3];
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void GuardarButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
     }
 }

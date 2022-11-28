@@ -37,6 +37,7 @@
             this.labelDesviacionEstandar = new System.Windows.Forms.Label();
             this.textBoxDesviacionEstandar = new System.Windows.Forms.TextBox();
             this.GuardarButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -127,12 +128,25 @@
             this.GuardarButton.TabIndex = 24;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(610, 415);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(86, 31);
+            this.button1.TabIndex = 32;
+            this.button1.Text = "Cancelar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MenuConfigFuncionGaussiana
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -147,7 +161,7 @@
 
         #endregion
 
-        private ScottPlot.FormsPlot formsPlot1;
+        public ScottPlot.FormsPlot formsPlot1;
         private Panel panel1;
         private Panel panel2;
         private Label labelDesviacionEstandar;
@@ -158,5 +172,6 @@
         private Button GuardarButton;
         private Label labelFactorFuzzy;
         private TextBox textBoxFactorFuzzy;
+        private Button button1;
     }
 }

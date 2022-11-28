@@ -89,7 +89,7 @@
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(94, 21);
+            this.textBoxNombre.Location = new System.Drawing.Point(153, 21);
             this.textBoxNombre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(194, 27);
@@ -126,7 +126,7 @@
             // labelNombreUnidad
             // 
             this.labelNombreUnidad.AutoSize = true;
-            this.labelNombreUnidad.Location = new System.Drawing.Point(311, 24);
+            this.labelNombreUnidad.Location = new System.Drawing.Point(31, 81);
             this.labelNombreUnidad.Name = "labelNombreUnidad";
             this.labelNombreUnidad.Size = new System.Drawing.Size(116, 20);
             this.labelNombreUnidad.TabIndex = 36;
@@ -134,7 +134,7 @@
             // 
             // textBoxNombreUnidad
             // 
-            this.textBoxNombreUnidad.Location = new System.Drawing.Point(431, 21);
+            this.textBoxNombreUnidad.Location = new System.Drawing.Point(153, 74);
             this.textBoxNombreUnidad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxNombreUnidad.Name = "textBoxNombreUnidad";
             this.textBoxNombreUnidad.Size = new System.Drawing.Size(194, 27);
@@ -149,7 +149,7 @@
             "Hacia arriba",
             "Hacia abajo",
             "Caso sensible"});
-            this.comboBoxMetodosResolucion.Location = new System.Drawing.Point(198, 64);
+            this.comboBoxMetodosResolucion.Location = new System.Drawing.Point(411, 52);
             this.comboBoxMetodosResolucion.Name = "comboBoxMetodosResolucion";
             this.comboBoxMetodosResolucion.Size = new System.Drawing.Size(194, 28);
             this.comboBoxMetodosResolucion.TabIndex = 38;
@@ -159,7 +159,7 @@
             // labelMetodoResolucion
             // 
             this.labelMetodoResolucion.AutoSize = true;
-            this.labelMetodoResolucion.Location = new System.Drawing.Point(33, 67);
+            this.labelMetodoResolucion.Location = new System.Drawing.Point(411, 29);
             this.labelMetodoResolucion.Name = "labelMetodoResolucion";
             this.labelMetodoResolucion.Size = new System.Drawing.Size(159, 20);
             this.labelMetodoResolucion.TabIndex = 39;

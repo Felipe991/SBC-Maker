@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SBC_Maker.Logica.Conjuntos_Difusos
 {
-    internal class FuncionTriangular : FuncionPertenencia
+    public class FuncionTriangular : FuncionPertenencia
     {
         private Double limiteIzquierdo;
         private Double centro;

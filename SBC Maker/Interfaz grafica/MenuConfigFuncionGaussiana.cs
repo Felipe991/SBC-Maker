@@ -1,4 +1,5 @@
 ﻿using SBC_Maker.Logica.Conjuntos_Difusos;
+using ScottPlot.Plottable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,21 +14,29 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class MenuConfigFuncionGaussiana : Form
     {
-        private FuncionGaussiana funcGaussiana;
+        public FuncionGaussiana funcGaussiana;
+        public ScatterPlot plotTrapezoidal;
         private List<string> memoriaTextBoxes;
         private Utiles utiles = new Utiles();
         
-        public MenuConfigFuncionGaussiana(string nombreFuncion)
+        public MenuConfigFuncionGaussiana(FuncionGaussiana funcionGaussiana, ScatterPlot plotGrafico)
         {
+            this.funcGaussiana = funcionGaussiana;
+            this.plotTrapezoidal = plotGrafico;
             InitializeComponent();
-            iniciarMemoria();
-            funcGaussiana = new FuncionGaussiana(Double.Parse(textBoxCentro.Text),
-                                       Double.Parse(textBoxDesviacionEstandar.Text),
-                                       nombreFuncion);
+            RellenarCampos();
+            IniciarMemoria();
             IniciarGrafico();
         }
-        
-        private void iniciarMemoria()
+
+
+        private void RellenarCampos()
+        {
+            textBoxCentro.Text = funcGaussiana.Centro.ToString();
+            textBoxDesviacionEstandar.Text = funcGaussiana.DesviacionEstandar.ToString();
+        }
+
+        private void IniciarMemoria()
         {
             memoriaTextBoxes = new List<string>();
             memoriaTextBoxes.Add(textBoxDesviacionEstandar.Text);
@@ -115,6 +124,16 @@ namespace SBC_Maker.Interfaz_grafica
                 return;
             }
             textBoxCentro.Text = memoriaTextBoxes[1];
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void GuardarButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }

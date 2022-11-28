@@ -40,6 +40,7 @@
             this.labelLimiteIzquierdo = new System.Windows.Forms.Label();
             this.textBoxLimIzquierdo = new System.Windows.Forms.TextBox();
             this.formsPlot1 = new ScottPlot.FormsPlot();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             this.GuardarButton.TabIndex = 30;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // panel2
             // 
@@ -164,11 +166,23 @@
             this.formsPlot1.TabIndex = 28;
             this.formsPlot1.Load += new System.EventHandler(this.formsPlot1_Load);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(614, 413);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(86, 31);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "Cancelar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MenuConfigFuncionTrapezoidal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.formsPlot1);
@@ -192,8 +206,9 @@
         private TextBox textBoxCentroIzq;
         private Label labelLimiteIzquierdo;
         private TextBox textBoxLimIzquierdo;
-        private ScottPlot.FormsPlot formsPlot1;
+        public ScottPlot.FormsPlot formsPlot1;
         private Label labelCentroIzq;
         private TextBox textBoxCentroDer;
+        private Button button1;
     }
 }

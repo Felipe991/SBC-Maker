@@ -29,7 +29,6 @@ namespace SBC_Maker.Interfaz_grafica
             funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, funcionPertenencia.Nombre);
             funcionGaussiana = new FuncionGaussiana(5, 0.5, funcionPertenencia.Nombre);
             funcionPertenencia = funcionTriangular;
-
             textBoxNombreFuncionPertenencia.Text = funcionPertenencia.Nombre;
             iniciarPlot();
         }
@@ -110,16 +109,31 @@ namespace SBC_Maker.Interfaz_grafica
             switch (opcionSeleccionada)
             {
                 case "Triangular":
-                    Console.WriteLine(1+opcionSeleccionada);
-                    funcionPertenencia = funcionTriangular;
-                    break;
-                case "Gaussiana":
-                    Console.WriteLine(2+opcionSeleccionada);
-                    funcionPertenencia = funcionGaussiana;
+                    MenuConfigFuncionTriangular mcft = new MenuConfigFuncionTriangular(funcionTriangular,plot);
+                    if (mcft.ShowDialog() == DialogResult.OK)
+                    {
+                        funcionTriangular = mcft.funcTriangular;
+                        funcionPertenencia = funcionTriangular;
+                        plot = mcft.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
+                    }
                     break;
                 case "Trapezoidal":
-                    Console.WriteLine(3+opcionSeleccionada);
-                    funcionPertenencia = funcionTrapezoidal;
+                    MenuConfigFuncionTrapezoidal mcftr = new MenuConfigFuncionTrapezoidal(funcionTrapezoidal, plot);
+                    if (mcftr.ShowDialog() == DialogResult.OK)
+                    {
+                        funcionTrapezoidal = mcftr.funcTrapezoidal;
+                        funcionPertenencia = funcionTrapezoidal;
+                        plot = mcftr.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
+                    }
+                    break;
+                case "Gaussiana":
+                    MenuConfigFuncionGaussiana mcfg = new MenuConfigFuncionGaussiana(funcionGaussiana, plot);
+                    if (mcfg.ShowDialog() == DialogResult.OK)
+                    {
+                        funcionGaussiana = mcfg.funcGaussiana;
+                        funcionPertenencia = funcionGaussiana;
+                        plot = mcfg.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
+                    }
                     break;
                 default:
                     break;
@@ -141,6 +155,7 @@ namespace SBC_Maker.Interfaz_grafica
             if(colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 plot.Color = colorDialog1.Color;
+                buttonPintar.BackColor = colorDialog1.Color;
             }
         }
     }

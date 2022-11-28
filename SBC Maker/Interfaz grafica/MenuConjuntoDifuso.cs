@@ -45,7 +45,6 @@ namespace SBC_Maker
             conjuntoDifuso.addFuncionPertenencia(funcionPertenencia);
             flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(funcionPertenencia,plot));
             formsPlot1.Plot.Add(plot);
-            formsPlot1.Refresh();
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)

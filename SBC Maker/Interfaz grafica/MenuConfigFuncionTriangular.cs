@@ -1,5 +1,6 @@
 ﻿using SBC_Maker.Logica.Conjuntos_Difusos;
 using ScottPlot;
+using ScottPlot.Plottable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,24 +15,29 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class MenuConfigFuncionTriangular : Form 
     {
-        private FuncionTriangular funcTriangular;
+        public FuncionTriangular funcTriangular;
+        private ScatterPlot plotTriangular;
         private Utiles utiles = new Utiles();
         private List<string> memoriaTextBoxes;
-        public MenuConfigFuncionTriangular(string nombreFuncion)
+        public MenuConfigFuncionTriangular(FuncionTriangular funcionTriangular, ScatterPlot plotGrafico)
         {
+            this.funcTriangular = funcionTriangular;
+            this.plotTriangular = plotGrafico;
             InitializeComponent();
-            iniciarMemoria();
-            
-            
-            funcTriangular = new FuncionTriangular(Double.Parse(textBoxLimIzquierdo.Text),
-                                                   Double.Parse(textBoxMedia.Text),
-                                                   Double.Parse(textBoxLimDerecho.Text),
-                                                   nombreFuncion);
-
+            RellenarCampos();
+            IniciarMemoria();
             IniciarGrafico();
         }
 
-        private void iniciarMemoria()
+
+        private void RellenarCampos()
+        {
+            textBoxLimIzquierdo.Text = funcTriangular.LimiteIzquierdo.ToString();
+            textBoxMedia.Text = funcTriangular.Centro.ToString();
+            textBoxLimDerecho.Text = funcTriangular.LimiteDerecho.ToString();
+        }
+
+        private void IniciarMemoria()
         {
             memoriaTextBoxes = new List<string>();
             memoriaTextBoxes.Add(textBoxLimIzquierdo.Text);
@@ -57,7 +63,7 @@ namespace SBC_Maker.Interfaz_grafica
             Double[] valoresX = getValoresX();
             Double[] valoresY = getValoresY();
             formsPlot1.Plot.Clear();
-            formsPlot1.Plot.AddScatter(valoresX, valoresY, Color.Red);
+            formsPlot1.Plot.AddScatter(valoresX, valoresY, plotTriangular.Color);
             formsPlot1.Refresh();
         }
 
@@ -161,6 +167,16 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
+        }
+
+        private void GuardarButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

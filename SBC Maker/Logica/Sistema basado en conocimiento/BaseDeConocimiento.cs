@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace SBC_Maker.Logica
 {
-    public class Grafo
+    public class BaseDeConocimiento
     {
-        private List<Nodo> nodos;
+        private List<Nodo> listaAdyacencia;
 
-        public Grafo()
+        public BaseDeConocimiento()
         {
-            nodos = new List<Nodo>();
+            listaAdyacencia = new List<Nodo>();
         }
         
         public void addNodo(Nodo nodo)
         {
-            this.nodos.Add(nodo);
+            this.listaAdyacencia.Add(nodo);
         }
 
         public void removeNodo(Nodo nodo)
         {
-            this.nodos.Remove(nodo);
+            this.listaAdyacencia.Remove(nodo);
         }
     }
 }

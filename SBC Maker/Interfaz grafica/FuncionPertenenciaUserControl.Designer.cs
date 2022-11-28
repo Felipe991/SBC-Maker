@@ -50,7 +50,7 @@
             // 
             // buttonPintar
             // 
-            this.buttonPintar.BackColor = System.Drawing.Color.Transparent;
+            this.buttonPintar.BackColor = System.Drawing.Color.Red;
             this.buttonPintar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.buttonPintar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPintar.FlatAppearance.BorderSize = 0;
@@ -110,7 +110,7 @@
             this.comboBoxFuncionesPertenencia.Items.AddRange(new object[] {
             "Triangular",
             "Trapezoidal",
-            "Gausiana"});
+            "Gaussiana"});
             this.comboBoxFuncionesPertenencia.Location = new System.Drawing.Point(272, 8);
             this.comboBoxFuncionesPertenencia.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBoxFuncionesPertenencia.Name = "comboBoxFuncionesPertenencia";

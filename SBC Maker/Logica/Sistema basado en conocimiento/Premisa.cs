@@ -8,13 +8,12 @@ namespace SBC_Maker.Logica
 {
     public class Premisa : Relacion
     {
-        private string respuestaNecesaria;
+        private List<string> respuestasNecesarias;
 
-        public Premisa(string respuestaNecesaria, Nodo nodo) : base(nodo)
+        public Premisa(List<string> respuestasNecesarias, Nodo nodo) : base(nodo)
         {
-            this.respuestaNecesaria = respuestaNecesaria;
+            this.respuestasNecesarias = respuestasNecesarias;
         }
-
-        public string RespuestaNecesaria { get => respuestaNecesaria; set => respuestaNecesaria = value; }
+        
     }
 }
