@@ -16,11 +16,20 @@ namespace SBC_Maker
     public partial class MenuConjuntoDifuso : Form
     {
         private ConjuntoDifuso conjuntoDifuso;
+        private List<String> memoria;
         public MenuConjuntoDifuso()
         {
             InitializeComponent();
             IniciarGrafico();
             conjuntoDifuso = new ConjuntoDifuso(textBoxNombre.Text,1);
+            IniciarMemoria();
+        }
+
+        private void IniciarMemoria()
+        {
+            memoria = new List<String>();
+            memoria.Add(textBoxNombre.Text);
+            memoria.Add(textBoxNombreUnidad.Text);
         }
 
         private void IniciarGrafico()
@@ -40,10 +49,9 @@ namespace SBC_Maker
         private void addFuncionButton_Click(object sender, EventArgs e)
         {
             int numeroFuncion = flowLayoutPanelFuncionesPertenencia.Controls.Count + 1;
-            FuncionPertenencia funcionPertenencia = new FuncionPertenencia("Funcion N°" + numeroFuncion);
+            string nombreFuncion = "Funcion N°" + numeroFuncion;
             ScatterPlot plot = null;
-            conjuntoDifuso.addFuncionPertenencia(funcionPertenencia);
-            flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(funcionPertenencia,plot));
+            flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(nombreFuncion,conjuntoDifuso, formsPlot1));
             formsPlot1.Plot.Add(plot);
         }
 
@@ -54,14 +62,28 @@ namespace SBC_Maker
 
         private void textBoxNombre_Leave(object sender, EventArgs e)
         {
-            formsPlot1.Plot.Title(textBoxNombre.Text);
-            formsPlot1.Refresh();
+            if (!textBoxNombre.Text.Equals(""))
+            {
+                formsPlot1.Plot.Title(textBoxNombre.Text);
+                formsPlot1.Refresh();
+                memoria[0] = textBoxNombre.Text;
+                return;
+            }
+            textBoxNombre.Text = memoria[0];
+            MessageBox.Show("Nombre invalido");
         }
 
         private void textBoxNombreUnidad_Leave(object sender, EventArgs e)
         {
-            formsPlot1.Plot.XAxis.Label(textBoxNombreUnidad.Text);
-            formsPlot1.Refresh();
+            if (!textBoxNombreUnidad.Text.Equals(""))
+            {
+                formsPlot1.Plot.XAxis.Label(textBoxNombreUnidad.Text);
+                formsPlot1.Refresh();
+                memoria[1] = textBoxNombreUnidad.Text;
+                return;
+            }
+            textBoxNombreUnidad.Text = memoria[1];
+            MessageBox.Show("Unidad invalida");
         }
 
         private void comboBoxMetodosResolucion_SelectedIndexChanged(object sender, EventArgs e)

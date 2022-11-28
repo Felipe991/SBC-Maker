@@ -1,5 +1,6 @@
 ﻿using SBC_Maker.Logica;
 using SBC_Maker.Logica.Conjuntos_Difusos;
+using ScottPlot;
 using ScottPlot.Plottable;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,20 @@ namespace SBC_Maker.Interfaz_grafica
         FuncionTriangular funcionTriangular;
         FuncionTrapezoidal funcionTrapezoidal;
         FuncionGaussiana funcionGaussiana;
-        
+        ConjuntoDifuso conjuntoAux;
+        FormsPlot formsPlotAux;
         ScatterPlot plot;
-        public FuncionPertenenciaUserControl(FuncionPertenencia funcionPertenencia, ScatterPlot? plot)
+        public FuncionPertenenciaUserControl(string nombre, ConjuntoDifuso conjuntoDifuso,FormsPlot formsPlot)
         {
             InitializeComponent();
-            this.funcionPertenencia = new FuncionPertenencia(funcionPertenencia.Nombre);
-            funcionTriangular = new FuncionTriangular(-10,0,10,funcionPertenencia.Nombre);
-            funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, funcionPertenencia.Nombre);
-            funcionGaussiana = new FuncionGaussiana(5, 0.5, funcionPertenencia.Nombre);
+            conjuntoAux = conjuntoDifuso;
+            formsPlotAux = formsPlot;
+            funcionPertenencia = new FuncionPertenencia(nombre);
+            funcionTriangular = new FuncionTriangular(-10,0,10, nombre);
+            funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, nombre);
+            funcionGaussiana = new FuncionGaussiana(5, 0.5, nombre);
             funcionPertenencia = funcionTriangular;
+            conjuntoAux.addFuncionPertenencia(funcionPertenencia);
             textBoxNombreFuncionPertenencia.Text = funcionPertenencia.Nombre;
             iniciarPlot();
         }
@@ -39,26 +44,28 @@ namespace SBC_Maker.Interfaz_grafica
             Double[] valoresY = getValoresY();
             plot = new ScatterPlot(valoresX, valoresY);
             plot.Color = Color.Red;
+            formsPlotAux.Plot.Add(plot);
+            //formsPlotAux.Refresh(false,true);
         }
 
         private double[] getValoresX()
         {
             List<Double> valorsX = new List<Double>();
 
-            switch (funcionPertenencia.GetType().ToString())
+            switch (funcionPertenencia)
             {
-                case "FuncionTriangular":
+                case FuncionTriangular:
                     valorsX.Add(funcionTriangular.LimiteIzquierdo);
                     valorsX.Add(funcionTriangular.Centro);
                     valorsX.Add(funcionTriangular.LimiteDerecho);
                     break;
-                case "FuncionTrapezoidal":
+                case FuncionTrapezoidal:
                     valorsX.Add(funcionTrapezoidal.LimIzquierdo);
                     valorsX.Add(funcionTrapezoidal.CentroIzq);
                     valorsX.Add(funcionTrapezoidal.CentroDer);
                     valorsX.Add(funcionTrapezoidal.LimDerecho);
                     break;
-                case "FuncionGaussiana":
+                case FuncionGaussiana:
                     for (Double i = funcionGaussiana.Centro - (funcionGaussiana.DesviacionEstandar * 7);
                         i <= funcionGaussiana.Centro + (funcionGaussiana.DesviacionEstandar * 7);
                         i += funcionGaussiana.DesviacionEstandar / 3)
@@ -76,20 +83,20 @@ namespace SBC_Maker.Interfaz_grafica
         {
             List<Double> valores = new List<Double>();
 
-            switch (funcionPertenencia.GetType().ToString())
+            switch (funcionPertenencia)
             {
-                case "FuncionTriangular":
+                case FuncionTriangular:
                     valores.Add(funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteIzquierdo));
                     valores.Add(funcionTriangular.CalcularPertenencia(funcionTriangular.Centro));
                     valores.Add(funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteDerecho));
                     break;
-                case "FuncionTrapezoidal":
+                case FuncionTrapezoidal:
                     valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimIzquierdo));
                     valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.CentroIzq));
                     valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.CentroDer));
                     valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimDerecho));
                     break;
-                case "FuncionGaussiana":
+                case FuncionGaussiana:
                     for (Double i = funcionGaussiana.Centro - (funcionGaussiana.DesviacionEstandar * 7);
                         i <= funcionGaussiana.Centro + (funcionGaussiana.DesviacionEstandar * 7);
                         i += funcionGaussiana.DesviacionEstandar / 3)
@@ -138,11 +145,13 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
+            //formsPlotAux.Refresh(false,true);
         }
 
         private void eliminarButton_Click_1(object sender, EventArgs e)
         {
-
+            conjuntoAux.removeFuncionPertenencia(funcionPertenencia);
+            //eliminar plot del scottplot
         }
 
         private void textBoxNombreFuncionPertenencia_Leave(object sender, EventArgs e)
