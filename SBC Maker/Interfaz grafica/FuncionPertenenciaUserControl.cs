@@ -148,6 +148,9 @@ namespace SBC_Maker.Interfaz_grafica
         private void textBoxNombreFuncionPertenencia_Leave(object sender, EventArgs e)
         {
             funcionPertenencia.Nombre = textBoxNombreFuncionPertenencia.Text;
+            funcionTriangular.Nombre = textBoxNombreFuncionPertenencia.Text;
+            funcionTrapezoidal.Nombre = textBoxNombreFuncionPertenencia.Text;
+            funcionGaussiana.Nombre = textBoxNombreFuncionPertenencia.Text;
         }
 
         private void buttonPintar_Click(object sender, EventArgs e)
