@@ -21,7 +21,9 @@ namespace SBC_Maker
         {
             InitializeComponent();
             IniciarGrafico();
-            conjuntoDifuso = new ConjuntoDifuso(textBoxNombre.Text,1);
+            conjuntoDifuso = new ConjuntoDifuso(textBoxNombre.Text,
+                                                textBoxNombreUnidad.Text,
+                                                comboBoxMetodosResolucion.SelectedIndex);
             IniciarMemoria();
         }
 
@@ -34,7 +36,7 @@ namespace SBC_Maker
 
         private void IniciarGrafico()
         {
-            formsPlot1.Plot.XAxis.Label("Unidades");
+            formsPlot1.Plot.XAxis.Label(textBoxNombreUnidad.Text);
             formsPlot1.Plot.YAxis.Label("Pertenencia");
             formsPlot1.Plot.SetAxisLimits(-10, 10, 0, 1.2);
             formsPlot1.Plot.Title(textBoxNombre.Text);
@@ -77,6 +79,7 @@ namespace SBC_Maker
             {
                 formsPlot1.Plot.XAxis.Label(textBoxNombreUnidad.Text);
                 formsPlot1.Refresh();
+                conjuntoDifuso.NombreUnidades = textBoxNombreUnidad.Text;
                 memoria[1] = textBoxNombreUnidad.Text;
                 return;
             }
@@ -97,8 +100,6 @@ namespace SBC_Maker
             }
         }
 
-        //pasar este metodo al control(?
-        //error ploteo ineccesario de puntos, se hace dos veces
         private void FixPlots()
         { 
             Double puntoMax = formsPlot1.Plot.GetAxisLimits().XMax;

@@ -52,7 +52,7 @@ namespace SBC_Maker.Interfaz_grafica
         private double[] getValoresX()
         {
             List<Double> valorsX = new List<Double>();
-            valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMin);
+            //valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMin);
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
@@ -78,14 +78,14 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
-            valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMax);
+            //valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMax);
             return valorsX.ToArray();
         }
 
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
-            valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMin + 0.26));
+            //valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMin + 0.26));
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
@@ -110,7 +110,7 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
-            valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMax- 0.26));
+            //valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMax- 0.26));
             return valores.ToArray();
         }
 
