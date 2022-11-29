@@ -96,7 +96,7 @@
             this.textBoxCentro.Name = "textBoxCentro";
             this.textBoxCentro.Size = new System.Drawing.Size(150, 27);
             this.textBoxCentro.TabIndex = 7;
-            this.textBoxCentro.Text = "5";
+            this.textBoxCentro.Text = "0";
             this.textBoxCentro.Enter += new System.EventHandler(this.textBoxMedia_Enter);
             this.textBoxCentro.Leave += new System.EventHandler(this.textBoxMedia_Leave);
             // 
@@ -115,7 +115,7 @@
             this.textBoxDesviacionEstandar.Name = "textBoxDesviacionEstandar";
             this.textBoxDesviacionEstandar.Size = new System.Drawing.Size(150, 27);
             this.textBoxDesviacionEstandar.TabIndex = 5;
-            this.textBoxDesviacionEstandar.Text = "0.5";
+            this.textBoxDesviacionEstandar.Text = "2";
             this.textBoxDesviacionEstandar.Enter += new System.EventHandler(this.textBoxDesviacionEstandar_Enter);
             this.textBoxDesviacionEstandar.Leave += new System.EventHandler(this.textBoxDesviacionEstandar_Leave);
             // 

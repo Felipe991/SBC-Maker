@@ -13,12 +13,12 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
         private Double centroDer;
         private Double limDerecho;
 
-        public FuncionTrapezoidal(Double a, Double b, Double c, Double d, string nombre) : base(nombre)
+        public FuncionTrapezoidal(Double limiteIzquierdo, Double centroIzq, Double centroDer, Double limDerecho, string nombre) : base(nombre)
         {
-            this.limIzquierdo = a;
-            this.centroIzq = b;
-            this.centroDer = c;
-            this.limDerecho = d;
+            this.limIzquierdo = limiteIzquierdo;
+            this.centroIzq = centroIzq;
+            this.centroDer = centroDer;
+            this.limDerecho = limDerecho;
         }
 
         public Double LimIzquierdo { get => limIzquierdo; set => limIzquierdo = value; }

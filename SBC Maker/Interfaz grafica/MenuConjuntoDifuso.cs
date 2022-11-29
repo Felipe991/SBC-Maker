@@ -50,9 +50,7 @@ namespace SBC_Maker
         {
             int numeroFuncion = flowLayoutPanelFuncionesPertenencia.Controls.Count + 1;
             string nombreFuncion = "Funcion N°" + numeroFuncion;
-            ScatterPlot plot = null;
             flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(nombreFuncion,conjuntoDifuso, formsPlot1));
-            formsPlot1.Plot.Add(plot);
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)
@@ -89,6 +87,40 @@ namespace SBC_Maker
         private void comboBoxMetodosResolucion_SelectedIndexChanged(object sender, EventArgs e)
         {
             conjuntoDifuso.MetodoResolucion = comboBoxMetodosResolucion.SelectedIndex;
+        }
+        
+        private void flowLayoutPanelFuncionesPertenencia_ControlAdded(object sender, ControlEventArgs e)
+        {
+            if (flowLayoutPanelFuncionesPertenencia.Controls.Count != 1)
+            {
+                FixPlots();
+            }
+        }
+
+        //pasar este metodo al control(?
+        //error ploteo ineccesario de puntos, se hace dos veces
+        private void FixPlots()
+        { 
+            Double puntoMax = formsPlot1.Plot.GetAxisLimits().XMax;
+            Double puntoMin = formsPlot1.Plot.GetAxisLimits().XMin;
+            foreach (FuncionPertenenciaUserControl control in flowLayoutPanelFuncionesPertenencia.Controls)
+            {
+                FuncionPertenencia funcAux = control.funcionPertenencia;
+                Double[] puntosX = (new Double[] { puntoMin }).Concat(control.plot.Xs).ToArray();
+                puntosX = puntosX.Concat(new Double[] { puntoMax }).ToArray();
+                Double[] puntosY = (new Double[] { funcAux.CalcularPertenencia(puntoMin) }).Concat(control.plot.Ys).ToArray();
+                puntosY = puntosY.Concat((new Double[] { funcAux.CalcularPertenencia(puntoMax) })).ToArray();
+                control.plot.Update(puntosX, puntosY);
+            }
+            formsPlot1.Refresh();
+        }
+
+        private void flowLayoutPanelFuncionesPertenencia_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            if (flowLayoutPanelFuncionesPertenencia.Controls.Count != 0)
+            {
+                FixPlots();
+            }
         }
     }
 }

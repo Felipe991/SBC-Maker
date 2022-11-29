@@ -16,13 +16,13 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class FuncionPertenenciaUserControl : UserControl
     {
-        FuncionPertenencia funcionPertenencia;
+        public FuncionPertenencia funcionPertenencia;
         FuncionTriangular funcionTriangular;
         FuncionTrapezoidal funcionTrapezoidal;
         FuncionGaussiana funcionGaussiana;
-        ConjuntoDifuso conjuntoAux;
-        FormsPlot formsPlotAux;
-        ScatterPlot plot;
+        public ConjuntoDifuso conjuntoAux;
+        public FormsPlot formsPlotAux;
+        public ScatterPlot plot;
         public FuncionPertenenciaUserControl(string nombre, ConjuntoDifuso conjuntoDifuso,FormsPlot formsPlot)
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace SBC_Maker.Interfaz_grafica
             funcionPertenencia = new FuncionPertenencia(nombre);
             funcionTriangular = new FuncionTriangular(-10,0,10, nombre);
             funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, nombre);
-            funcionGaussiana = new FuncionGaussiana(5, 0.5, nombre);
+            funcionGaussiana = new FuncionGaussiana(0, 2, nombre);
             funcionPertenencia = funcionTriangular;
             conjuntoAux.addFuncionPertenencia(funcionPertenencia);
             textBoxNombreFuncionPertenencia.Text = funcionPertenencia.Nombre;
@@ -45,16 +45,18 @@ namespace SBC_Maker.Interfaz_grafica
             plot = new ScatterPlot(valoresX, valoresY);
             plot.Color = Color.Red;
             formsPlotAux.Plot.Add(plot);
-            //formsPlotAux.Refresh(false,true);
+            formsPlotAux.Plot.AxisAuto();
+            formsPlotAux.Refresh(false,true);
         }
 
         private double[] getValoresX()
         {
             List<Double> valorsX = new List<Double>();
-
+            valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMin);
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
+                    
                     valorsX.Add(funcionTriangular.LimiteIzquierdo);
                     valorsX.Add(funcionTriangular.Centro);
                     valorsX.Add(funcionTriangular.LimiteDerecho);
@@ -76,13 +78,14 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
+            valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMax);
             return valorsX.ToArray();
         }
 
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
-
+            valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMin + 0.26));
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
@@ -107,51 +110,87 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
+            valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMax- 0.26));
             return valores.ToArray();
         }
 
         private void buttonConfiguracion_Click(object sender, EventArgs e)
         {
+            ScatterPlot plotAux = null;
             string opcionSeleccionada = comboBoxFuncionesPertenencia.Text;
+            
             switch (opcionSeleccionada)
             {
                 case "Triangular":
-                    MenuConfigFuncionTriangular mcft = new MenuConfigFuncionTriangular(funcionTriangular,plot);
+                    MenuConfigFuncionTriangular mcft = new MenuConfigFuncionTriangular(getCopiaFuncTriangular(funcionTriangular),plot);
                     if (mcft.ShowDialog() == DialogResult.OK)
                     {
                         funcionTriangular = mcft.funcTriangular;
                         funcionPertenencia = funcionTriangular;
-                        plot = mcft.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
+                        plotAux = mcft.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
                     }
                     break;
                 case "Trapezoidal":
-                    MenuConfigFuncionTrapezoidal mcftr = new MenuConfigFuncionTrapezoidal(funcionTrapezoidal, plot);
+                    MenuConfigFuncionTrapezoidal mcftr = new MenuConfigFuncionTrapezoidal(getCopiaFuncTrapezoidal(funcionTrapezoidal), plot);
                     if (mcftr.ShowDialog() == DialogResult.OK)
                     {
                         funcionTrapezoidal = mcftr.funcTrapezoidal;
                         funcionPertenencia = funcionTrapezoidal;
-                        plot = mcftr.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
+                        plotAux = mcftr.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
                     }
                     break;
                 case "Gaussiana":
-                    MenuConfigFuncionGaussiana mcfg = new MenuConfigFuncionGaussiana(funcionGaussiana, plot);
+                    MenuConfigFuncionGaussiana mcfg = new MenuConfigFuncionGaussiana(getCopiaFuncGaussiana(funcionGaussiana), plot);
                     if (mcfg.ShowDialog() == DialogResult.OK)
                     {
                         funcionGaussiana = mcfg.funcGaussiana;
                         funcionPertenencia = funcionGaussiana;
-                        plot = mcfg.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
+                        plotAux = mcfg.formsPlot1.Plot.GetPlottables().First() as ScatterPlot;
                     }
                     break;
                 default:
                     break;
             }
-            //formsPlotAux.Refresh(false,true);
+            if (plotAux == null) return;
+            formsPlotAux.Plot.Remove(plot);
+            formsPlotAux.Plot.Add(plotAux);
+            formsPlotAux.Plot.AxisAuto();
+            plot = plotAux;
+            formsPlotAux.Refresh();
+        }
+
+        private FuncionTriangular getCopiaFuncTriangular(FuncionTriangular funcionTriangular)
+        {
+            return new FuncionTriangular(
+                         funcionTriangular.LimiteIzquierdo,
+                         funcionTriangular.Centro,
+                         funcionTriangular.LimiteDerecho,
+                         funcionTriangular.Nombre);
+        }
+        private FuncionTrapezoidal getCopiaFuncTrapezoidal(FuncionTrapezoidal funcionTrapezoidal)
+        {
+            return new FuncionTrapezoidal(
+                         funcionTrapezoidal.LimIzquierdo,
+                         funcionTrapezoidal.CentroIzq,
+                         funcionTrapezoidal.CentroDer,
+                         funcionTrapezoidal.LimDerecho,
+                         funcionTrapezoidal.Nombre);
+        }
+
+        private FuncionGaussiana getCopiaFuncGaussiana(FuncionGaussiana funcionGaussiana)
+        {
+            return new FuncionGaussiana(
+                         funcionGaussiana.Centro,
+                         funcionGaussiana.DesviacionEstandar,
+                         funcionGaussiana.Nombre);
         }
 
         private void eliminarButton_Click_1(object sender, EventArgs e)
         {
             conjuntoAux.removeFuncionPertenencia(funcionPertenencia);
-            //eliminar plot del scottplot
+            formsPlotAux.Plot.Remove(plot);
+            formsPlotAux.Refresh();
+            this.Dispose();
         }
 
         private void textBoxNombreFuncionPertenencia_Leave(object sender, EventArgs e)
@@ -166,9 +205,51 @@ namespace SBC_Maker.Interfaz_grafica
         {
             if(colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                plot.Color = colorDialog1.Color;
                 buttonPintar.BackColor = colorDialog1.Color;
+                ScatterPlot plotAux = plot;
+                plotAux.Color = colorDialog1.Color;
+                formsPlotAux.Plot.Remove(plot);
+                formsPlotAux.Plot.Add(plotAux);
+                formsPlotAux.Refresh();
+                plot = plotAux;
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void comboBoxFuncionesPertenencia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxFuncionesPertenencia.Text)
+            {
+                case "Triangular":
+                    funcionPertenencia = funcionTriangular;
+                    break;
+                case "Trapezoidal":
+                    funcionPertenencia = funcionTrapezoidal;
+                    break;
+                case "Gaussiana":
+                    funcionPertenencia = funcionGaussiana;
+                    break;
+                default:
+                    break;
+            }
+            ReconstuirPlot();
+        }
+
+        private void ReconstuirPlot()
+        {
+            Double[] valoresX = getValoresX();
+            Double[] valoresY = getValoresY();
+            ScatterPlot plotAux = new ScatterPlot(valoresX, valoresY);
+            plotAux.Color = plot.Color;
+            formsPlotAux.Plot.Remove(plot);
+            formsPlotAux.Plot.Add(plotAux);
+            formsPlotAux.Plot.AxisAuto();
+            formsPlotAux.Refresh(false, true);
+            plot = plotAux;
         }
     }
 }

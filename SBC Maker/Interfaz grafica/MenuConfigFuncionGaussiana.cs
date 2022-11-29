@@ -15,14 +15,14 @@ namespace SBC_Maker.Interfaz_grafica
     public partial class MenuConfigFuncionGaussiana : Form
     {
         public FuncionGaussiana funcGaussiana;
-        public ScatterPlot plotTrapezoidal;
+        public ScatterPlot plotGaussiana;
         private List<string> memoriaTextBoxes;
         private Utiles utiles = new Utiles();
         
         public MenuConfigFuncionGaussiana(FuncionGaussiana funcionGaussiana, ScatterPlot plotGrafico)
         {
             this.funcGaussiana = funcionGaussiana;
-            this.plotTrapezoidal = plotGrafico;
+            this.plotGaussiana = plotGrafico;
             InitializeComponent();
             RellenarCampos();
             IniciarMemoria();
@@ -56,7 +56,7 @@ namespace SBC_Maker.Interfaz_grafica
             Double[] valoresX = getValoresX();
             Double[] valoresY = getValoresY();
             formsPlot1.Plot.Clear();
-            formsPlot1.Plot.AddScatter(valoresX, valoresY, Color.Red);
+            formsPlot1.Plot.AddScatter(valoresX, valoresY, plotGaussiana.Color);
             formsPlot1.Refresh();
         }
 
@@ -75,6 +75,7 @@ namespace SBC_Maker.Interfaz_grafica
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
+            
             for (Double i = funcGaussiana.Centro - (funcGaussiana.DesviacionEstandar * 7);
                 i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
                 i += funcGaussiana.DesviacionEstandar/3)

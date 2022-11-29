@@ -25,9 +25,10 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
 
         public override Double CalcularPertenencia(Double x)
         {
-            if (x <= limiteIzquierdo || x >= limiteDerecho) { return 0; }
-            if (x>limiteIzquierdo && x<=centro) { return (x-limiteIzquierdo)/(centro-limiteIzquierdo); }
-            if (x >= centro && x < limiteDerecho) { return (limiteDerecho - x) / (limiteDerecho - centro); }
+            if (x == centro) return 1;
+            if (x <= limiteIzquierdo || x >= limiteDerecho) return 0;
+            if (x>limiteIzquierdo && x<=centro) return (x-limiteIzquierdo)/(centro-limiteIzquierdo);
+            if (x >= centro && x < limiteDerecho) return (limiteDerecho - x) / (limiteDerecho - centro);
             return 0;
         }
         

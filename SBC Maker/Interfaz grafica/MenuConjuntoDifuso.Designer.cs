@@ -80,6 +80,7 @@
             // 
             // formsPlot1
             // 
+            this.formsPlot1.Enabled = false;
             this.formsPlot1.Location = new System.Drawing.Point(14, 111);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.formsPlot1.Name = "formsPlot1";
@@ -122,6 +123,8 @@
             this.flowLayoutPanelFuncionesPertenencia.Name = "flowLayoutPanelFuncionesPertenencia";
             this.flowLayoutPanelFuncionesPertenencia.Size = new System.Drawing.Size(592, 227);
             this.flowLayoutPanelFuncionesPertenencia.TabIndex = 35;
+            this.flowLayoutPanelFuncionesPertenencia.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.flowLayoutPanelFuncionesPertenencia_ControlAdded);
+            this.flowLayoutPanelFuncionesPertenencia.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.flowLayoutPanelFuncionesPertenencia_ControlRemoved);
             // 
             // labelNombreUnidad
             // 

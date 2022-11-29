@@ -4,7 +4,7 @@
     {
         private string nombre;
         private int metodoResolucion;
-        private List<FuncionPertenencia> funcionesPertenencia;
+        public List<FuncionPertenencia> funcionesPertenencia;
 
         public ConjuntoDifuso(string nombre, int metodoResolucion)
         {
