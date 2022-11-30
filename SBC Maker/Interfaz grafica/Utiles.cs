@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SBC_Maker.Logica;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,50 @@ namespace SBC_Maker.Interfaz_grafica
                 return true;
             }
             return false;
+        }
+
+        public bool IsUnique(Regla regla, List<Nodo> listaAdyacencia)
+        {
+            foreach (Nodo nodo in listaAdyacencia)
+            {
+                if (nodo.Regla.Nombre == regla.Nombre)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        public bool VerifyCicle(Nodo antecedente, Nodo consecuente )
+        {
+            return consecuente.Nivel > antecedente.Nivel;
+        }
+
+        public bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
+        {
+
+            return true;
+        }
+
+        public bool VerifyStructure (List<Nodo> listaAdyacencia)
+        {
+            foreach (Nodo nodo in listaAdyacencia)
+            {
+                switch (nodo.Regla)
+                {
+                    case ReglaConclusion:
+
+                        break;
+                    case ReglaInformacion:
+
+                        break;
+                    default:
+
+                        break;
+                }
+            }
+            
+            return true;
         }
     }
 }
