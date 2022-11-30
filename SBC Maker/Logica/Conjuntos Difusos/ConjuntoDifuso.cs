@@ -2,9 +2,9 @@
 {
     public class ConjuntoDifuso
     {
-        private string nombre;
-        private string nombreUnidades;
-        private int metodoResolucion;
+        public string nombre;
+        public string nombreUnidades;
+        public int metodoResolucion;
         public List<FuncionPertenencia> funcionesPertenencia;
 
         public ConjuntoDifuso(string nombre, string nombreUnidades, int metodoResolucion)

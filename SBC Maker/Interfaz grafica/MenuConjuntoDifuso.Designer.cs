@@ -42,6 +42,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.comboBoxMetodosResolucion = new System.Windows.Forms.ComboBox();
             this.labelMetodoResolucion = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // CancelarButton
@@ -63,6 +64,7 @@
             this.GuardarButton.TabIndex = 22;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // addFuncionButton
             // 
@@ -210,5 +212,6 @@
         private ColorDialog colorDialog1;
         private ComboBox comboBoxMetodosResolucion;
         private Label labelMetodoResolucion;
+        private SaveFileDialog saveFileDialog1;
     }
 }

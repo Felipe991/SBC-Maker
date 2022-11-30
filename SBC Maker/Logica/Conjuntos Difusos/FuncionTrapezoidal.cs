@@ -8,10 +8,10 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
 {
     public class FuncionTrapezoidal : FuncionPertenencia
     {
-        private Double limIzquierdo;
-        private Double centroIzq;
-        private Double centroDer;
-        private Double limDerecho;
+        public Double limIzquierdo;
+        public Double centroIzq;
+        public Double centroDer;
+        public Double limDerecho;
 
         public FuncionTrapezoidal(Double limiteIzquierdo, Double centroIzq, Double centroDer, Double limDerecho, string nombre) : base(nombre)
         {

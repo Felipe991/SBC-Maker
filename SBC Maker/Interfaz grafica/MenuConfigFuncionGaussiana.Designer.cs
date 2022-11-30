@@ -170,8 +170,6 @@
         private TextBox textBoxCentro;
         private Label labelParametros;
         private Button GuardarButton;
-        private Label labelFactorFuzzy;
-        private TextBox textBoxFactorFuzzy;
         private Button button1;
     }
 }

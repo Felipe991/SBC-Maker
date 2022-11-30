@@ -2,7 +2,8 @@
 {
     public class FuncionPertenencia
     {
-        private string nombre;
+        public string nombre;
+        public Color color;
 
         public FuncionPertenencia(string nombre)
         {

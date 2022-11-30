@@ -1,4 +1,5 @@
-﻿using SBC_Maker.Interfaz_grafica;
+﻿using Newtonsoft.Json;
+using SBC_Maker.Interfaz_grafica;
 using SBC_Maker.Logica;
 using ScottPlot.Plottable;
 using System;
@@ -27,6 +28,21 @@ namespace SBC_Maker
             IniciarMemoria();
         }
 
+        public MenuConjuntoDifuso(ConjuntoDifuso conjuntoDifuso)
+        {
+            InitializeComponent();
+            this.conjuntoDifuso = conjuntoDifuso;
+            textBoxNombre.Text = conjuntoDifuso.nombre;
+            textBoxNombreUnidad.Text = conjuntoDifuso.NombreUnidades;
+            comboBoxMetodosResolucion.SelectedIndex = conjuntoDifuso.MetodoResolucion;
+            foreach (FuncionPertenencia funcion in conjuntoDifuso.funcionesPertenencia)
+            {
+                flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(funcion.nombre, conjuntoDifuso, formsPlot1));
+            }
+            IniciarGrafico();
+            IniciarMemoria();
+        }
+
         private void IniciarMemoria()
         {
             memoria = new List<String>();
@@ -38,7 +54,6 @@ namespace SBC_Maker
         {
             formsPlot1.Plot.XAxis.Label(textBoxNombreUnidad.Text);
             formsPlot1.Plot.YAxis.Label("Pertenencia");
-            formsPlot1.Plot.SetAxisLimits(-10, 10, 0, 1.2);
             formsPlot1.Plot.Title(textBoxNombre.Text);
             formsPlot1.Refresh();
         }
@@ -123,5 +138,51 @@ namespace SBC_Maker
                 FixPlots();
             }
         }
+
+        private void GuardarButton_Click(object sender, EventArgs e)
+        {
+            if (VerificarFuncionesPertenencia())
+            {
+                archivarConjunto();
+            }
+        }
+
+        private void archivarConjunto()
+        {
+            var conjuntoDifusoJSON = JsonConvert.SerializeObject(this.conjuntoDifuso);
+            saveFileDialog1.FileName = this.conjuntoDifuso.nombre;
+            saveFileDialog1.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.File.WriteAllText(saveFileDialog1.FileName, conjuntoDifusoJSON);
+                DialogResult = DialogResult.OK;
+                MessageBox.Show("Archivo guardado");
+            }
+            
+        }
+
+        private bool VerificarFuncionesPertenencia()
+        {
+            if (flowLayoutPanelFuncionesPertenencia.Controls.Count == 0)
+            {
+                MessageBox.Show("No hay funciones de pertenencia");
+                return false;
+            }
+            else
+            {
+                List<string> nombres = new List<string>();
+                foreach (FuncionPertenenciaUserControl control in flowLayoutPanelFuncionesPertenencia.Controls)
+                {
+                    if (nombres.Contains(control.funcionPertenencia.Nombre))
+                    {
+                        MessageBox.Show("Hay funciones de pertenencia con el mismo nombre");
+                        return false;
+                    }
+                    nombres.Add(control.funcionPertenencia.Nombre);
+                }
+            }
+            return true;
+        }
+
     }
 }

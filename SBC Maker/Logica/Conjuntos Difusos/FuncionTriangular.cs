@@ -8,9 +8,9 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
 {
     public class FuncionTriangular : FuncionPertenencia
     {
-        private Double limiteIzquierdo;
-        private Double centro;
-        private Double limiteDerecho;
+        public Double limiteIzquierdo;
+        public Double centro;
+        public Double limiteDerecho;
 
         public FuncionTriangular(Double limiteIzquierdo, Double centro, Double limiteDerecho, string nombre) : base (nombre)
         {

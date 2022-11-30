@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SBC_Maker.Logica;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,79 +19,33 @@ namespace SBC_Maker
             InitializeComponent();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void MenuConfeccion_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void conjuntoDifusoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    var conjuntoDifusoJSON = File.ReadAllText(openFileDialog1.Title);
+                    ConjuntoDifuso conjuntoDifuso = JsonConvert.DeserializeObject<ConjuntoDifuso>(conjuntoDifusoJSON);
+                    MenuConjuntoDifuso mcd = new MenuConjuntoDifuso(conjuntoDifuso);
+                    mcd.ShowDialog();
+                }
+                catch
+                {
+                    MessageBox.Show("Archivo invalido");
+                }
+            }
         }
 
-        private void Reglas_SelectedIndexChanged(object sender, EventArgs e)
+        private void conjuntoDifusoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void Reglas_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void toolStripButton1_Click_1(object sender, EventArgs e)
-        {
-
+            MenuConjuntoDifuso menuConjuntoDifuso = new MenuConjuntoDifuso();
+            menuConjuntoDifuso.ShowDialog();
         }
     }
 }

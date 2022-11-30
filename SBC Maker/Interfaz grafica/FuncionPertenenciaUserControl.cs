@@ -38,21 +38,69 @@ namespace SBC_Maker.Interfaz_grafica
             iniciarPlot();
         }
 
+        public FuncionPertenenciaUserControl(FuncionPertenencia funcionPertenencia, ConjuntoDifuso conjuntoDifuso, FormsPlot formsPlot)
+        {
+            InitializeComponent();
+            conjuntoAux = conjuntoDifuso;
+            formsPlotAux = formsPlot;
+            this.funcionPertenencia = funcionPertenencia;
+            funcionTriangular = new FuncionTriangular(-10, 0, 10, funcionPertenencia.Nombre);
+            funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, funcionPertenencia.Nombre);
+            funcionGaussiana = new FuncionGaussiana(0, 2, funcionPertenencia.Nombre);
+            textBoxNombreFuncionPertenencia.Text = funcionPertenencia.Nombre;
+            buttonPintar.BackColor = funcionPertenencia.color;
+            ReconstuirFuncion(this.funcionPertenencia);
+            iniciarPlot(funcionPertenencia.color);
+        }
+
+        private void ReconstuirFuncion(FuncionPertenencia funcionPertenencia)
+        {
+            switch (funcionPertenencia)
+            {
+                case FuncionTriangular:
+                    funcionTriangular = (FuncionTriangular)funcionPertenencia;
+                    comboBoxFuncionesPertenencia.SelectedIndex = 0;
+                    break;
+                case FuncionTrapezoidal:
+                    funcionTrapezoidal = (FuncionTrapezoidal)funcionPertenencia;
+                    comboBoxFuncionesPertenencia.SelectedIndex = 1;
+                    break;
+                case FuncionGaussiana:
+                    funcionGaussiana = (FuncionGaussiana)funcionPertenencia;
+                    comboBoxFuncionesPertenencia.SelectedIndex = 2;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void iniciarPlot()
         {
             Double[] valoresX = getValoresX();
             Double[] valoresY = getValoresY();
             plot = new ScatterPlot(valoresX, valoresY);
             plot.Color = Color.Red;
+            funcionPertenencia.color = Color.Red;
             formsPlotAux.Plot.Add(plot);
             formsPlotAux.Plot.AxisAuto();
             formsPlotAux.Refresh(false,true);
         }
 
+        private void iniciarPlot(Color color)
+        {
+            Double[] valoresX = getValoresX();
+            Double[] valoresY = getValoresY();
+            plot = new ScatterPlot(valoresX, valoresY);
+            plot.Color = Color.Red;
+            funcionPertenencia.color = color;
+            formsPlotAux.Plot.Add(plot);
+            formsPlotAux.Plot.AxisAuto();
+            formsPlotAux.Refresh(false, true);
+        }
+
         private double[] getValoresX()
         {
             List<Double> valorsX = new List<Double>();
-            //valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMin);
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
@@ -78,14 +126,12 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
-            //valorsX.Add(formsPlotAux.Plot.GetAxisLimits().XMax);
             return valorsX.ToArray();
         }
 
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
-            //valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMin + 0.26));
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
@@ -110,7 +156,6 @@ namespace SBC_Maker.Interfaz_grafica
                 default:
                     break;
             }
-            //valores.Add(funcionPertenencia.CalcularPertenencia(formsPlotAux.Plot.GetAxisLimits().XMax- 0.26));
             return valores.ToArray();
         }
 
@@ -212,6 +257,7 @@ namespace SBC_Maker.Interfaz_grafica
                 formsPlotAux.Plot.Add(plotAux);
                 formsPlotAux.Refresh();
                 plot = plotAux;
+                funcionPertenencia.color = colorDialog1.Color;
             }
         }
 
@@ -251,5 +297,6 @@ namespace SBC_Maker.Interfaz_grafica
             formsPlotAux.Refresh(false, true);
             plot = plotAux;
         }
+
     }
 }

@@ -8,8 +8,8 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
 {
     public class FuncionGaussiana : FuncionPertenencia
     {
-        private Double centro;
-        private Double desviacionEstandar;
+        public Double centro;
+        public Double desviacionEstandar;
 
         public FuncionGaussiana(Double centro,
                                 Double desviacionEstandar,

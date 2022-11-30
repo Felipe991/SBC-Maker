@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LiveCharts" Version="0.9.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.59" />
   </ItemGroup>
 
