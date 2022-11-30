@@ -22,10 +22,9 @@ namespace SBC_Maker.Interfaz_grafica
             }
             return false;
         }
-
         public bool IsGreater(Double debeSerMayor, Double debeSerMenor)
         {
-            if (debeSerMayor > debeSerMenor)
+            if (debeSerMayor >= debeSerMenor)
             {
                 return true;
             }
@@ -46,7 +45,23 @@ namespace SBC_Maker.Interfaz_grafica
         
         public bool VerifyCycle(Nodo antecedente, Nodo consecuente )
         {
-            return consecuente.Nivel > antecedente.Nivel;
+            if (VerifyRoots(antecedente, consecuente)) return consecuente.Nivel >= antecedente.Nivel;
+            return true;
+        }
+        
+        private bool VerifyRoots(Nodo antecedente, Nodo consecuente)
+        {
+            List<Nodo> rootsConsecuente = consecuente.GetRoots();
+            List<Nodo> rootsAntecedente = antecedente.GetRoots();
+            foreach (Nodo rootAntecedente in rootsAntecedente)
+            {
+                foreach(Nodo rootConsecuente in rootsConsecuente)
+                {
+                    if (rootAntecedente == rootConsecuente) return false;
+                }
+            }
+            return true;
+
         }
 
         public bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
