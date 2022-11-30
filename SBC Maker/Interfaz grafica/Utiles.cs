@@ -44,14 +44,24 @@ namespace SBC_Maker.Interfaz_grafica
             return true;
         }
         
-        public bool VerifyCicle(Nodo antecedente, Nodo consecuente )
+        public bool VerifyCycle(Nodo antecedente, Nodo consecuente )
         {
             return consecuente.Nivel > antecedente.Nivel;
         }
 
         public bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
         {
-
+            if (antecedente.Regla.Nombre == consecuente.Regla.Nombre)
+            {
+                return false;
+            }
+            foreach(List<Relacion> antecedentes in consecuente.Antecedentes)
+            {
+                foreach(Relacion anterior in antecedentes)
+                {
+                    VerifyRedundancy(antecedente, anterior.Nodo);
+                }
+            } 
             return true;
         }
 
@@ -62,17 +72,13 @@ namespace SBC_Maker.Interfaz_grafica
                 switch (nodo.Regla)
                 {
                     case ReglaConclusion:
-
+                        if (nodo.Antecedentes.Count() < 1 || nodo.Consecuentes.Count() > 0) return false;
                         break;
                     case ReglaInformacion:
-
-                        break;
-                    default:
-
+                        if (nodo.Consecuentes.Count() < 1) return false;
                         break;
                 }
             }
-            
             return true;
         }
     }
