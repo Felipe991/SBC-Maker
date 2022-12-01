@@ -53,36 +53,11 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void ActualizarValoresGrafico()
         {
-            Double[] valoresX = getValoresX();
-            Double[] valoresY = getValoresY();
+            Double[] valoresX = funcGaussiana.getValoresX();
+            Double[] valoresY = funcGaussiana.getValoresY();
             formsPlot1.Plot.Clear();
             formsPlot1.Plot.AddScatter(valoresX, valoresY, plotGaussiana.Color);
             formsPlot1.Refresh();
-        }
-
-        private double[] getValoresX()
-        {
-            List<Double> valorsX = new List<Double>();
-            for (Double i = funcGaussiana.Centro-(funcGaussiana.DesviacionEstandar*7);
-                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
-                i+=funcGaussiana.DesviacionEstandar/3)
-            {
-                valorsX.Add(i);
-            }
-            return valorsX.ToArray();
-        }
-
-        private double[] getValoresY()
-        {
-            List<Double> valores = new List<Double>();
-            
-            for (Double i = funcGaussiana.Centro - (funcGaussiana.DesviacionEstandar * 7);
-                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
-                i += funcGaussiana.DesviacionEstandar/3)
-            {
-                valores.Add(funcGaussiana.CalcularPertenencia(i));
-            }
-            return valores.ToArray();
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)

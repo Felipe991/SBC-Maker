@@ -47,32 +47,11 @@ namespace SBC_Maker.Interfaz_grafica
         
         private void ActualizarValoresGrafico()
         {
-            Double[] valoresX = getValoresX();
-            Double[] valoresY = getValoresY();
+            Double[] valoresX = funcTrapezoidal.getValoresX();
+            Double[] valoresY = funcTrapezoidal.getValoresY();
             formsPlot1.Plot.Clear();
             formsPlot1.Plot.AddScatter(valoresX, valoresY, plotTrapezoidal.Color);
             formsPlot1.Refresh();
-        }
-
-        private double[] getValoresX()
-        {
-            List<Double> valorsX = new List<Double>();
-            valorsX.Add(funcTrapezoidal.LimIzquierdo);
-            valorsX.Add(funcTrapezoidal.CentroIzq);
-            valorsX.Add(funcTrapezoidal.CentroDer);
-            valorsX.Add(funcTrapezoidal.LimDerecho);
-            return valorsX.ToArray();
-        }
-
-        private double[] getValoresY()
-        {
-            List<Double> valores = new List<Double>();
-            
-            valores.Add(funcTrapezoidal.isRectoIzq() ? 0 : funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.LimIzquierdo));
-            valores.Add(funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.CentroIzq));
-            valores.Add(funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.CentroDer));
-            valores.Add(funcTrapezoidal.isRectoDer() ? 0 : funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.LimDerecho));
-            return valores.ToArray();
         }
 
         private void MenuConfigFuncionTrapezoidal_Load(object sender, EventArgs e)

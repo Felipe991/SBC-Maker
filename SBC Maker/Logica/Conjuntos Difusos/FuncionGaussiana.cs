@@ -22,6 +22,30 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
         public Double Centro { get => centro; set => centro = value; }
         public Double DesviacionEstandar { get => desviacionEstandar; set => desviacionEstandar = value; }
 
+        public override Double[] getValoresX()
+        {
+            List<Double> valoresX = new List<Double>();
+            for (Double i = Centro - (DesviacionEstandar * 7);
+                i <= Centro + (DesviacionEstandar * 7);
+                i += DesviacionEstandar / 3)
+            {
+                valoresX.Add(i);
+            }
+            return valoresX.ToArray();
+        }
+
+        public override Double[] getValoresY()
+        {
+            List<Double> valoresY = new List<Double>();
+            for (Double i = Centro - (DesviacionEstandar * 7);
+                        i <= Centro + (DesviacionEstandar * 7);
+                        i += DesviacionEstandar / 3)
+            {
+                valoresY.Add(CalcularPertenencia(i));
+            }
+            return valoresY.ToArray();
+        }
+
         public override Double CalcularPertenencia(Double valor)
         {
             var v1 = (valor - centro);

@@ -60,29 +60,11 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void ActualizarValoresGrafico()
         {
-            Double[] valoresX = getValoresX();
-            Double[] valoresY = getValoresY();
+            Double[] valoresX = funcTriangular.getValoresX();
+            Double[] valoresY = funcTriangular.getValoresY();
             formsPlot1.Plot.Clear();
             formsPlot1.Plot.AddScatter(valoresX, valoresY, plotTriangular.Color);
             formsPlot1.Refresh();
-        }
-
-        private double[] getValoresX()
-        {
-            List<Double> valorsX = new List<Double>();
-            valorsX.Add(funcTriangular.LimiteIzquierdo);
-            valorsX.Add(funcTriangular.Centro);
-            valorsX.Add(funcTriangular.LimiteDerecho);
-            return valorsX.ToArray();
-        }
-
-        private double[] getValoresY()
-        {
-            List<Double> valores = new List<Double>();
-            valores.Add(funcTriangular.isRectoIzq() ? 0 : funcTriangular.CalcularPertenencia(funcTriangular.LimiteIzquierdo));
-            valores.Add(funcTriangular.CalcularPertenencia(funcTriangular.Centro));
-            valores.Add(funcTriangular.isRectoDer() ? 0 : funcTriangular.CalcularPertenencia(funcTriangular.LimiteDerecho));
-            return valores.ToArray();
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)

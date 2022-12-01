@@ -1,6 +1,6 @@
 ﻿namespace SBC_Maker.Logica
 {
-    public class FuncionPertenencia
+    public abstract class FuncionPertenencia
     {
         public string nombre;
         public Color color;
@@ -11,9 +11,11 @@
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
-        public virtual Double CalcularPertenencia(Double x) 
-        {
-            return 0;
-        }
+        
+        public abstract Double CalcularPertenencia(Double x);
+
+        public abstract Double[] getValoresX();
+        
+        public abstract Double[] getValoresY();
     }
 }

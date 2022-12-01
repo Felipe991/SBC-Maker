@@ -34,6 +34,26 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
             else { return (limDerecho - x) / (limDerecho - centroDer); }
         }
 
+        public override Double[] getValoresX()
+        {
+            List<Double> valoresX = new List<Double>();
+            valoresX.Add(LimIzquierdo);
+            valoresX.Add(CentroIzq);
+            valoresX.Add(CentroDer);
+            valoresX.Add(LimDerecho);
+            return valoresX.ToArray();
+        }
+
+        public override Double[] getValoresY()
+        {
+            List<Double> valoresY = new List<Double>();
+            valoresY.Add(isRectoIzq() ? 0 : CalcularPertenencia(LimIzquierdo));
+            valoresY.Add(CalcularPertenencia(CentroIzq));
+            valoresY.Add(CalcularPertenencia(CentroDer));
+            valoresY.Add(isRectoDer() ? 0 : CalcularPertenencia(LimDerecho));
+            return valoresY.ToArray();
+        }
+
         public bool isRecto()
         {
             return isRectoIzq() || isRectoDer();

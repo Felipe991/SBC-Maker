@@ -28,7 +28,6 @@ namespace SBC_Maker.Interfaz_grafica
             InitializeComponent();
             conjuntoAux = conjuntoDifuso;
             formsPlotAux = formsPlot;
-            funcionPertenencia = new FuncionPertenencia(nombre);
             funcionTriangular = new FuncionTriangular(-10,0,10, nombre);
             funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, nombre);
             funcionGaussiana = new FuncionGaussiana(0, 2, nombre);
@@ -76,8 +75,8 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void iniciarPlot()
         {
-            Double[] valoresX = getValoresX();
-            Double[] valoresY = getValoresY();
+            Double[] valoresX = funcionPertenencia.getValoresX();
+            Double[] valoresY = funcionPertenencia.getValoresY();
             plot = new ScatterPlot(valoresX, valoresY);
             plot.Color = Color.Red;
             funcionPertenencia.color = Color.Red;
@@ -88,75 +87,14 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void iniciarPlot(Color color)
         {
-            Double[] valoresX = getValoresX();
-            Double[] valoresY = getValoresY();
+            Double[] valoresX = funcionPertenencia.getValoresX();
+            Double[] valoresY = funcionPertenencia.getValoresY();
             plot = new ScatterPlot(valoresX, valoresY);
             plot.Color = Color.Red;
             funcionPertenencia.color = color;
             formsPlotAux.Plot.Add(plot);
             formsPlotAux.Plot.AxisAuto();
             formsPlotAux.Refresh(false, true);
-        }
-
-        private double[] getValoresX()
-        {
-            List<Double> valorsX = new List<Double>();
-            switch (funcionPertenencia)
-            {
-                case FuncionTriangular:
-                    
-                    valorsX.Add(funcionTriangular.LimiteIzquierdo);
-                    valorsX.Add(funcionTriangular.Centro);
-                    valorsX.Add(funcionTriangular.LimiteDerecho);
-                    break;
-                case FuncionTrapezoidal:
-                    valorsX.Add(funcionTrapezoidal.LimIzquierdo);
-                    valorsX.Add(funcionTrapezoidal.CentroIzq);
-                    valorsX.Add(funcionTrapezoidal.CentroDer);
-                    valorsX.Add(funcionTrapezoidal.LimDerecho);
-                    break;
-                case FuncionGaussiana:
-                    for (Double i = funcionGaussiana.Centro - (funcionGaussiana.DesviacionEstandar * 7);
-                        i <= funcionGaussiana.Centro + (funcionGaussiana.DesviacionEstandar * 7);
-                        i += funcionGaussiana.DesviacionEstandar / 3)
-                    {
-                        valorsX.Add(i);
-                    }
-                    break;
-                default:
-                    break;
-            }
-            return valorsX.ToArray();
-        }
-
-        private double[] getValoresY()
-        {
-            List<Double> valores = new List<Double>();
-            switch (funcionPertenencia)
-            {
-                case FuncionTriangular:
-                    valores.Add(funcionTriangular.isRectoIzq() ? 0 : funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteIzquierdo));
-                    valores.Add(funcionTriangular.CalcularPertenencia(funcionTriangular.Centro));
-                    valores.Add(funcionTriangular.isRectoDer() ? 0 : funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteDerecho));
-                    break;
-                case FuncionTrapezoidal:
-                    valores.Add(funcionTrapezoidal.isRectoIzq() ? 0 : funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimIzquierdo));
-                    valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.CentroIzq));
-                    valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.CentroDer));
-                    valores.Add(funcionTrapezoidal.isRectoDer() ? 0 : funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimDerecho));
-                    break;
-                case FuncionGaussiana:
-                    for (Double i = funcionGaussiana.Centro - (funcionGaussiana.DesviacionEstandar * 7);
-                        i <= funcionGaussiana.Centro + (funcionGaussiana.DesviacionEstandar * 7);
-                        i += funcionGaussiana.DesviacionEstandar / 3)
-                    {
-                        valores.Add(funcionGaussiana.CalcularPertenencia(i));
-                    }
-                    break;
-                default:
-                    break;
-            }
-            return valores.ToArray();
         }
 
         private void buttonConfiguracion_Click(object sender, EventArgs e)
@@ -287,8 +225,8 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void ReconstuirPlot()
         {
-            Double[] valoresX = getValoresX();
-            Double[] valoresY = getValoresY();
+            Double[] valoresX = funcionPertenencia.getValoresX();
+            Double[] valoresY = funcionPertenencia.getValoresY();
             ScatterPlot plotAux = new ScatterPlot(valoresX, valoresY);
             plotAux.Color = plot.Color;
             formsPlotAux.Plot.Remove(plot);
