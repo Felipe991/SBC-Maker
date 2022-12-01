@@ -12,7 +12,8 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class MenuRegla : Form
     {
-        PreguntaDicotomicaUserControl pduc = new PreguntaDicotomicaUserControl();
+        PreguntaCerradaUserControl pduc = new PreguntaCerradaUserControl();
+        PreguntaDifusaUserControl pdifuc = new PreguntaDifusaUserControl();
         public MenuRegla()
         {
             InitializeComponent();
@@ -50,12 +51,13 @@ namespace SBC_Maker.Interfaz_grafica
         {
             switch (comboBoxTipoPregunta.Text)
             {
-                case ("Dicotomica"):
-                    
-                    break;
-                case ("Politomica"):
+                case ("Cerrada"):
+                    this.panelPregunta.Controls.Clear();
+                    this.panelPregunta.Controls.Add(pduc);
                     break;
                 case ("Difusa"):
+                    this.panelPregunta.Controls.Clear();
+                    this.panelPregunta.Controls.Add(pdifuc);
                     break;
             }
         }
