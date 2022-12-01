@@ -61,7 +61,6 @@ namespace SBC_Maker.Interfaz_grafica
                 }
             }
             return true;
-
         }
 
         public bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
@@ -86,11 +85,14 @@ namespace SBC_Maker.Interfaz_grafica
             {
                 switch (nodo.Regla)
                 {
-                    case ReglaConclusion:
-                        if (nodo.Antecedentes.Count() < 1 || nodo.Consecuentes.Count() > 0) return false;
+                    case ReglaInicio:
+                        if (nodo.Antecedentes.Count() > 0 || nodo.Consecuentes.Count() < 1) return false;
                         break;
                     case ReglaInformacion:
-                        if (nodo.Consecuentes.Count() < 1) return false;
+                        if (nodo.Antecedentes.Count() < 1 || nodo.Consecuentes.Count() < 1) return false;
+                        break;
+                    case ReglaConclusion:
+                        if (nodo.Antecedentes.Count() < 1 || nodo.Consecuentes.Count() > 0) return false;
                         break;
                 }
             }

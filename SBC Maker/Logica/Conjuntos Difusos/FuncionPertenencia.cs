@@ -11,7 +11,7 @@
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
-        public virtual Double CalcularPertenencia(Double x)
+        public virtual Double CalcularPertenencia(Double x) 
         {
             return 0;
         }
