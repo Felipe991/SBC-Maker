@@ -117,8 +117,10 @@
             // 
             this.textBoxNombre.Location = new System.Drawing.Point(111, 40);
             this.textBoxNombre.Name = "textBoxNombre";
+            this.textBoxNombre.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBoxNombre.Size = new System.Drawing.Size(398, 23);
             this.textBoxNombre.TabIndex = 7;
+            this.textBoxNombre.Text = "Regla";
             // 
             // textBoxExplicacion
             // 

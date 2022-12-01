@@ -14,6 +14,7 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class PreguntaDifusaUserControl : UserControl
     {
+        public ConjuntoDifuso conjuntoDifuso;
         public PreguntaDifusaUserControl()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace SBC_Maker.Interfaz_grafica
                 try
                 {
                     var conjuntoDifusoJSON = File.ReadAllText(openFileDialog1.Title);
-                    ConjuntoDifuso conjuntoDifuso = JsonConvert.DeserializeObject<ConjuntoDifuso>(conjuntoDifusoJSON);
+                    this.conjuntoDifuso = JsonConvert.DeserializeObject<ConjuntoDifuso>(conjuntoDifusoJSON);
                     textBoxRuta.Text = openFileDialog1.Title;
                 }
                 catch
@@ -34,6 +35,11 @@ namespace SBC_Maker.Interfaz_grafica
                     MessageBox.Show("Archivo invalido");
                 }
             }
+        }
+
+        private void PreguntaDifusaUserControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

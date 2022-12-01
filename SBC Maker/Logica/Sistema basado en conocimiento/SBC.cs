@@ -19,7 +19,7 @@ namespace SBC_Maker.Logica
             this.ConfiguracionMotor = configuracionMotor;
             this.baseConocimiento = new List<Nodo>();
         }
-
+        
         public string Nombre { get => nombre; set => nombre = value; }
         public ConfiguracionMotor ConfiguracionMotor { get => configuracionMotor; set => configuracionMotor = value; }
         public List<Nodo> BaseConocimiento { get => baseConocimiento; set => baseConocimiento = value; }

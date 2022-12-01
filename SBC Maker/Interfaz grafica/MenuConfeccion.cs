@@ -2,6 +2,7 @@
 using SBC_Maker.Interfaz_grafica;
 using SBC_Maker.Logica;
 using SBC_Maker.Logica.Configuracion;
+using static SBC_Maker.Logica.Utiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

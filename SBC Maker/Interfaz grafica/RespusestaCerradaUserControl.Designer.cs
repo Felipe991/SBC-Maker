@@ -82,7 +82,7 @@
 
         #endregion
 
-        private TextBox textBoxRespuesta1;
+        public TextBox textBoxRespuesta1;
         private Label label1;
         private Button eliminarButton;
     }
