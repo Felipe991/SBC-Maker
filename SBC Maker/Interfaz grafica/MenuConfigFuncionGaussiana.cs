@@ -32,7 +32,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void RellenarCampos()
         {
-            textBoxCentro.Text = funcGaussiana.Centro.ToString();
+            textBoxCentro.Text = funcGaussiana.CentroG.ToString();
             textBoxDesviacionEstandar.Text = funcGaussiana.DesviacionEstandar.ToString();
         }
 
@@ -95,7 +95,7 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxCentro.Text))
             {
                 Double textoParseado = Double.Parse(textBoxCentro.Text);
-                funcGaussiana.Centro = textoParseado;
+                funcGaussiana.CentroG = textoParseado;
                 ActualizarValoresGrafico();
                 return;
             }

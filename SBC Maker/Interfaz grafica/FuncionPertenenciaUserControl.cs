@@ -163,7 +163,7 @@ namespace SBC_Maker.Interfaz_grafica
         private FuncionGaussiana getCopiaFuncGaussiana(FuncionGaussiana funcionGaussiana)
         {
             return new FuncionGaussiana(
-                         funcionGaussiana.Centro,
+                         funcionGaussiana.CentroG,
                          funcionGaussiana.DesviacionEstandar,
                          funcionGaussiana.Nombre);
         }

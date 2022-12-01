@@ -10,6 +10,12 @@
             this.Nombre = nombre;
         }
 
+        public FuncionPertenencia()
+        {
+            this.nombre = "";
+            this.color = new Color();
+        }
+
         public string Nombre { get => nombre; set => nombre = value; }
         
         public abstract Double CalcularPertenencia(Double x);

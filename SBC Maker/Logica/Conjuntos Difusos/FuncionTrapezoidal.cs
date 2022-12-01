@@ -21,6 +21,14 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
             this.limDerecho = limDerecho;
         }
 
+        public FuncionTrapezoidal()
+        {
+            limIzquierdo = new double();
+            centroIzq = new double();
+            centroDer = new double();
+            limDerecho = new double();
+        }
+
         public Double LimIzquierdo { get => limIzquierdo; set => limIzquierdo = value; }
         public Double CentroIzq { get => centroIzq; set => centroIzq = value; }
         public Double CentroDer { get => centroDer; set => centroDer = value; }

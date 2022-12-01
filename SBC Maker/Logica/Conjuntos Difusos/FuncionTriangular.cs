@@ -19,6 +19,13 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
             this.limiteDerecho = limiteDerecho;
         }
 
+        public FuncionTriangular()
+        {
+            limiteIzquierdo = new double();
+            centro = new double();
+            limiteDerecho = new double();
+        }
+
         public Double LimiteIzquierdo { get => limiteIzquierdo; set => limiteIzquierdo = value; }
         public Double Centro { get => centro; set => centro = value; }
         public Double LimiteDerecho { get => limiteDerecho; set => limiteDerecho = value; }
