@@ -1,6 +1,8 @@
-﻿using SBC_Maker.Logica.Conjuntos_Difusos;
+﻿using SBC_Maker.Logica;
+using SBC_Maker.Logica.Conjuntos_Difusos;
 using ScottPlot;
 using ScottPlot.Plottable;
+using static SBC_Maker.Logica.Utiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -74,7 +76,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxLimIzquierdo_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxLimIzquierdo.Text))
+            if (IsDouble(textBoxLimIzquierdo.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimIzquierdo.Text);
                 if (textoParseado<funcTriangular.Centro 
@@ -90,7 +92,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxMedia_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxMedia.Text))
+            if (IsDouble(textBoxMedia.Text))
             {
                 Double textoParseado = Double.Parse(textBoxMedia.Text);
                 if (textoParseado>funcTriangular.LimiteIzquierdo
@@ -107,7 +109,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxLimDerecho_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxLimDerecho.Text))
+            if (IsDouble(textBoxLimDerecho.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimDerecho.Text);
                 if (textoParseado>funcTriangular.Centro

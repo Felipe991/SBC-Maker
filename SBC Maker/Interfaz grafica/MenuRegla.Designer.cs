@@ -95,7 +95,7 @@
             this.GroupTipoRegla.Controls.Add(this.InformacionButton);
             this.GroupTipoRegla.Controls.Add(this.InicioButton);
             this.GroupTipoRegla.Controls.Add(this.ConclusionButton);
-            this.GroupTipoRegla.Location = new System.Drawing.Point(32, 325);
+            this.GroupTipoRegla.Location = new System.Drawing.Point(32, 308);
             this.GroupTipoRegla.Name = "GroupTipoRegla";
             this.GroupTipoRegla.Size = new System.Drawing.Size(478, 50);
             this.GroupTipoRegla.TabIndex = 6;
@@ -136,6 +136,7 @@
             this.GuardarButton.TabIndex = 11;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // CancelarButton
             // 
@@ -148,9 +149,9 @@
             // 
             // panelPregunta
             // 
-            this.panelPregunta.Location = new System.Drawing.Point(32, 499);
+            this.panelPregunta.Location = new System.Drawing.Point(32, 441);
             this.panelPregunta.Name = "panelPregunta";
-            this.panelPregunta.Size = new System.Drawing.Size(478, 90);
+            this.panelPregunta.Size = new System.Drawing.Size(478, 148);
             this.panelPregunta.TabIndex = 13;
             // 
             // textBoxIndicacion
@@ -176,20 +177,19 @@
             // 
             this.comboBoxTipoPregunta.FormattingEnabled = true;
             this.comboBoxTipoPregunta.Items.AddRange(new object[] {
-            "Dicotomica",
-            "Politomica",
+            "Cerrada",
             "Difusa"});
-            this.comboBoxTipoPregunta.Location = new System.Drawing.Point(135, 412);
+            this.comboBoxTipoPregunta.Location = new System.Drawing.Point(135, 370);
             this.comboBoxTipoPregunta.Name = "comboBoxTipoPregunta";
             this.comboBoxTipoPregunta.Size = new System.Drawing.Size(145, 23);
             this.comboBoxTipoPregunta.TabIndex = 30;
-            this.comboBoxTipoPregunta.Text = "Dicotomica";
+            this.comboBoxTipoPregunta.Text = "Cerrada";
             this.comboBoxTipoPregunta.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoPregunta_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 412);
+            this.label5.Location = new System.Drawing.Point(32, 370);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 15);
             this.label5.TabIndex = 29;
@@ -197,7 +197,7 @@
             // 
             // textBoxPregunta
             // 
-            this.textBoxPregunta.Location = new System.Drawing.Point(110, 458);
+            this.textBoxPregunta.Location = new System.Drawing.Point(110, 399);
             this.textBoxPregunta.Name = "textBoxPregunta";
             this.textBoxPregunta.Size = new System.Drawing.Size(399, 23);
             this.textBoxPregunta.TabIndex = 28;
@@ -205,7 +205,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 461);
+            this.label3.Location = new System.Drawing.Point(31, 402);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 15);
             this.label3.TabIndex = 27;

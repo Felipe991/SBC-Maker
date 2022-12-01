@@ -1,5 +1,7 @@
-﻿using SBC_Maker.Logica.Conjuntos_Difusos;
+﻿using SBC_Maker.Logica;
+using SBC_Maker.Logica.Conjuntos_Difusos;
 using ScottPlot.Plottable;
+using static SBC_Maker.Logica.Utiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,11 +55,36 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void ActualizarValoresGrafico()
         {
-            Double[] valoresX = funcGaussiana.getValoresX();
-            Double[] valoresY = funcGaussiana.getValoresY();
+            Double[] valoresX = getValoresX();
+            Double[] valoresY = getValoresY();
             formsPlot1.Plot.Clear();
             formsPlot1.Plot.AddScatter(valoresX, valoresY, plotGaussiana.Color);
             formsPlot1.Refresh();
+        }
+
+        private double[] getValoresX()
+        {
+            List<Double> valorsX = new List<Double>();
+            for (Double i = funcGaussiana.Centro-(funcGaussiana.DesviacionEstandar*7);
+                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
+                i+=funcGaussiana.DesviacionEstandar/3)
+            {
+                valorsX.Add(i);
+            }
+            return valorsX.ToArray();
+        }
+
+        private double[] getValoresY()
+        {
+            List<Double> valores = new List<Double>();
+            
+            for (Double i = funcGaussiana.Centro - (funcGaussiana.DesviacionEstandar * 7);
+                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
+                i += funcGaussiana.DesviacionEstandar/3)
+            {
+                valores.Add(funcGaussiana.CalcularPertenencia(i));
+            }
+            return valores.ToArray();
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)
@@ -77,7 +104,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxDesviacionEstandar_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxDesviacionEstandar.Text))
+            if (IsDouble(textBoxDesviacionEstandar.Text))
             {
                 Double textoParseado = Double.Parse(textBoxDesviacionEstandar.Text);
                 if (textoParseado>0)
@@ -92,7 +119,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxMedia_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxCentro.Text))
+            if (IsDouble(textBoxCentro.Text))
             {
                 Double textoParseado = Double.Parse(textBoxCentro.Text);
                 funcGaussiana.CentroG = textoParseado;

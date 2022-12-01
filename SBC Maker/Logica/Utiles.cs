@@ -1,28 +1,22 @@
-﻿using SBC_Maker.Logica;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SBC_Maker.Interfaz_grafica
+namespace SBC_Maker.Logica
 {
-    internal class Utiles
+    public class Utiles
     {
-        public Utiles()
+        public static bool IsDouble(string texto)
         {
-            
-        }
-
-        public bool IsDouble(string texto)
-        {
-            if (double.TryParse(texto, out double d) && !Double.IsNaN(d) && !Double.IsInfinity(d))
+            if (double.TryParse(texto, out double d) && !double.IsNaN(d) && !double.IsInfinity(d))
             {
                 return true;
             }
             return false;
         }
-        public bool IsGreater(Double debeSerMayor, Double debeSerMenor)
+        public static bool IsGreater(double debeSerMayor, double debeSerMenor)
         {
             if (debeSerMayor >= debeSerMenor)
             {
@@ -31,7 +25,7 @@ namespace SBC_Maker.Interfaz_grafica
             return false;
         }
 
-        public bool IsUnique(Regla regla, List<Nodo> listaAdyacencia)
+        public static bool IsUnique(Regla regla, List<Nodo> listaAdyacencia)
         {
             foreach (Nodo nodo in listaAdyacencia)
             {
@@ -42,20 +36,20 @@ namespace SBC_Maker.Interfaz_grafica
             }
             return true;
         }
-        
-        public bool VerifyCycle(Nodo antecedente, Nodo consecuente )
+
+        public static bool VerifyCycle(Nodo antecedente, Nodo consecuente)
         {
             if (VerifyRoots(antecedente, consecuente)) return consecuente.Nivel >= antecedente.Nivel;
             return true;
         }
-        
-        private bool VerifyRoots(Nodo antecedente, Nodo consecuente)
+
+        private static bool VerifyRoots(Nodo antecedente, Nodo consecuente)
         {
             List<Nodo> rootsConsecuente = consecuente.GetRoots();
             List<Nodo> rootsAntecedente = antecedente.GetRoots();
             foreach (Nodo rootAntecedente in rootsAntecedente)
             {
-                foreach(Nodo rootConsecuente in rootsConsecuente)
+                foreach (Nodo rootConsecuente in rootsConsecuente)
                 {
                     if (rootAntecedente == rootConsecuente) return false;
                 }
@@ -63,23 +57,23 @@ namespace SBC_Maker.Interfaz_grafica
             return true;
         }
 
-        public bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
         {
             if (antecedente.Regla.Nombre == consecuente.Regla.Nombre)
             {
                 return false;
             }
-            foreach(List<Relacion> antecedentes in consecuente.Antecedentes)
+            foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
             {
-                foreach(Relacion anterior in antecedentes)
+                foreach (Relacion anterior in antecedentes)
                 {
                     VerifyRedundancy(antecedente, anterior.Nodo);
                 }
-            } 
+            }
             return true;
         }
 
-        public bool VerifyStructure (List<Nodo> listaAdyacencia)
+        public static bool VerifyStructure(List<Nodo> listaAdyacencia)
         {
             foreach (Nodo nodo in listaAdyacencia)
             {
