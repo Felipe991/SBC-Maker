@@ -65,8 +65,8 @@ namespace SBC_Maker.Interfaz_grafica
         private double[] getValoresX()
         {
             List<Double> valorsX = new List<Double>();
-            for (Double i = funcGaussiana.Centro-(funcGaussiana.DesviacionEstandar*7);
-                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
+            for (Double i = funcGaussiana.CentroG-(funcGaussiana.DesviacionEstandar*7);
+                i <= funcGaussiana.CentroG + (funcGaussiana.DesviacionEstandar * 7);
                 i+=funcGaussiana.DesviacionEstandar/3)
             {
                 valorsX.Add(i);
@@ -78,8 +78,8 @@ namespace SBC_Maker.Interfaz_grafica
         {
             List<Double> valores = new List<Double>();
             
-            for (Double i = funcGaussiana.Centro - (funcGaussiana.DesviacionEstandar * 7);
-                i <= funcGaussiana.Centro + (funcGaussiana.DesviacionEstandar * 7);
+            for (Double i = funcGaussiana.CentroG - (funcGaussiana.DesviacionEstandar * 7);
+                i <= funcGaussiana.CentroG + (funcGaussiana.DesviacionEstandar * 7);
                 i += funcGaussiana.DesviacionEstandar/3)
             {
                 valores.Add(funcGaussiana.CalcularPertenencia(i));
