@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using SBC_Maker.Interfaz_grafica;
 using SBC_Maker.Logica;
+using SBC_Maker.Logica.Configuracion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +16,16 @@ namespace SBC_Maker
 {
     public partial class MenuConfeccion : Form
     {
-        public MenuConfeccion()
+        private SBC sbc;
+        public MenuConfeccion(string nombre)
         {
             InitializeComponent();
+            this.sbc = new SBC(nombre, new ConfiguracionMotor());
+        }
+        public MenuConfeccion(SBC sbc)
+        {
+            InitializeComponent();
+            this.sbc = sbc;
         }
 
         private void MenuConfeccion_Load(object sender, EventArgs e)
@@ -37,7 +46,7 @@ namespace SBC_Maker
                 }
                 catch
                 {
-                    MessageBox.Show("Archivo invalido");
+                    MessageBox.Show("Archivo inválido");
                 }
             }
         }
@@ -46,6 +55,18 @@ namespace SBC_Maker
         {
             MenuConjuntoDifuso menuConjuntoDifuso = new MenuConjuntoDifuso();
             menuConjuntoDifuso.ShowDialog();
+        }
+
+        private void configuracionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MenuConfiguracionSBC menuConfiguracionSBC = new MenuConfiguracionSBC(sbc.ConfiguracionMotor);
+            menuConfiguracionSBC.ShowDialog();
+        }
+
+        private void toolStripButtonAgregarRegla_Click(object sender, EventArgs e)
+        {
+            MenuRegla menuRegla = new MenuRegla();
+            menuRegla.ShowDialog();
         }
     }
 }

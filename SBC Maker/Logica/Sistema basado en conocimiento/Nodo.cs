@@ -1,4 +1,6 @@
-﻿namespace SBC_Maker.Logica
+﻿using SBC_Maker.Logica.Configuracion;
+
+namespace SBC_Maker.Logica
 {
     public class Nodo
     {
@@ -7,12 +9,14 @@
         private int nivel;
         private List<List<Relacion>> antecedentes;
         private List<Relacion> consecuentes;
+        private Posicion posicion;
 
         public Nodo(Regla regla, Hecho hecho, int nivel)
         {
             this.Regla = regla;
             this.Hecho = hecho;
             this.Nivel = nivel;
+            this.Posicion = new Posicion();
             this.Antecedentes = new List<List<Relacion>>();
             this.Consecuentes = new List<Relacion>();
         }
@@ -37,5 +41,6 @@
         public List<List<Relacion>> Antecedentes { get => antecedentes; set => antecedentes = value; }
         public List<Relacion> Consecuentes { get => consecuentes; set => consecuentes = value; }
         internal Regla Regla { get => regla; set => regla = value; }
+        public Posicion Posicion { get => posicion; set => posicion = value; }
     }
 }

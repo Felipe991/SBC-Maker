@@ -2,27 +2,24 @@
 {
     public class ConfiguracionMotor
     {
-        private int conclusionesNecesarias = 1;
+        private int limiteConclusiones = 1;
         private bool[] metodoResolucion = new bool[3];
         private bool explicacion = true;
 
         public ConfiguracionMotor()
         {
-            metodoResolucion[0] = true;
-            metodoResolucion[1] = false;
-            metodoResolucion[2] = false;
+            MetodoResolucion[0] = true;
+            MetodoResolucion[1] = false;
+            MetodoResolucion[2] = false;
         }
 
-        public int ConclusionesNecesarias { get => conclusionesNecesarias; set => conclusionesNecesarias = value; }
+        public int ConclusionesNecesarias { get => limiteConclusiones; set => limiteConclusiones = value; }
         public bool Explicacion { get => explicacion; set => explicacion = value; }
+        public bool[] MetodoResolucion { get => metodoResolucion; set => metodoResolucion = value; }
 
-        public void activarMetodoResolucion(int numMetodo)
+        public void SetMetodoResolucion(int numMetodo, bool estado)
         {
-            metodoResolucion[numMetodo] = true;
-        }
-        public void desactivarMetodoResolucion(int numMetodo)
-        {
-            metodoResolucion[numMetodo] = false;
+            MetodoResolucion[numMetodo] = estado;
         }
     }
 }

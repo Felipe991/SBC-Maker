@@ -61,5 +61,11 @@ namespace SBC_Maker.Interfaz_grafica
                     break;
             }
         }
+
+        private void GuardarButton_Click(object sender, EventArgs e)
+        {
+            
+            DialogResult = DialogResult.OK;
+        }
     }
 }

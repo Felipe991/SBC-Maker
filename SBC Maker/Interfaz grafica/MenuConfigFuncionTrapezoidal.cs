@@ -1,5 +1,7 @@
-﻿using SBC_Maker.Logica.Conjuntos_Difusos;
+﻿using SBC_Maker.Logica;
+using SBC_Maker.Logica.Conjuntos_Difusos;
 using ScottPlot.Plottable;
+using static SBC_Maker.Logica.Utiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +18,6 @@ namespace SBC_Maker.Interfaz_grafica
     {
         public FuncionTrapezoidal funcTrapezoidal;
         public ScatterPlot plotTrapezoidal; 
-        private Utiles utiles = new Utiles();
         private List<string> memoriaTextBoxes;
         
         public MenuConfigFuncionTrapezoidal(FuncionTrapezoidal funcionTrapezoidal,ScatterPlot plotGrafico)
@@ -93,7 +94,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxLimIzquierdo_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxLimIzquierdo.Text))
+            if (IsDouble(textBoxLimIzquierdo.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimIzquierdo.Text);
                 if (textoParseado < funcTrapezoidal.centroIzq
@@ -109,7 +110,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxCentroIzq_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxCentroIzq.Text))
+            if (IsDouble(textBoxCentroIzq.Text))
             {
                 Double textoParseado = Double.Parse(textBoxCentroIzq.Text);
                 if ((textoParseado > funcTrapezoidal.LimIzquierdo
@@ -126,7 +127,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxCentroDer_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxCentroDer.Text))
+            if (IsDouble(textBoxCentroDer.Text))
             {
                 Double textoParseado = Double.Parse(textBoxCentroDer.Text);
                 if ((textoParseado> funcTrapezoidal.CentroIzq
@@ -143,7 +144,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void textBoxLimDerecho_Leave(object sender, EventArgs e)
         {
-            if (utiles.IsDouble(textBoxLimDerecho.Text))
+            if (IsDouble(textBoxLimDerecho.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimDerecho.Text);
                 if ((textoParseado>funcTrapezoidal.CentroDer)

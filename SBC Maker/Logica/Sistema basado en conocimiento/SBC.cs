@@ -10,28 +10,18 @@ namespace SBC_Maker.Logica
     public class SBC
     {
         private string nombre;
-        private VerificadorReglas verificadorReglas;
-        private BaseDeConocimiento baseConocimientos;
-        private ConfiguracionGrafica configuracionGrafica;
+        private List<Nodo> baseConocimiento;
         private ConfiguracionMotor configuracionMotor;
 
-        public SBC(string nombre,
-                   VerificadorReglas verificadorReglas,
-                   BaseDeConocimiento grafo,
-                   ConfiguracionGrafica configuracionGrafica,
-                   ConfiguracionMotor configuracionMotor)
+        public SBC(string nombre, ConfiguracionMotor configuracionMotor)
         {
             this.Nombre = nombre;
-            this.VerificadorReglas = verificadorReglas;
-            this.Grafo = grafo;
-            this.ConfiguracionGrafica = configuracionGrafica;
             this.ConfiguracionMotor = configuracionMotor;
+            this.baseConocimiento = new List<Nodo>();
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
-        public VerificadorReglas VerificadorReglas { get => verificadorReglas; set => verificadorReglas = value; }
-        public BaseDeConocimiento Grafo { get => baseConocimientos; set => baseConocimientos = value; }
-        public ConfiguracionGrafica ConfiguracionGrafica { get => configuracionGrafica; set => configuracionGrafica = value; }
         public ConfiguracionMotor ConfiguracionMotor { get => configuracionMotor; set => configuracionMotor = value; }
+        public List<Nodo> BaseConocimiento { get => baseConocimiento; set => baseConocimiento = value; }
     }
 }
