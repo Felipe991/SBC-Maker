@@ -28,10 +28,25 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
 
         public override Double CalcularPertenencia(Double x)
         {
-            if (x <= limIzquierdo || x >= limDerecho) { return 0; }
             if (x >= centroIzq && x <= centroDer) { return 1; }
+            if (x < limIzquierdo || x > limDerecho) { return 0; }
             if (x >= limIzquierdo && x <= centroIzq) { return (x - limIzquierdo) / (centroIzq - limIzquierdo); }
             else { return (limDerecho - x) / (limDerecho - centroDer); }
+        }
+
+        public bool isRecto()
+        {
+            return isRectoIzq() || isRectoDer();
+        }
+
+        public bool isRectoIzq()
+        {
+            return limIzquierdo == centroIzq;
+        }
+
+        public bool isRectoDer()
+        {
+            return limDerecho == centroDer;
         }
     }
 }

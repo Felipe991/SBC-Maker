@@ -18,6 +18,7 @@ namespace SBC_Maker.Interfaz_grafica
         public ScatterPlot plotTrapezoidal; 
         private Utiles utiles = new Utiles();
         private List<string> memoriaTextBoxes;
+        
         public MenuConfigFuncionTrapezoidal(FuncionTrapezoidal funcionTrapezoidal,ScatterPlot plotGrafico)
         {
             this.funcTrapezoidal = funcionTrapezoidal;
@@ -66,10 +67,11 @@ namespace SBC_Maker.Interfaz_grafica
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
-            valores.Add(funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.LimIzquierdo));
+            
+            valores.Add(funcTrapezoidal.isRectoIzq() ? 0 : funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.LimIzquierdo));
             valores.Add(funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.CentroIzq));
             valores.Add(funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.CentroDer));
-            valores.Add(funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.LimDerecho));
+            valores.Add(funcTrapezoidal.isRectoDer() ? 0 : funcTrapezoidal.CalcularPertenencia(funcTrapezoidal.LimDerecho));
             return valores.ToArray();
         }
 
@@ -115,7 +117,8 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxLimIzquierdo.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimIzquierdo.Text);
-                if (!utiles.IsGreater(textoParseado, funcTrapezoidal.CentroIzq))
+                if (textoParseado < funcTrapezoidal.centroIzq
+                    ||(textoParseado == funcTrapezoidal.centroIzq && !funcTrapezoidal.isRecto()))
                 {
                     funcTrapezoidal.LimIzquierdo = textoParseado;
                     ActualizarValoresGrafico();
@@ -130,8 +133,9 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxCentroIzq.Text))
             {
                 Double textoParseado = Double.Parse(textBoxCentroIzq.Text);
-                if (utiles.IsGreater(textoParseado, funcTrapezoidal.LimIzquierdo)
-                    && !utiles.IsGreater(textoParseado, funcTrapezoidal.CentroDer))
+                if ((textoParseado > funcTrapezoidal.LimIzquierdo
+                    && textoParseado<funcTrapezoidal.CentroDer)
+                    ||(textoParseado == funcTrapezoidal.LimIzquierdo && !funcTrapezoidal.isRecto()))
                 {
                     funcTrapezoidal.CentroIzq = textoParseado;
                     ActualizarValoresGrafico();
@@ -146,8 +150,9 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxCentroDer.Text))
             {
                 Double textoParseado = Double.Parse(textBoxCentroDer.Text);
-                if (utiles.IsGreater(textoParseado, funcTrapezoidal.CentroIzq)
-                    && !utiles.IsGreater(textoParseado, funcTrapezoidal.LimDerecho))
+                if ((textoParseado> funcTrapezoidal.CentroIzq
+                    && textoParseado<funcTrapezoidal.LimDerecho)
+                    || (textoParseado == funcTrapezoidal.LimDerecho && !funcTrapezoidal.isRecto()))
                 {
                     funcTrapezoidal.CentroDer = textoParseado;
                     ActualizarValoresGrafico();
@@ -162,7 +167,8 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxLimDerecho.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimDerecho.Text);
-                if (utiles.IsGreater(textoParseado, funcTrapezoidal.CentroDer))
+                if ((textoParseado>funcTrapezoidal.CentroDer)
+                    || (textoParseado == funcTrapezoidal.CentroDer && !funcTrapezoidal.isRecto()))
                 {
                     funcTrapezoidal.LimDerecho = textoParseado;
                     ActualizarValoresGrafico();
@@ -180,6 +186,11 @@ namespace SBC_Maker.Interfaz_grafica
         private void GuardarButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void textBoxCentroIzq_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

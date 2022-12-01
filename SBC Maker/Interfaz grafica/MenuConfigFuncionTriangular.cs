@@ -79,9 +79,9 @@ namespace SBC_Maker.Interfaz_grafica
         private double[] getValoresY()
         {
             List<Double> valores = new List<Double>();
-            valores.Add(funcTriangular.CalcularPertenencia(funcTriangular.LimiteIzquierdo));
+            valores.Add(funcTriangular.isRectoIzq() ? 0 : funcTriangular.CalcularPertenencia(funcTriangular.LimiteIzquierdo));
             valores.Add(funcTriangular.CalcularPertenencia(funcTriangular.Centro));
-            valores.Add(funcTriangular.CalcularPertenencia(funcTriangular.LimiteDerecho));
+            valores.Add(funcTriangular.isRectoDer() ? 0 : funcTriangular.CalcularPertenencia(funcTriangular.LimiteDerecho));
             return valores.ToArray();
         }
 
@@ -95,7 +95,8 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxLimIzquierdo.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimIzquierdo.Text);
-                if (!utiles.IsGreater(textoParseado, funcTriangular.Centro))
+                if (textoParseado<funcTriangular.Centro 
+                    || (textoParseado == funcTriangular.Centro && !funcTriangular.isRecto()))
                 {
                     funcTriangular.LimiteIzquierdo = textoParseado;
                     ActualizarValoresGrafico();
@@ -110,8 +111,9 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxMedia.Text))
             {
                 Double textoParseado = Double.Parse(textBoxMedia.Text);
-                if (utiles.IsGreater(textoParseado, funcTriangular.LimiteIzquierdo)
-                    && !utiles.IsGreater(textoParseado, funcTriangular.LimiteDerecho))
+                if (textoParseado>funcTriangular.LimiteIzquierdo
+                    && textoParseado<funcTriangular.limiteDerecho
+                    || ((textoParseado == funcTriangular.LimiteIzquierdo || textoParseado == funcTriangular.LimiteDerecho) && !funcTriangular.isRecto()))
                 {
                     funcTriangular.Centro = textoParseado;
                     ActualizarValoresGrafico();
@@ -126,7 +128,8 @@ namespace SBC_Maker.Interfaz_grafica
             if (utiles.IsDouble(textBoxLimDerecho.Text))
             {
                 Double textoParseado = Double.Parse(textBoxLimDerecho.Text);
-                if (utiles.IsGreater(textoParseado, funcTriangular.Centro))
+                if (textoParseado>funcTriangular.Centro
+                    | (textoParseado == funcTriangular.Centro && !funcTriangular.isRecto()))
                 {
                     funcTriangular.LimiteDerecho = textoParseado;
                     ActualizarValoresGrafico();

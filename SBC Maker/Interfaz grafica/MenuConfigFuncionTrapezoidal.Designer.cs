@@ -134,6 +134,7 @@
             this.textBoxCentroIzq.Size = new System.Drawing.Size(150, 27);
             this.textBoxCentroIzq.TabIndex = 7;
             this.textBoxCentroIzq.Text = "-5";
+            this.textBoxCentroIzq.TextChanged += new System.EventHandler(this.textBoxCentroIzq_TextChanged);
             this.textBoxCentroIzq.Enter += new System.EventHandler(this.textBoxCentroIzq_Enter);
             this.textBoxCentroIzq.Leave += new System.EventHandler(this.textBoxCentroIzq_Leave);
             // 

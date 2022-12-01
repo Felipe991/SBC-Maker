@@ -135,15 +135,15 @@ namespace SBC_Maker.Interfaz_grafica
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
-                    valores.Add(funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteIzquierdo));
+                    valores.Add(funcionTriangular.isRectoIzq() ? 0 : funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteIzquierdo));
                     valores.Add(funcionTriangular.CalcularPertenencia(funcionTriangular.Centro));
-                    valores.Add(funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteDerecho));
+                    valores.Add(funcionTriangular.isRectoDer() ? 0 : funcionTriangular.CalcularPertenencia(funcionTriangular.LimiteDerecho));
                     break;
                 case FuncionTrapezoidal:
-                    valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimIzquierdo));
+                    valores.Add(funcionTrapezoidal.isRectoIzq() ? 0 : funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimIzquierdo));
                     valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.CentroIzq));
                     valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.CentroDer));
-                    valores.Add(funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimDerecho));
+                    valores.Add(funcionTrapezoidal.isRectoDer() ? 0 : funcionTrapezoidal.CalcularPertenencia(funcionTrapezoidal.LimDerecho));
                     break;
                 case FuncionGaussiana:
                     for (Double i = funcionGaussiana.Centro - (funcionGaussiana.DesviacionEstandar * 7);

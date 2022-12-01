@@ -31,6 +31,20 @@ namespace SBC_Maker.Logica.Conjuntos_Difusos
             if (x >= centro && x < limiteDerecho) return (limiteDerecho - x) / (limiteDerecho - centro);
             return 0;
         }
-        
+
+        public bool isRecto()
+        {
+            return isRectoDer() | isRectoIzq();
+        }
+
+        public bool isRectoIzq()
+        {
+            return limiteIzquierdo == centro;
+        }
+
+        public bool isRectoDer()
+        {
+            return limiteDerecho == centro;
+        }
     }
 }

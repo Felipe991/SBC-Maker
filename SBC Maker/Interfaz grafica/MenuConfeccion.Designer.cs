@@ -87,19 +87,19 @@
             this.proyectoToolStripMenuItem,
             this.conjuntoDifusoToolStripMenuItem});
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             // 
             // proyectoToolStripMenuItem
             // 
             this.proyectoToolStripMenuItem.Name = "proyectoToolStripMenuItem";
-            this.proyectoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.proyectoToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
             this.proyectoToolStripMenuItem.Text = "Proyecto";
             // 
             // conjuntoDifusoToolStripMenuItem
             // 
             this.conjuntoDifusoToolStripMenuItem.Name = "conjuntoDifusoToolStripMenuItem";
-            this.conjuntoDifusoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.conjuntoDifusoToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
             this.conjuntoDifusoToolStripMenuItem.Text = "Conjunto difuso";
             this.conjuntoDifusoToolStripMenuItem.Click += new System.EventHandler(this.conjuntoDifusoToolStripMenuItem_Click);
             // 
@@ -109,7 +109,7 @@
             this.proyectoToolStripMenuItem1,
             this.conjuntoDifusoToolStripMenuItem1});
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.abrirToolStripMenuItem.Text = "Abrir";
             // 
             // proyectoToolStripMenuItem1
@@ -128,19 +128,19 @@
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.guardarToolStripMenuItem.Text = "Guardar";
             // 
             // guardarComoToolStripMenuItem
             // 
             this.guardarComoToolStripMenuItem.Name = "guardarComoToolStripMenuItem";
-            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.guardarComoToolStripMenuItem.Text = "Guardar como...";
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             // 
             // ejecutarToolStripMenuItem
@@ -154,10 +154,10 @@
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(0, 36);
+            this.panel1.Location = new System.Drawing.Point(12, 36);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(296, 709);
+            this.panel1.Size = new System.Drawing.Size(284, 696);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -227,7 +227,7 @@
             this.panel3.Location = new System.Drawing.Point(303, 73);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1158, 671);
+            this.panel3.Size = new System.Drawing.Size(1147, 659);
             this.panel3.TabIndex = 3;
             // 
             // openFileDialog1
