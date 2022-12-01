@@ -32,19 +32,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.InicioButton = new System.Windows.Forms.RadioButton();
             this.ConclusionButton = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TipoReglaGroup = new System.Windows.Forms.GroupBox();
+            this.GroupTipoRegla = new System.Windows.Forms.GroupBox();
             this.InformacionButton = new System.Windows.Forms.RadioButton();
-            this.Nombre = new System.Windows.Forms.TextBox();
-            this.Explicacion = new System.Windows.Forms.RichTextBox();
-            this.Pregunta = new System.Windows.Forms.TextBox();
-            this.Indicacion = new System.Windows.Forms.RichTextBox();
+            this.textBoxNombre = new System.Windows.Forms.TextBox();
+            this.textBoxExplicacion = new System.Windows.Forms.RichTextBox();
             this.GuardarButton = new System.Windows.Forms.Button();
             this.CancelarButton = new System.Windows.Forms.Button();
+            this.panelPregunta = new System.Windows.Forms.Panel();
+            this.textBoxIndicacion = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxTipoPregunta = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.TipoReglaGroup.SuspendLayout();
+            this.textBoxPregunta = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.GroupTipoRegla.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -68,12 +69,15 @@
             // InicioButton
             // 
             this.InicioButton.AutoSize = true;
-            this.InicioButton.Location = new System.Drawing.Point(106, 22);
+            this.InicioButton.Checked = true;
+            this.InicioButton.Location = new System.Drawing.Point(10, 22);
             this.InicioButton.Name = "InicioButton";
             this.InicioButton.Size = new System.Drawing.Size(54, 19);
             this.InicioButton.TabIndex = 2;
+            this.InicioButton.TabStop = true;
             this.InicioButton.Text = "Inicio";
             this.InicioButton.UseVisualStyleBackColor = true;
+            this.InicioButton.Click += new System.EventHandler(this.InicioButton_Click);
             // 
             // ConclusionButton
             // 
@@ -84,82 +88,49 @@
             this.ConclusionButton.TabIndex = 3;
             this.ConclusionButton.Text = "Conclusion";
             this.ConclusionButton.UseVisualStyleBackColor = true;
+            this.ConclusionButton.Click += new System.EventHandler(this.ConclusionButton_Click);
             // 
-            // label3
+            // GroupTipoRegla
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 338);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Pregunta";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 380);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 15);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Indicacion";
-            // 
-            // TipoReglaGroup
-            // 
-            this.TipoReglaGroup.Controls.Add(this.InformacionButton);
-            this.TipoReglaGroup.Controls.Add(this.InicioButton);
-            this.TipoReglaGroup.Controls.Add(this.ConclusionButton);
-            this.TipoReglaGroup.Location = new System.Drawing.Point(32, 191);
-            this.TipoReglaGroup.Name = "TipoReglaGroup";
-            this.TipoReglaGroup.Size = new System.Drawing.Size(478, 50);
-            this.TipoReglaGroup.TabIndex = 6;
-            this.TipoReglaGroup.TabStop = false;
-            this.TipoReglaGroup.Text = "Tipo de regla";
+            this.GroupTipoRegla.Controls.Add(this.InformacionButton);
+            this.GroupTipoRegla.Controls.Add(this.InicioButton);
+            this.GroupTipoRegla.Controls.Add(this.ConclusionButton);
+            this.GroupTipoRegla.Location = new System.Drawing.Point(32, 325);
+            this.GroupTipoRegla.Name = "GroupTipoRegla";
+            this.GroupTipoRegla.Size = new System.Drawing.Size(478, 50);
+            this.GroupTipoRegla.TabIndex = 6;
+            this.GroupTipoRegla.TabStop = false;
+            this.GroupTipoRegla.Text = "Tipo de regla";
             // 
             // InformacionButton
             // 
             this.InformacionButton.AutoSize = true;
-            this.InformacionButton.Checked = true;
-            this.InformacionButton.Location = new System.Drawing.Point(6, 22);
+            this.InformacionButton.Location = new System.Drawing.Point(70, 22);
             this.InformacionButton.Name = "InformacionButton";
             this.InformacionButton.Size = new System.Drawing.Size(90, 19);
             this.InformacionButton.TabIndex = 4;
-            this.InformacionButton.TabStop = true;
             this.InformacionButton.Text = "Informacion\r\n";
             this.InformacionButton.UseVisualStyleBackColor = true;
+            this.InformacionButton.Click += new System.EventHandler(this.InformacionButton_Click);
             // 
-            // Nombre
+            // textBoxNombre
             // 
-            this.Nombre.Location = new System.Drawing.Point(111, 40);
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Size = new System.Drawing.Size(172, 23);
-            this.Nombre.TabIndex = 7;
+            this.textBoxNombre.Location = new System.Drawing.Point(111, 40);
+            this.textBoxNombre.Name = "textBoxNombre";
+            this.textBoxNombre.Size = new System.Drawing.Size(398, 23);
+            this.textBoxNombre.TabIndex = 7;
             // 
-            // Explicacion
+            // textBoxExplicacion
             // 
-            this.Explicacion.Location = new System.Drawing.Point(111, 80);
-            this.Explicacion.Name = "Explicacion";
-            this.Explicacion.Size = new System.Drawing.Size(399, 96);
-            this.Explicacion.TabIndex = 8;
-            this.Explicacion.Text = "";
-            // 
-            // Pregunta
-            // 
-            this.Pregunta.Location = new System.Drawing.Point(111, 335);
-            this.Pregunta.Name = "Pregunta";
-            this.Pregunta.Size = new System.Drawing.Size(399, 23);
-            this.Pregunta.TabIndex = 9;
-            // 
-            // Indicacion
-            // 
-            this.Indicacion.Location = new System.Drawing.Point(111, 377);
-            this.Indicacion.Name = "Indicacion";
-            this.Indicacion.Size = new System.Drawing.Size(399, 96);
-            this.Indicacion.TabIndex = 10;
-            this.Indicacion.Text = "";
+            this.textBoxExplicacion.Location = new System.Drawing.Point(111, 80);
+            this.textBoxExplicacion.Name = "textBoxExplicacion";
+            this.textBoxExplicacion.Size = new System.Drawing.Size(399, 96);
+            this.textBoxExplicacion.TabIndex = 8;
+            this.textBoxExplicacion.Text = "";
             // 
             // GuardarButton
             // 
-            this.GuardarButton.Location = new System.Drawing.Point(435, 523);
+            this.GuardarButton.Location = new System.Drawing.Point(435, 610);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(75, 23);
             this.GuardarButton.TabIndex = 11;
@@ -168,33 +139,77 @@
             // 
             // CancelarButton
             // 
-            this.CancelarButton.Location = new System.Drawing.Point(354, 523);
+            this.CancelarButton.Location = new System.Drawing.Point(354, 610);
             this.CancelarButton.Name = "CancelarButton";
             this.CancelarButton.Size = new System.Drawing.Size(75, 23);
             this.CancelarButton.TabIndex = 12;
             this.CancelarButton.Text = "Cancelar";
             this.CancelarButton.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // panelPregunta
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 281);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 15);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Tipo de pregunta";
+            this.panelPregunta.Location = new System.Drawing.Point(32, 499);
+            this.panelPregunta.Name = "panelPregunta";
+            this.panelPregunta.Size = new System.Drawing.Size(478, 90);
+            this.panelPregunta.TabIndex = 13;
             // 
-            // comboBox1
+            // textBoxIndicacion
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.textBoxIndicacion.BackColor = System.Drawing.Color.Silver;
+            this.textBoxIndicacion.Enabled = false;
+            this.textBoxIndicacion.Location = new System.Drawing.Point(111, 191);
+            this.textBoxIndicacion.Name = "textBoxIndicacion";
+            this.textBoxIndicacion.Size = new System.Drawing.Size(399, 96);
+            this.textBoxIndicacion.TabIndex = 26;
+            this.textBoxIndicacion.Text = "";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 194);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 15);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Indicacion";
+            // 
+            // comboBoxTipoPregunta
+            // 
+            this.comboBoxTipoPregunta.FormattingEnabled = true;
+            this.comboBoxTipoPregunta.Items.AddRange(new object[] {
             "Dicotomica",
             "Politomica",
             "Difusa"});
-            this.comboBox1.Location = new System.Drawing.Point(111, 281);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 23);
-            this.comboBox1.TabIndex = 14;
+            this.comboBoxTipoPregunta.Location = new System.Drawing.Point(135, 412);
+            this.comboBoxTipoPregunta.Name = "comboBoxTipoPregunta";
+            this.comboBoxTipoPregunta.Size = new System.Drawing.Size(145, 23);
+            this.comboBoxTipoPregunta.TabIndex = 30;
+            this.comboBoxTipoPregunta.Text = "Dicotomica";
+            this.comboBoxTipoPregunta.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoPregunta_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(32, 412);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 15);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Tipo de pregunta";
+            // 
+            // textBoxPregunta
+            // 
+            this.textBoxPregunta.Location = new System.Drawing.Point(110, 458);
+            this.textBoxPregunta.Name = "textBoxPregunta";
+            this.textBoxPregunta.Size = new System.Drawing.Size(399, 23);
+            this.textBoxPregunta.TabIndex = 28;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(31, 461);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 15);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Pregunta";
             // 
             // MenuRegla
             // 
@@ -203,24 +218,25 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.CancelButton = this.CancelarButton;
-            this.ClientSize = new System.Drawing.Size(559, 581);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(543, 645);
+            this.Controls.Add(this.comboBoxTipoPregunta);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBoxPregunta);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxIndicacion);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.panelPregunta);
             this.Controls.Add(this.CancelarButton);
             this.Controls.Add(this.GuardarButton);
-            this.Controls.Add(this.Indicacion);
-            this.Controls.Add(this.Pregunta);
-            this.Controls.Add(this.Explicacion);
-            this.Controls.Add(this.Nombre);
-            this.Controls.Add(this.TipoReglaGroup);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxExplicacion);
+            this.Controls.Add(this.textBoxNombre);
+            this.Controls.Add(this.GroupTipoRegla);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "MenuRegla";
             this.Text = "MenuRegla";
-            this.TipoReglaGroup.ResumeLayout(false);
-            this.TipoReglaGroup.PerformLayout();
+            this.GroupTipoRegla.ResumeLayout(false);
+            this.GroupTipoRegla.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,17 +248,18 @@
         private Label label2;
         private RadioButton InicioButton;
         private RadioButton ConclusionButton;
-        private Label label3;
-        private Label label4;
-        private GroupBox TipoReglaGroup;
+        private GroupBox GroupTipoRegla;
         private RadioButton InformacionButton;
-        private TextBox Nombre;
-        private RichTextBox Explicacion;
-        private TextBox Pregunta;
-        private RichTextBox Indicacion;
+        private TextBox textBoxNombre;
+        private RichTextBox textBoxExplicacion;
         private Button GuardarButton;
         private Button CancelarButton;
+        private Panel panelPregunta;
+        private RichTextBox textBoxIndicacion;
+        private Label label4;
+        private ComboBox comboBoxTipoPregunta;
         private Label label5;
-        private ComboBox comboBox1;
+        private TextBox textBoxPregunta;
+        private Label label3;
     }
 }
