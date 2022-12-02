@@ -242,16 +242,17 @@ namespace SBC_Maker.Interfaz_grafica
             switch (pregunta)
             {
                 case (PreguntaCerrada):
+                    if (!this.comboBoxTipoPregunta.Text.Equals("Cerrada")) return false;
                     bool sonIguales = GetAlternativas().SequenceEqual(((PreguntaCerrada)pregunta).Alternativas);
                     if (!sonIguales) return false;
-                    if (!this.comboBoxTipoPregunta.Text.Equals("Cerrada")) return false;
+                    
                     break;
                 case (PreguntaDifusa):
+                    if (!this.comboBoxTipoPregunta.Text.Equals("Difusa")) return false;
                     Object pduc = this.panelPregunta.Controls[0];
                     ConjuntoDifuso conjuntoDifuso = ((PreguntaDifusaUserControl)pduc).conjuntoDifuso;
                     
                     if (((PreguntaDifusa)pregunta).ConjuntoDifuso != conjuntoDifuso) return false;
-                    if (!this.comboBoxTipoPregunta.Text.Equals("Cerrada")) return false;
                     break;
             }
             return true;
