@@ -14,40 +14,109 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class MenuRegla : Form
     {
-        PreguntaCerradaUserControl pduc = new PreguntaCerradaUserControl();
+        PreguntaCerradaUserControl pcuc = new PreguntaCerradaUserControl();
         PreguntaDifusaUserControl pdifuc = new PreguntaDifusaUserControl();
         Regla regla = null;
-        private List<Nodo> listaAdyacencia;
-        
-        public MenuRegla(Regla regla, List<Nodo> listaadyacencia)
-        {
-            InitializeComponent();
-            this.panelPregunta.Controls.Add(pduc);
-            this.regla = regla;
-            this.listaAdyacencia = listaadyacencia;
-        }
+        public Nodo nodo;
+        public List<Nodo> listaAdyacencia;
+
         public MenuRegla(List<Nodo> listaadyacencia)
         {
             InitializeComponent();
-            this.panelPregunta.Controls.Add(pduc);
+            this.panelPregunta.Controls.Add(pcuc);
             this.listaAdyacencia = listaadyacencia;
         }
+        public MenuRegla(Nodo nodo, List<Nodo> listaadyacencia)
+        {
+            InitializeComponent();
+            this.panelPregunta.Controls.Add(pcuc);
+            this.nodo = nodo;
+            this.regla = nodo.Regla;
+            this.listaAdyacencia = listaadyacencia;
+            LoadRegla();
+        }
+        private void LoadRegla()
+        {
+            this.textBoxNombre.Text = regla.Nombre;
+            this.textBoxExplicacion.Text = regla.Explicacion;
+            Pregunta pregunta;
+            switch (this.regla)
+            {
+                case (ReglaInicio):
+                    pregunta = ((ReglaInicio)this.regla).Pregunta;
+                    
+                    this.InicioButton.Checked = true;
+                    this.comboBoxTipoPregunta.Text = "Inicio";
+                    LoadRespuestas(pregunta);
+                    break;
+                case (ReglaInformacion):
+                    pregunta = ((ReglaInformacion)this.regla).Pregunta;
+                    
+                    this.InformacionButton.Checked = true;
+                    this.comboBoxTipoPregunta.Text = "Informacion";
+                    LoadRespuestas(pregunta);
+                    break;
+                case (ReglaConclusion):
+                    this.ConclusionButton.Checked = true;
+                    this.textBoxIndicacion.Text = ((ReglaConclusion)this.regla).Indicacion;
+                    break;
+            }
+        }
+        private void LoadRespuestas(Pregunta pregunta)
+        {
+            this.textBoxPregunta.Text = pregunta.Enunciado;
+            switch (pregunta)
+            {
+                case (PreguntaCerrada):
+                    this.comboBoxTipoPregunta.SelectedIndex = 0;
+                    List<string> respuestas = ((PreguntaCerrada)pregunta).Alternativas;
+                    int indice = 1;
+                    
+                    foreach (string respuesta in respuestas)
+                    {
+                        RespusestaCerradaUserControl rcuc = new RespusestaCerradaUserControl(this.pcuc.flowLayoutPanelRespuesta, indice);
+                        rcuc.textBoxRespuesta1.Text = respuesta;
+                        this.pcuc.flowLayoutPanelRespuesta.Controls.Add(rcuc);
+                        indice++;
+                    }
+                    break;
+                case (PreguntaDifusa):
+                    this.comboBoxTipoPregunta.SelectedIndex = 1;
+                    pdifuc.conjuntoDifuso = ((PreguntaDifusa)pregunta).ConjuntoDifuso;
+                    pdifuc.textBoxRuta.Text = pdifuc.conjuntoDifuso.Nombre;
+                    break;
+            }
+        }
+        
         private void GuardarButton_Click(object sender, EventArgs e)
         {
             if (VerifyRegla())
             {
-                GuardarRegla();
-                DialogResult = DialogResult.OK;
+                if (GuardarRegla()) DialogResult = DialogResult.OK;
             }
         }
         private bool VerifyRegla()
         {
             string error="";
             bool flag = true;
-            if (IsUnique(this.textBoxNombre.Text, listaAdyacencia))
+            if(this.regla == null)
             {
-                error = "Ya existe una regla con este nombre";
-                flag = false;
+                if (!IsUnique(this.textBoxNombre.Text, listaAdyacencia))
+                {
+                    error = "Ya existe una regla con este nombre";
+                    flag = false;
+                }
+            }
+            else
+            {
+                if (this.regla.Nombre != this.textBoxNombre.Text)
+                {
+                    if (!IsUnique(this.textBoxNombre.Text, listaAdyacencia))
+                    {
+                        error = "Ya existe una regla con este nombre";
+                        flag = false;
+                    }
+                }
             }
             if (this.textBoxNombre.Text == "")
             {
@@ -73,6 +142,11 @@ namespace SBC_Maker.Interfaz_grafica
                         error = "Se necesitan al menos 2 respuestas";
                         flag = false;
                     }
+                    if (!VerifyRespuestas())
+                    {
+                        error = "Las respuestas no pueden ser iguales";
+                        flag = false;
+                    }
                 }
                 else
                 {
@@ -89,41 +163,56 @@ namespace SBC_Maker.Interfaz_grafica
             MessageBox.Show(error);
             return false;
         }
+        private bool VerifyRespuestas()
+        {
+            for (int i = 0; i < this.pcuc.flowLayoutPanelRespuesta.Controls.Count; i++)
+            {
+                for (int j = i + 1; j < this.pcuc.flowLayoutPanelRespuesta.Controls.Count; j++)
+                {
+                    if (((RespusestaCerradaUserControl)this.pcuc.flowLayoutPanelRespuesta.Controls[i]).textBoxRespuesta1.Text
+                        == ((RespusestaCerradaUserControl)this.pcuc.flowLayoutPanelRespuesta.Controls[j]).textBoxRespuesta1.Text)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         
-        private void GuardarRegla()
+        private bool GuardarRegla()
         {
             if (this.regla is null)
             {
-                AddNewRegla();
+                return AddNewNodo();
             }
             else
             {
-                EditRegla();
+                return EditRegla();
             }
         }
-        private void AddNewRegla()
+        private bool AddNewNodo()
         {
             this.regla = makeRegla();
-            Nodo nodo = new Nodo(this.regla, new Hecho(), 0);
-            listaAdyacencia.Add(nodo);
+            this.nodo = new Nodo(this.regla, new Hecho(), 0);
+            listaAdyacencia.Add(this.nodo);
+            return true;
         }
-        private void EditRegla()
+        private bool EditRegla()
         {
-            if (this.regla.Nombre == this.textBoxNombre.Text ||
-               (this.regla.Nombre != this.textBoxNombre.Text && IsUnique(this.textBoxNombre.Text, this.listaAdyacencia)))
+            if (WasModificated())
             {
-                if (WasModificated())
+                if (MessageBox.Show("Realmente desea salir?", "Alerta", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    if (MessageBox.Show("Realmente desea salir?", "Alerta", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
-                        if (DeleteNodo(this.regla, this.listaAdyacencia)) AddNewRegla();
-                        DialogResult = DialogResult.OK;
-                    }
+                    if (DeleteNodo(this.nodo, this.listaAdyacencia)) AddNewNodo();
                 }
-                else this.regla = makeRegla();
+                else
+                {
+                    return false;
+                }
             }
+            else this.nodo.Regla = makeRegla();
+            return true;
         }
-
         private bool WasModificated()
         {
             Pregunta pregunta;
@@ -133,15 +222,13 @@ namespace SBC_Maker.Interfaz_grafica
                     pregunta = ((ReglaInicio)this.regla).Pregunta;
                     
                     if (!this.InicioButton.Checked) return true;
-                    if (!this.comboBoxTipoPregunta.Text.Equals(pregunta.GetType().ToString())) return true;
-                    if (!VerifyRespuestas(pregunta)) return true;
+                    if (!SameRespuestas(pregunta)) return true;
                     break;
                 case (ReglaInformacion):
                     pregunta = ((ReglaInformacion)this.regla).Pregunta;
                     
                     if (!this.InformacionButton.Checked) return true;
-                    if (!this.comboBoxTipoPregunta.Text.Equals(pregunta.GetType().ToString())) return true;
-                    if (!VerifyRespuestas(pregunta)) return true;
+                    if (!SameRespuestas(pregunta)) return true;
                     break;
                 case (ReglaConclusion):
                     if (!this.ConclusionButton.Checked) return true;
@@ -150,19 +237,21 @@ namespace SBC_Maker.Interfaz_grafica
                 
             return false;
         }
-        private bool VerifyRespuestas(Pregunta pregunta)
+        private bool SameRespuestas(Pregunta pregunta)
         {
             switch (pregunta)
             {
                 case (PreguntaCerrada):
-                    IEnumerable<string> diferencias = GetAlternativas().Intersect(((PreguntaCerrada)pregunta).Alternativas);
-                    if (diferencias != null) return false;
+                    bool sonIguales = GetAlternativas().SequenceEqual(((PreguntaCerrada)pregunta).Alternativas);
+                    if (!sonIguales) return false;
+                    if (!this.comboBoxTipoPregunta.Text.Equals("Cerrada")) return false;
                     break;
                 case (PreguntaDifusa):
                     Object pduc = this.panelPregunta.Controls[0];
                     ConjuntoDifuso conjuntoDifuso = ((PreguntaDifusaUserControl)pduc).conjuntoDifuso;
                     
                     if (((PreguntaDifusa)pregunta).ConjuntoDifuso != conjuntoDifuso) return false;
+                    if (!this.comboBoxTipoPregunta.Text.Equals("Cerrada")) return false;
                     break;
             }
             return true;
@@ -275,7 +364,7 @@ namespace SBC_Maker.Interfaz_grafica
             {
                 case ("Cerrada"):
                     this.panelPregunta.Controls.Clear();
-                    this.panelPregunta.Controls.Add(pduc);
+                    this.panelPregunta.Controls.Add(pcuc);
                     break;
                 case ("Difusa"):
                     this.panelPregunta.Controls.Clear();

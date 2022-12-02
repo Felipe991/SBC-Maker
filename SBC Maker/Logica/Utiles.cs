@@ -92,10 +92,8 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-        public static bool DeleteNodo(Regla regla, List<Nodo> listaAdyacencia)
+        public static bool DeleteNodo(Nodo nodo, List<Nodo> listaAdyacencia)
         {
-            Nodo nodo = listaAdyacencia.Find(nodo => nodo.Regla == regla);
-            
             foreach (List<Relacion> antecedentes in nodo.Antecedentes)
             {
                 foreach(Relacion antecedente in antecedentes)

@@ -72,7 +72,7 @@
         #endregion
 
         private Button buttonExaminar;
-        private TextBox textBoxRuta;
+        public TextBox textBoxRuta;
         private OpenFileDialog openFileDialog1;
     }
 }
