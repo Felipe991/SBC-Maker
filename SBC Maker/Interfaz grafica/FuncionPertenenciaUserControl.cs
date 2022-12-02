@@ -28,11 +28,8 @@ namespace SBC_Maker.Interfaz_grafica
             InitializeComponent();
             conjuntoAux = conjuntoDifuso;
             formsPlotAux = formsPlot;
-            funcionTriangular = new FuncionTriangular(-10,0,10, nombre);
-            funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, nombre);
-            funcionGaussiana = new FuncionGaussiana(0, 2, nombre);
-            funcionPertenencia = funcionTriangular;
-            textBoxNombreFuncionPertenencia.Text = funcionPertenencia.Nombre;
+            textBoxNombreFuncionPertenencia.Text = nombre;
+            InitMembershipFunctions(funcionPertenencia);
             iniciarPlot();
         }
 
@@ -42,29 +39,52 @@ namespace SBC_Maker.Interfaz_grafica
             conjuntoAux = conjuntoDifuso;
             formsPlotAux = formsPlot;
             this.funcionPertenencia = funcionPertenencia;
-            funcionTriangular = new FuncionTriangular(-10, 0, 10, funcionPertenencia.Nombre);
-            funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, funcionPertenencia.Nombre);
-            funcionGaussiana = new FuncionGaussiana(0, 2, funcionPertenencia.Nombre);
             textBoxNombreFuncionPertenencia.Text = funcionPertenencia.Nombre;
             buttonPintar.BackColor = funcionPertenencia.color;
-            ReconstuirFuncion(this.funcionPertenencia);
+            InitMembershipFunctions(funcionPertenencia);
             iniciarPlot(funcionPertenencia.color);
+            loadSelectedIndex(this.funcionPertenencia);
         }
 
-        private void ReconstuirFuncion(FuncionPertenencia funcionPertenencia)
+        private void InitMembershipFunctions(FuncionPertenencia? funcionPertenencia)
+        {
+            switch (funcionPertenencia)
+            {
+                case FuncionTriangular funcionTriangular:
+                    this.funcionTriangular = funcionTriangular;
+                    funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, funcionPertenencia.Nombre);
+                    funcionGaussiana = new FuncionGaussiana(0, 2, funcionPertenencia.Nombre);
+                    break;
+                case FuncionTrapezoidal funcionTrapezoidal:
+                    this.funcionTrapezoidal = funcionTrapezoidal;
+                    funcionGaussiana = new FuncionGaussiana(0, 2, funcionPertenencia.Nombre);
+                    funcionTriangular = new FuncionTriangular(-10, 0, 10, funcionPertenencia.Nombre);
+                    break;
+                case FuncionGaussiana funcionGaussiana:
+                    this.funcionGaussiana = funcionGaussiana;
+                    funcionTriangular = new FuncionTriangular(-10, 0, 10, funcionPertenencia.Nombre);
+                    funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, funcionPertenencia.Nombre);
+                    break;
+                default:
+                    funcionTriangular = new FuncionTriangular(-10, 0, 10, textBoxNombreFuncionPertenencia.Text);
+                    funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, textBoxNombreFuncionPertenencia.Text);
+                    funcionGaussiana = new FuncionGaussiana(0, 2, textBoxNombreFuncionPertenencia.Text);
+                    this.funcionPertenencia = funcionTriangular;
+                    break;
+            }
+        }
+
+        private void loadSelectedIndex(FuncionPertenencia funcionPertenencia)
         {
             switch (funcionPertenencia)
             {
                 case FuncionTriangular:
-                    funcionTriangular = (FuncionTriangular)funcionPertenencia;
                     comboBoxFuncionesPertenencia.SelectedIndex = 0;
                     break;
                 case FuncionTrapezoidal:
-                    funcionTrapezoidal = (FuncionTrapezoidal)funcionPertenencia;
                     comboBoxFuncionesPertenencia.SelectedIndex = 1;
                     break;
                 case FuncionGaussiana:
-                    funcionGaussiana = (FuncionGaussiana)funcionPertenencia;
                     comboBoxFuncionesPertenencia.SelectedIndex = 2;
                     break;
                 default:
@@ -89,7 +109,7 @@ namespace SBC_Maker.Interfaz_grafica
             Double[] valoresX = funcionPertenencia.getValoresX();
             Double[] valoresY = funcionPertenencia.getValoresY();
             plot = new ScatterPlot(valoresX, valoresY);
-            plot.Color = Color.Red;
+            plot.Color = color;
             funcionPertenencia.color = color;
             formsPlotAux.Plot.Add(plot);
             formsPlotAux.Plot.AxisAuto();

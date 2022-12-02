@@ -153,6 +153,7 @@ namespace SBC_Maker
 
         private void GuardarFunciones()
         {
+            conjuntoDifuso.funcionesPertenencia.Clear();
             foreach (FuncionPertenenciaUserControl control in flowLayoutPanelFuncionesPertenencia.Controls)
             {
                 conjuntoDifuso.funcionesPertenencia.Add(control.funcionPertenencia);

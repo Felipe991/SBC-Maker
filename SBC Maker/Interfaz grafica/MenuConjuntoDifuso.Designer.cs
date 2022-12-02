@@ -196,7 +196,9 @@
             this.Load += new System.EventHandler(this.MenuConjuntoDifuso_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            
+            System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos");
+            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos";
         }
 
         #endregion
