@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.Json;
+using System.Xml.Serialization;
 
 namespace SBC_Maker
 {
@@ -40,8 +42,12 @@ namespace SBC_Maker
             {
                 try
                 {
-                    var conjuntoDifusoJSON = File.ReadAllText(openFileDialog1.Title);
-                    ConjuntoDifuso conjuntoDifuso = JsonConvert.DeserializeObject<ConjuntoDifuso>(conjuntoDifusoJSON);
+                    var serializerOptiones = new JsonSerializerOptions();
+                    serializerOptiones.Converters.Add(new FuncionPertenenciaJsonConverter());
+                    var path = File.ReadAllText(openFileDialog1.FileName);
+                    ConjuntoDifuso conjuntoDifuso = System.Text.Json.JsonSerializer.Deserialize<ConjuntoDifuso>(path, serializerOptiones);
+
+                    //ConjuntoDifuso conjuntoDifuso = JsonConvert.DeserializeObject<ConjuntoDifuso>(path);
                     MenuConjuntoDifuso mcd = new MenuConjuntoDifuso(conjuntoDifuso);
                     mcd.ShowDialog();
                 }

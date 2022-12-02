@@ -15,6 +15,14 @@
             this.funcionesPertenencia = new List<FuncionPertenencia>();
         }
 
+        public ConjuntoDifuso()
+        {
+            this.Nombre = "";
+            this.NombreUnidades = "";
+            this.MetodoResolucion = new int();
+            this.funcionesPertenencia = new List<FuncionPertenencia>();
+        }
+
         public string Nombre { get => nombre; set => nombre = value; }
         public int MetodoResolucion { get => metodoResolucion; set => metodoResolucion = value; }
         public string NombreUnidades { get => nombreUnidades; set => nombreUnidades = value; }

@@ -9,8 +9,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace SBC_Maker
 {
@@ -149,12 +151,17 @@ namespace SBC_Maker
 
         private void archivarConjunto()
         {
-            var conjuntoDifusoJSON = JsonConvert.SerializeObject(this.conjuntoDifuso);
             saveFileDialog1.FileName = this.conjuntoDifuso.nombre;
             saveFileDialog1.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                System.IO.File.WriteAllText(saveFileDialog1.FileName, conjuntoDifusoJSON);
+
+                /*var serializerOptiones = new JsonSerializerOptions();
+                serializerOptiones.Converters.Add(new FuncionPertenenciaJsonConverter());
+                var conjuntoDifusoJSON = System.Text.Json.JsonSerializer.Serialize(conjuntoDifuso, serializerOptiones);*/
+                
+                /*var conjuntoDifusoJSON = JsonConvert.SerializeObject(conjuntoDifuso, Formatting.Indented);
+                System.IO.File.WriteAllText(saveFileDialog1.FileName, conjuntoDifusoJSON);*/
                 DialogResult = DialogResult.OK;
                 MessageBox.Show("Archivo guardado");
             }
