@@ -75,6 +75,10 @@ namespace SBC_Maker.Interfaz_grafica
             }
         }
         public ConfiguracionMotor ConfiguracionMotor { get => configuracionMotor; set => configuracionMotor = value; }
-        
+
+        private void CancelarButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
     }
 }
