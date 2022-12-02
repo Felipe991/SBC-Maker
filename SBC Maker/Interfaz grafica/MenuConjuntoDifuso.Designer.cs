@@ -1,5 +1,6 @@
 ﻿namespace SBC_Maker
 {
+    [Serializable]
     partial class MenuConjuntoDifuso
     {
         /// <summary>

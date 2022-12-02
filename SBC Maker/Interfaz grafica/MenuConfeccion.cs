@@ -42,12 +42,10 @@ namespace SBC_Maker
             {
                 try
                 {
-                    var serializerOptiones = new JsonSerializerOptions();
-                    serializerOptiones.Converters.Add(new FuncionPertenenciaJsonConverter());
-                    var path = File.ReadAllText(openFileDialog1.FileName);
-                    ConjuntoDifuso conjuntoDifuso = System.Text.Json.JsonSerializer.Deserialize<ConjuntoDifuso>(path, serializerOptiones);
-
-                    //ConjuntoDifuso conjuntoDifuso = JsonConvert.DeserializeObject<ConjuntoDifuso>(path);
+                    Stream stream = File.Open(openFileDialog1.FileName, FileMode.Open);
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    ConjuntoDifuso conjuntoDifuso = (ConjuntoDifuso)bformatter.Deserialize(stream);
+                    stream.Close();
                     MenuConjuntoDifuso mcd = new MenuConjuntoDifuso(conjuntoDifuso);
                     mcd.ShowDialog();
                 }

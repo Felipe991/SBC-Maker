@@ -1,5 +1,6 @@
 ﻿namespace SBC_Maker.Logica
 {
+    [Serializable]
     public class ConjuntoDifuso
     {
         public string nombre;

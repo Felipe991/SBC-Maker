@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SBC_Maker.Logica.Conjuntos_Difusos
 {
+    [Serializable]
     public class FuncionTrapezoidal : FuncionPertenencia
     {
         public Double limIzquierdo;

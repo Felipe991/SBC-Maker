@@ -1,5 +1,6 @@
 ﻿namespace SBC_Maker.Logica
 {
+    [Serializable]
     public abstract class FuncionPertenencia
     {
         public string nombre;

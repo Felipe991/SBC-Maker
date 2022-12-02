@@ -39,7 +39,7 @@ namespace SBC_Maker
             comboBoxMetodosResolucion.SelectedIndex = conjuntoDifuso.MetodoResolucion;
             foreach (FuncionPertenencia funcion in conjuntoDifuso.funcionesPertenencia)
             {
-                flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(funcion.nombre, conjuntoDifuso, formsPlot1));
+                flowLayoutPanelFuncionesPertenencia.Controls.Add(new FuncionPertenenciaUserControl(funcion, conjuntoDifuso, formsPlot1));
             }
             IniciarGrafico();
             IniciarMemoria();
@@ -152,16 +152,14 @@ namespace SBC_Maker
         private void archivarConjunto()
         {
             saveFileDialog1.FileName = this.conjuntoDifuso.nombre;
-            saveFileDialog1.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "TXT files (*.txt)|*.txt|All files (*.*)|*.*";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-
-                /*var serializerOptiones = new JsonSerializerOptions();
-                serializerOptiones.Converters.Add(new FuncionPertenenciaJsonConverter());
-                var conjuntoDifusoJSON = System.Text.Json.JsonSerializer.Serialize(conjuntoDifuso, serializerOptiones);*/
-                
-                /*var conjuntoDifusoJSON = JsonConvert.SerializeObject(conjuntoDifuso, Formatting.Indented);
-                System.IO.File.WriteAllText(saveFileDialog1.FileName, conjuntoDifusoJSON);*/
+                File.Create(saveFileDialog1.FileName).Close();
+                Stream stream = File.Open(saveFileDialog1.FileName, FileMode.Create);
+                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                bformatter.Serialize(stream, conjuntoDifuso);
+                stream.Close();
                 DialogResult = DialogResult.OK;
                 MessageBox.Show("Archivo guardado");
             }
