@@ -68,6 +68,6 @@
 
         #endregion
         private Button addFuncionButton;
-        private FlowLayoutPanel flowLayoutPanelRespuesta;
+        public FlowLayoutPanel flowLayoutPanelRespuesta;
     }
 }

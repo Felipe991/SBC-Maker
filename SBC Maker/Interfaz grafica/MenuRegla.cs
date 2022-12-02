@@ -17,80 +17,155 @@ namespace SBC_Maker.Interfaz_grafica
         PreguntaCerradaUserControl pduc = new PreguntaCerradaUserControl();
         PreguntaDifusaUserControl pdifuc = new PreguntaDifusaUserControl();
         Regla regla = null;
-        List<Nodo> listaAdyacencia;
-
-        public MenuRegla(Regla regla, List<Nodo> listaadyacencia )
+        private List<Nodo> listaAdyacencia;
+        
+        public MenuRegla(Regla regla, List<Nodo> listaadyacencia)
         {
             InitializeComponent();
             this.panelPregunta.Controls.Add(pduc);
             this.regla = regla;
             this.listaAdyacencia = listaadyacencia;
         }
-        public MenuRegla()
+        public MenuRegla(List<Nodo> listaadyacencia)
         {
             InitializeComponent();
             this.panelPregunta.Controls.Add(pduc);
+            this.listaAdyacencia = listaadyacencia;
         }
         private void GuardarButton_Click(object sender, EventArgs e)
         {
             if (VerifyRegla())
             {
-                Regla NuevaRegla = makeRegla();
                 GuardarRegla();
                 DialogResult = DialogResult.OK;
             }
-            else
-            {
-                MessageBox.Show("Uno o más campos vacíos necesarios");
-            }
-            
         }
         private bool VerifyRegla()
         {
+            string error="";
+            bool flag = true;
+            if (IsUnique(this.textBoxNombre.Text, listaAdyacencia))
+            {
+                error = "Ya existe una regla con este nombre";
+                flag = false;
+            }
             if (this.textBoxNombre.Text == "")
             {
-                return false;
+                error = "El nombre de la regla no puede estar vacío";
+                flag = false;
             }
-            if (this.ConclusionButton.Checked)
+            if (this.ConclusionButton.Checked && this.textBoxIndicacion.Text == "")
             {
-                if (this.textBoxIndicacion.Text == "")
-                {
-                    return false;
-                }
+                error = "La indicación de la conclusión no puede estar vacía";
+                flag = false;
             }
-            else
+            if (!this.ConclusionButton.Checked ) 
             {
                 if (this.textBoxPregunta.Text == "")
                 {
-                    return false;
+                    error = "La pregunta no puede estar vacía";
+                    flag = false;
+                }
+                if(this.comboBoxTipoPregunta.Text == "Cerrada")
+                {
+                    if (GetAlternativas().Count < 2)
+                    {
+                        error = "Se necesitan al menos 2 respuestas";
+                        flag = false;
+                    }
+                }
+                else
+                {
+                    Object pduc = this.panelPregunta.Controls[0];
+                    ConjuntoDifuso conjuntoDifuso = ((PreguntaDifusaUserControl)pduc).conjuntoDifuso;
+                    if (conjuntoDifuso == null) 
+                    {
+                        error = "El conjunto difuso no puede estar vacío";
+                        flag = false;
+                    }
                 }
             }
-            return true;
+            if (flag) return true;
+            MessageBox.Show(error);
+            return false;
         }
         
         private void GuardarRegla()
         {
-            if (IsNewRule())
+            if (this.regla is null)
             {
-                //ask if IsUnique
-                //Igualo la regla a la nueva regla
+                AddNewRegla();
             }
             else
             {
-                if (this.regla.Nombre == this.textBoxNombre.Text)
+                EditRegla();
+            }
+        }
+        private void AddNewRegla()
+        {
+            this.regla = makeRegla();
+            Nodo nodo = new Nodo(this.regla, new Hecho(), 0);
+            listaAdyacencia.Add(nodo);
+        }
+        private void EditRegla()
+        {
+            if (this.regla.Nombre == this.textBoxNombre.Text ||
+               (this.regla.Nombre != this.textBoxNombre.Text && IsUnique(this.textBoxNombre.Text, this.listaAdyacencia)))
+            {
+                if (WasModificated())
                 {
-                    //Guarda la regla
+                    if (MessageBox.Show("Realmente desea salir?", "Alerta", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    {
+                        if (DeleteNodo(this.regla, this.listaAdyacencia)) AddNewRegla();
+                        DialogResult = DialogResult.OK;
+                    }
                 }
-                else
-                {
-                    //if (IsUnique(this.regla))
-                }
+                else this.regla = makeRegla();
             }
         }
 
-        private bool IsNewRule()
+        private bool WasModificated()
         {
-            return (this.regla is null);
+            Pregunta pregunta;
+            switch (this.regla)
+            {
+                case (ReglaInicio):
+                    pregunta = ((ReglaInicio)this.regla).Pregunta;
+                    
+                    if (!this.InicioButton.Checked) return true;
+                    if (!this.comboBoxTipoPregunta.Text.Equals(pregunta.GetType().ToString())) return true;
+                    if (!VerifyRespuestas(pregunta)) return true;
+                    break;
+                case (ReglaInformacion):
+                    pregunta = ((ReglaInformacion)this.regla).Pregunta;
+                    
+                    if (!this.InformacionButton.Checked) return true;
+                    if (!this.comboBoxTipoPregunta.Text.Equals(pregunta.GetType().ToString())) return true;
+                    if (!VerifyRespuestas(pregunta)) return true;
+                    break;
+                case (ReglaConclusion):
+                    if (!this.ConclusionButton.Checked) return true;
+                    break;
+            }
+                
+            return false;
+        }
+        private bool VerifyRespuestas(Pregunta pregunta)
+        {
+            switch (pregunta)
+            {
+                case (PreguntaCerrada):
+                    IEnumerable<string> diferencias = GetAlternativas().Intersect(((PreguntaCerrada)pregunta).Alternativas);
+                    if (diferencias != null) return false;
+                    break;
+                case (PreguntaDifusa):
+                    Object pduc = this.panelPregunta.Controls[0];
+                    ConjuntoDifuso conjuntoDifuso = ((PreguntaDifusaUserControl)pduc).conjuntoDifuso;
+                    
+                    if (((PreguntaDifusa)pregunta).ConjuntoDifuso != conjuntoDifuso) return false;
+                    break;
+            }
+            return true;
         }
 
         private Regla makeRegla()
@@ -121,7 +196,6 @@ namespace SBC_Maker.Interfaz_grafica
             {
                 List<string> alternativas = GetAlternativas();
                 pregunta = new PreguntaCerrada(alternativas, enunciado);
-                
             }
             else
             {
@@ -139,7 +213,6 @@ namespace SBC_Maker.Interfaz_grafica
             {
                 List<string> alternativas = GetAlternativas();
                 pregunta = new PreguntaCerrada(alternativas, enunciado);
-
             }
             else
             {
@@ -152,9 +225,13 @@ namespace SBC_Maker.Interfaz_grafica
         private List<string> GetAlternativas()
         {
             List<string> alternativas = new List<string>();
-            foreach(RespusestaCerradaUserControl control in this.panelPregunta.Controls)
+
+            foreach ( PreguntaCerradaUserControl control in this.panelPregunta.Controls)
             {
-                alternativas.Add(control.textBoxRespuesta1.Text);
+                foreach (RespusestaCerradaUserControl rcuc in control.flowLayoutPanelRespuesta.Controls)
+                {
+                    alternativas.Add(rcuc.textBoxRespuesta1.Text);
+                }
             }
             return alternativas;
         }

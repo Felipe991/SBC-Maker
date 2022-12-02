@@ -25,11 +25,11 @@ namespace SBC_Maker.Logica
             return false;
         }
 
-        public static bool IsUnique(Regla regla, List<Nodo> listaAdyacencia)
+        public static bool IsUnique(string nombre, List<Nodo> listaAdyacencia)
         {
             foreach (Nodo nodo in listaAdyacencia)
             {
-                if (nodo.Regla.Nombre == regla.Nombre)
+                if (nodo.Regla.Nombre == nombre)
                 {
                     return false;
                 }
@@ -91,6 +91,29 @@ namespace SBC_Maker.Logica
                 }
             }
             return true;
+        }
+        public static bool DeleteNodo(Regla regla, List<Nodo> listaAdyacencia)
+        {
+            Nodo nodo = listaAdyacencia.Find(nodo => nodo.Regla == regla);
+            
+            foreach (List<Relacion> antecedentes in nodo.Antecedentes)
+            {
+                foreach(Relacion antecedente in antecedentes)
+                {
+                    antecedente.Nodo.Consecuentes.Remove(antecedente.Nodo.Consecuentes.Find(relacion => relacion.Nodo == nodo));
+                }
+            }   
+            
+            foreach (Relacion consecuente in nodo.Consecuentes)
+            {
+                foreach (List<Relacion> antecedentes in consecuente.Nodo.Antecedentes)
+                {
+                    antecedentes.Remove(antecedentes.Find(antecedente => antecedente.Nodo == nodo));
+                }
+            }
+
+
+            return listaAdyacencia.Remove(nodo);
         }
     }
 }
