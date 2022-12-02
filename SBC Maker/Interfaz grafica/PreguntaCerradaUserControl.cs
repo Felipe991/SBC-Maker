@@ -12,7 +12,7 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class PreguntaCerradaUserControl : UserControl
     {
-        string memoria;
+        int contadorRespuesta = 1;
         public PreguntaCerradaUserControl()
         {
             InitializeComponent();
@@ -25,8 +25,9 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void addFuncionButton_Click(object sender, EventArgs e)
         {
-            RespusestaCerradaUserControl rcuc = new RespusestaCerradaUserControl(flowLayoutPanelRespuesta);
+            RespusestaCerradaUserControl rcuc = new RespusestaCerradaUserControl(flowLayoutPanelRespuesta, this.contadorRespuesta);
             flowLayoutPanelRespuesta.Controls.Add(rcuc);
+            contadorRespuesta++;
             
         }
     }

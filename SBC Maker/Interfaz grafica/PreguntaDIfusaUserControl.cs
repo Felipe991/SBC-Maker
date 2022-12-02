@@ -28,7 +28,7 @@ namespace SBC_Maker.Interfaz_grafica
                 {
                     var conjuntoDifusoJSON = File.ReadAllText(openFileDialog1.Title);
                     this.conjuntoDifuso = JsonConvert.DeserializeObject<ConjuntoDifuso>(conjuntoDifusoJSON);
-                    textBoxRuta.Text = openFileDialog1.Title;
+                    textBoxRuta.Text = conjuntoDifuso.Nombre;
                 }
                 catch
                 {

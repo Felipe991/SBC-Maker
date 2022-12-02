@@ -72,6 +72,10 @@ namespace SBC_Maker
         {
             MenuRegla menuRegla = new MenuRegla(sbc.BaseConocimiento);
             menuRegla.ShowDialog();
+            if (menuRegla.DialogResult == DialogResult.OK)
+            {
+                this.panelLienzo.Controls.Add(new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento));
+            }
         }
     }
 }

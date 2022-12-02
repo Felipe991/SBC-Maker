@@ -49,7 +49,7 @@
             this.toolStripButtonAgregarRelacion = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelLienzo = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,7 +65,7 @@
             this.configuracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1020, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1019, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -215,15 +215,15 @@
             this.toolStripButton4.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton4.Text = "toolStripButton4";
             // 
-            // panel3
+            // panelLienzo
             // 
-            this.panel3.AllowDrop = true;
-            this.panel3.BackColor = System.Drawing.SystemColors.Window;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Location = new System.Drawing.Point(12, 57);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1002, 495);
-            this.panel3.TabIndex = 3;
+            this.panelLienzo.AllowDrop = true;
+            this.panelLienzo.BackColor = System.Drawing.SystemColors.Window;
+            this.panelLienzo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLienzo.Location = new System.Drawing.Point(12, 57);
+            this.panelLienzo.Name = "panelLienzo";
+            this.panelLienzo.Size = new System.Drawing.Size(1002, 495);
+            this.panelLienzo.TabIndex = 3;
             // 
             // openFileDialog1
             // 
@@ -233,8 +233,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 559);
-            this.Controls.Add(this.panel3);
+            this.ClientSize = new System.Drawing.Size(1019, 559);
+            this.Controls.Add(this.panelLienzo);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -251,6 +251,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos");
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos";
         }
 
         #endregion
@@ -274,7 +276,7 @@
         private ToolStripButton toolStripButtonAgregarRegla;
         private ToolStripButton toolStripButtonAgregarRelacion;
         private ToolStripButton toolStripButton3;
-        private Panel panel3;
+        private Panel panelLienzo;
         private ToolStripButton toolStripButton4;
         private OpenFileDialog openFileDialog1;
         private ToolStripMenuItem configuracionToolStripMenuItem;

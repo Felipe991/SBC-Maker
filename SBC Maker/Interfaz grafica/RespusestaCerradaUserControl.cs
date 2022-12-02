@@ -14,12 +14,12 @@ namespace SBC_Maker.Interfaz_grafica
     {
         private FlowLayoutPanel panelRespuesta;
         private string memoria;
-        private int indice = 0;
-        public RespusestaCerradaUserControl(FlowLayoutPanel panelRespuesta)
+        private int indice;
+        public RespusestaCerradaUserControl(FlowLayoutPanel panelRespuesta, int indice)
         {
             InitializeComponent();
             this.PanelRespuesta = panelRespuesta;
-            this.indice = this.PanelRespuesta.Controls.Count + 1;
+            this.indice = indice;
             this.textBoxRespuesta1.Text = "Respuesta " + this.indice;
             this.memoria = this.textBoxRespuesta1.Text;
         }
@@ -34,7 +34,7 @@ namespace SBC_Maker.Interfaz_grafica
         private void textBoxRespuesta1_Leave(object sender, EventArgs e)
         {
             string respuesta = textBoxRespuesta1.Text;
-            if (respuesta == "" || !isUnique(respuesta))
+            if (respuesta == "")
             {
                 textBoxRespuesta1.Text = this.memoria;
             }
@@ -42,17 +42,6 @@ namespace SBC_Maker.Interfaz_grafica
             {
                 this.memoria = respuesta;
             }
-        }
-        private bool isUnique(string respuesta)
-        {
-            foreach (RespusestaCerradaUserControl rcuc in this.panelRespuesta.Controls)
-            {
-                if (rcuc.textBoxRespuesta1.Text == respuesta && this.indice != rcuc.indice)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }
