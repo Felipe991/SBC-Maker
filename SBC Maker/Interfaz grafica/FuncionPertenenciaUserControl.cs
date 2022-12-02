@@ -32,7 +32,6 @@ namespace SBC_Maker.Interfaz_grafica
             funcionTrapezoidal = new FuncionTrapezoidal(-10, -5, 5, 10, nombre);
             funcionGaussiana = new FuncionGaussiana(0, 2, nombre);
             funcionPertenencia = funcionTriangular;
-            conjuntoAux.addFuncionPertenencia(funcionPertenencia);
             textBoxNombreFuncionPertenencia.Text = funcionPertenencia.Nombre;
             iniciarPlot();
         }
@@ -206,15 +205,15 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void comboBoxFuncionesPertenencia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBoxFuncionesPertenencia.Text)
+            switch (comboBoxFuncionesPertenencia.SelectedIndex)
             {
-                case "Triangular":
+                case 0:
                     funcionPertenencia = funcionTriangular;
                     break;
-                case "Trapezoidal":
+                case 1:
                     funcionPertenencia = funcionTrapezoidal;
                     break;
-                case "Gaussiana":
+                case 2:
                     funcionPertenencia = funcionGaussiana;
                     break;
                 default:

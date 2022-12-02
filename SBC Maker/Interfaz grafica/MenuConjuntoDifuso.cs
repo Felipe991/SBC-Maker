@@ -83,6 +83,7 @@ namespace SBC_Maker
             {
                 formsPlot1.Plot.Title(textBoxNombre.Text);
                 formsPlot1.Refresh();
+                conjuntoDifuso.Nombre = textBoxNombre.Text;
                 memoria[0] = textBoxNombre.Text;
                 return;
             }
@@ -145,7 +146,16 @@ namespace SBC_Maker
         {
             if (VerificarFuncionesPertenencia())
             {
+                GuardarFunciones();
                 archivarConjunto();
+            }
+        }
+
+        private void GuardarFunciones()
+        {
+            foreach (FuncionPertenenciaUserControl control in flowLayoutPanelFuncionesPertenencia.Controls)
+            {
+                conjuntoDifuso.funcionesPertenencia.Add(control.funcionPertenencia);
             }
         }
 
@@ -189,5 +199,9 @@ namespace SBC_Maker
             return true;
         }
 
+        private void textBoxNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
