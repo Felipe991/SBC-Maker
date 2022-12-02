@@ -11,17 +11,19 @@ namespace SBC_Maker.Logica
         private List<string> alternativas;
         public PreguntaCerrada(List<string> alternativas, string enunciado) : base(enunciado)
         {
-            this.alternativas = alternativas;
+            this.Alternativas = alternativas;
         }
+
+        public List<string> Alternativas { get => alternativas; set => alternativas = value; }
 
         public void addAlternativa(string alternativa)
         {
-            this.alternativas.Add(alternativa);
+            this.Alternativas.Add(alternativa);
         }
 
         public void removeAlternativa(string alternativa)
         {
-            this.alternativas.Remove(alternativa);
+            this.Alternativas.Remove(alternativa);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class PreguntaDifusaUserControl : UserControl
     {
-        public ConjuntoDifuso conjuntoDifuso;
+        public ConjuntoDifuso conjuntoDifuso = null;
         public PreguntaDifusaUserControl()
         {
             InitializeComponent();

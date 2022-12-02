@@ -43,7 +43,6 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ejecutarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAgregarRegla = new System.Windows.Forms.ToolStripButton();
@@ -66,7 +65,7 @@
             this.configuracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1279, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1020, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -157,20 +156,10 @@
             this.configuracionToolStripMenuItem.Text = "Configuracion";
             this.configuracionToolStripMenuItem.Click += new System.EventHandler(this.configuracionToolStripMenuItem_Click);
             // 
-            // panel1
-            // 
-            this.panel1.AutoSize = true;
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(10, 27);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(249, 522);
-            this.panel1.TabIndex = 1;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.toolStrip1);
-            this.panel2.Location = new System.Drawing.Point(265, 27);
+            this.panel2.Location = new System.Drawing.Point(0, 27);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1014, 26);
             this.panel2.TabIndex = 2;
@@ -231,9 +220,9 @@
             this.panel3.AllowDrop = true;
             this.panel3.BackColor = System.Drawing.SystemColors.Window;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Location = new System.Drawing.Point(265, 55);
+            this.panel3.Location = new System.Drawing.Point(12, 57);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1004, 495);
+            this.panel3.Size = new System.Drawing.Size(1002, 495);
             this.panel3.TabIndex = 3;
             // 
             // openFileDialog1
@@ -244,10 +233,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1279, 559);
+            this.ClientSize = new System.Drawing.Size(1020, 559);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -281,7 +269,6 @@
         private ToolStripMenuItem guardarComoToolStripMenuItem;
         private ToolStripMenuItem salirToolStripMenuItem;
         private ToolStripMenuItem ejecutarToolStripMenuItem;
-        private Panel panel1;
         private Panel panel2;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButtonAgregarRegla;

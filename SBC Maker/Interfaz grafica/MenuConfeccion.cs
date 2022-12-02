@@ -66,7 +66,7 @@ namespace SBC_Maker
 
         private void toolStripButtonAgregarRegla_Click(object sender, EventArgs e)
         {
-            MenuRegla menuRegla = new MenuRegla();
+            MenuRegla menuRegla = new MenuRegla(sbc.BaseConocimiento);
             menuRegla.ShowDialog();
         }
     }
