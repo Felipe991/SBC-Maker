@@ -196,6 +196,7 @@
             this.toolStripButtonAgregarRelacion.Name = "toolStripButtonAgregarRelacion";
             this.toolStripButtonAgregarRelacion.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAgregarRelacion.Text = "toolStripButtonAgregarRelacion";
+            this.toolStripButtonAgregarRelacion.Click += new System.EventHandler(this.toolStripButtonAgregarRelacion_Click);
             // 
             // toolStripButton3
             // 
@@ -218,6 +219,8 @@
             // panelLienzo
             // 
             this.panelLienzo.AllowDrop = true;
+            this.panelLienzo.AutoScroll = true;
+            this.panelLienzo.AutoSize = true;
             this.panelLienzo.BackColor = System.Drawing.SystemColors.Window;
             this.panelLienzo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelLienzo.Location = new System.Drawing.Point(12, 57);
@@ -228,6 +231,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.InitialDirectory = "C:\\Users\\R_B_G\\Documents\\Conjuntos Difusos";
             // 
             // MenuConfeccion
             // 
@@ -251,8 +255,6 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos");
-            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos";
         }
 
         #endregion

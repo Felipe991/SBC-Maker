@@ -77,5 +77,11 @@ namespace SBC_Maker
                 this.panelLienzo.Controls.Add(new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento));
             }
         }
+
+        private void toolStripButtonAgregarRelacion_Click(object sender, EventArgs e)
+        {
+            MenuRelacion menuRelacion = new MenuRelacion(sbc.BaseConocimiento);
+            menuRelacion.ShowDialog();
+        }
     }
 }

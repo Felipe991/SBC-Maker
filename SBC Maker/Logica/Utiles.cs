@@ -51,7 +51,7 @@ namespace SBC_Maker.Logica
             {
                 foreach (Nodo rootConsecuente in rootsConsecuente)
                 {
-                    if (rootAntecedente == rootConsecuente) return false;
+                    if (rootAntecedente.Equals(rootConsecuente)) return false;
                 }
             }
             return true;
@@ -59,7 +59,7 @@ namespace SBC_Maker.Logica
 
         public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
         {
-            if (antecedente.Regla.Nombre == consecuente.Regla.Nombre)
+            if (antecedente.Regla.Equals(consecuente.Regla))
             {
                 return false;
             }
