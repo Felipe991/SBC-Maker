@@ -46,7 +46,7 @@ namespace SBC_Maker.Interfaz_grafica
                     bool isInicio = ((ReglaInformacion)this.regla).ReglaInicio;
 
                     this.InicioButton.Checked = isInicio;
-                    this.InformacionButton.Checked = isInicio;
+                    this.InformacionButton.Checked = !isInicio;
                     this.comboBoxTipoPregunta.Text = "Informacion";
                     LoadRespuestas(pregunta);
                     break;

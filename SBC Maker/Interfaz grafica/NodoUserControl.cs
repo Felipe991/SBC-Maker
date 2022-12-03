@@ -23,11 +23,23 @@ namespace SBC_Maker.Interfaz_grafica
             InitializeComponent();
             richTextBoxNombreRegla.SelectionAlignment = HorizontalAlignment.Center;
             this.nodo = nodo;
-            
-            this.nodo.Posicion.X = this.Left;
-            this.nodo.Posicion.Y = this.Top;
             this.listaAdyacencia = listaadyacencia;
             this.richTextBoxNombreRegla.Text = nodo.Regla.Nombre;
+            extendEvents();
+            RefreshNodePos();
+        }
+
+        private void extendEvents()
+        {
+            this.MouseDown += richTextBoxNombreRegla_MouseDown;
+            this.MouseUp += richTextBoxNombreRegla_MouseUp;
+            this.MouseMove += richTextBoxNombreRegla_MouseMove;
+        }
+
+        private void RefreshNodePos()
+        {
+            this.nodo.Posicion.X = this.Left;
+            this.nodo.Posicion.Y = this.Top;
         }
 
         private void richTextBoxNombreRegla_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -45,6 +57,7 @@ namespace SBC_Maker.Interfaz_grafica
         private void richTextBoxNombreRegla_MouseDown(object sender, MouseEventArgs e)
         {
             IsPicked = true;
+            mouseOffset = new Size(e.Location);
         }
 
         private void richTextBoxNombreRegla_MouseUp(object sender, MouseEventArgs e)
@@ -59,6 +72,7 @@ namespace SBC_Maker.Interfaz_grafica
                 Point point = e.Location - mouseOffset;
                 this.Left += point.X;
                 this.Top += point.Y;
+                RefreshNodePos();
             }
         }
 

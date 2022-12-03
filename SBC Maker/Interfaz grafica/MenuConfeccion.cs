@@ -84,8 +84,17 @@ namespace SBC_Maker
             MenuRelacion menuRelacion = new MenuRelacion(sbc.BaseConocimiento);
             if (menuRelacion.ShowDialog() == DialogResult.OK)
             {
-                DrawArrow(menuRelacion,menuRelacion.antecedente,menuRelacion.consecuente);
+                DrawArrow(menuRelacion.antecedente.Posicion,menuRelacion.consecuente.Posicion);
             }
+        }
+
+        private void DrawArrow(Posicion posicion1, Posicion posicion2)
+        {
+            Graphics g = panelLienzo.CreateGraphics();
+            Pen pen = new Pen(Color.Black, 2);
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            g.DrawLine(pen, new Point(posicion1.X, posicion1.Y), new Point(posicion2.X,posicion2.Y));
+            flechas.Add(g);
         }
     }
 }
