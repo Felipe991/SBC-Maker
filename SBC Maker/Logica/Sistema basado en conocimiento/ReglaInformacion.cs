@@ -9,7 +9,7 @@ namespace SBC_Maker.Logica
     public class ReglaInformacion : Regla
     {
         Pregunta pregunta;
-        public ReglaInformacion(string nombre, string? explicacion, Pregunta pregunta) : base(nombre, explicacion)
+        public ReglaInformacion(string nombre, Pregunta pregunta) : base(nombre)
         {
             this.Pregunta = pregunta;
         }

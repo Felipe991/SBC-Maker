@@ -38,7 +38,6 @@ namespace SBC_Maker.Interfaz_grafica
         private void LoadRegla()
         {
             this.textBoxNombre.Text = regla.Nombre;
-            this.textBoxExplicacion.Text = regla.Explicacion;
             Pregunta pregunta;
             switch (this.regla)
             {
@@ -261,24 +260,23 @@ namespace SBC_Maker.Interfaz_grafica
         private Regla makeRegla()
         {
             string nombre = this.textBoxNombre.Text;
-            string explicacion = this.textBoxExplicacion.Text;
             Regla regla;
 
             if (this.InicioButton.Checked)
             {
-                regla = makeReglaInicio(nombre, explicacion);
+                regla = makeReglaInicio(nombre);
             }
             else if (this.InformacionButton.Checked)
             {
-                regla = makeReglaInformacion(nombre, explicacion);
+                regla = makeReglaInformacion(nombre);
             }
             else
             {
-                regla = makeReglaConlusion(nombre, explicacion);
+                regla = makeReglaConlusion(nombre);
             }
             return regla;
         }
-        private ReglaInicio makeReglaInicio(string nombre, string explicacion)
+        private ReglaInicio makeReglaInicio(string nombre)
         {
             string enunciado = this.textBoxPregunta.Text;
             Pregunta pregunta;
@@ -293,9 +291,9 @@ namespace SBC_Maker.Interfaz_grafica
                 ConjuntoDifuso conjuntoDifuso = ((PreguntaDifusaUserControl)pduc).conjuntoDifuso;
                 pregunta = new PreguntaDifusa(conjuntoDifuso,enunciado);
             }
-            return new ReglaInicio(nombre, explicacion, pregunta);
+            return new ReglaInicio(nombre, pregunta);
         }
-        private ReglaInformacion makeReglaInformacion(string nombre, string explicacion)
+        private ReglaInformacion makeReglaInformacion(string nombre)
         {
             string enunciado = this.textBoxPregunta.Text;
             Pregunta pregunta;
@@ -310,7 +308,7 @@ namespace SBC_Maker.Interfaz_grafica
                 ConjuntoDifuso conjuntoDifuso = ((PreguntaDifusaUserControl)pduc).conjuntoDifuso;
                 pregunta = new PreguntaDifusa(conjuntoDifuso, enunciado);
             }
-            return new ReglaInformacion(nombre, explicacion, pregunta);
+            return new ReglaInformacion(nombre, pregunta);
         }
         private List<string> GetAlternativas()
         {
@@ -326,10 +324,10 @@ namespace SBC_Maker.Interfaz_grafica
             return alternativas;
         }
 
-        private ReglaConclusion makeReglaConlusion(string nombre, string explicacion)
+        private ReglaConclusion makeReglaConlusion(string nombre)
         {
             string indicacion = this.textBoxIndicacion.Text;
-            return new ReglaConclusion(nombre, explicacion, indicacion);
+            return new ReglaConclusion(nombre,indicacion);
         }
 
         private void ConclusionButton_Click(object sender, EventArgs e)

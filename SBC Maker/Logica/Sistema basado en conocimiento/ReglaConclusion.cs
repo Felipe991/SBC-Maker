@@ -9,7 +9,7 @@ namespace SBC_Maker.Logica
     public class ReglaConclusion : Regla
     {
         private string indicacion;
-        public ReglaConclusion(string nombre, string? explicacion,string indicacion) : base(nombre, explicacion)
+        public ReglaConclusion(string nombre, string indicacion) : base(nombre)
         {
             this.Indicacion = indicacion;
         }

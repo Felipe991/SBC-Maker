@@ -3,11 +3,12 @@
     public class Relacion
     {
         private Nodo nodo;
-        private List<string>? respuestasNecesarias;
-        public Relacion(Nodo nodo, List<string> respuestasNecesarias = null)
+        public List<string>? respuestasNecesarias = new List<string>();
+        private string explicacion;
+        public Relacion(Nodo nodo,string explicacion = "")
         {
             this.Nodo = nodo;
-            this.RespuestasNecesarias = respuestasNecesarias;
+            this.explicacion = explicacion;
         }
 
         public Nodo Nodo { get => nodo; set => nodo = value; }

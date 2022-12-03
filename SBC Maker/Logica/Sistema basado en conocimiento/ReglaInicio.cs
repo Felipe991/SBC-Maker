@@ -10,7 +10,7 @@ namespace SBC_Maker.Logica
     {
         Pregunta pregunta;
 
-        public ReglaInicio(string nombre, string? explicacion, Pregunta pregunta) : base(nombre, explicacion)
+        public ReglaInicio(string nombre, Pregunta pregunta) : base(nombre)
         {
             this.pregunta = pregunta;
         }

@@ -3,15 +3,12 @@
     public class Regla
     {
         private string nombre;
-        private string? explicacion;
         
-        public Regla(string nombre, string? explicacion)
+        public Regla(string nombre)
         {
             this.Nombre = nombre;
-            this.Explicacion = explicacion;
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
-        public string? Explicacion { get => explicacion; set => explicacion = value; }
     }
 }
