@@ -84,7 +84,7 @@ namespace SBC_Maker
             MenuRelacion menuRelacion = new MenuRelacion(sbc.BaseConocimiento);
             if (menuRelacion.ShowDialog() == DialogResult.OK)
             {
-                DrawArrow(menuRelacion,menuRelacion.antecedente,menuRelacion.consecuente);
+                //DrawArrow(menuRelacion,menuRelacion.antecedente,menuRelacion.consecuente);
             }
         }
     }

@@ -18,6 +18,7 @@ namespace SBC_Maker.Interfaz_grafica
         public Nodo antecedente;
         public Nodo consecuente;
         int numeroRelacion = 0;
+        Relacion relacionAntecedente = null;
 
         public MenuRelacion(List<Nodo>listaadyacencia)
         {
@@ -26,13 +27,75 @@ namespace SBC_Maker.Interfaz_grafica
             InitializeAntecedentes();
         }
 
-        public MenuRelacion(List<Nodo>listaadyacencia,Nodo nodoAntecedente)
+        public MenuRelacion(List<Nodo>listaadyacencia, Nodo consecuente,Relacion relacionAntecedente, int numeroRelacion = 0)
         {
             InitializeComponent();
-            antecedente = nodoAntecedente;
+            this.antecedente = relacionAntecedente.Nodo;
+            this.consecuente = consecuente;
             this.listaadyacencia = listaadyacencia;
-            comboBoxAntecedente.Enabled = false;
-            InitializeConsecuentes();
+            this.numeroRelacion = numeroRelacion;
+            this.relacionAntecedente = relacionAntecedente;
+            InitializeAntecedentes();
+            this.comboBoxAntecedente.SelectedItem = this.antecedente.Regla.Nombre;
+            this.comboBoxConsecuente.SelectedItem = this.consecuente.Regla.Nombre;
+            this.comboBoxNRelacion.SelectedItem = this.numeroRelacion;
+            LoadRespuestas();
+        }
+        
+        private void LoadRespuestas()
+        {
+            Pregunta pregunta = null;
+            switch (this.antecedente.Regla)
+            {
+                case (ReglaInformacion):
+                    pregunta = ((ReglaInformacion)this.antecedente.Regla).Pregunta;
+                    break;
+            }
+            switch (pregunta)
+            {
+                case (PreguntaCerrada):
+                    LoadRespuestaCerrada((PreguntaCerrada)pregunta);
+                    break;
+                case (PreguntaDifusa):
+                    LoadRespuestaDifusa((PreguntaDifusa)pregunta);
+                    break;
+            }
+        }
+        private void LoadRespuestaCerrada(PreguntaCerrada pregunta)
+        {
+            this.groupBoxRespuestaCerrada.Controls.Clear();
+            this.checkedListBoxRespuestaDifusa.Visible = false;
+            this.groupBoxRespuestaCerrada.Visible = true;
+
+            int i = 0;
+            foreach (string respuesta in pregunta.Alternativas)
+            {
+                RadioButton radioButton = new RadioButton()
+                {
+                    Text = respuesta,
+                    AutoSize = true,
+                    Location = new Point(10, 10 + 20 * i),
+                };
+                if (this.relacionAntecedente.RespuestasNecesarias[0]==radioButton.Text) radioButton.Checked = true;
+                this.groupBoxRespuestaCerrada.Controls.Add(radioButton);
+                i++;
+            }
+        }
+        private void LoadRespuestaDifusa(PreguntaDifusa pregunta)
+        {
+            this.checkedListBoxRespuestaDifusa.Items.Clear();
+            this.checkedListBoxRespuestaDifusa.Visible = true;
+            this.groupBoxRespuestaCerrada.Visible = false;
+            
+            foreach (FuncionPertenencia funcionPertenencia in pregunta.ConjuntoDifuso.funcionesPertenencia)
+            {
+                this.checkedListBoxRespuestaDifusa.Items.Add(funcionPertenencia.Nombre);
+                if (this.relacionAntecedente.RespuestasNecesarias.Contains(funcionPertenencia.Nombre))
+                {
+                    int i =  this.checkedListBoxRespuestaDifusa.Items.IndexOf(funcionPertenencia.Nombre);
+                    this.checkedListBoxRespuestaDifusa.SetItemChecked(i, true);
+                }
+            }
         }
 
         private void InitializeAntecedentes(){
@@ -241,8 +304,7 @@ namespace SBC_Maker.Interfaz_grafica
         private void GuardarRelacion()
         {
             AsignarNivel(this.antecedente,this.consecuente);
-            List<string> respuestsNecesarias = GetRespuestas();
-            Relacion relacionAntecedente = new Relacion(antecedente,this.textBoxExplicacion.Text);
+            this.relacionAntecedente = new Relacion(antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
             relacionAntecedente.RespuestasNecesarias = GetRespuestas();
 
             if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
@@ -256,8 +318,7 @@ namespace SBC_Maker.Interfaz_grafica
                 this.consecuente.Antecedentes[this.numeroRelacion - 1].Add(relacionAntecedente);
             }
 
-            Relacion relacionConsecuente = new Relacion(consecuente, this.textBoxExplicacion.Text);
-            if (!this.antecedente.Consecuentes.Contains(relacionConsecuente)) this.antecedente.Consecuentes.Add(relacionConsecuente);
+            if (!this.antecedente.Consecuentes.Contains(this.consecuente)) this.antecedente.Consecuentes.Add(this.consecuente);
         }
         
         private List<string> GetRespuestas()

@@ -64,8 +64,8 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MenuRelacion mr = new MenuRelacion(listaAdyacencia,nodo);
-            mr.ShowDialog();
+            /*MenuRelacion mr = new MenuRelacion(listaAdyacencia,nodo);
+            mr.ShowDialog();*/
         }
     }
 }
