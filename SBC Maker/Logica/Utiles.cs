@@ -36,6 +36,18 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
+        public static void AsignarNivel(Nodo antecedente, Nodo consecuente)
+        {
+            int nuevoNivel = antecedente.Nivel + 1;
+            if (consecuente.Nivel < nuevoNivel)
+            {
+                consecuente.Nivel = nuevoNivel;
+                foreach (Relacion relacion in consecuente.Consecuentes)
+                {
+                    AsignarNivel(consecuente, relacion.Nodo);
+                }
+            }
+        }
 
         public static bool VerifyCycle(Nodo antecedente, Nodo consecuente)
         {
@@ -68,6 +80,19 @@ namespace SBC_Maker.Logica
                 foreach (Relacion anterior in antecedentes)
                 {
                     VerifyRedundancy(antecedente, anterior.Nodo);
+                }
+            }
+            return true;
+        }
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, int nivel)
+        {
+            List<Relacion> antecedentes = consecuente.Antecedentes[nivel-1];
+
+            foreach (Relacion anterior in antecedentes)
+            {
+                if (anterior.Nodo.Equals(antecedente))
+                {
+                    return false;
                 }
             }
             return true;

@@ -36,13 +36,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxExplicacion = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.flowLayoutPanelRespuesta = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxNRelacion = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBoxRespuestaCerrada = new System.Windows.Forms.GroupBox();
             this.checkedListBoxRespuestaDifusa = new System.Windows.Forms.CheckedListBox();
-            this.groupBoxRespuestaCerrada.SuspendLayout();
             this.SuspendLayout();
             // 
             // CancelarButton
@@ -62,6 +60,7 @@
             this.GuardarButton.TabIndex = 22;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // label1
             // 
@@ -120,18 +119,10 @@
             this.label3.TabIndex = 27;
             this.label3.Text = "Explicacion";
             // 
-            // flowLayoutPanelRespuesta
-            // 
-            this.flowLayoutPanelRespuesta.AutoScroll = true;
-            this.flowLayoutPanelRespuesta.Location = new System.Drawing.Point(32, 313);
-            this.flowLayoutPanelRespuesta.Name = "flowLayoutPanelRespuesta";
-            this.flowLayoutPanelRespuesta.Size = new System.Drawing.Size(397, 165);
-            this.flowLayoutPanelRespuesta.TabIndex = 29;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 295);
+            this.label4.Location = new System.Drawing.Point(-4, 312);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 15);
             this.label4.TabIndex = 30;
@@ -159,10 +150,9 @@
             // 
             // groupBoxRespuestaCerrada
             // 
-            this.groupBoxRespuestaCerrada.Controls.Add(this.checkedListBoxRespuestaDifusa);
-            this.groupBoxRespuestaCerrada.Location = new System.Drawing.Point(39, 313);
+            this.groupBoxRespuestaCerrada.Location = new System.Drawing.Point(124, 300);
             this.groupBoxRespuestaCerrada.Name = "groupBoxRespuestaCerrada";
-            this.groupBoxRespuestaCerrada.Size = new System.Drawing.Size(390, 165);
+            this.groupBoxRespuestaCerrada.Size = new System.Drawing.Size(305, 148);
             this.groupBoxRespuestaCerrada.TabIndex = 0;
             this.groupBoxRespuestaCerrada.TabStop = false;
             this.groupBoxRespuestaCerrada.Visible = false;
@@ -170,9 +160,9 @@
             // checkedListBoxRespuestaDifusa
             // 
             this.checkedListBoxRespuestaDifusa.FormattingEnabled = true;
-            this.checkedListBoxRespuestaDifusa.Location = new System.Drawing.Point(-7, 0);
+            this.checkedListBoxRespuestaDifusa.Location = new System.Drawing.Point(124, 300);
             this.checkedListBoxRespuestaDifusa.Name = "checkedListBoxRespuestaDifusa";
-            this.checkedListBoxRespuestaDifusa.Size = new System.Drawing.Size(397, 166);
+            this.checkedListBoxRespuestaDifusa.Size = new System.Drawing.Size(305, 148);
             this.checkedListBoxRespuestaDifusa.TabIndex = 1;
             this.checkedListBoxRespuestaDifusa.Visible = false;
             // 
@@ -183,11 +173,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelarButton;
             this.ClientSize = new System.Drawing.Size(462, 552);
+            this.Controls.Add(this.checkedListBoxRespuestaDifusa);
             this.Controls.Add(this.groupBoxRespuestaCerrada);
             this.Controls.Add(this.comboBoxNRelacion);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.flowLayoutPanelRespuesta);
             this.Controls.Add(this.textBoxExplicacion);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxConsecuente);
@@ -198,7 +188,6 @@
             this.Controls.Add(this.label1);
             this.Name = "MenuRelacion";
             this.Text = "MenuRelacion";
-            this.groupBoxRespuestaCerrada.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,7 +203,6 @@
         private Label label2;
         private RichTextBox textBoxExplicacion;
         private Label label3;
-        private FlowLayoutPanel flowLayoutPanelRespuesta;
         private Label label4;
         private ComboBox comboBoxNRelacion;
         private Label label5;
