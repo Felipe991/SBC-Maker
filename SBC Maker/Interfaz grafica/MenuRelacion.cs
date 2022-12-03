@@ -166,7 +166,6 @@ namespace SBC_Maker.Interfaz_grafica
         {
             this.numeroRelacion = (int)comboBoxNRelacion.SelectedItem;
         }
-
         private void GuardarButton_Click(object sender, EventArgs e)
         {
             if (VerifyRelacion())
@@ -243,20 +242,22 @@ namespace SBC_Maker.Interfaz_grafica
         {
             AsignarNivel(this.antecedente,this.consecuente);
             List<string> respuestsNecesarias = GetRespuestas();
-            Relacion relacion = new Relacion(antecedente,this.textBoxExplicacion.Text);
-            relacion.RespuestasNecesarias = GetRespuestas();
+            Relacion relacionAntecedente = new Relacion(antecedente,this.textBoxExplicacion.Text);
+            relacionAntecedente.RespuestasNecesarias = GetRespuestas();
 
             if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
             {
                 List<Relacion> listaRelacion = new List<Relacion>();
-                listaRelacion.Add(relacion);
+                listaRelacion.Add(relacionAntecedente);
                 this.consecuente.Antecedentes.Add(listaRelacion);
             }
             else
             {
-                this.consecuente.Antecedentes[this.numeroRelacion - 1].Add(relacion);
+                this.consecuente.Antecedentes[this.numeroRelacion - 1].Add(relacionAntecedente);
             }
-            if (!this.antecedente.Consecuentes.Contains(relacion)) this.antecedente.Consecuentes.Add(relacion);
+
+            Relacion relacionConsecuente = new Relacion(consecuente, this.textBoxExplicacion.Text);
+            if (!this.antecedente.Consecuentes.Contains(relacionConsecuente)) this.antecedente.Consecuentes.Add(relacionConsecuente);
         }
         
         private List<string> GetRespuestas()
