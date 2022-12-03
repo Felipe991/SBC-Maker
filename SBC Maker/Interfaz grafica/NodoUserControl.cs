@@ -23,6 +23,9 @@ namespace SBC_Maker.Interfaz_grafica
             InitializeComponent();
             richTextBoxNombreRegla.SelectionAlignment = HorizontalAlignment.Center;
             this.nodo = nodo;
+            
+            this.nodo.Posicion.X = this.Left;
+            this.nodo.Posicion.Y = this.Top;
             this.listaAdyacencia = listaadyacencia;
             this.richTextBoxNombreRegla.Text = nodo.Regla.Nombre;
         }
@@ -57,6 +60,12 @@ namespace SBC_Maker.Interfaz_grafica
                 this.Left += point.X;
                 this.Top += point.Y;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MenuRelacion mr = new MenuRelacion(listaAdyacencia,nodo);
+            mr.ShowDialog();
         }
     }
 }

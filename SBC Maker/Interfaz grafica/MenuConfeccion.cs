@@ -20,6 +20,7 @@ namespace SBC_Maker
     public partial class MenuConfeccion : Form
     {
         private SBC sbc;
+        private List<Graphics> flechas = new();
         public MenuConfeccion(string nombre)
         {
             InitializeComponent();
@@ -75,13 +76,16 @@ namespace SBC_Maker
             if (menuRegla.DialogResult == DialogResult.OK)
             {
                 this.panelLienzo.Controls.Add(new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento));
-            }
+             }
         }
 
         private void toolStripButtonAgregarRelacion_Click(object sender, EventArgs e)
         {
             MenuRelacion menuRelacion = new MenuRelacion(sbc.BaseConocimiento);
-            menuRelacion.ShowDialog();
+            if (menuRelacion.ShowDialog() == DialogResult.OK)
+            {
+                DrawArrow(menuRelacion,menuRelacion.antecedente,menuRelacion.consecuente);
+            }
         }
     }
 }

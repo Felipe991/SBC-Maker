@@ -15,8 +15,8 @@ namespace SBC_Maker.Interfaz_grafica
     public partial class MenuRelacion : Form
     {
         List<Nodo> listaadyacencia;
-        Nodo antecedente;
-        Nodo consecuente;
+        public Nodo antecedente;
+        public Nodo consecuente;
         int numeroRelacion = 0;
 
         public MenuRelacion(List<Nodo>listaadyacencia)
@@ -25,6 +25,16 @@ namespace SBC_Maker.Interfaz_grafica
             this.listaadyacencia = listaadyacencia;
             InitializeAntecedentes();
         }
+
+        public MenuRelacion(List<Nodo>listaadyacencia,Nodo nodoAntecedente)
+        {
+            InitializeComponent();
+            antecedente = nodoAntecedente;
+            this.listaadyacencia = listaadyacencia;
+            comboBoxAntecedente.Enabled = false;
+            InitializeConsecuentes();
+        }
+
         private void InitializeAntecedentes(){
             foreach (Nodo nodo in listaadyacencia)
             {
