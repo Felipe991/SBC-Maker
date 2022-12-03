@@ -99,7 +99,6 @@
             this.textBoxNombre.Size = new System.Drawing.Size(194, 27);
             this.textBoxNombre.TabIndex = 33;
             this.textBoxNombre.Text = "Conjunto Difuso";
-            this.textBoxNombre.TextChanged += new System.EventHandler(this.textBoxNombre_TextChanged);
             this.textBoxNombre.Leave += new System.EventHandler(this.textBoxNombre_Leave);
             // 
             // label1
@@ -172,6 +171,10 @@
             this.labelMetodoResolucion.TabIndex = 39;
             this.labelMetodoResolucion.Text = "Metodo de Resolucion";
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.InitialDirectory = "C:\\Users\\PIPEX\\Documents\\Conjuntos Difusos";
+            // 
             // MenuConjuntoDifuso
             // 
             this.AcceptButton = this.GuardarButton;
@@ -196,9 +199,7 @@
             this.Load += new System.EventHandler(this.MenuConjuntoDifuso_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-            
-            System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos");
-            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos";
+
         }
 
         #endregion

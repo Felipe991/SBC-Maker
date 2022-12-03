@@ -199,10 +199,5 @@ namespace SBC_Maker
             }
             return true;
         }
-
-        private void textBoxNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
