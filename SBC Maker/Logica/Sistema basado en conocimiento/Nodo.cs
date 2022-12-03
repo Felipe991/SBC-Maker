@@ -8,7 +8,7 @@ namespace SBC_Maker.Logica
         private Hecho hecho;
         private int nivel;
         private List<List<Relacion>> antecedentes;
-        private List<Relacion> consecuentes;
+        private List<Nodo> consecuentes;
         private Posicion posicion;
 
         public Nodo(Regla regla, Hecho hecho, int nivel)
@@ -18,7 +18,7 @@ namespace SBC_Maker.Logica
             this.Nivel = nivel;
             this.Posicion = new Posicion();
             this.Antecedentes = new List<List<Relacion>>();
-            this.Consecuentes = new List<Relacion>();
+            this.Consecuentes = new List<Nodo>();
         }
         public List<Nodo> GetRoots()
         {
@@ -39,7 +39,7 @@ namespace SBC_Maker.Logica
         public Hecho Hecho { get => hecho; set => hecho = value; }
         public int Nivel { get => nivel; set => nivel = value; }
         public List<List<Relacion>> Antecedentes { get => antecedentes; set => antecedentes = value; }
-        public List<Relacion> Consecuentes { get => consecuentes; set => consecuentes = value; }
+        public List<Nodo> Consecuentes { get => consecuentes; set => consecuentes = value; }
         internal Regla Regla { get => regla; set => regla = value; }
         public Posicion Posicion { get => posicion; set => posicion = value; }
     }

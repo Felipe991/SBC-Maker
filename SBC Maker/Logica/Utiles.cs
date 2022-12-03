@@ -42,9 +42,9 @@ namespace SBC_Maker.Logica
             if (consecuente.Nivel < nuevoNivel)
             {
                 consecuente.Nivel = nuevoNivel;
-                foreach (Relacion relacion in consecuente.Consecuentes)
+                foreach (Nodo siguiente in consecuente.Consecuentes)
                 {
-                    AsignarNivel(consecuente, relacion.Nodo);
+                    AsignarNivel(consecuente, siguiente);
                 }
             }
         }
@@ -84,13 +84,12 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, int nivel)
+        public static bool VerifyRedundancy(Nodo objetivo, Nodo actual, int numeroRelacion)
         {
-            List<Relacion> antecedentes = consecuente.Antecedentes[nivel-1];
-
-            foreach (Relacion anterior in antecedentes)
+            List<Relacion> antecedentes = actual.Antecedentes[numeroRelacion - 1];
+            foreach(Relacion antecedente in antecedentes)
             {
-                if (anterior.Nodo.Equals(antecedente))
+                if (!VerifyRedundancy(objetivo, antecedente.Nodo))
                 {
                     return false;
                 }
@@ -122,13 +121,13 @@ namespace SBC_Maker.Logica
             {
                 foreach(Relacion antecedente in antecedentes)
                 {
-                    antecedente.Nodo.Consecuentes.Remove(antecedente.Nodo.Consecuentes.Find(relacion => relacion.Nodo == nodo));
+                    antecedente.Nodo.Consecuentes.Remove(antecedente.Nodo.Consecuentes.Find(consecuente => consecuente == nodo));
                 }
             }   
             
-            foreach (Relacion consecuente in nodo.Consecuentes)
+            foreach (Nodo consecuente in nodo.Consecuentes)
             {
-                foreach (List<Relacion> antecedentes in consecuente.Nodo.Antecedentes)
+                foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
                 {
                     antecedentes.Remove(antecedentes.Find(antecedente => antecedente.Nodo == nodo));
                 }
