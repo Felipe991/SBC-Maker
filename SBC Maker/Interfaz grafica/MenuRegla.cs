@@ -41,17 +41,12 @@ namespace SBC_Maker.Interfaz_grafica
             Pregunta pregunta;
             switch (this.regla)
             {
-                case (ReglaInicio):
-                    pregunta = ((ReglaInicio)this.regla).Pregunta;
-                    
-                    this.InicioButton.Checked = true;
-                    this.comboBoxTipoPregunta.Text = "Inicio";
-                    LoadRespuestas(pregunta);
-                    break;
                 case (ReglaInformacion):
                     pregunta = ((ReglaInformacion)this.regla).Pregunta;
-                    
-                    this.InformacionButton.Checked = true;
+                    bool isInicio = ((ReglaInformacion)this.regla).ReglaInicio;
+
+                    this.InicioButton.Checked = isInicio;
+                    this.InformacionButton.Checked = isInicio;
                     this.comboBoxTipoPregunta.Text = "Informacion";
                     LoadRespuestas(pregunta);
                     break;
@@ -217,16 +212,12 @@ namespace SBC_Maker.Interfaz_grafica
             Pregunta pregunta;
             switch (this.regla)
             {
-                case (ReglaInicio):
-                    pregunta = ((ReglaInicio)this.regla).Pregunta;
-                    
-                    if (!this.InicioButton.Checked) return true;
-                    if (!SameRespuestas(pregunta)) return true;
-                    break;
                 case (ReglaInformacion):
                     pregunta = ((ReglaInformacion)this.regla).Pregunta;
-                    
-                    if (!this.InformacionButton.Checked) return true;
+                    bool isInicio = ((ReglaInformacion)this.regla).ReglaInicio;
+
+                    if (!this.InicioButton.Checked && isInicio) return true;
+                    if (!this.InformacionButton.Checked && !isInicio) return true;
                     if (!SameRespuestas(pregunta)) return true;
                     break;
                 case (ReglaConclusion):
@@ -264,7 +255,8 @@ namespace SBC_Maker.Interfaz_grafica
 
             if (this.InicioButton.Checked)
             {
-                regla = makeReglaInicio(nombre);
+                regla = makeReglaInformacion(nombre);
+                ((ReglaInformacion)regla).ReglaInicio = true;
             }
             else if (this.InformacionButton.Checked)
             {
@@ -275,23 +267,6 @@ namespace SBC_Maker.Interfaz_grafica
                 regla = makeReglaConlusion(nombre);
             }
             return regla;
-        }
-        private ReglaInicio makeReglaInicio(string nombre)
-        {
-            string enunciado = this.textBoxPregunta.Text;
-            Pregunta pregunta;
-            if (comboBoxTipoPregunta.Text == "Cerrada")
-            {
-                List<string> alternativas = GetAlternativas();
-                pregunta = new PreguntaCerrada(alternativas, enunciado);
-            }
-            else
-            {
-                Object pduc = this.panelPregunta.Controls[0];
-                ConjuntoDifuso conjuntoDifuso = ((PreguntaDifusaUserControl)pduc).conjuntoDifuso;
-                pregunta = new PreguntaDifusa(conjuntoDifuso,enunciado);
-            }
-            return new ReglaInicio(nombre, pregunta);
         }
         private ReglaInformacion makeReglaInformacion(string nombre)
         {

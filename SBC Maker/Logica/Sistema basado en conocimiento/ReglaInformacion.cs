@@ -9,11 +9,13 @@ namespace SBC_Maker.Logica
     public class ReglaInformacion : Regla
     {
         Pregunta pregunta;
+        bool  reglaInicio = false;
         public ReglaInformacion(string nombre, Pregunta pregunta) : base(nombre)
         {
             this.Pregunta = pregunta;
         }
 
         public Pregunta Pregunta { get => pregunta; set => pregunta = value; }
+        public bool ReglaInicio { get => reglaInicio; set => reglaInicio = value; }
     }
 }

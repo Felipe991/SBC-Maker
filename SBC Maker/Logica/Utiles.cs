@@ -79,11 +79,10 @@ namespace SBC_Maker.Logica
             {
                 switch (nodo.Regla)
                 {
-                    case ReglaInicio:
-                        if (nodo.Antecedentes.Count() > 0 || nodo.Consecuentes.Count() < 1) return false;
-                        break;
                     case ReglaInformacion:
-                        if (nodo.Antecedentes.Count() < 1 || nodo.Consecuentes.Count() < 1) return false;
+                        bool isInicio = ((ReglaInformacion)nodo.Regla).ReglaInicio;
+                        if(isInicio && (nodo.Antecedentes.Count() > 0 || nodo.Consecuentes.Count() < 1)) return false;
+                        if (!isInicio && (nodo.Antecedentes.Count() < 1 || nodo.Consecuentes.Count() < 1)) return false; 
                         break;
                     case ReglaConclusion:
                         if (nodo.Antecedentes.Count() < 1 || nodo.Consecuentes.Count() > 0) return false;
