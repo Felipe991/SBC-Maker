@@ -257,7 +257,7 @@ namespace SBC_Maker.Interfaz_grafica
             }
             if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
             {
-                if (!VerifyRedundancy(this.antecedente, this.consecuente))
+                if (!VerifyRedundancy(this.antecedente, this.consecuente, new List<Nodo>()))
                 {
                     error = "Relacion Redundante";
                     flag = false;

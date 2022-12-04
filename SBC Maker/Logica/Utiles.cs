@@ -99,27 +99,42 @@ namespace SBC_Maker.Logica
             return false;
         }
 
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, List<Nodo> recorridos)
         {
             if (antecedente.Regla.Equals(consecuente.Regla))
             {
                 return false;
             }
+            recorridos.Add(consecuente);
+            foreach (Nodo siguiente in consecuente.Consecuentes)
+            {
+                if (!recorridos.Contains(siguiente))
+                {
+                    if (!VerifyRedundancy(antecedente, siguiente, recorridos)) return false;
+                }
+            }
+            
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
             {
                 foreach (Relacion anterior in antecedentes)
                 {
-                    if(!VerifyRedundancy(antecedente, anterior.Nodo)) return false;
+                    if (!recorridos.Contains(anterior.Nodo))
+                    {
+                        if (!VerifyRedundancy(antecedente, anterior.Nodo, recorridos)) return false;
+                    }
                 }
             }
+               
             return true;
         }
-        public static bool VerifyRedundancy(Nodo objetivo, Nodo actual, int numeroRelacion)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, int numeroRelacion)
         {
-            List<Relacion> antecedentes = actual.Antecedentes[numeroRelacion - 1];
-            foreach(Relacion antecedente in antecedentes)
+            List<Relacion> antecedentes = consecuente.Antecedentes[numeroRelacion - 1];
+            List<Nodo> recorridos = new List<Nodo>();
+            recorridos.Add(consecuente);
+            foreach (Relacion anterior in antecedentes)
             {
-                if (!VerifyRedundancy(objetivo, antecedente.Nodo))
+                if (!VerifyRedundancy(antecedente, anterior.Nodo, recorridos))
                 {
                     return false;
                 }
