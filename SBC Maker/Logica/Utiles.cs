@@ -163,6 +163,7 @@ namespace SBC_Maker.Logica
         }
         private static void DeleteFromConsecuentes(Nodo nodo)
         {
+            
             foreach (Nodo consecuente in nodo.Consecuentes)
             {
                 List<List<Relacion>> relacionesRemanentes = new List<List<Relacion>>();
@@ -174,29 +175,49 @@ namespace SBC_Maker.Logica
                         relacionesRemanentes.Add(antecedentes);
                     }
                 }
-                DeleteConsecuenteFromAntecedente(consecuente.Antecedentes, relacionesRemanentes, consecuente);
+                DeleteConsecuenteFromAntecedente(consecuente.Antecedentes, relacionesRemanentes, nodo,consecuente);
                 consecuente.Antecedentes = relacionesRemanentes;
                 ResetNumeroRelacion(consecuente.Antecedentes);
             }
         }
 
+        private static void DeleteConsecuenteFromAntecedente(List<List<Relacion>> relacionesOriginales, List<List<Relacion>> relacionesRemanentes, Nodo antecedente ,Nodo consecuente)
+        {
+            foreach (List<Relacion> antecedentes in relacionesOriginales)
+            {
+                bool isRemanente = false;
+                foreach (Relacion relacionAntecedente in antecedentes)
+                {
+                    foreach(List<Relacion> antecedentesRemanentes in relacionesRemanentes)
+                    {
+                        Relacion equivalente = antecedentesRemanentes.Find(antecedenteRemanente => antecedenteRemanente.Nodo == relacionAntecedente.Nodo);
+                        if (equivalente != null )
+                        {
+                            isRemanente = true;
+                            break;
+                        }
+                    }
+                    if (!isRemanente && !relacionAntecedente.Nodo.Equals(antecedente)) relacionAntecedente.Nodo.Consecuentes.Remove(consecuente);
+                }
+            }
+        }
         private static void DeleteConsecuenteFromAntecedente(List<List<Relacion>> relacionesOriginales, List<List<Relacion>> relacionesRemanentes, Nodo consecuente)
         {
             foreach (List<Relacion> antecedentes in relacionesOriginales)
             {
                 bool isRemanente = false;
-                foreach (Relacion antecedente in antecedentes)
+                foreach (Relacion relacionAntecedente in antecedentes)
                 {
-                    foreach(List<Relacion> antecedentesRemanentes in relacionesRemanentes)
+                    foreach (List<Relacion> antecedentesRemanentes in relacionesRemanentes)
                     {
-                        Relacion equivalente = antecedentesRemanentes.Find(antecedenteRemanente => antecedenteRemanente.Nodo == antecedente.Nodo);
+                        Relacion equivalente = antecedentesRemanentes.Find(antecedenteRemanente => antecedenteRemanente.Nodo == relacionAntecedente.Nodo);
                         if (equivalente != null)
                         {
                             isRemanente = true;
                             break;
                         }
                     }
-                    if (!isRemanente) antecedente.Nodo.Consecuentes.Remove(consecuente);
+                    if (!isRemanente) relacionAntecedente.Nodo.Consecuentes.Remove(consecuente);
                 }
             }
         }
@@ -212,7 +233,7 @@ namespace SBC_Maker.Logica
                 i++;
             }
         }
-        public static void DeleteRelacion(Nodo antecedente/*B*/, Nodo consecuente/*d*/, Relacion relacionAntecedente/*b-3->c*/)
+        public static void DeleteRelacion(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
             List<List<Relacion>> relacionesRemanentes = new List<List<Relacion>>();
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
@@ -225,7 +246,6 @@ namespace SBC_Maker.Logica
             DeleteConsecuenteFromAntecedente(consecuente.Antecedentes, relacionesRemanentes, consecuente);
             consecuente.Antecedentes = relacionesRemanentes;
             ResetNumeroRelacion(consecuente.Antecedentes);
-            //Para cada antecedente del consecuente en la lista que se encuentre la relacion que voy a borrar:
         }
 
     }
