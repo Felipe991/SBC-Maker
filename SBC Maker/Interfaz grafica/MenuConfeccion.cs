@@ -35,6 +35,7 @@ namespace SBC_Maker
             this.sbc = sbc;
         }
 
+        
         private void MenuConfeccion_Load(object sender, EventArgs e)
         {
             DoubleBuffered = false;
@@ -82,6 +83,7 @@ namespace SBC_Maker
                 ExtendEvents(NUC);
                 this.panelLienzo.Controls.Add(NUC);
                 AsignarNivelGlobal(sbc.BaseConocimiento);
+                LoadTree(sbc.BaseConocimiento);
             }
         }
 
@@ -105,6 +107,7 @@ namespace SBC_Maker
             {
                 AddNewFlecha(menuRelacion);
                 AsignarNivelGlobal(sbc.BaseConocimiento);
+                LoadTree(sbc.BaseConocimiento);
                 this.panelLienzo.Refresh();
             }
         }
@@ -157,6 +160,38 @@ namespace SBC_Maker
         private void panelLienzo_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
+        }
+
+        private void LoadTree(List<Nodo> listaAdyacencia)
+        {
+            this.treeViewRelaciones.Nodes.Clear();
+            int i = 0;
+            foreach (Nodo nodo in listaAdyacencia)
+            {
+                this.treeViewRelaciones.Nodes.Add(nodo.Regla.Nombre);
+                foreach (Nodo consecuente in nodo.Consecuentes)
+                {
+                    foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
+                    {
+                        Relacion antecedente = antecedentes.Find(r => r.Nodo == nodo);
+                        if (antecedente != null)
+                        {
+                            int numeroRelacion = antecedente.NumeroRelacion;
+                            string label = "(" + numeroRelacion + ") " + consecuente.Regla.Nombre;
+
+                            this.treeViewRelaciones.Nodes[i].Nodes.Add(label);
+                        }
+                    }
+                }
+                i++;
+            }
+        }
+
+        private void toolStripButtonVerRelaciones_Click(object sender, EventArgs e)
+        {
+            bool visible = this.treeViewRelaciones.Visible;
+            LoadTree(sbc.BaseConocimiento);
+            this.treeViewRelaciones.Visible = !visible;
         }
     }
 }

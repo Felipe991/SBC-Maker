@@ -113,7 +113,6 @@ namespace SBC_Maker.Logica
                     if (!VerifyRedundancy(antecedente, siguiente, recorridos)) return false;
                 }
             }
-            
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
             {
                 foreach (Relacion anterior in antecedentes)
@@ -124,7 +123,6 @@ namespace SBC_Maker.Logica
                     }
                 }
             }
-               
             return true;
         }
         public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, int numeroRelacion)
