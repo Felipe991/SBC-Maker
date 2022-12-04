@@ -1,5 +1,6 @@
 ﻿using SBC_Maker.Logica;
 using SBC_Maker.Logica.Configuracion;
+using static SBC_Maker.Logica.Utiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -78,6 +79,7 @@ namespace SBC_Maker.Interfaz_grafica
                 this.nodo = menuRegla.nodo;
                 this.listaAdyacencia = menuRegla.listaAdyacencia;
                 this.richTextBoxNombreRegla.Text = menuRegla.nodo.Regla.Nombre;
+                AsignarNivelGlobal(listaAdyacencia);
             }
         }
 
@@ -106,7 +108,9 @@ namespace SBC_Maker.Interfaz_grafica
         private void button1_Click(object sender, EventArgs e)
         {
             /*MenuRelacion mr = new MenuRelacion(listaAdyacencia,nodo);
-            mr.ShowDialog();*/
+            mr.ShowDialog();
+            AsignarNivelGlobal(listaAdyacencia);
+             */
         }
     }
 }
