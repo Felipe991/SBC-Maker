@@ -175,14 +175,8 @@ namespace SBC_Maker.Interfaz_grafica
         
         private bool GuardarRegla()
         {
-            if (this.regla is null)
-            {
-                return AddNewNodo();
-            }
-            else
-            {
-                return EditRegla();
-            }
+            if (this.regla is null) return AddNewNodo();
+            else return EditRegla();
         }
         private bool AddNewNodo()
         {

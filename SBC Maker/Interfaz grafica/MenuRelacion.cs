@@ -41,7 +41,6 @@ namespace SBC_Maker.Interfaz_grafica
             this.comboBoxNRelacion.SelectedItem = this.numeroRelacion;
             LoadRespuestas();
         }
-        
         private void LoadRespuestas()
         {
             Pregunta pregunta = null;
@@ -233,8 +232,7 @@ namespace SBC_Maker.Interfaz_grafica
         {
             if (VerifyRelacion())
             {
-                GuardarRelacion();
-                DialogResult = DialogResult.OK;
+                if (GuardarRelacion()) DialogResult = DialogResult.OK;
             }
         }
         private bool VerifyRelacion()
@@ -301,9 +299,15 @@ namespace SBC_Maker.Interfaz_grafica
             }
             return false;
         }
-        private void GuardarRelacion()
+        private bool GuardarRelacion()
         {
-            AsignarNivel(this.antecedente,this.consecuente);
+            if (this.relacionAntecedente == null) return AddRelacion();
+            else return EditRelacion();
+
+        }
+        private bool AddRelacion()
+        {
+            AsignarNivel(this.antecedente, this.consecuente);
             this.relacionAntecedente = new Relacion(antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
             relacionAntecedente.RespuestasNecesarias = GetRespuestas();
 
@@ -319,8 +323,35 @@ namespace SBC_Maker.Interfaz_grafica
             }
 
             if (!this.antecedente.Consecuentes.Contains(this.consecuente)) this.antecedente.Consecuentes.Add(this.consecuente);
+            return true;
         }
-        
+        private bool EditRelacion()
+        {
+            if (WasModificated())
+            {
+                if (MessageBox.Show("Realmente desea salir?", "Alerta", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    //if (DeleteRelacion()) AddRelacion();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                this.relacionAntecedente.Explicacion = this.textBoxExplicacion.Text;
+                this.relacionAntecedente.RespuestasNecesarias = GetRespuestas();
+            }
+            return true;
+        }
+        private bool WasModificated()
+        {
+            if (this.relacionAntecedente.Nodo.Regla.Nombre != this.comboBoxConsecuente.SelectedItem.ToString()) return true;
+            if (this.antecedente.Regla.Nombre != this.comboBoxAntecedente.SelectedItem.ToString()) return true;
+            if (this.relacionAntecedente.NumeroRelacion != this.numeroRelacion) return true;
+            return false;
+        } 
         private List<string> GetRespuestas()
         {
             List<string>  respuestasNecesarias = new List<string>();
