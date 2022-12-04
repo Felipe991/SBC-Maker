@@ -20,12 +20,15 @@ namespace SBC_Maker
     public partial class MenuConfeccion : Form
     {
         private SBC sbc;
-        private List<Graphics> flechas = new();
+        private List<(string, (Posicion, Posicion))> datosFlecha = new();
+        private bool mouseDown = false;
         public MenuConfeccion(string nombre)
         {
             InitializeComponent();
             this.sbc = new SBC(nombre, new ConfiguracionMotor());
+            this.SetStyle(ControlStyles.Opaque, true);
         }
+        
         public MenuConfeccion(SBC sbc)
         {
             InitializeComponent();
@@ -34,7 +37,7 @@ namespace SBC_Maker
 
         private void MenuConfeccion_Load(object sender, EventArgs e)
         {
-
+            DoubleBuffered = false;
         }
 
         private void conjuntoDifusoToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -75,8 +78,23 @@ namespace SBC_Maker
             menuRegla.ShowDialog();
             if (menuRegla.DialogResult == DialogResult.OK)
             {
-                this.panelLienzo.Controls.Add(new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento));
-             }
+                NodoUserControl NUC = new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento);
+                ExtendEvents(NUC);
+                this.panelLienzo.Controls.Add(NUC);
+            }
+        }
+
+        private void ExtendEvents(NodoUserControl NUC)
+        {
+            NUC.MouseMove += panelLienzo_MouseMove;
+            NUC.richTextBoxNombreRegla.MouseMove += panelLienzo_MouseMove;
+            NUC.buttonRelacion.MouseMove += panelLienzo_MouseMove;
+            foreach (Control c in NUC.Controls)
+            {
+                c.MouseMove += panelLienzo_MouseMove;
+                c.MouseUp+= panelLienzo_MouseUp;
+                c.MouseDown += panelLienzo_MouseDown;
+            }
         }
 
         private void toolStripButtonAgregarRelacion_Click(object sender, EventArgs e)
@@ -84,17 +102,59 @@ namespace SBC_Maker
             MenuRelacion menuRelacion = new MenuRelacion(sbc.BaseConocimiento);
             if (menuRelacion.ShowDialog() == DialogResult.OK)
             {
-                DrawArrow(menuRelacion.antecedente.Posicion,menuRelacion.consecuente.Posicion);
+                AddNewFlecha(menuRelacion);
+                this.panelLienzo.Refresh();
             }
         }
 
-        private void DrawArrow(Posicion posicion1, Posicion posicion2)
+        private void AddNewFlecha(MenuRelacion menuRelacion)
         {
-            Graphics g = panelLienzo.CreateGraphics();
-            Pen pen = new Pen(Color.Black, 2);
-            pen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            g.DrawLine(pen, new Point(posicion1.X, posicion1.Y), new Point(posicion2.X,posicion2.Y));
-            flechas.Add(g);
+            Nodo antecedente = menuRelacion.antecedente;
+            Nodo consecuente = menuRelacion.consecuente;
+
+            Posicion posAnt = antecedente.Posicion;
+            Posicion posCon = consecuente.Posicion;
+
+            string ID = antecedente.Regla.Nombre + consecuente.Regla.Nombre;
+
+            this.datosFlecha.Add((ID,(posAnt,posCon)));
+        }
+
+        private void panelLienzo_Paint(object sender, PaintEventArgs e)
+        {
+            foreach((string,(Posicion,Posicion)) datos in datosFlecha)
+            {
+                DrawArrow(datos,e.Graphics);
+            }
+        }
+
+        private void DrawArrow((string, (Posicion, Posicion)) datos,Graphics g)
+        {
+            Pen p = new Pen(Brushes.Black,5);
+            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            g.DrawLine(p,
+                       datos.Item2.Item1.X+45,
+                       datos.Item2.Item1.Y+60,
+                       datos.Item2.Item2.X+45,
+                       datos.Item2.Item2.Y);
+        }
+
+        private void panelLienzo_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                Refresh();
+            }
+        }
+
+        private void panelLienzo_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+        }
+
+        private void panelLienzo_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
     }
 }

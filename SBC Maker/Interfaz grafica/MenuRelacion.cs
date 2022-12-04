@@ -340,7 +340,7 @@ namespace SBC_Maker.Interfaz_grafica
             }
             else
             {
-                this.relacionAntecedente.Explicacion = this.textBoxExplicacion.Text;
+                //this.relacionAntecedente.Explicacion = this.textBoxExplicacion.Text;
                 this.relacionAntecedente.RespuestasNecesarias = GetRespuestas();
             }
             return true;

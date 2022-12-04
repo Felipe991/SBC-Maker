@@ -1,4 +1,5 @@
 ﻿using SBC_Maker.Logica;
+using SBC_Maker.Logica.Configuracion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +15,12 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class NodoUserControl : UserControl
     {
-        Nodo nodo;
+        public Nodo nodo;
+        public Dictionary<string, (Posicion, Posicion)> flechas = new();
         private List<Nodo> listaAdyacencia;
         private static Size mouseOffset;
         private bool IsPicked = false;
+
         public NodoUserControl(Nodo nodo, List<Nodo> listaadyacencia)
         {
             InitializeComponent();
@@ -25,15 +28,39 @@ namespace SBC_Maker.Interfaz_grafica
             this.nodo = nodo;
             this.listaAdyacencia = listaadyacencia;
             this.richTextBoxNombreRegla.Text = nodo.Regla.Nombre;
+            InitializeBackColor();
             extendEvents();
             RefreshNodePos();
         }
 
+        private void InitializeBackColor()
+        {
+            switch (nodo.Regla)
+            {
+                case ReglaConclusion:
+                    this.BackColor = Color.Red;
+                    break;
+                case ReglaInformacion reglaInformacion:
+                    if (reglaInformacion.ReglaInicio)
+                    {
+                        this.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        this.BackColor = Color.Yellow;
+                    }
+                    break;
+            }
+        }
+
         private void extendEvents()
         {
-            this.MouseDown += richTextBoxNombreRegla_MouseDown;
-            this.MouseUp += richTextBoxNombreRegla_MouseUp;
-            this.MouseMove += richTextBoxNombreRegla_MouseMove;
+            /*foreach (Control control in this.Controls)
+            {
+                control.MouseDown += richTextBoxNombreRegla_MouseDown;
+                control.MouseMove += richTextBoxNombreRegla_MouseMove;
+                control.MouseUp += richTextBoxNombreRegla_MouseMove;
+            }*/
         }
 
         private void RefreshNodePos()

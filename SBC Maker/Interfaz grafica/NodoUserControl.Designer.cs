@@ -80,7 +80,7 @@
 
         #endregion
 
-        private RichTextBox richTextBoxNombreRegla;
-        private Button buttonRelacion;
+        public RichTextBox richTextBoxNombreRegla;
+        public Button buttonRelacion;
     }
 }
