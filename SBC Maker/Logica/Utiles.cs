@@ -48,6 +48,34 @@ namespace SBC_Maker.Logica
                 }
             }
         }
+        public static void AsignarNivelGlobal(List<Nodo> listaAdyacencia)
+        {
+            List<Nodo> pseudoRoot = GetNivelesCero(listaAdyacencia);
+            SetNivelCero(listaAdyacencia);
+            foreach (Nodo nodo in pseudoRoot)
+            {
+                foreach (Nodo siguiente in nodo.Consecuentes)
+                {
+                    AsignarNivel(nodo, siguiente);
+                }
+            }
+        }
+        private static List<Nodo> GetNivelesCero(List<Nodo> listaAdyacencia)
+        {
+            List<Nodo> nivelesCero = new List<Nodo>();
+            foreach(Nodo nodo in listaAdyacencia)
+            {
+                if (nodo.Nivel == 0) nivelesCero.Add(nodo);
+            }
+            return nivelesCero;
+        }
+        private static void SetNivelCero(List<Nodo> listaAdyacencia)
+        {
+            foreach(Nodo nodo in listaAdyacencia)
+            {
+                nodo.Nivel = 0;
+            }
+        }
 
         public static bool VerifyCycle(Nodo antecedente, Nodo consecuente)
         {
@@ -57,8 +85,10 @@ namespace SBC_Maker.Logica
 
         private static bool VerifySameRoots(Nodo antecedente, Nodo consecuente)
         {
-            List<Nodo> rootsConsecuente = consecuente.GetRoots();
-            List<Nodo> rootsAntecedente = antecedente.GetRoots();
+            List<Nodo> rootsConsecuente = new List<Nodo>();
+            consecuente.GetRoots(rootsConsecuente);
+            List<Nodo> rootsAntecedente = new List<Nodo>();
+            antecedente.GetRoots(rootsAntecedente);
             foreach (Nodo rootAntecedente in rootsAntecedente)
             {
                 foreach (Nodo rootConsecuente in rootsConsecuente)
@@ -69,27 +99,40 @@ namespace SBC_Maker.Logica
             return false;
         }
 
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, List<Nodo> recorridos)
         {
             if (antecedente.Regla.Equals(consecuente.Regla))
             {
                 return false;
             }
+            recorridos.Add(consecuente);
+            foreach (Nodo siguiente in consecuente.Consecuentes)
+            {
+                if (!recorridos.Contains(siguiente))
+                {
+                    if (!VerifyRedundancy(antecedente, siguiente, recorridos)) return false;
+                }
+            }
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
             {
                 foreach (Relacion anterior in antecedentes)
                 {
-                    VerifyRedundancy(antecedente, anterior.Nodo);
+                    if (!recorridos.Contains(anterior.Nodo))
+                    {
+                        if (!VerifyRedundancy(antecedente, anterior.Nodo, recorridos)) return false;
+                    }
                 }
             }
             return true;
         }
-        public static bool VerifyRedundancy(Nodo objetivo, Nodo actual, int numeroRelacion)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, int numeroRelacion)
         {
-            List<Relacion> antecedentes = actual.Antecedentes[numeroRelacion - 1];
-            foreach(Relacion antecedente in antecedentes)
+            List<Relacion> antecedentes = consecuente.Antecedentes[numeroRelacion - 1];
+            List<Nodo> recorridos = new List<Nodo>();
+            recorridos.Add(consecuente);
+            foreach (Relacion anterior in antecedentes)
             {
-                if (!VerifyRedundancy(objetivo, antecedente.Nodo))
+                if (!VerifyRedundancy(antecedente, anterior.Nodo, recorridos))
                 {
                     return false;
                 }
@@ -133,46 +176,90 @@ namespace SBC_Maker.Logica
         }
         private static void DeleteFromConsecuentes(Nodo nodo)
         {
+            
             foreach (Nodo consecuente in nodo.Consecuentes)
             {
-                bool flag = false;
-                consecuente.Nivel = 0;
+                List<List<Relacion>> relacionesRemanentes = new List<List<Relacion>>();
                 foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
                 {
-                    //Si encuentro el nodo en una lista,
-                    //Visito cada relacion, y si no hay otro registro en una de las otras listas,
-                        //entonces elimino al consecuente de la lista de consecuentes del nodo de la relacion
-                    //borra la lista completa 
-                    //Al terminar de borrar todo, re balanceo el numero de relacion
-                    
-                    
                     Relacion antecedente = antecedentes.Find(antecedente => antecedente.Nodo == nodo);
-                    if (antecedente != null)
+                    if (antecedente == null)
                     {
-                        foreach(Relacion relacion in antecedentes)
-                        {
-                            //si no encuentro esta relacion en otro de los registros,
-                                //tengo que borrar el consecuente de la lista dee consecuentes de su nodo
-                        }
-                        consecuente.Antecedentes.Remove(antecedentes);
-                    }
-                    else
-                    {
-                        foreach (Relacion relacion in antecedentes)
-                        {
-                            AsignarNivel(relacion.Nodo, consecuente);
-                        }
+                        relacionesRemanentes.Add(antecedentes);
                     }
                 }
-                //Re determinar el numero de relacion
+                DeleteConsecuenteFromAntecedente(consecuente.Antecedentes, relacionesRemanentes, nodo,consecuente);
+                consecuente.Antecedentes = relacionesRemanentes;
+                ResetNumeroRelacion(consecuente.Antecedentes);
             }
         }
-        
-        public static bool DeleteRelacion()
+
+        private static void DeleteConsecuenteFromAntecedente(List<List<Relacion>> relacionesOriginales, List<List<Relacion>> relacionesRemanentes, Nodo antecedente ,Nodo consecuente)
         {
-            //El antecedente elimina al consecuente de sus consecuentes (A no ser que exista otra relación que lo incluya)
-            //El consecuente elimina al antecedente de sus antecedentes (Del mismo numero de relacion)
-            return true;
+            foreach (List<Relacion> antecedentes in relacionesOriginales)
+            {
+                bool isRemanente = false;
+                foreach (Relacion relacionAntecedente in antecedentes)
+                {
+                    foreach(List<Relacion> antecedentesRemanentes in relacionesRemanentes)
+                    {
+                        Relacion equivalente = antecedentesRemanentes.Find(antecedenteRemanente => antecedenteRemanente.Nodo == relacionAntecedente.Nodo);
+                        if (equivalente != null )
+                        {
+                            isRemanente = true;
+                            break;
+                        }
+                    }
+                    if (!isRemanente && !relacionAntecedente.Nodo.Equals(antecedente)) relacionAntecedente.Nodo.Consecuentes.Remove(consecuente);
+                }
+            }
         }
+        private static void DeleteConsecuenteFromAntecedente(List<List<Relacion>> relacionesOriginales, List<List<Relacion>> relacionesRemanentes, Nodo consecuente)
+        {
+            foreach (List<Relacion> antecedentes in relacionesOriginales)
+            {
+                bool isRemanente = false;
+                foreach (Relacion relacionAntecedente in antecedentes)
+                {
+                    foreach (List<Relacion> antecedentesRemanentes in relacionesRemanentes)
+                    {
+                        Relacion equivalente = antecedentesRemanentes.Find(antecedenteRemanente => antecedenteRemanente.Nodo == relacionAntecedente.Nodo);
+                        if (equivalente != null)
+                        {
+                            isRemanente = true;
+                            break;
+                        }
+                    }
+                    if (!isRemanente) relacionAntecedente.Nodo.Consecuentes.Remove(consecuente);
+                }
+            }
+        }
+        private static void ResetNumeroRelacion(List<List<Relacion>> listaAntecedentes)
+        {
+            int i = 1;
+            foreach (List<Relacion> antecedentes in listaAntecedentes)
+            {
+                foreach (Relacion relacionAntecedente in antecedentes)
+                {
+                    relacionAntecedente.NumeroRelacion = i;
+                }
+                i++;
+            }
+        }
+        public static void DeleteRelacion(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
+        {
+            List<List<Relacion>> relacionesRemanentes = new List<List<Relacion>>();
+            foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
+            {
+                if (!antecedentes.Contains(relacionAntecedente))
+                {
+                    relacionesRemanentes.Add(antecedentes);
+                }
+            }
+            DeleteConsecuenteFromAntecedente(consecuente.Antecedentes, relacionesRemanentes, consecuente);
+            consecuente.Antecedentes = relacionesRemanentes;
+            ResetNumeroRelacion(consecuente.Antecedentes);
+        }
+
     }
 }

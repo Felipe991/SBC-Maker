@@ -20,9 +20,13 @@ namespace SBC_Maker.Logica
             this.Antecedentes = new List<List<Relacion>>();
             this.Consecuentes = new List<Nodo>();
         }
-        public List<Nodo> GetRoots()
+
+        public void GetRoots(List<Nodo> roots)
         {
-            List<Nodo> roots = new List<Nodo>();
+            if (this.Nivel == 0)
+            {
+                roots.Add(this);
+            }
             foreach (List<Relacion> antecedentes in this.Antecedentes)
             {
                 foreach (Relacion antecedente in antecedentes)
@@ -31,16 +35,19 @@ namespace SBC_Maker.Logica
                     {
                         roots.Add(antecedente.Nodo);
                     }
+                    else
+                    {
+                        antecedente.Nodo.GetRoots(roots);
+                    }
                 }
             }
-            return roots;
         }
 
         public Hecho Hecho { get => hecho; set => hecho = value; }
-        public int Nivel { get => nivel; set => nivel = value; }
         public List<List<Relacion>> Antecedentes { get => antecedentes; set => antecedentes = value; }
         public List<Nodo> Consecuentes { get => consecuentes; set => consecuentes = value; }
         internal Regla Regla { get => regla; set => regla = value; }
         public Posicion Posicion { get => posicion; set => posicion = value; }
+        public int Nivel { get => nivel; set => nivel = value; }
     }
 }

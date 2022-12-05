@@ -257,7 +257,7 @@ namespace SBC_Maker.Interfaz_grafica
             }
             if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
             {
-                if (!VerifyRedundancy(this.antecedente, this.consecuente))
+                if (!VerifyRedundancy(this.antecedente, this.consecuente, new List<Nodo>()))
                 {
                     error = "Relacion Redundante";
                     flag = false;
@@ -307,7 +307,7 @@ namespace SBC_Maker.Interfaz_grafica
         }
         private bool AddRelacion()
         {
-            AsignarNivel(this.antecedente, this.consecuente);
+            //AsignarNivel(this.antecedente, this.consecuente);
             this.relacionAntecedente = new Relacion(antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
             relacionAntecedente.RespuestasNecesarias = GetRespuestas();
 
@@ -331,7 +331,8 @@ namespace SBC_Maker.Interfaz_grafica
             {
                 if (MessageBox.Show("Realmente desea salir?", "Alerta", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    //if (DeleteRelacion()) AddRelacion();
+                    DeleteRelacion(this.antecedente, this.consecuente, this.relacionAntecedente);
+                    AddRelacion();
                 }
                 else
                 {

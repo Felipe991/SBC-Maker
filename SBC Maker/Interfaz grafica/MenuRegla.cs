@@ -20,24 +20,25 @@ namespace SBC_Maker.Interfaz_grafica
         public Nodo nodo;
         public List<Nodo> listaAdyacencia;
 
-        public MenuRegla(List<Nodo> listaadyacencia)
+        public MenuRegla(List<Nodo> listaAdyacencia)
         {
             InitializeComponent();
             this.panelPregunta.Controls.Add(pcuc);
-            this.listaAdyacencia = listaadyacencia;
+            this.listaAdyacencia = listaAdyacencia;
         }
-        public MenuRegla(Nodo nodo, List<Nodo> listaadyacencia)
+        public MenuRegla(Nodo nodo, List<Nodo> listaAdyacencia)
         {
             InitializeComponent();
             this.panelPregunta.Controls.Add(pcuc);
             this.nodo = nodo;
             this.regla = nodo.Regla;
-            this.listaAdyacencia = listaadyacencia;
+            this.listaAdyacencia = listaAdyacencia;
             LoadRegla();
         }
         private void LoadRegla()
         {
-            this.textBoxNombre.Text = regla.Nombre;
+            this.textBoxNombre.Text = this.regla.Nombre;
+            this.textBoxNivel.Text = this.nodo.Nivel.ToString();
             Pregunta pregunta;
             switch (this.regla)
             {
