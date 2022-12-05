@@ -1,0 +1,21 @@
+﻿using SBC_Maker.Logica;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SBC_Maker.Interfaz_grafica
+{
+    public partial class TipoRelacionUserControl : UserControl
+    {
+        public TipoRelacionUserControl(List<Nodo> listaAdyacencia, Nodo Antecedente, int numeroRelacion)
+        {
+            InitializeComponent();
+        }
+    }
+}

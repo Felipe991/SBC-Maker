@@ -113,6 +113,26 @@ namespace SBC_Maker.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Imagen1tree {
+            get {
+                object obj = ResourceManager.GetObject("Imagen1tree", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Imagen1tree2 {
+            get {
+                object obj = ResourceManager.GetObject("Imagen1tree2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap trash_bin_icon_icons_com_67981 {
             get {
                 object obj = ResourceManager.GetObject("trash_bin_icon-icons.com_67981", resourceCulture);

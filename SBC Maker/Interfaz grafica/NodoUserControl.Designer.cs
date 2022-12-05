@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBoxNombreRegla = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editarReglaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarRelacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarReglaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBoxNombreRegla
@@ -46,6 +52,37 @@
             this.richTextBoxNombreRegla.Text = "";
             this.richTextBoxNombreRegla.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxNombreRegla_MouseDoubleClick);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editarReglaToolStripMenuItem,
+            this.editarRelacionesToolStripMenuItem,
+            this.eliminarReglaToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 76);
+            // 
+            // editarReglaToolStripMenuItem
+            // 
+            this.editarReglaToolStripMenuItem.Name = "editarReglaToolStripMenuItem";
+            this.editarReglaToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.editarReglaToolStripMenuItem.Text = "Editar regla";
+            this.editarReglaToolStripMenuItem.Click += new System.EventHandler(this.editarReglaToolStripMenuItem_Click);
+            // 
+            // editarRelacionesToolStripMenuItem
+            // 
+            this.editarRelacionesToolStripMenuItem.Name = "editarRelacionesToolStripMenuItem";
+            this.editarRelacionesToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.editarRelacionesToolStripMenuItem.Text = "Editar relaciones";
+            this.editarRelacionesToolStripMenuItem.Click += new System.EventHandler(this.editarRelacionesToolStripMenuItem_Click);
+            // 
+            // eliminarReglaToolStripMenuItem
+            // 
+            this.eliminarReglaToolStripMenuItem.Name = "eliminarReglaToolStripMenuItem";
+            this.eliminarReglaToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.eliminarReglaToolStripMenuItem.Text = "Eliminar regla";
+            this.eliminarReglaToolStripMenuItem.Click += new System.EventHandler(this.eliminarReglaToolStripMenuItem_Click);
+            // 
             // NodoUserControl
             // 
             this.AllowDrop = true;
@@ -60,6 +97,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NodoUserControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NodoUserControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NodoUserControl_MouseUp);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -67,5 +105,9 @@
         #endregion
 
         public RichTextBox richTextBoxNombreRegla;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem editarReglaToolStripMenuItem;
+        private ToolStripMenuItem editarRelacionesToolStripMenuItem;
+        private ToolStripMenuItem eliminarReglaToolStripMenuItem;
     }
 }

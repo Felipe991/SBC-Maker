@@ -27,13 +27,13 @@ namespace SBC_Maker.Interfaz_grafica
             InitializeAntecedentes();
         }
 
-        public MenuRelacion(List<Nodo>listaadyacencia, Nodo consecuente,Relacion relacionAntecedente, int numeroRelacion = 0)
+        public MenuRelacion(List<Nodo>listaadyacencia, Nodo consecuente,Relacion relacionAntecedente)
         {
             InitializeComponent();
             this.antecedente = relacionAntecedente.Nodo;
             this.consecuente = consecuente;
             this.listaadyacencia = listaadyacencia;
-            this.numeroRelacion = numeroRelacion;
+            this.numeroRelacion = relacionAntecedente.NumeroRelacion;
             this.relacionAntecedente = relacionAntecedente;
             InitializeAntecedentes();
             this.comboBoxAntecedente.SelectedItem = this.antecedente.Regla.Nombre;
@@ -307,7 +307,6 @@ namespace SBC_Maker.Interfaz_grafica
         }
         private bool AddRelacion()
         {
-            //AsignarNivel(this.antecedente, this.consecuente);
             this.relacionAntecedente = new Relacion(antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
             relacionAntecedente.RespuestasNecesarias = GetRespuestas();
 
@@ -341,7 +340,7 @@ namespace SBC_Maker.Interfaz_grafica
             }
             else
             {
-                //this.relacionAntecedente.Explicacion = this.textBoxExplicacion.Text;
+                this.relacionAntecedente.Explicacion = this.textBoxExplicacion.Text;
                 this.relacionAntecedente.RespuestasNecesarias = GetRespuestas();
             }
             return true;
