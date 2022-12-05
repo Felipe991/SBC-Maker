@@ -88,7 +88,6 @@ namespace SBC_Maker
         {
             NUC.MouseMove += panelLienzo_MouseMove;
             NUC.richTextBoxNombreRegla.MouseMove += panelLienzo_MouseMove;
-            NUC.buttonRelacion.MouseMove += panelLienzo_MouseMove;
             foreach (Control c in NUC.Controls)
             {
                 c.MouseMove += panelLienzo_MouseMove;
@@ -134,9 +133,9 @@ namespace SBC_Maker
             p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             g.DrawLine(p,
                        datos.Item2.Item1.X+45,
-                       datos.Item2.Item1.Y+60,
+                       datos.Item2.Item1.Y+45,
                        datos.Item2.Item2.X+45,
-                       datos.Item2.Item2.Y);
+                       datos.Item2.Item2.Y-3);
         }
 
         private void panelLienzo_MouseMove(object sender, MouseEventArgs e)

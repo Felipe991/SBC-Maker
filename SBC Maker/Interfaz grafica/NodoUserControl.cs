@@ -55,12 +55,12 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void extendEvents()
         {
-            /*foreach (Control control in this.Controls)
+            foreach (Control control in this.Controls)
             {
-                control.MouseDown += richTextBoxNombreRegla_MouseDown;
-                control.MouseMove += richTextBoxNombreRegla_MouseMove;
-                control.MouseUp += richTextBoxNombreRegla_MouseMove;
-            }*/
+                control.MouseDown += NodoUserControl_MouseDown;
+                control.MouseMove += NodoUserControl_MouseMove;
+                control.MouseUp += NodoUserControl_MouseUp;
+            }
         }
 
         private void RefreshNodePos()
@@ -81,18 +81,18 @@ namespace SBC_Maker.Interfaz_grafica
             }
         }
 
-        private void richTextBoxNombreRegla_MouseDown(object sender, MouseEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            IsPicked = true;
-            mouseOffset = new Size(e.Location);
+            /*MenuRelacion mr = new MenuRelacion(listaAdyacencia,nodo);
+            mr.ShowDialog();*/
         }
 
-        private void richTextBoxNombreRegla_MouseUp(object sender, MouseEventArgs e)
+        private void NodoUserControl_MouseUp(object sender, MouseEventArgs e)
         {
             IsPicked = false;
         }
 
-        private void richTextBoxNombreRegla_MouseMove(object sender, MouseEventArgs e)
+        private void NodoUserControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (IsPicked)
             {
@@ -103,10 +103,10 @@ namespace SBC_Maker.Interfaz_grafica
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void NodoUserControl_MouseDown(object sender, MouseEventArgs e)
         {
-            /*MenuRelacion mr = new MenuRelacion(listaAdyacencia,nodo);
-            mr.ShowDialog();*/
+            IsPicked = true;
+            mouseOffset = new Size(e.Location);
         }
     }
 }
