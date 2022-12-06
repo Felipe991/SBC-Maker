@@ -125,17 +125,50 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, int numeroRelacion)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
-            List<Relacion> antecedentes = consecuente.Antecedentes[numeroRelacion - 1];
+            List<Relacion> relaciones = new List<Relacion>() ;
+            foreach(Relacion r in consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1])
+            {
+                relaciones.Add(r);
+            }
             List<Nodo> recorridos = new List<Nodo>();
             recorridos.Add(consecuente);
-            foreach (Relacion anterior in antecedentes)
+            foreach (Relacion relacion in relaciones)
             {
-                if (!VerifyRedundancy(antecedente, anterior.Nodo, recorridos))
+                if (!VerifyRedundancy(antecedente, relacion.Nodo, recorridos))
                 {
                     return false;
                 }
+            }
+            relaciones.Add(relacionAntecedente);
+            if (!VerifySameRelacion(relaciones, consecuente.Antecedentes)) return false;
+            return true;
+        }
+        private static bool VerifySameRelacion(List<Relacion> relaciones, List<List<Relacion>> listaAntecedentes)
+        {
+            foreach(List<Relacion> antecedentes in listaAntecedentes)
+            {
+                bool flag = true;
+                foreach(Relacion antecedente in antecedentes)
+                {
+                    Relacion relacion = relaciones.Find(x => x.Nodo.Equals(antecedente.Nodo));
+                    if(relacion != null)
+                    {
+                        if (relacion.NumeroRelacion == antecedente.NumeroRelacion ||
+                            !relacion.respuestasNecesarias.SequenceEqual(antecedente.respuestasNecesarias))
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) return false;
             }
             return true;
         }

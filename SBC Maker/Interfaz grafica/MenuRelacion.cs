@@ -239,6 +239,8 @@ namespace SBC_Maker.Interfaz_grafica
         {
             string error="";
             bool flag = true;
+            Relacion relacion = new Relacion(this.antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
+            relacion.RespuestasNecesarias = GetRespuestas();
 
             if (this.consecuente == null)
             {
@@ -265,7 +267,7 @@ namespace SBC_Maker.Interfaz_grafica
             }
             else
             {
-                if (!VerifyRedundancy(this.antecedente, this.consecuente, this.numeroRelacion))
+                if (!VerifyRedundancy(this.antecedente, this.consecuente, relacion))
                 {
                     error = "Relacion Redundante";
                     flag = false;
@@ -303,12 +305,11 @@ namespace SBC_Maker.Interfaz_grafica
         {
             if (this.relacionAntecedente == null) return AddRelacion();
             else return EditRelacion();
-
+            
         }
         private bool AddRelacion()
         {
-            //AsignarNivel(this.antecedente, this.consecuente);
-            this.relacionAntecedente = new Relacion(antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
+            this.relacionAntecedente = new Relacion(this.antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
             relacionAntecedente.RespuestasNecesarias = GetRespuestas();
 
             if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
