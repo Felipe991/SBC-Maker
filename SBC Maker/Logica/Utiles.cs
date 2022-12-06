@@ -76,13 +76,11 @@ namespace SBC_Maker.Logica
                 nodo.Nivel = 0;
             }
         }
-
         public static bool VerifyCycle(Nodo antecedente, Nodo consecuente)
         {
             if (VerifySameRoots(antecedente, consecuente)) return consecuente.Nivel >= antecedente.Nivel;
             return true;
         }
-
         private static bool VerifySameRoots(Nodo antecedente, Nodo consecuente)
         {
             List<Nodo> rootsConsecuente = new List<Nodo>();
@@ -98,7 +96,6 @@ namespace SBC_Maker.Logica
             }
             return false;
         }
-
         public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, List<Nodo> recorridos)
         {
             if (antecedente.Regla.Equals(consecuente.Regla))
@@ -172,7 +169,6 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-
         public static bool VerifyStructure(List<Nodo> listaAdyacencia)
         {
             foreach (Nodo nodo in listaAdyacencia)
@@ -209,7 +205,6 @@ namespace SBC_Maker.Logica
         }
         private static void DeleteFromConsecuentes(Nodo nodo)
         {
-            
             foreach (Nodo consecuente in nodo.Consecuentes)
             {
                 List<List<Relacion>> relacionesRemanentes = new List<List<Relacion>>();
@@ -226,7 +221,6 @@ namespace SBC_Maker.Logica
                 ResetNumeroRelacion(consecuente.Antecedentes);
             }
         }
-
         private static void DeleteConsecuenteFromAntecedente(List<List<Relacion>> relacionesOriginales, List<List<Relacion>> relacionesRemanentes, Nodo antecedente ,Nodo consecuente)
         {
             foreach (List<Relacion> antecedentes in relacionesOriginales)
@@ -293,6 +287,5 @@ namespace SBC_Maker.Logica
             consecuente.Antecedentes = relacionesRemanentes;
             ResetNumeroRelacion(consecuente.Antecedentes);
         }
-
     }
 }

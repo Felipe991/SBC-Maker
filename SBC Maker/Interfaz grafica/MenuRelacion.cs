@@ -237,46 +237,37 @@ namespace SBC_Maker.Interfaz_grafica
         }
         private bool VerifyRelacion()
         {
-            string error="";
-            bool flag = true;
-            Relacion relacion = new Relacion(this.antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
-            relacion.RespuestasNecesarias = GetRespuestas();
-
+            string error = "";
+            
             if (this.consecuente == null)
             {
-                MessageBox.Show("Seleccione un consecuente");
-                return false;
-            }
-            if (!VerifyCycle(this.antecedente,this.consecuente))
-            {
-                error = "No se permiten ciclos";
-                flag = false;
-            }  
-            if (!VerifyRespuestas())
-            {
-                error = "Seleccione al menos una respuesta";
-                flag = false;
-            }
-            if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
-            {
-                if (!VerifyRedundancy(this.antecedente, this.consecuente, new List<Nodo>()))
-                {
-                    error = "Relacion Redundante";
-                    flag = false;
-                }
+                error = "Seleccione un consecuente";
             }
             else
             {
-                if (!VerifyRedundancy(this.antecedente, this.consecuente, relacion))
-                {
-                    error = "Relacion Redundante";
-                    flag = false;
-                }
+                error = VerifyLogic();
             }
 
-            if (flag) return true;
+            if (error == "") return true;
             MessageBox.Show(error);
             return false;
+        }
+        private string VerifyLogic()
+        {
+            Relacion relacion = new Relacion(this.antecedente, this.numeroRelacion, this.textBoxExplicacion.Text);
+            relacion.RespuestasNecesarias = GetRespuestas();
+            string error = "";
+            if (!VerifyCycle(this.antecedente, this.consecuente)) error = "No se permiten ciclos";
+            if (!VerifyRespuestas()) error = "Seleccione al menos una respuesta";
+            if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
+            {
+                if (!VerifyRedundancy(this.antecedente, this.consecuente, new List<Nodo>())) error = "Relacion Redundante";
+            }
+            else
+            {
+                if (!VerifyRedundancy(this.antecedente, this.consecuente, relacion)) error = "Relacion Redundante";
+            }
+            return error;
         }
         private bool VerifyRespuestas()
         {
