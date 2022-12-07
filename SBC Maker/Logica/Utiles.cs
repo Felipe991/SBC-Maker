@@ -76,13 +76,11 @@ namespace SBC_Maker.Logica
                 nodo.Nivel = 0;
             }
         }
-
         public static bool VerifyCycle(Nodo antecedente, Nodo consecuente)
         {
             if (VerifySameRoots(antecedente, consecuente)) return consecuente.Nivel >= antecedente.Nivel;
             return true;
         }
-
         private static bool VerifySameRoots(Nodo antecedente, Nodo consecuente)
         {
             List<Nodo> rootsConsecuente = new List<Nodo>();
@@ -98,7 +96,6 @@ namespace SBC_Maker.Logica
             }
             return false;
         }
-
         public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, List<Nodo> recorridos)
         {
             if (antecedente.Regla.Equals(consecuente.Regla))
@@ -125,21 +122,53 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, int numeroRelacion)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
-            List<Relacion> antecedentes = consecuente.Antecedentes[numeroRelacion - 1];
+            List<Relacion> relaciones = new List<Relacion>() ;
+            foreach(Relacion r in consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1])
+            {
+                relaciones.Add(r);
+            }
             List<Nodo> recorridos = new List<Nodo>();
             recorridos.Add(consecuente);
-            foreach (Relacion anterior in antecedentes)
+            foreach (Relacion relacion in relaciones)
             {
-                if (!VerifyRedundancy(antecedente, anterior.Nodo, recorridos))
+                if (!VerifyRedundancy(antecedente, relacion.Nodo, recorridos))
                 {
                     return false;
                 }
             }
+            relaciones.Add(relacionAntecedente);
+            if (!VerifySameRelacion(relaciones, consecuente.Antecedentes)) return false;
             return true;
         }
-
+        private static bool VerifySameRelacion(List<Relacion> relaciones, List<List<Relacion>> listaAntecedentes)
+        {
+            foreach(List<Relacion> antecedentes in listaAntecedentes)
+            {
+                bool flag = true;
+                foreach(Relacion antecedente in antecedentes)
+                {
+                    Relacion relacion = relaciones.Find(x => x.Nodo.Equals(antecedente.Nodo));
+                    if(relacion != null)
+                    {
+                        if (relacion.NumeroRelacion == antecedente.NumeroRelacion ||
+                            !relacion.respuestasNecesarias.SequenceEqual(antecedente.respuestasNecesarias))
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) return false;
+            }
+            return true;
+        }
         public static bool VerifyStructure(List<Nodo> listaAdyacencia)
         {
             foreach (Nodo nodo in listaAdyacencia)
@@ -176,7 +205,6 @@ namespace SBC_Maker.Logica
         }
         private static void DeleteFromConsecuentes(Nodo nodo)
         {
-            
             foreach (Nodo consecuente in nodo.Consecuentes)
             {
                 List<List<Relacion>> relacionesRemanentes = new List<List<Relacion>>();
@@ -193,7 +221,6 @@ namespace SBC_Maker.Logica
                 ResetNumeroRelacion(consecuente.Antecedentes);
             }
         }
-
         private static void DeleteConsecuenteFromAntecedente(List<List<Relacion>> relacionesOriginales, List<List<Relacion>> relacionesRemanentes, Nodo antecedente ,Nodo consecuente)
         {
             foreach (List<Relacion> antecedentes in relacionesOriginales)
@@ -260,6 +287,5 @@ namespace SBC_Maker.Logica
             consecuente.Antecedentes = relacionesRemanentes;
             ResetNumeroRelacion(consecuente.Antecedentes);
         }
-
     }
 }

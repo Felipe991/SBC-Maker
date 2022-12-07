@@ -34,7 +34,6 @@ namespace SBC_Maker
             InitializeComponent();
             this.sbc = sbc;
         }
-
         
         private void MenuConfeccion_Load(object sender, EventArgs e)
         {
