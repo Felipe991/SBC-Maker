@@ -96,8 +96,88 @@ namespace SBC_Maker.Logica
             }
             return false;
         }
+       
+        public static bool VerifyNewRelacion(Nodo antecedente, Nodo consecuente, Relacion relacion)
+        {
+            if (!VerifyAntecedenteIndirecto(antecedente, consecuente, relacion)) return false;
+            if (!VerifyConsecuentes(consecuente, relacion, new List<Nodo>())) return false;
+            return true;
+        }
+        private static bool VerifyAntecedenteIndirecto(Nodo antecedente, Nodo consecuente, Relacion relacion)
+        {
+            if (antecedente.Regla.Equals(consecuente.Regla))
+            {
+                return false;
+            }
+            foreach (List<Relacion> antecedentesConsecuente in consecuente.Antecedentes)
+            {
+                foreach (Relacion relacionAntecedente in antecedentesConsecuente)
+                {
+                    if (!VerifyAntecedenteIndirecto(antecedente, relacionAntecedente.Nodo, relacion))
+                    {
+                        if (relacionAntecedente.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
+                    }
+                }
+            }
+            if (!VerifyAntecedentesAntecedente(antecedente, consecuente)) return false;
+            return true;
+        }
+        private static bool VerifyAntecedentesAntecedente(Nodo antecedente, Nodo consecuente)
+        {
+            foreach (List<Relacion> antecedentesAntecedente in antecedente.Antecedentes)
+            {
+                foreach (Relacion relacionAntecedente in antecedentesAntecedente)
+                {
+                    foreach (List<Relacion> antecedentesConsecuente in consecuente.Antecedentes)
+                    {
+                        foreach (Relacion relacionAnterior in antecedentesConsecuente)
+                        {
+                            if (!VerifyAntecedenteIndirecto(relacionAntecedente.Nodo, relacionAnterior.Nodo, relacionAntecedente))
+                            {
+                                if (relacionAnterior.respuestasNecesarias.SequenceEqual(relacionAntecedente.respuestasNecesarias)) return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        private static bool VerifyConsecuentes(Nodo consecuente, Relacion relacion, List<Nodo> recorridos)
+        {
+            if (relacion.Nodo.Regla.Equals(consecuente.Regla))
+            {
+                return false;
+            }
+            recorridos.Add(consecuente);
+            foreach (Nodo siguiente in consecuente.Consecuentes)
+            {
+                if (!recorridos.Contains(siguiente))
+                {
+                    if (!VerifyConsecuentes(siguiente, relacion, recorridos)) return false;
+                }
+            }
+            foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
+            {
+                foreach (Relacion anterior in antecedentes)
+                {
+                    if (!recorridos.Contains(anterior.Nodo))
+                    {
+                        if (!VerifyConsecuentes(anterior.Nodo, relacion, recorridos))
+                        {
+                            if (anterior.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        
+        
+        
+        
         public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, List<Nodo> recorridos)
         {
+            
             if (antecedente.Regla.Equals(consecuente.Regla))
             {
                 return false;
@@ -122,7 +202,7 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
+        public static bool VerifyRelacion(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
             List<Relacion> relaciones = new List<Relacion>() ;
             relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);
