@@ -202,7 +202,7 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-        public static bool VerifyRelacion(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
+        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
             List<Relacion> relaciones = new List<Relacion>() ;
             relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);

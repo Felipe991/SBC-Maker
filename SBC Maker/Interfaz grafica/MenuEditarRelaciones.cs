@@ -30,7 +30,7 @@ namespace SBC_Maker.Interfaz_grafica
         {
             foreach(List<Relacion> TipoRelacion in nodoActual.Antecedentes)
             {
-                this.flowLayoutPanel1.Controls.Add(new RelacionUserControl(nodoActual,TipoRelacion,listaAdyacencia));
+                this.flowLayoutPanel1.Controls.Add(new TipoRelacionUserControl(listaAdyacencia, nodoActual,TipoRelacion,flechas));
             }
         }
     }

@@ -1,15 +1,6 @@
 ﻿using SBC_Maker.Logica;
 using SBC_Maker.Logica.Configuracion;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SBC_Maker.Logica;
+
 
 namespace SBC_Maker.Interfaz_grafica
 {
@@ -19,6 +10,8 @@ namespace SBC_Maker.Interfaz_grafica
         Relacion relacionAntecedente;
         List<Nodo> listaAdyacencia;
         List<(string, (Posicion, Posicion))> flechas;
+
+        //Eliminar relacion, ver la wea de las flechas, despues aplicar la misma wea al borrar un nodo.
         public RelacionUserControl(Nodo consecuente,
                                    Relacion relacionAntecedente,
                                    List<Nodo> listaAdyacencia,
@@ -32,6 +25,18 @@ namespace SBC_Maker.Interfaz_grafica
             
             this.labelConsecuente.Text = consecuente.Regla.Nombre;
             this.labelAntecedente.Text = relacionAntecedente.Nodo.Regla.Nombre;
+            this.labelRespuesta.Text = GetRespuestasNecesarias();
+        }
+
+        private string GetRespuestasNecesarias()
+        {
+            string respNecesarias = "(";
+            foreach(string respuestaNecesarioa in relacionAntecedente.RespuestasNecesarias)
+            {
+                string aditivo = relacionAntecedente.RespuestasNecesarias.Last() == respuestaNecesarioa ? "" : ", ";
+                respNecesarias += respuestaNecesarioa + aditivo;
+            }
+            return respNecesarias+")";
         }
 
         private void buttonConfiguracion_Click(object sender, EventArgs e)
