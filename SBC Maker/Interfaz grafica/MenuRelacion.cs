@@ -272,7 +272,8 @@ namespace SBC_Maker.Interfaz_grafica
             if (!VerifyRespuestas()) error = "Seleccione al menos una respuesta";
             if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
             {
-                if (!VerifyRedundancy(this.antecedente, this.consecuente, new List<Nodo>())) error = "Relacion Redundante";
+                if (!VerifyNewRelacion(this.antecedente, this.consecuente, relacion)) error = "Nueva relación redundante";
+                //if (!VerifyRedundancy(this.antecedente, this.consecuente, new List<Nodo>())) error = "Relacion Redundante";
             }
             else
             {
