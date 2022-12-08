@@ -81,12 +81,6 @@ namespace SBC_Maker.Interfaz_grafica
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*MenuRelacion mr = new MenuRelacion(listaAdyacencia,nodo);
-            mr.ShowDialog();*/
-        }
-
         private void NodoUserControl_MouseUp(object sender, MouseEventArgs e)
         {
             IsPicked = false;
@@ -107,6 +101,34 @@ namespace SBC_Maker.Interfaz_grafica
         {
             IsPicked = true;
             mouseOffset = new Size(e.Location);
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(this, e.Location);
+            }
+        }
+
+        private void editarReglaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MenuRegla menuRegla = new MenuRegla(this.nodo, this.listaAdyacencia);
+            menuRegla.ShowDialog();
+            if (menuRegla.DialogResult == DialogResult.OK)
+            {
+                this.nodo = menuRegla.nodo;
+                this.listaAdyacencia = menuRegla.listaAdyacencia;
+                this.richTextBoxNombreRegla.Text = menuRegla.nodo.Regla.Nombre;
+            }
+        }
+
+        private void editarRelacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Abrir menu con relaciones ordenadas por tipo
+        }
+
+        private void eliminarReglaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Eliminar relaciones
+            //Eliminar todas las flechas
+            //Eliminar este elemento
         }
     }
 }
