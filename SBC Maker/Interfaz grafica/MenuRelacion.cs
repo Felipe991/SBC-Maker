@@ -35,12 +35,23 @@ namespace SBC_Maker.Interfaz_grafica
             this.listaadyacencia = listaadyacencia;
             this.numeroRelacion = relacionAntecedente.NumeroRelacion;
             this.relacionAntecedente = relacionAntecedente;
+
             InitializeAntecedentes();
+            InitializeComponentsValues();
+            LoadRespuestas();
+        }
+
+        private void InitializeComponentsValues()
+        {
             this.comboBoxAntecedente.SelectedItem = this.antecedente.Regla.Nombre;
             this.comboBoxConsecuente.SelectedItem = this.consecuente.Regla.Nombre;
             this.comboBoxNRelacion.SelectedItem = this.numeroRelacion;
-            LoadRespuestas();
+
+            this.comboBoxAntecedente.Enabled = false;
+            this.comboBoxConsecuente.Enabled = false;
+            this.comboBoxNRelacion.Enabled = false;
         }
+
         private void LoadRespuestas()
         {
             Pregunta pregunta = null;

@@ -16,7 +16,7 @@ namespace SBC_Maker.Interfaz_grafica
     public partial class NodoUserControl : UserControl
     {
         public Nodo nodo;
-        public Dictionary<string, (Posicion, Posicion)> flechas = new();
+        public List<(string, (Posicion, Posicion))> flechas = new();
         private List<Nodo> listaAdyacencia;
         private static Size mouseOffset;
         private bool IsPicked = false;
@@ -121,7 +121,8 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void editarRelacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Abrir menu con relaciones ordenadas por tipo
+            MenuEditarRelaciones menuEditarRelaciones = new MenuEditarRelaciones(this.nodo, listaAdyacencia, flechas);
+            menuEditarRelaciones.ShowDialog();
         }
 
         private void eliminarReglaToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace SBC_Maker.Interfaz_grafica
 {
-    partial class ConsecuenteUserControl
+    partial class RelacionUserControl
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsecuenteUserControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelacionUserControl));
             this.labelAntecedente = new System.Windows.Forms.Label();
             this.labelConsecuente = new System.Windows.Forms.Label();
             this.buttonEliminar = new System.Windows.Forms.Button();
@@ -70,6 +70,7 @@
             this.buttonEliminar.Size = new System.Drawing.Size(35, 32);
             this.buttonEliminar.TabIndex = 41;
             this.buttonEliminar.UseVisualStyleBackColor = false;
+            this.buttonEliminar.Click += new System.EventHandler(this.buttonEliminar_Click);
             // 
             // buttonConfiguracion
             // 
@@ -97,7 +98,7 @@
             this.labelFlecha.TabIndex = 43;
             this.labelFlecha.Text = "🡺";
             // 
-            // ConsecuenteUserControl
+            // RelacionUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,8 +107,9 @@
             this.Controls.Add(this.buttonEliminar);
             this.Controls.Add(this.labelConsecuente);
             this.Controls.Add(this.labelAntecedente);
-            this.Name = "ConsecuenteUserControl";
+            this.Name = "RelacionUserControl";
             this.Size = new System.Drawing.Size(394, 45);
+            this.Load += new System.EventHandler(this.ConsecuenteUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
