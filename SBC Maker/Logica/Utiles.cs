@@ -125,12 +125,11 @@ namespace SBC_Maker.Logica
         public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
             List<Relacion> relaciones = new List<Relacion>() ;
-            foreach(Relacion r in consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1])
-            {
-                relaciones.Add(r);
-            }
+            relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);
+            
             List<Nodo> recorridos = new List<Nodo>();
             recorridos.Add(consecuente);
+            
             foreach (Relacion relacion in relaciones)
             {
                 if (!VerifyRedundancy(antecedente, relacion.Nodo, recorridos))
