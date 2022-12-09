@@ -16,15 +16,6 @@ namespace SBC_Maker.Logica
             }
             return false;
         }
-        public static bool IsGreater(double debeSerMayor, double debeSerMenor)
-        {
-            if (debeSerMayor >= debeSerMenor)
-            {
-                return true;
-            }
-            return false;
-        }
-
         public static bool IsUnique(string nombre, List<Nodo> listaAdyacencia)
         {
             foreach (Nodo nodo in listaAdyacencia)
@@ -99,8 +90,15 @@ namespace SBC_Maker.Logica
        
         public static bool VerifyNewRelacion(Nodo antecedente, Nodo consecuente, Relacion relacion)
         {
-            if (!VerifyAntecedenteIndirecto(antecedente, consecuente, relacion)) return false;
+            if (!VerifyAntecedentes(antecedente, consecuente, relacion)) return false;
             if (!VerifyConsecuentes(consecuente, relacion, new List<Nodo>())) return false;
+            return true;
+        }
+        
+        private static bool VerifyAntecedentes (Nodo antecedente, Nodo consecuente, Relacion relacion)
+        {
+            if (!VerifyAntecedenteIndirecto(antecedente, consecuente, relacion)) return false;
+            if (!VerifyAntecedentesAntecedente(antecedente, consecuente)) return false;
             return true;
         }
         private static bool VerifyAntecedenteIndirecto(Nodo antecedente, Nodo consecuente, Relacion relacion)
@@ -119,7 +117,6 @@ namespace SBC_Maker.Logica
                     }
                 }
             }
-            if (!VerifyAntecedentesAntecedente(antecedente, consecuente)) return false;
             return true;
         }
         private static bool VerifyAntecedentesAntecedente(Nodo antecedente, Nodo consecuente)
@@ -132,7 +129,7 @@ namespace SBC_Maker.Logica
                     {
                         foreach (Relacion relacionAnterior in antecedentesConsecuente)
                         {
-                            if (!VerifyAntecedenteIndirecto(relacionAntecedente.Nodo, relacionAnterior.Nodo, relacionAntecedente))
+                            if (!VerifyAntecedentes(relacionAntecedente.Nodo, relacionAnterior.Nodo, relacionAntecedente))
                             {
                                 if (relacionAnterior.respuestasNecesarias.SequenceEqual(relacionAntecedente.respuestasNecesarias)) return false;
                             }
@@ -171,54 +168,26 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
-        
-        
-        
-        
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, List<Nodo> recorridos)
+        public static bool VerifyInalcanzableNew(Nodo consecuente, Relacion relacion)
         {
-            
-            if (antecedente.Regla.Equals(consecuente.Regla))
-            {
-                return false;
-            }
-            recorridos.Add(consecuente);
-            foreach (Nodo siguiente in consecuente.Consecuentes)
-            {
-                if (!recorridos.Contains(siguiente))
-                {
-                    if (!VerifyRedundancy(antecedente, siguiente, recorridos)) return false;
-                }
-            }
-            foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
-            {
-                foreach (Relacion anterior in antecedentes)
-                {
-                    if (!recorridos.Contains(anterior.Nodo))
-                    {
-                        if (!VerifyRedundancy(antecedente, anterior.Nodo, recorridos)) return false;
-                    }
-                }
-            }
+            if (!VerifyConsecuentesInalcanzable(consecuente, relacion, new List<Nodo>())) return false;
             return true;
         }
-        public static bool VerifyRedundancy(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
+
+        public static bool VerifyExistentRelacion(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
-            List<Relacion> relaciones = new List<Relacion>() ;
+            List<Relacion> relaciones = new List<Relacion>();
             relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);
-            
-            List<Nodo> recorridos = new List<Nodo>();
-            recorridos.Add(consecuente);
-            
+
             foreach (Relacion relacion in relaciones)
             {
-                if (!VerifyRedundancy(antecedente, relacion.Nodo, recorridos))
-                {
-                    return false;
-                }
+                if (!VerifyAntecedenteIndirecto(antecedente, consecuente, relacion)) return false;
+
             }
+            
             relaciones.Add(relacionAntecedente);
             if (!VerifySameRelacion(relaciones, consecuente.Antecedentes)) return false;
+
             return true;
         }
         private static bool VerifySameRelacion(List<Relacion> relaciones, List<List<Relacion>> listaAntecedentes)
@@ -248,6 +217,72 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
+
+        public static bool VerifyInalcanzable(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
+        {
+
+            List<Relacion> relaciones = new List<Relacion>();
+            relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);
+
+            List<Nodo> recorridos = new List<Nodo>();
+            recorridos.Add(consecuente);
+
+            foreach (Relacion relacion in relaciones)
+            {
+                if (!VerifyAntecedenteIndirectoInalcanzable(antecedente, consecuente, relacion)) return false;
+                if (!VerifyConsecuentesInalcanzable(consecuente, relacion, recorridos)) return false;
+
+            }
+            return true;
+        }
+        private static bool VerifyAntecedenteIndirectoInalcanzable(Nodo antecedente, Nodo consecuente, Relacion relacion)
+        {
+            if (antecedente.Regla.Equals(consecuente.Regla))
+            {
+                return false;
+            }
+            foreach (List<Relacion> antecedentesConsecuente in consecuente.Antecedentes)
+            {
+                foreach (Relacion relacionAntecedente in antecedentesConsecuente)
+                {
+                    if (!VerifyAntecedenteIndirecto(antecedente, relacionAntecedente.Nodo, relacion))
+                    {
+                        if (!relacionAntecedente.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
+                    }
+                }
+            }
+            return true;
+        }
+        private static bool VerifyConsecuentesInalcanzable(Nodo consecuente, Relacion relacion, List<Nodo> recorridos)
+        {
+            if (relacion.Nodo.Regla.Equals(consecuente.Regla))
+            {
+                return false;
+            }
+            recorridos.Add(consecuente);
+            foreach (Nodo siguiente in consecuente.Consecuentes)
+            {
+                if (!recorridos.Contains(siguiente))
+                {
+                    if (!VerifyConsecuentes(siguiente, relacion, recorridos)) return false;
+                }
+            }
+            foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
+            {
+                foreach (Relacion anterior in antecedentes)
+                {
+                    if (!recorridos.Contains(anterior.Nodo))
+                    {
+                        if (!VerifyConsecuentes(anterior.Nodo, relacion, recorridos))
+                        {
+                            if (!anterior.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         public static bool VerifyStructure(List<Nodo> listaAdyacencia)
         {
             foreach (Nodo nodo in listaAdyacencia)

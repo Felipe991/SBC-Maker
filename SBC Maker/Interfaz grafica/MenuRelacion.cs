@@ -273,11 +273,12 @@ namespace SBC_Maker.Interfaz_grafica
             if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
             {
                 if (!VerifyNewRelacion(this.antecedente, this.consecuente, relacion)) error = "Nueva relación redundante";
-                //if (!VerifyRedundancy(this.antecedente, this.consecuente, new List<Nodo>())) error = "Relacion Redundante";
+                else if (!VerifyInalcanzableNew(this.consecuente, relacion)) error = "Nueva relación redundante";
             }
             else
             {
-                if (!VerifyRedundancy(this.antecedente, this.consecuente, relacion)) error = "Relacion Redundante";
+                if (!VerifyExistentRelacion(this.antecedente, this.consecuente, relacion)) error = "Relacion Redundante";
+                else if (!VerifyInalcanzable(this.antecedente, this.consecuente, relacion)) error = "Regla inalcanzable";
             }
             return error;
         }
