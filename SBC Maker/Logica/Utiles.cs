@@ -91,7 +91,10 @@ namespace SBC_Maker.Logica
         public static bool VerifyNewRelacion(Nodo antecedente, Nodo consecuente, Relacion relacion)
         {
             if (!VerifyAntecedentes(antecedente, consecuente, relacion)) return false;
-            if (!VerifyConsecuentes(consecuente, relacion, new List<Nodo>())) return false;
+            if (consecuente.Consecuentes.Count() > 0)
+            {
+                if (!VerifyConsecuentes(consecuente, relacion, new List<Nodo>())) return false;
+            }
             return true;
         }
         
@@ -179,10 +182,13 @@ namespace SBC_Maker.Logica
             List<Relacion> relaciones = new List<Relacion>();
             relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);
 
+            List<Nodo> recorridos = new List<Nodo>();
+            recorridos.Add(consecuente);
+            
             foreach (Relacion relacion in relaciones)
             {
                 if (!VerifyAntecedenteIndirecto(antecedente, consecuente, relacion)) return false;
-
+                //if (!VerifyConsecuentes(relacion.Nodo, relacionAntecedente, recorridos)) return false;
             }
             
             relaciones.Add(relacionAntecedente);
@@ -190,6 +196,7 @@ namespace SBC_Maker.Logica
 
             return true;
         }
+        
         private static bool VerifySameRelacion(List<Relacion> relaciones, List<List<Relacion>> listaAntecedentes)
         {
             foreach(List<Relacion> antecedentes in listaAntecedentes)
@@ -230,7 +237,7 @@ namespace SBC_Maker.Logica
             foreach (Relacion relacion in relaciones)
             {
                 if (!VerifyAntecedenteIndirectoInalcanzable(antecedente, consecuente, relacion)) return false;
-                if (!VerifyConsecuentesInalcanzable(consecuente, relacion, recorridos)) return false;
+                if (!VerifyConsecuentesInalcanzable(relacion.Nodo, relacionAntecedente, recorridos)) return false;
 
             }
             return true;
@@ -245,7 +252,7 @@ namespace SBC_Maker.Logica
             {
                 foreach (Relacion relacionAntecedente in antecedentesConsecuente)
                 {
-                    if (!VerifyAntecedenteIndirecto(antecedente, relacionAntecedente.Nodo, relacion))
+                    if (!VerifyAntecedenteIndirectoInalcanzable(antecedente, relacionAntecedente.Nodo, relacion))
                     {
                         if (!relacionAntecedente.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
                     }
@@ -264,7 +271,7 @@ namespace SBC_Maker.Logica
             {
                 if (!recorridos.Contains(siguiente))
                 {
-                    if (!VerifyConsecuentes(siguiente, relacion, recorridos)) return false;
+                    if (!VerifyConsecuentesInalcanzable(siguiente, relacion, recorridos)) return false;
                 }
             }
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
@@ -273,7 +280,7 @@ namespace SBC_Maker.Logica
                 {
                     if (!recorridos.Contains(anterior.Nodo))
                     {
-                        if (!VerifyConsecuentes(anterior.Nodo, relacion, recorridos))
+                        if (!VerifyConsecuentesInalcanzable(anterior.Nodo, relacion, recorridos))
                         {
                             if (!anterior.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
                         }
