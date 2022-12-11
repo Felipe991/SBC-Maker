@@ -32,7 +32,6 @@
             this.labelAntecedente = new System.Windows.Forms.Label();
             this.labelConsecuente = new System.Windows.Forms.Label();
             this.buttonEliminar = new System.Windows.Forms.Button();
-            this.buttonConfiguracion = new System.Windows.Forms.Button();
             this.labelFlecha = new System.Windows.Forms.Label();
             this.labelRespuesta = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -73,22 +72,6 @@
             this.buttonEliminar.UseVisualStyleBackColor = false;
             this.buttonEliminar.Click += new System.EventHandler(this.buttonEliminar_Click);
             // 
-            // buttonConfiguracion
-            // 
-            this.buttonConfiguracion.BackColor = System.Drawing.Color.Transparent;
-            this.buttonConfiguracion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonConfiguracion.FlatAppearance.BorderSize = 0;
-            this.buttonConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonConfiguracion.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfiguracion.Image")));
-            this.buttonConfiguracion.Location = new System.Drawing.Point(309, 6);
-            this.buttonConfiguracion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.buttonConfiguracion.Name = "buttonConfiguracion";
-            this.buttonConfiguracion.Size = new System.Drawing.Size(35, 32);
-            this.buttonConfiguracion.TabIndex = 42;
-            this.buttonConfiguracion.UseVisualStyleBackColor = false;
-            this.buttonConfiguracion.Click += new System.EventHandler(this.buttonConfiguracion_Click);
-            // 
             // labelFlecha
             // 
             this.labelFlecha.AutoSize = true;
@@ -115,13 +98,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.labelRespuesta);
             this.Controls.Add(this.labelFlecha);
-            this.Controls.Add(this.buttonConfiguracion);
             this.Controls.Add(this.buttonEliminar);
             this.Controls.Add(this.labelConsecuente);
             this.Controls.Add(this.labelAntecedente);
             this.Name = "RelacionUserControl";
             this.Size = new System.Drawing.Size(394, 45);
-            this.Load += new System.EventHandler(this.ConsecuenteUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,7 +113,6 @@
         private Label labelAntecedente;
         private Label labelConsecuente;
         private Button buttonEliminar;
-        private Button buttonConfiguracion;
         private Label labelFlecha;
         private Label labelRespuesta;
     }

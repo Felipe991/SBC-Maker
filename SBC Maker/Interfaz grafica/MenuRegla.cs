@@ -19,6 +19,7 @@ namespace SBC_Maker.Interfaz_grafica
         Regla regla = null;
         public Nodo nodo;
         public List<Nodo> listaAdyacencia;
+        public bool modificado = false;
 
         public MenuRegla(List<Nodo> listaAdyacencia)
         {
@@ -192,6 +193,7 @@ namespace SBC_Maker.Interfaz_grafica
             {
                 if (MessageBox.Show("Realmente desea salir?", "Alerta", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
+                    this.modificado = true;
                     if (DeleteNodo(this.nodo, this.listaAdyacencia)) AddNewNodo();
                 }
                 else

@@ -1,5 +1,6 @@
 ﻿using SBC_Maker.Logica;
 using SBC_Maker.Logica.Configuracion;
+using static SBC_Maker.Logica.Utiles;
 
 
 namespace SBC_Maker.Interfaz_grafica
@@ -9,19 +10,18 @@ namespace SBC_Maker.Interfaz_grafica
         Nodo consecuente;
         Relacion relacionAntecedente;
         List<Nodo> listaAdyacencia;
-        List<(string, (Posicion, Posicion))> flechas;
+        List<(Nodo, Nodo, Relacion)> relacionesEliminadas;
 
-        //Eliminar relacion, ver la wea de las flechas, despues aplicar la misma wea al borrar un nodo.
         public RelacionUserControl(Nodo consecuente,
                                    Relacion relacionAntecedente,
                                    List<Nodo> listaAdyacencia,
-                                   List<(string, (Posicion, Posicion))> flechas)
+                                   List<(Nodo, Nodo, Relacion)> relacionesEliminadas)
         {
             InitializeComponent();
             this.consecuente = consecuente;
             this.relacionAntecedente = relacionAntecedente;
             this.listaAdyacencia = listaAdyacencia;
-            this.flechas = flechas;
+            this.relacionesEliminadas = relacionesEliminadas;
             
             this.labelConsecuente.Text = consecuente.Regla.Nombre;
             this.labelAntecedente.Text = relacionAntecedente.Nodo.Regla.Nombre;
@@ -39,20 +39,10 @@ namespace SBC_Maker.Interfaz_grafica
             return respNecesarias+")";
         }
 
-        private void buttonConfiguracion_Click(object sender, EventArgs e)
-        {
-            MenuRelacion menuRelacion = new MenuRelacion(listaAdyacencia,consecuente,relacionAntecedente);
-            menuRelacion.ShowDialog();
-        }
-
-        private void ConsecuenteUserControl_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void buttonEliminar_Click(object sender, EventArgs e)
         {
-            
+            relacionesEliminadas.Add((relacionAntecedente.Nodo,consecuente,relacionAntecedente));
+            this.Dispose();
         }
     }
 }

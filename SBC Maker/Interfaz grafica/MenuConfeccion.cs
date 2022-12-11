@@ -78,7 +78,7 @@ namespace SBC_Maker
             menuRegla.ShowDialog();
             if (menuRegla.DialogResult == DialogResult.OK)
             {
-                NodoUserControl NUC = new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento);
+                NodoUserControl NUC = new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento,panelLienzo);
                 NUC.flechas = this.datosFlecha;
                 ExtendEvents(NUC);
                 this.panelLienzo.Controls.Add(NUC);

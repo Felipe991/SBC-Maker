@@ -1,5 +1,6 @@
 ﻿using SBC_Maker.Logica;
 using SBC_Maker.Logica.Configuracion;
+using static SBC_Maker.Logica.Utiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,20 +21,22 @@ namespace SBC_Maker.Interfaz_grafica
         private List<Nodo> listaAdyacencia;
         private static Size mouseOffset;
         private bool IsPicked = false;
+        private Panel panelPadre;
 
-        public NodoUserControl(Nodo nodo, List<Nodo> listaadyacencia)
+        public NodoUserControl(Nodo nodo, List<Nodo> listaadyacencia, Panel panelPadre)
         {
             InitializeComponent();
+            this.panelPadre = panelPadre;
             richTextBoxNombreRegla.SelectionAlignment = HorizontalAlignment.Center;
             this.nodo = nodo;
             this.listaAdyacencia = listaadyacencia;
             this.richTextBoxNombreRegla.Text = nodo.Regla.Nombre;
-            InitializeBackColor();
+            setBackColor();
             extendEvents();
             RefreshNodePos();
         }
 
-        private void InitializeBackColor()
+        private void setBackColor()
         {
             switch (nodo.Regla)
             {
@@ -71,14 +74,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void richTextBoxNombreRegla_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            MenuRegla menuRegla = new MenuRegla(this.nodo, this.listaAdyacencia);
-            menuRegla.ShowDialog();
-            if (menuRegla.DialogResult == DialogResult.OK)
-            {
-                this.nodo = menuRegla.nodo;
-                this.listaAdyacencia = menuRegla.listaAdyacencia;
-                this.richTextBoxNombreRegla.Text = menuRegla.nodo.Regla.Nombre;
-            }
+            EditReglaMenu();
         }
 
         private void NodoUserControl_MouseUp(object sender, MouseEventArgs e)
@@ -109,27 +105,97 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void editarReglaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            EditReglaMenu();
+        }
+
+        private void EditReglaMenu()
+        {
             MenuRegla menuRegla = new MenuRegla(this.nodo, this.listaAdyacencia);
             menuRegla.ShowDialog();
             if (menuRegla.DialogResult == DialogResult.OK)
             {
+                if (menuRegla.modificado) DeleteAllArrows(this.nodo);
                 this.nodo = menuRegla.nodo;
                 this.listaAdyacencia = menuRegla.listaAdyacencia;
                 this.richTextBoxNombreRegla.Text = menuRegla.nodo.Regla.Nombre;
+                setBackColor();
+                this.panelPadre.Refresh();
             }
         }
 
         private void editarRelacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MenuEditarRelaciones menuEditarRelaciones = new MenuEditarRelaciones(this.nodo, listaAdyacencia, flechas);
+            MenuEditarRelaciones menuEditarRelaciones = new MenuEditarRelaciones(this.nodo, listaAdyacencia);
             menuEditarRelaciones.ShowDialog();
+            if(menuEditarRelaciones.DialogResult == DialogResult.OK)
+            {
+                DeleteRelaciones(menuEditarRelaciones.relacionesEliminadas);
+            }
+        }
+
+        private void DeleteRelaciones(List<(Nodo, Nodo, Relacion)> relacionesEliminadas)
+        {
+            foreach ((Nodo, Nodo, Relacion) relacion in relacionesEliminadas)
+            {
+                string idFlecha = relacion.Item1.Regla.Nombre + relacion.Item2.Regla.Nombre;
+                DeleteFlecha(idFlecha);
+                DeleteRelacion(relacion.Item1, relacion.Item2, relacion.Item3);
+                panelPadre.Refresh();
+            }
+        }
+
+        private void DeleteFlecha(string idFlecha)
+        {
+            flechas.Remove(flechas.Find(x => x.Item1 == idFlecha));
         }
 
         private void eliminarReglaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Eliminar relaciones
-            //Eliminar todas las flechas
-            //Eliminar este elemento
+            DeleteAllArrows(this.nodo);
+            DeleteNodo(this.nodo, this.listaAdyacencia);
+            AsignarNivelGlobal(listaAdyacencia);
+            this.panelPadre.Refresh();
+            this.Dispose();
+        }
+
+        private void DeleteAllArrows(Nodo nodo)
+        {
+            List<string> idsRelaciones = getIdsRelaciones(this.nodo);
+            foreach (string idRelacion in idsRelaciones)
+            {
+                DeleteFlecha(idRelacion);
+            }
+        }
+
+        private List<string> getIdsRelaciones(Nodo nodo)
+        {
+            List<string> idsRelaciones = new();
+            idsRelaciones.AddRange(getIdsRelacionesAntecedentes(nodo));
+            idsRelaciones.AddRange(getIdsRelacionesConsecuentes(nodo));
+            return idsRelaciones;
+        }
+        
+        private List<string> getIdsRelacionesConsecuentes(Nodo nodoAntecedente)
+        {
+            List<string> idsRelacionesConsecuentes = new();
+            foreach(Nodo consecuente in nodoAntecedente.Consecuentes)
+            {
+                idsRelacionesConsecuentes.Add(nodoAntecedente.Regla.Nombre+consecuente.Regla.Nombre);
+            }
+            return idsRelacionesConsecuentes;
+        }
+
+        private List<string> getIdsRelacionesAntecedentes(Nodo nodoConsecuente)
+        {
+            List<string> idsRelacionesAntecedentes = new();
+            foreach(List<Relacion> relacionesAntecedentes in nodoConsecuente.Antecedentes)
+            {
+                foreach(Relacion relacionAntecedente in relacionesAntecedentes)
+                {
+                    idsRelacionesAntecedentes.Add(relacionAntecedente.Nodo.Regla.Nombre+nodoConsecuente.Regla.Nombre);
+                }
+            }
+            return idsRelacionesAntecedentes;
         }
     }
 }

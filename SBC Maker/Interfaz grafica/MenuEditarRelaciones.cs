@@ -16,13 +16,12 @@ namespace SBC_Maker.Interfaz_grafica
     {
         Nodo nodoActual;
         List<Nodo> listaAdyacencia;
-        List<(string, (Posicion, Posicion))> flechas;
-        public MenuEditarRelaciones(Nodo nodo,List<Nodo> listaAdyacencia,List<(string, (Posicion, Posicion))> flechas)
+        public List<(Nodo, Nodo, Relacion)> relacionesEliminadas = new List<(Nodo, Nodo, Relacion)>();
+        public MenuEditarRelaciones(Nodo nodo,List<Nodo> listaAdyacencia)
         {
             InitializeComponent();
             nodoActual = nodo;
             this.listaAdyacencia = listaAdyacencia;
-            this.flechas = flechas;
             InitializeRelaciones();
         }
 
@@ -30,8 +29,18 @@ namespace SBC_Maker.Interfaz_grafica
         {
             foreach(List<Relacion> TipoRelacion in nodoActual.Antecedentes)
             {
-                this.flowLayoutPanel1.Controls.Add(new TipoRelacionUserControl(listaAdyacencia, nodoActual,TipoRelacion,flechas));
+                this.flowLayoutPanel1.Controls.Add(new TipoRelacionUserControl(listaAdyacencia, nodoActual,TipoRelacion,relacionesEliminadas));
             }
+        }
+
+        private void CancelarButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void GuardarButton_Click_1(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }

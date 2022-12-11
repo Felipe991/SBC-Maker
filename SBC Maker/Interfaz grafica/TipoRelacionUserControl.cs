@@ -15,16 +15,16 @@ namespace SBC_Maker.Interfaz_grafica
     public partial class TipoRelacionUserControl : UserControl
     {
         List<Nodo> listaAdyacencia = new List<Nodo>();
-        List<(string, (Posicion, Posicion))> flechas;
-       Nodo consecuente;
+        List<(Nodo, Nodo, Relacion)> relacionesEliminadas;
+        Nodo consecuente;
         List<Relacion> relacionesAntecedente;
         public TipoRelacionUserControl(List<Nodo> listaAdyacencia,
                                        Nodo consecuente,
                                        List<Relacion> relacionesAntecedente,
-                                       List<(string, (Posicion, Posicion))> flechas)
+                                       List<(Nodo, Nodo, Relacion)> relacionesEliminadas)
         {
             InitializeComponent();
-            this.flechas = flechas;
+            this.relacionesEliminadas = relacionesEliminadas;
             this.listaAdyacencia = listaAdyacencia;
             this.consecuente = consecuente;
             this.relacionesAntecedente = relacionesAntecedente;
@@ -36,7 +36,7 @@ namespace SBC_Maker.Interfaz_grafica
         {
             foreach(Relacion relacionAntecedente in relacionesAntecedente)
             {
-                this.flowLayoutPanel1.Controls.Add(new RelacionUserControl(consecuente,relacionAntecedente, listaAdyacencia,flechas));
+                this.flowLayoutPanel1.Controls.Add(new RelacionUserControl(consecuente,relacionAntecedente, listaAdyacencia,relacionesEliminadas));
             }
         }
     }
