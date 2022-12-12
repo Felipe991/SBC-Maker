@@ -13,6 +13,7 @@ namespace SBC_Maker.Logica
         private string nombre = "SBC";
         private List<Nodo> baseConocimiento;
         private ConfiguracionMotor configuracionMotor = new ConfiguracionMotor();
+        public List<(string, (Posicion, Posicion))> datosFlecha = new();
 
         public SBC()
         {
@@ -22,5 +23,6 @@ namespace SBC_Maker.Logica
         public string Nombre { get => nombre; set => nombre = value; }
         public ConfiguracionMotor ConfiguracionMotor { get => configuracionMotor; set => configuracionMotor = value; }
         public List<Nodo> BaseConocimiento { get => baseConocimiento; set => baseConocimiento = value; }
+        public List<(string, (Posicion, Posicion))> DatosFlecha { get => datosFlecha; set => datosFlecha = value; }
     }
 }

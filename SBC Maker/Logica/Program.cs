@@ -1,4 +1,5 @@
 using SBC_Maker.Interfaz_grafica;
+using static SBC_Maker.Logica.FormListener;
 
 namespace SBC_Maker.Logica
 {
@@ -13,8 +14,11 @@ namespace SBC_Maker.Logica
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MenuPrincipal());
-            //Application.Run(new MenuConfigFuncionTriangular("XD"));
+            var menu = new MenuPrincipal();
+            menu.FormClosed += delForm;
+            menu.Show();
+            addForm();
+            Application.Run();
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SBC_Maker.Logica.Utiles;
+using static SBC_Maker.Logica.FormListener;
 
 namespace SBC_Maker.Interfaz_grafica
 {
@@ -21,7 +22,10 @@ namespace SBC_Maker.Interfaz_grafica
         private void buttonConfeccion_Click(object sender, EventArgs e)
         {
             MenuConfeccion menuConfeccion = new MenuConfeccion();
+            menuConfeccion.FormClosed += delForm;
+            addForm();
             menuConfeccion.Show();
+            this.Close();
         }
 
         private void buttonEjecucion_Click(object sender, EventArgs e)
@@ -29,6 +33,8 @@ namespace SBC_Maker.Interfaz_grafica
             //Cargar el archivo SBC
             //VerifyStructure(sbc.listaadyacencia)
             /*MenuEjecucion menuEjecucio = new MenuEjecucion(sbc);
+             * menuEjecucio.FormClosed += delForm;
+             * addForm();
             menuConfeccion.Show();
             this.Dispose();*/
         }

@@ -14,17 +14,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json;
 using System.Xml.Serialization;
+using static SBC_Maker.Logica.FormListener;
 
 namespace SBC_Maker
 {
     public partial class MenuConfeccion : Form
     {
         private SBC sbc;
-        private List<(string, (Posicion, Posicion))> datosFlecha = new();
         private bool mouseDown = false;
         public MenuConfeccion()
         {
             InitializeComponent();
+            setDirectorys();
             this.sbc = new SBC();
             this.SetStyle(ControlStyles.Opaque, true);
         }
@@ -32,9 +33,41 @@ namespace SBC_Maker
         public MenuConfeccion(SBC sbc)
         {
             InitializeComponent();
+            setDirectorys();
             this.sbc = sbc;
+            rebuildNodos(sbc.BaseConocimiento);
+            this.panelLienzo.Refresh();
         }
-        
+
+        private void setDirectorys()
+        {
+            setDirectoryConjuntoDifuso();
+            setDirectorySBC();
+        }
+
+        private void setDirectorySBC()
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path = Path.Combine(path, "SBCs");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            this.openFileDialogSBC.InitialDirectory = path;
+            this.saveFileDialogSBCs.InitialDirectory = path;
+        }
+
+        private void setDirectoryConjuntoDifuso()
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path = Path.Combine(path, "Conjuntos Difusos");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            this.openFileDialogConjuntoDifuso.InitialDirectory = path;
+        }
+
         private void MenuConfeccion_Load(object sender, EventArgs e)
         {
             DoubleBuffered = false;
@@ -42,11 +75,11 @@ namespace SBC_Maker
 
         private void conjuntoDifusoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            if(openFileDialogConjuntoDifuso.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    Stream stream = File.Open(openFileDialog1.FileName, FileMode.Open);
+                    Stream stream = File.Open(openFileDialogConjuntoDifuso.FileName, FileMode.Open);
                     var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                     ConjuntoDifuso conjuntoDifuso = (ConjuntoDifuso)bformatter.Deserialize(stream);
                     stream.Close();
@@ -78,13 +111,19 @@ namespace SBC_Maker
             menuRegla.ShowDialog();
             if (menuRegla.DialogResult == DialogResult.OK)
             {
-                NodoUserControl NUC = new NodoUserControl(menuRegla.nodo, sbc.BaseConocimiento,panelLienzo);
-                NUC.flechas = this.datosFlecha;
-                ExtendEvents(NUC);
-                this.panelLienzo.Controls.Add(NUC);
-                AsignarNivelGlobal(sbc.BaseConocimiento);
-                LoadTree(sbc.BaseConocimiento);
+                addNUC(menuRegla.nodo, sbc.BaseConocimiento, panelLienzo);
             }
+        }
+
+        private void addNUC(Nodo nodo, List<Nodo> baseConocimiento, Panel panelLienzo)
+        {
+            NodoUserControl NUC = new NodoUserControl(nodo, sbc.BaseConocimiento, panelLienzo);
+            NUC.flechas = this.sbc.datosFlecha;
+            ExtendEvents(NUC);
+            this.panelLienzo.Controls.Add(NUC);
+            NUC.Location = new Point(nodo.Posicion.X,nodo.Posicion.Y);
+            AsignarNivelGlobal(sbc.BaseConocimiento);
+            LoadTree(sbc.BaseConocimiento);
         }
 
         private void ExtendEvents(NodoUserControl NUC)
@@ -120,13 +159,13 @@ namespace SBC_Maker
             Posicion posCon = consecuente.Posicion;
 
             string ID = antecedente.Regla.Nombre + consecuente.Regla.Nombre;
-
-            this.datosFlecha.Add((ID,(posAnt,posCon)));
+            
+            this.sbc.datosFlecha.Add((ID,(posAnt,posCon)));
         }
 
         private void panelLienzo_Paint(object sender, PaintEventArgs e)
         {
-            foreach((string,(Posicion,Posicion)) datos in datosFlecha)
+            foreach((string,(Posicion,Posicion)) datos in sbc.datosFlecha)
             {
                 DrawArrow(datos,e.Graphics);
             }
@@ -200,6 +239,93 @@ namespace SBC_Maker
             /*MenuEjecucion menuEjecucio = new MenuEjecucion(sbc);
             menuConfeccion.Show();
             this.Dispose();*/
+        }
+
+        private void MenuConfeccion_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            askUserSaveSBC();
+            addForm();
+            MenuPrincipal menuPrincipal = new();
+            menuPrincipal.FormClosed += delForm;
+            menuPrincipal.Show();
+        }
+
+        private void askUserSaveSBC()
+        {
+            if (MessageBox.Show("¿Guardar SBC?", "Alerta", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                saveSBC();
+            }
+        }
+
+        private void saveSBC()
+        {
+            saveFileDialogSBCs.FileName = this.sbc.Nombre;
+            saveFileDialogSBCs.Filter = "TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (saveFileDialogSBCs.ShowDialog() == DialogResult.OK)
+            {
+                File.Create(saveFileDialogSBCs.FileName).Close();
+                Stream stream = File.Open(saveFileDialogSBCs.FileName, FileMode.Create);
+                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                bformatter.Serialize(stream, this.sbc);
+                stream.Close();
+                DialogResult = DialogResult.OK;
+                MessageBox.Show("Archivo guardado");
+            }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void proyectoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            askUserSaveSBC();
+            SBC sbcAux = loadSBC();
+            MenuConfeccion menuConfeccionNuevo = new MenuConfeccion(sbcAux);
+            menuConfeccionNuevo.FormClosed += delForm;
+            menuConfeccionNuevo.Show();
+            this.Dispose();
+        }
+
+        private void rebuildNodos(List<Nodo> baseConocimiento)
+        {
+            foreach(Nodo nodo in baseConocimiento)
+            {
+                addNUC(nodo, baseConocimiento,panelLienzo);
+            }
+        }
+
+        private SBC loadSBC()
+        {
+            SBC sbc = new SBC();
+            try
+            {
+                openFileDialogSBC.Filter = "TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+                if (openFileDialogSBC.ShowDialog() == DialogResult.OK)
+                {
+                    Stream stream = File.Open(openFileDialogSBC.FileName, FileMode.Open);
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    sbc = (SBC)bformatter.Deserialize(stream);
+                    stream.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Archivo inválido");
+            }
+            return sbc;
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveSBC();
+        }
+
+        private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveSBC();
         }
     }
 }

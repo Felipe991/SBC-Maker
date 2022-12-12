@@ -20,6 +20,9 @@ namespace SBC_Maker
     {
         private ConjuntoDifuso conjuntoDifuso;
         private List<String> memoria;
+
+
+
         public MenuConjuntoDifuso()
         {
             InitializeComponent();
@@ -27,12 +30,14 @@ namespace SBC_Maker
             conjuntoDifuso = new ConjuntoDifuso(textBoxNombre.Text,
                                                 textBoxNombreUnidad.Text,
                                                 comboBoxMetodosResolucion.SelectedIndex);
+            setDirectory();
             IniciarMemoria();
         }
 
         public MenuConjuntoDifuso(ConjuntoDifuso conjuntoDifuso)
         {
             InitializeComponent();
+            setDirectory();
             this.conjuntoDifuso = conjuntoDifuso;
             textBoxNombre.Text = conjuntoDifuso.nombre;
             textBoxNombreUnidad.Text = conjuntoDifuso.NombreUnidades;
@@ -43,6 +48,17 @@ namespace SBC_Maker
             }
             IniciarGrafico();
             IniciarMemoria();
+        }
+
+        private void setDirectory()
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path = Path.Combine(path, "Conjuntos Difusos");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            saveFileDialog1.InitialDirectory = path;
         }
 
         private void IniciarMemoria()
