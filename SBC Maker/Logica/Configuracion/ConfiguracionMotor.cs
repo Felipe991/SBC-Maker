@@ -1,5 +1,6 @@
 ﻿namespace SBC_Maker.Logica.Configuracion
 {
+    [Serializable]
     public class ConfiguracionMotor
     {
         private int limiteConclusiones = 1;

@@ -2,6 +2,7 @@
 
 namespace SBC_Maker.Logica
 {
+    [Serializable]
     public class Nodo
     {
         private Regla regla;

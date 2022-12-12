@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SBC_Maker.Logica
 {
+    [Serializable]
     public class PreguntaCerrada : Pregunta
     {
         private List<string> alternativas;

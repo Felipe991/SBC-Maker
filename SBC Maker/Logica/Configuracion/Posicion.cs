@@ -1,5 +1,6 @@
 ﻿namespace SBC_Maker.Logica.Configuracion
 {
+    [Serializable]
     public class Posicion
     {
         private int x;

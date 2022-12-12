@@ -22,10 +22,10 @@ namespace SBC_Maker
         private SBC sbc;
         private List<(string, (Posicion, Posicion))> datosFlecha = new();
         private bool mouseDown = false;
-        public MenuConfeccion(string nombre)
+        public MenuConfeccion()
         {
             InitializeComponent();
-            this.sbc = new SBC(nombre, new ConfiguracionMotor());
+            this.sbc = new SBC();
             this.SetStyle(ControlStyles.Opaque, true);
         }
         
@@ -191,6 +191,15 @@ namespace SBC_Maker
             bool visible = this.treeViewRelaciones.Visible;
             LoadTree(sbc.BaseConocimiento);
             this.treeViewRelaciones.Visible = !visible;
+        }
+
+        private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Cargar el archivo SBC
+            //VerifyStructure(sbc.listaadyacencia)
+            /*MenuEjecucion menuEjecucio = new MenuEjecucion(sbc);
+            menuConfeccion.Show();
+            this.Dispose();*/
         }
     }
 }

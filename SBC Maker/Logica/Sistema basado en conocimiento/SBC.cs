@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace SBC_Maker.Logica
 {
+    [Serializable]
     public class SBC
     {
-        private string nombre;
+        private string nombre = "SBC";
         private List<Nodo> baseConocimiento;
-        private ConfiguracionMotor configuracionMotor;
+        private ConfiguracionMotor configuracionMotor = new ConfiguracionMotor();
 
-        public SBC(string nombre, ConfiguracionMotor configuracionMotor)
+        public SBC()
         {
-            this.Nombre = nombre;
-            this.ConfiguracionMotor = configuracionMotor;
             this.baseConocimiento = new List<Nodo>();
         }
         

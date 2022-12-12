@@ -1,5 +1,6 @@
 ﻿namespace SBC_Maker.Logica
 {
+    [Serializable]
     public class Hecho
     {
         private string respuestaFinal;
