@@ -176,12 +176,13 @@ namespace SBC_Maker.Logica
         {
             List<Relacion> relaciones = new List<Relacion>();
             relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);
-
+            
+            if (!CompareAntecedentes(antecedente, relaciones)) return false;
             foreach (Relacion relacion in relaciones)
             {
-                if (!VerifyAntecedenteIndirecto(antecedente, consecuente, relacion)) return false;
-                if (!CompareAntecedentes(antecedente, relaciones)) return false;
+                if (!VerifyAntecedenteIndirecto(antecedente, relacion.Nodo, relacionAntecedente)) return false;
             }
+            
             relaciones.Add(relacionAntecedente);
             if (!VerifySameRelacion(relaciones, consecuente.Antecedentes)) return false;
 
@@ -240,20 +241,20 @@ namespace SBC_Maker.Logica
             
             foreach (Relacion relacion in relaciones)
             {
-                if (!VerifyAntecedenteInalcanzable(antecedente, consecuente, relacion)) return false;
+                if (!VerifyAntecedenteInalcanzable(antecedente, relacion.Nodo, relacionAntecedente)) return false;
 
             }
             return true;
         }
         private static bool VerifyAntecedenteInalcanzable(Nodo antecedente, Nodo consecuente, Relacion relacion)
         {
-            if (!VerifyAntecedenteIndirectoInalcanzable(antecedente, consecuente, relacion)) return false;
+            if (!VerifyAntecedenteIndirectoInalcanzable( consecuente, relacion)) return false;
             if (!VerifyAntecedentesAntecedenteInalcanzable(antecedente, consecuente)) return false;
             return true;
         }
-        private static bool VerifyAntecedenteIndirectoInalcanzable(Nodo antecedente, Nodo consecuente, Relacion relacion)
+        private static bool VerifyAntecedenteIndirectoInalcanzable( Nodo consecuente, Relacion relacion)
         {
-            if (antecedente.Regla.Equals(consecuente.Regla))
+            if (relacion.Nodo.Regla.Equals(consecuente.Regla))
             {
                 return false;
             }
@@ -261,7 +262,7 @@ namespace SBC_Maker.Logica
             {
                 foreach (Relacion relacionAntecedente in antecedentesConsecuente)
                 {
-                    if (!VerifyAntecedenteIndirectoInalcanzable(antecedente, relacionAntecedente.Nodo, relacion))
+                    if (!VerifyAntecedenteIndirectoInalcanzable(relacionAntecedente.Nodo, relacion))
                     {
                         if (!relacionAntecedente.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
                     }
@@ -296,6 +297,10 @@ namespace SBC_Maker.Logica
             {
                 if (!VerifyConsecuentesInalcanzable(antecedente,consecuente, relacionAntecedente, new List<Nodo>())) return false;
             }
+            else
+            {
+                if (!VerifyAntecedenteIndirectoInalcanzable(consecuente, relacionAntecedente)) return false;
+            }
             return true;
         }
         private static bool VerifyConsecuentesInalcanzable(Nodo antecedente,Nodo consecuente, Relacion relacion, List<Nodo> recorridos)
@@ -312,24 +317,24 @@ namespace SBC_Maker.Logica
                     if (!VerifyConsecuentesInalcanzable(consecuente,siguiente, relacion, recorridos)) return false;
                 }
             }
-
+            
+            List<List<Relacion>> caminos = new List<List<Relacion>>();
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
             {
-                foreach (Relacion anterior in antecedentes)
+                Relacion aux = antecedentes.Find(x => x.Nodo.Equals(antecedente));
+                if (aux != null) caminos.Add(antecedentes);
+            }
+            foreach (List<Relacion> antecedentes in caminos)
+            {
+                foreach(Relacion anterior in antecedentes)
                 {
                     if (!recorridos.Contains(anterior.Nodo))
                     {
-                        if (!VerifyConsecuentesInalcanzable(consecuente, anterior.Nodo, relacion, recorridos))
-                        {
-                            Relacion aux = consecuente.Antecedentes[anterior.NumeroRelacion - 1].Find(x => x.Nodo.Equals(antecedente));
-                            if (aux != null)
-                            {
-                                if (!anterior.respuestasNecesarias.SequenceEqual(relacion.respuestasNecesarias)) return false;
-                            }
-                        }
+                        if (!VerifyAntecedenteIndirectoInalcanzable(anterior.Nodo, relacion)) return false;
                     }
                 }
             }
+
             return true;
         }
 
