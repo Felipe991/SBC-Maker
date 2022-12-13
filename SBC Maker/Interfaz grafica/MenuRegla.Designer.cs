@@ -51,36 +51,38 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 21);
+            this.label1.Location = new System.Drawing.Point(27, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 15);
+            this.label1.Size = new System.Drawing.Size(64, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(102, 21);
+            this.textBoxNombre.Location = new System.Drawing.Point(117, 28);
+            this.textBoxNombre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBoxNombre.Size = new System.Drawing.Size(398, 23);
+            this.textBoxNombre.Size = new System.Drawing.Size(454, 27);
             this.textBoxNombre.TabIndex = 7;
             this.textBoxNombre.Text = "Regla";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 52);
+            this.label4.Location = new System.Drawing.Point(24, 69);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 15);
+            this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.TabIndex = 25;
             this.label4.Text = "Indicacion";
             // 
             // ConclusionButton
             // 
             this.ConclusionButton.AutoSize = true;
-            this.ConclusionButton.Location = new System.Drawing.Point(166, 22);
+            this.ConclusionButton.Location = new System.Drawing.Point(190, 29);
+            this.ConclusionButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ConclusionButton.Name = "ConclusionButton";
-            this.ConclusionButton.Size = new System.Drawing.Size(85, 19);
+            this.ConclusionButton.Size = new System.Drawing.Size(102, 24);
             this.ConclusionButton.TabIndex = 3;
             this.ConclusionButton.Text = "Conclusion";
             this.ConclusionButton.UseVisualStyleBackColor = true;
@@ -90,9 +92,10 @@
             // 
             this.InicioButton.AutoSize = true;
             this.InicioButton.Checked = true;
-            this.InicioButton.Location = new System.Drawing.Point(10, 22);
+            this.InicioButton.Location = new System.Drawing.Point(11, 29);
+            this.InicioButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.InicioButton.Name = "InicioButton";
-            this.InicioButton.Size = new System.Drawing.Size(54, 19);
+            this.InicioButton.Size = new System.Drawing.Size(66, 24);
             this.InicioButton.TabIndex = 2;
             this.InicioButton.TabStop = true;
             this.InicioButton.Text = "Inicio";
@@ -102,9 +105,10 @@
             // InformacionButton
             // 
             this.InformacionButton.AutoSize = true;
-            this.InformacionButton.Location = new System.Drawing.Point(70, 22);
+            this.InformacionButton.Location = new System.Drawing.Point(80, 29);
+            this.InformacionButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.InformacionButton.Name = "InformacionButton";
-            this.InformacionButton.Size = new System.Drawing.Size(90, 19);
+            this.InformacionButton.Size = new System.Drawing.Size(110, 24);
             this.InformacionButton.TabIndex = 4;
             this.InformacionButton.Text = "Informacion\r\n";
             this.InformacionButton.UseVisualStyleBackColor = true;
@@ -115,18 +119,21 @@
             this.GroupTipoRegla.Controls.Add(this.InformacionButton);
             this.GroupTipoRegla.Controls.Add(this.InicioButton);
             this.GroupTipoRegla.Controls.Add(this.ConclusionButton);
-            this.GroupTipoRegla.Location = new System.Drawing.Point(23, 191);
+            this.GroupTipoRegla.Location = new System.Drawing.Point(26, 255);
+            this.GroupTipoRegla.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GroupTipoRegla.Name = "GroupTipoRegla";
-            this.GroupTipoRegla.Size = new System.Drawing.Size(478, 50);
+            this.GroupTipoRegla.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.GroupTipoRegla.Size = new System.Drawing.Size(546, 67);
             this.GroupTipoRegla.TabIndex = 6;
             this.GroupTipoRegla.TabStop = false;
             this.GroupTipoRegla.Text = "Tipo de regla";
             // 
             // GuardarButton
             // 
-            this.GuardarButton.Location = new System.Drawing.Point(425, 480);
+            this.GuardarButton.Location = new System.Drawing.Point(486, 640);
+            this.GuardarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GuardarButton.Name = "GuardarButton";
-            this.GuardarButton.Size = new System.Drawing.Size(75, 23);
+            this.GuardarButton.Size = new System.Drawing.Size(86, 31);
             this.GuardarButton.TabIndex = 11;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
@@ -134,52 +141,56 @@
             // 
             // CancelarButton
             // 
-            this.CancelarButton.Location = new System.Drawing.Point(345, 480);
+            this.CancelarButton.Location = new System.Drawing.Point(394, 640);
+            this.CancelarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CancelarButton.Name = "CancelarButton";
-            this.CancelarButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelarButton.Size = new System.Drawing.Size(86, 31);
             this.CancelarButton.TabIndex = 12;
             this.CancelarButton.Text = "Cancelar";
             this.CancelarButton.UseVisualStyleBackColor = true;
             // 
             // panelPregunta
             // 
-            this.panelPregunta.Location = new System.Drawing.Point(23, 324);
+            this.panelPregunta.Location = new System.Drawing.Point(26, 432);
+            this.panelPregunta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelPregunta.Name = "panelPregunta";
-            this.panelPregunta.Size = new System.Drawing.Size(478, 148);
+            this.panelPregunta.Size = new System.Drawing.Size(546, 197);
             this.panelPregunta.TabIndex = 13;
             // 
             // textBoxIndicacion
             // 
             this.textBoxIndicacion.BackColor = System.Drawing.Color.Silver;
             this.textBoxIndicacion.Enabled = false;
-            this.textBoxIndicacion.Location = new System.Drawing.Point(102, 50);
+            this.textBoxIndicacion.Location = new System.Drawing.Point(117, 67);
+            this.textBoxIndicacion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxIndicacion.Name = "textBoxIndicacion";
-            this.textBoxIndicacion.Size = new System.Drawing.Size(399, 96);
+            this.textBoxIndicacion.Size = new System.Drawing.Size(455, 127);
             this.textBoxIndicacion.TabIndex = 26;
             this.textBoxIndicacion.Text = "";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 285);
+            this.label3.Location = new System.Drawing.Point(27, 380);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 15);
+            this.label3.Size = new System.Drawing.Size(68, 20);
             this.label3.TabIndex = 27;
             this.label3.Text = "Pregunta";
             // 
             // textBoxPregunta
             // 
-            this.textBoxPregunta.Location = new System.Drawing.Point(136, 282);
+            this.textBoxPregunta.Location = new System.Drawing.Point(155, 376);
+            this.textBoxPregunta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPregunta.Name = "textBoxPregunta";
-            this.textBoxPregunta.Size = new System.Drawing.Size(364, 23);
+            this.textBoxPregunta.Size = new System.Drawing.Size(415, 27);
             this.textBoxPregunta.TabIndex = 28;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 253);
+            this.label5.Location = new System.Drawing.Point(26, 337);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 15);
+            this.label5.Size = new System.Drawing.Size(124, 20);
             this.label5.TabIndex = 29;
             this.label5.Text = "Tipo de pregunta";
             // 
@@ -189,9 +200,10 @@
             this.comboBoxTipoPregunta.Items.AddRange(new object[] {
             "Cerrada",
             "Difusa"});
-            this.comboBoxTipoPregunta.Location = new System.Drawing.Point(136, 253);
+            this.comboBoxTipoPregunta.Location = new System.Drawing.Point(155, 337);
+            this.comboBoxTipoPregunta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBoxTipoPregunta.Name = "comboBoxTipoPregunta";
-            this.comboBoxTipoPregunta.Size = new System.Drawing.Size(145, 23);
+            this.comboBoxTipoPregunta.Size = new System.Drawing.Size(165, 28);
             this.comboBoxTipoPregunta.TabIndex = 30;
             this.comboBoxTipoPregunta.Text = "Cerrada";
             this.comboBoxTipoPregunta.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoPregunta_SelectedIndexChanged);
@@ -199,9 +211,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 162);
+            this.label2.Location = new System.Drawing.Point(47, 216);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 15);
+            this.label2.Size = new System.Drawing.Size(43, 20);
             this.label2.TabIndex = 31;
             this.label2.Text = "Nivel";
             // 
@@ -209,20 +221,21 @@
             // 
             this.textBoxNivel.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxNivel.Enabled = false;
-            this.textBoxNivel.Location = new System.Drawing.Point(102, 159);
+            this.textBoxNivel.Location = new System.Drawing.Point(117, 212);
+            this.textBoxNivel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxNivel.Name = "textBoxNivel";
-            this.textBoxNivel.Size = new System.Drawing.Size(100, 23);
+            this.textBoxNivel.Size = new System.Drawing.Size(114, 27);
             this.textBoxNivel.TabIndex = 32;
             this.textBoxNivel.Text = "0";
             // 
             // MenuRegla
             // 
             this.AcceptButton = this.GuardarButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.CancelButton = this.CancelarButton;
-            this.ClientSize = new System.Drawing.Size(522, 528);
+            this.ClientSize = new System.Drawing.Size(597, 704);
             this.Controls.Add(this.textBoxNivel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxTipoPregunta);
@@ -237,7 +250,9 @@
             this.Controls.Add(this.textBoxNombre);
             this.Controls.Add(this.GroupTipoRegla);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MenuRegla";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuRegla";
             this.GroupTipoRegla.ResumeLayout(false);
             this.GroupTipoRegla.PerformLayout();

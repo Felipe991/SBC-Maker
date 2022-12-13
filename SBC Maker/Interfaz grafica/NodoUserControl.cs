@@ -33,7 +33,6 @@ namespace SBC_Maker.Interfaz_grafica
             this.richTextBoxNombreRegla.Text = nodo.Regla.Nombre;
             setBackColor();
             extendEvents();
-            RefreshNodePos();
         }
 
         private void setBackColor()
@@ -87,10 +86,18 @@ namespace SBC_Maker.Interfaz_grafica
             if (IsPicked)
             {
                 Point point = e.Location - mouseOffset;
-                this.Left += point.X;
-                this.Top += point.Y;
-                RefreshNodePos();
+                if (!OutOfBounds(point))
+                {
+                    this.Left += point.X;
+                    this.Top += point.Y;
+                    RefreshNodePos();
+                }
             }
+        }
+
+        private bool OutOfBounds(Point point)
+        {
+            return ((this.Left + point.X) < 0 || (this.Top + point.Y) < 0);
         }
 
         private void NodoUserControl_MouseDown(object sender, MouseEventArgs e)

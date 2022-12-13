@@ -188,6 +188,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.formsPlot1);
             this.Name = "MenuConfigFuncionTrapezoidal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuConfigFuncionTrapezoidal";
             this.Load += new System.EventHandler(this.MenuConfigFuncionTrapezoidal_Load);
             this.panel2.ResumeLayout(false);

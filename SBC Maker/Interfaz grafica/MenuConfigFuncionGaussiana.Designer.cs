@@ -151,6 +151,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "MenuConfigFuncionGaussiana";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuConfigFuncionGaussiana";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

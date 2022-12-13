@@ -35,9 +35,10 @@
             // 
             // buttonEjecucion
             // 
-            this.buttonEjecucion.Location = new System.Drawing.Point(53, 151);
+            this.buttonEjecucion.Location = new System.Drawing.Point(49, 127);
+            this.buttonEjecucion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonEjecucion.Name = "buttonEjecucion";
-            this.buttonEjecucion.Size = new System.Drawing.Size(113, 23);
+            this.buttonEjecucion.Size = new System.Drawing.Size(157, 60);
             this.buttonEjecucion.TabIndex = 5;
             this.buttonEjecucion.Text = "Ejecutar";
             this.buttonEjecucion.UseVisualStyleBackColor = true;
@@ -46,17 +47,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(78, 35);
+            this.label1.Location = new System.Drawing.Point(87, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 15);
+            this.label1.Size = new System.Drawing.Size(80, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "SBC Maker";
             // 
             // buttonConfeccion
             // 
-            this.buttonConfeccion.Location = new System.Drawing.Point(53, 90);
+            this.buttonConfeccion.Location = new System.Drawing.Point(49, 58);
+            this.buttonConfeccion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonConfeccion.Name = "buttonConfeccion";
-            this.buttonConfeccion.Size = new System.Drawing.Size(113, 23);
+            this.buttonConfeccion.Size = new System.Drawing.Size(157, 61);
             this.buttonConfeccion.TabIndex = 3;
             this.buttonConfeccion.Text = "Confeccionar";
             this.buttonConfeccion.UseVisualStyleBackColor = true;
@@ -64,13 +66,15 @@
             // 
             // MenuPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(222, 240);
+            this.ClientSize = new System.Drawing.Size(254, 223);
             this.Controls.Add(this.buttonEjecucion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonConfeccion);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MenuPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuPrincipal";
             this.ResumeLayout(false);
             this.PerformLayout();

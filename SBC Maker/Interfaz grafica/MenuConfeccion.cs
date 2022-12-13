@@ -70,7 +70,7 @@ namespace SBC_Maker
 
         private void MenuConfeccion_Load(object sender, EventArgs e)
         {
-            DoubleBuffered = false;
+            DoubleBuffered = true;
         }
 
         private void conjuntoDifusoToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -121,7 +121,8 @@ namespace SBC_Maker
             NUC.flechas = this.sbc.datosFlecha;
             ExtendEvents(NUC);
             this.panelLienzo.Controls.Add(NUC);
-            NUC.Location = new Point(nodo.Posicion.X,nodo.Posicion.Y);
+            NUC.Left = nodo.Posicion.X;
+            NUC.Top = nodo.Posicion.Y;
             AsignarNivelGlobal(sbc.BaseConocimiento);
             LoadTree(sbc.BaseConocimiento);
         }

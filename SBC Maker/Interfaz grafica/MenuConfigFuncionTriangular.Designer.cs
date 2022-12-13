@@ -174,6 +174,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "MenuConfigFuncionTriangular";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuConfigFuncionTriangular";
             this.Load += new System.EventHandler(this.MenuConfigFuncionTriangular_Load);
             this.panel2.ResumeLayout(false);

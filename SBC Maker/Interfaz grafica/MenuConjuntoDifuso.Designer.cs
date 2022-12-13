@@ -195,6 +195,7 @@
             this.Controls.Add(this.CancelarButton);
             this.Controls.Add(this.GuardarButton);
             this.Name = "MenuConjuntoDifuso";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuConjuntoDifuso";
             this.Load += new System.EventHandler(this.MenuConjuntoDifuso_Load);
             this.ResumeLayout(false);

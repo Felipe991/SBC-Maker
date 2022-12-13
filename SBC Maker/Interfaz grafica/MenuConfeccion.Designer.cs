@@ -60,6 +60,9 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
@@ -68,7 +71,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1165, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(250, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,7 +93,7 @@
             this.proyectoToolStripMenuItem,
             this.conjuntoDifusoToolStripMenuItem});
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             // 
             // proyectoToolStripMenuItem
@@ -112,7 +115,7 @@
             this.proyectoToolStripMenuItem1,
             this.conjuntoDifusoToolStripMenuItem1});
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.abrirToolStripMenuItem.Text = "Abrir";
             // 
             // proyectoToolStripMenuItem1
@@ -132,21 +135,21 @@
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
             // guardarComoToolStripMenuItem
             // 
             this.guardarComoToolStripMenuItem.Name = "guardarComoToolStripMenuItem";
-            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.guardarComoToolStripMenuItem.Text = "Guardar como...";
             this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.guardarComoToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -166,6 +169,7 @@
             // 
             // panel2
             // 
+            this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.toolStrip1);
             this.panel2.Location = new System.Drawing.Point(0, 36);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -175,6 +179,9 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAgregarRegla,
@@ -182,7 +189,7 @@
             this.toolStripButtonVerRelaciones});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1159, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(100, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -220,15 +227,18 @@
             // panelLienzo
             // 
             this.panelLienzo.AllowDrop = true;
+            this.panelLienzo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelLienzo.AutoScroll = true;
-            this.panelLienzo.AutoSize = true;
+            this.panelLienzo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelLienzo.BackColor = System.Drawing.SystemColors.Window;
             this.panelLienzo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelLienzo.Controls.Add(this.treeViewRelaciones);
-            this.panelLienzo.Location = new System.Drawing.Point(0, 76);
+            this.panelLienzo.Location = new System.Drawing.Point(6, 79);
             this.panelLienzo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelLienzo.Name = "panelLienzo";
-            this.panelLienzo.Size = new System.Drawing.Size(1165, 677);
+            this.panelLienzo.Size = new System.Drawing.Size(1159, 666);
             this.panelLienzo.TabIndex = 3;
             this.panelLienzo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLienzo_Paint);
             this.panelLienzo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelLienzo_MouseDown);
@@ -242,7 +252,7 @@
             this.treeViewRelaciones.Location = new System.Drawing.Point(-2, -3);
             this.treeViewRelaciones.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.treeViewRelaciones.Name = "treeViewRelaciones";
-            this.treeViewRelaciones.Size = new System.Drawing.Size(149, 671);
+            this.treeViewRelaciones.Size = new System.Drawing.Size(149, 755);
             this.treeViewRelaciones.TabIndex = 0;
             this.treeViewRelaciones.Visible = false;
             // 
@@ -254,12 +264,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1165, 745);
             this.Controls.Add(this.panelLienzo);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MenuConfeccion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuPrincipal";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MenuConfeccion_FormClosed);
             this.Load += new System.EventHandler(this.MenuConfeccion_Load);

@@ -82,6 +82,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "MenuEditarRelaciones";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuEditarRelaciones";
             this.ResumeLayout(false);
             this.PerformLayout();

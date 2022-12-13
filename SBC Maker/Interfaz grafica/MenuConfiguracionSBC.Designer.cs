@@ -43,9 +43,10 @@
             // 
             // CancelarButton
             // 
-            this.CancelarButton.Location = new System.Drawing.Point(160, 326);
+            this.CancelarButton.Location = new System.Drawing.Point(183, 435);
+            this.CancelarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CancelarButton.Name = "CancelarButton";
-            this.CancelarButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelarButton.Size = new System.Drawing.Size(86, 31);
             this.CancelarButton.TabIndex = 14;
             this.CancelarButton.Text = "Cancelar";
             this.CancelarButton.UseVisualStyleBackColor = true;
@@ -53,9 +54,10 @@
             // 
             // GuardarButton
             // 
-            this.GuardarButton.Location = new System.Drawing.Point(241, 326);
+            this.GuardarButton.Location = new System.Drawing.Point(275, 435);
+            this.GuardarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GuardarButton.Name = "GuardarButton";
-            this.GuardarButton.Size = new System.Drawing.Size(75, 23);
+            this.GuardarButton.Size = new System.Drawing.Size(86, 31);
             this.GuardarButton.TabIndex = 13;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
@@ -64,15 +66,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 175);
+            this.label2.Location = new System.Drawing.Point(27, 233);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 15);
+            this.label2.Size = new System.Drawing.Size(159, 20);
             this.label2.TabIndex = 15;
             this.label2.Text = "Limite de conclusiones";
             // 
             // numericUpDownLimiteConclusiones
             // 
-            this.numericUpDownLimiteConclusiones.Location = new System.Drawing.Point(159, 173);
+            this.numericUpDownLimiteConclusiones.Location = new System.Drawing.Point(182, 231);
+            this.numericUpDownLimiteConclusiones.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.numericUpDownLimiteConclusiones.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -84,7 +87,7 @@
             0,
             0});
             this.numericUpDownLimiteConclusiones.Name = "numericUpDownLimiteConclusiones";
-            this.numericUpDownLimiteConclusiones.Size = new System.Drawing.Size(157, 23);
+            this.numericUpDownLimiteConclusiones.Size = new System.Drawing.Size(179, 27);
             this.numericUpDownLimiteConclusiones.TabIndex = 16;
             this.numericUpDownLimiteConclusiones.Value = new decimal(new int[] {
             1,
@@ -96,9 +99,11 @@
             // 
             this.groupBox1.Controls.Add(this.radioButtonNo);
             this.groupBox1.Controls.Add(this.radioButtonSi);
-            this.groupBox1.Location = new System.Drawing.Point(30, 228);
+            this.groupBox1.Location = new System.Drawing.Point(34, 304);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(286, 45);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(327, 60);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mostrar explicacion";
@@ -106,9 +111,10 @@
             // radioButtonNo
             // 
             this.radioButtonNo.AutoSize = true;
-            this.radioButtonNo.Location = new System.Drawing.Point(129, 17);
+            this.radioButtonNo.Location = new System.Drawing.Point(147, 23);
+            this.radioButtonNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButtonNo.Name = "radioButtonNo";
-            this.radioButtonNo.Size = new System.Drawing.Size(41, 19);
+            this.radioButtonNo.Size = new System.Drawing.Size(50, 24);
             this.radioButtonNo.TabIndex = 1;
             this.radioButtonNo.TabStop = true;
             this.radioButtonNo.Text = "No";
@@ -118,9 +124,10 @@
             // 
             this.radioButtonSi.AutoSize = true;
             this.radioButtonSi.Checked = true;
-            this.radioButtonSi.Location = new System.Drawing.Point(6, 17);
+            this.radioButtonSi.Location = new System.Drawing.Point(7, 23);
+            this.radioButtonSi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButtonSi.Name = "radioButtonSi";
-            this.radioButtonSi.Size = new System.Drawing.Size(34, 19);
+            this.radioButtonSi.Size = new System.Drawing.Size(42, 24);
             this.radioButtonSi.TabIndex = 0;
             this.radioButtonSi.TabStop = true;
             this.radioButtonSi.Text = "Si";
@@ -134,26 +141,27 @@
             "Menor largo de camino",
             "Mayor  profundidad",
             "Mayor  informacion"});
-            this.checkedListBoxMetodoResolucion.Location = new System.Drawing.Point(36, 71);
+            this.checkedListBoxMetodoResolucion.Location = new System.Drawing.Point(41, 95);
+            this.checkedListBoxMetodoResolucion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkedListBoxMetodoResolucion.Name = "checkedListBoxMetodoResolucion";
-            this.checkedListBoxMetodoResolucion.Size = new System.Drawing.Size(280, 76);
+            this.checkedListBoxMetodoResolucion.Size = new System.Drawing.Size(319, 92);
             this.checkedListBoxMetodoResolucion.TabIndex = 22;
             this.checkedListBoxMetodoResolucion.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxMetodoResolucion_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 43);
+            this.label1.Location = new System.Drawing.Point(41, 57);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 15);
+            this.label1.Size = new System.Drawing.Size(155, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Metodo de resolucion";
             // 
             // MenuConfiguracionSBC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 381);
+            this.ClientSize = new System.Drawing.Size(400, 508);
             this.Controls.Add(this.checkedListBoxMetodoResolucion);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.numericUpDownLimiteConclusiones);
@@ -161,7 +169,9 @@
             this.Controls.Add(this.CancelarButton);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MenuConfiguracionSBC";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuConfiguracionSBC";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimiteConclusiones)).EndInit();
             this.groupBox1.ResumeLayout(false);
