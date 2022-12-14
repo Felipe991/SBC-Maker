@@ -15,11 +15,14 @@ namespace SBC_Maker.Interfaz_grafica
     public partial class MenuEjecucion : Form
     {
         private MotorDeInferencia motor;
+        private Nodo nodoActual;
 
         public MenuEjecucion(SBC sbc)
         {
             InitializeComponent();
             this.motor = new MotorDeInferencia(sbc);
+            //this.nodoActual = this.motor.ResolucionConflicto();
+            //RefreshPanelRespuesta(this.nodoActual.Regla.Pregunta);
         }
 
         private void RefreshPanelRespuesta(Pregunta pregunta)
@@ -42,10 +45,12 @@ namespace SBC_Maker.Interfaz_grafica
         {
             Control controlRespuesta = this.panelRespuesta.Controls[0];
             string respuesta = getRespuesta();
-            //asignar respuesta al hecho blablablabla
-            //llamar a chainforward en el motor
-                //(que recibe el nodo por el acabas de preguntar y devuelve el sgte a preguntar)
-            //RefreshPanelRespuesta(nodo.regla.pregunta)
+            this.nodoActual.Hecho.RespuestaFinal = respuesta;
+            this.nodoActual = this.motor.ChainForward(this.nodoActual);
+
+            
+            /*if (this.nodoActual != null) RefreshPanelRespuesta(nodoActual.Regla.Pregunta);
+            else llamar al sgte menu*/
         }
 
         private string getRespuesta()

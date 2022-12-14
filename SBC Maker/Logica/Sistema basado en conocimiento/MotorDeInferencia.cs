@@ -29,40 +29,122 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
         {
             foreach(Nodo consecuente in preguntado.Consecuentes)
             {
-                List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
-                foreach(List<Relacion> antecedentes in consecuente.Antecedentes)
+                if (!consecuente.IsPreguntable()) continue;
+                List<List<Relacion>> antecedentesRemanentes = GetRemanentes(consecuente, preguntado);
+
+                if (reglasAplicables.Contains(consecuente) || conclusiones.Contains(consecuente))
                 {
-                    Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(preguntado));
-                    if(relacion != null)
-                    {
-                        if (SatisfyRespuesta(preguntado, relacion))
-                        {
-                            if (CheckRelacion(antecedentes))
-                            {
-                                this.reglasAplicables.Add(consecuente);
-                                break;
-                            }
-                            antecedentesRemanentes.Add(antecedentes);
-                        }
-                    }
+                    consecuente.Antecedentes.Clear();
                 }
-                consecuente.Antecedentes = antecedentesRemanentes;
-                //Llamo a un método recursivo que verifique si no le quedan antecedentes
-                    //a su vez este se llama a sí mismo con cada consecuente
-                if (antecedentesRemanentes.Count() == 0)
+                else
                 {
-                        
+                    if (antecedentesRemanentes.Count() == 0) DeleteInalcanzable(preguntado, consecuente);
+                    else consecuente.Antecedentes = antecedentesRemanentes;
                 }
             }
             this.reglasAplicables.Remove(preguntado);
             CleanAplicables();
-            if (this.reglasAplicables.Count() < 0 || conclusiones.Count() == this.MAXCONCLUSIONES) return null;
+            if (this.reglasAplicables.Count() == 0 || conclusiones.Count() == this.MAXCONCLUSIONES) return null;
             return ResolucionConflicto();
         }
+        
+        private List<List<Relacion>> GetRemanentes(Nodo consecuente, Nodo preguntado)
+        {
+            List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
+            foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
+            {
+                Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(preguntado));
+                if (relacion != null)
+                {
+                    if (SatisfyRespuesta(preguntado, relacion))
+                    {
+                        if (CheckRelacion(antecedentes))
+                        {
+                            if (consecuente.Regla is ReglaConclusion) this.conclusiones.Add(consecuente);
+                            else this.reglasAplicables.Add(consecuente);
+                            break;
+                        }
+                        antecedentesRemanentes.Add(antecedentes);
+                    }
+                }
+            }
+            return antecedentesRemanentes;
+        }
+
         private bool SatisfyRespuesta(Nodo preguntado, Relacion relacion)
         {
             string respuesta = relacion.respuestasNecesarias.Find(x => x.Equals(preguntado.Hecho.RespuestaFinal));
             return respuesta != null;
+        }
+        private bool CheckRelacion(List<Relacion> antecedentes)
+        {
+            foreach (Relacion relacion in antecedentes)
+            {
+                if (relacion.Nodo.Hecho.RespuestaFinal == null) return false;
+            }
+            return true;
+        }
+        private void DeleteInalcanzable(Nodo antecedente,Nodo nodo)
+        {
+            List<Nodo> recorridos = new List<Nodo>();
+            recorridos.Add(antecedente);
+            
+            DeleteInAntecedentes(nodo,recorridos);
+            nodo.Antecedentes.Clear();
+
+            DeleteInConsecuentes(nodo);
+        }
+        
+        private void DeleteInAntecedentes(Nodo nodo, List<Nodo> recorridos)
+        {
+            foreach (List<Relacion> antecedentes in nodo.Antecedentes)
+            {
+                foreach (Relacion antecedente in antecedentes)
+                {
+                    if (recorridos.Contains(antecedente.Nodo)) continue;
+                    recorridos.Add(antecedente.Nodo);
+                    
+                    if (AportaInfo(nodo,antecedente)) continue;
+                    DeleteAntecedente(antecedente, recorridos);
+                }
+            }
+        }
+        private bool AportaInfo(Nodo nodo, Relacion antecedente)
+        {
+            bool aportaInfo = false;
+            foreach (Nodo consecuente in antecedente.Nodo.Consecuentes)
+            {
+                if (!consecuente.Equals(nodo) && consecuente.IsPreguntable())
+                {
+                    aportaInfo = true;
+                    break;
+                }
+            }
+            return aportaInfo;
+        }
+        private void DeleteAntecedente(Relacion antecedente, List<Nodo> recorridos)
+        {
+            DeleteInAntecedentes(antecedente.Nodo, recorridos);
+            antecedente.Nodo.Antecedentes.Clear();
+
+        }
+        private void DeleteInConsecuentes(Nodo nodo)
+        {
+            foreach (Nodo consecuente in nodo.Consecuentes)
+            {
+                if (!consecuente.IsPreguntable()) continue;
+                List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
+                foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
+                {
+                    Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(nodo));
+                    if (relacion == null)
+                    {
+                        antecedentesRemanentes.Add(antecedentes);
+                    }
+                }
+                if (antecedentesRemanentes.Count() == 0) DeleteInalcanzable(nodo,consecuente);
+                else consecuente.Antecedentes = antecedentesRemanentes;
+            }
         }
         private void CleanAplicables()
         {
@@ -71,7 +153,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             {
                 foreach(Nodo consecuente in aplicable.Consecuentes)
                 {
-                    if (consecuente.Antecedentes.Count() > 0 && !this.reglasAplicables.Contains(consecuente))
+                    if (consecuente.IsPreguntable() && !this.reglasAplicables.Contains(consecuente))
                     {
                         aplicablesRemantentes.Add(aplicable);
                         break;
@@ -110,37 +192,5 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             }
             return nodosInicio;
         }
-
-        private bool CheckRelacion(List<Relacion> antecedentes)
-        {
-            foreach (Relacion relacion in antecedentes)
-            {
-                if (relacion.Nodo.Hecho.RespuestaFinal == "") return false;
-            }
-            return true;
-        }
-
-
-        //Busco reglas aplicables, Una regla es aplicable si
-        // (isPreguntable (es decir si no se ha recorrido o si responderla me lleva a una conclusion valida)
-        //  Algunas de sus relaciones antecedentes se cumple en su totalidad, Si es regla inicio este no aplica)
-        //Si no existen reglas aplicables -> exit
-        //Reviso si tengo conclusiones y las agrego
-        //Si se ha llegado al limite de conclusiones MAXCONCLUSIONES -> exit
-        //Soluciono conflictos entre reglas aplicables
-        //Pregunto por la regla aplicable
-        //Agrego el hecho a la respectiva regla
-        //Propagar isPreguntable
-        //Propagar hacia abajo (tomar en cuenta antecedentes de consecuentes al momento de propagar)
-        //Una vez propagado hacia abajo hay que tener en cuenta aquellas reglas
-        //que ya no tiene sentido preguntar, es decir, mirar hacia arriba y ver a quienes
-        //le afecta los cambios
-        //Repetir proceso
-
-        //-> exit es mostrar conclusiones y explicacion en caso de ser necesario (MOSTRAREXPLICACION)
-        //Para mostrar conclusiones simplemente se accede a la lista de conclusiones y se muestrran todas
-        //Para mostrar la explicacion se debe empezar del nodo conclusion hacia arriba pasando por todos
-        //los nodos construyendo la explicacion salto por salto 
-
     }
 }

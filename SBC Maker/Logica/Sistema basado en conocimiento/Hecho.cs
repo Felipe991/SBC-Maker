@@ -14,7 +14,7 @@
 
         public Hecho()
         {
-            this.respuestaFinal = "";
+            this.respuestaFinal = null;
             this.valorCrisp = new Double();
         }
 
