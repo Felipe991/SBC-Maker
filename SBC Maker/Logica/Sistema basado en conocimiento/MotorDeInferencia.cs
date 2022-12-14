@@ -25,15 +25,74 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             this.reglasAplicables = GetNodosInicio();
         }
 
-        public List<Nodo> ChainForward()
+        public Nodo ChainForward(Nodo preguntado)
         {
-            List<Nodo> conclusiones = new List<Nodo>();
-            while(this.reglasAplicables.Count()>0 && conclusiones.Count()<this.MAXCONCLUSIONES)
+            foreach(Nodo consecuente in preguntado.Consecuentes)
             {
-
-                
+                List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
+                foreach(List<Relacion> antecedentes in consecuente.Antecedentes)
+                {
+                    Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(preguntado));
+                    if(relacion != null)
+                    {
+                        if (SatisfyRespuesta(preguntado, relacion))
+                        {
+                            if (CheckRelacion(antecedentes))
+                            {
+                                this.reglasAplicables.Add(consecuente);
+                                break;
+                            }
+                            antecedentesRemanentes.Add(antecedentes);
+                        }
+                    }
+                }
+                consecuente.Antecedentes = antecedentesRemanentes;
+                //Llamo a un método recursivo que verifique si no le quedan antecedentes
+                    //a su vez este se llama a sí mismo con cada consecuente
+                if (antecedentesRemanentes.Count() == 0)
+                {
+                        
+                }
             }
-            return conclusiones;
+            this.reglasAplicables.Remove(preguntado);
+            CleanAplicables();
+            if (this.reglasAplicables.Count() < 0 || conclusiones.Count() == this.MAXCONCLUSIONES) return null;
+            return ResolucionConflicto();
+        }
+        private bool SatisfyRespuesta(Nodo preguntado, Relacion relacion)
+        {
+            string respuesta = relacion.respuestasNecesarias.Find(x => x.Equals(preguntado.Hecho.RespuestaFinal));
+            return respuesta != null;
+        }
+        private void CleanAplicables()
+        {
+            List<Nodo> aplicablesRemantentes = new List<Nodo>();
+            foreach (Nodo aplicable in this.reglasAplicables)
+            {
+                foreach(Nodo consecuente in aplicable.Consecuentes)
+                {
+                    if (consecuente.Antecedentes.Count() > 0 && !this.reglasAplicables.Contains(consecuente))
+                    {
+                        aplicablesRemantentes.Add(aplicable);
+                        break;
+                    }
+                    
+                }
+            }
+            this.reglasAplicables = aplicablesRemantentes;
+        }
+    
+        private Nodo ResolucionConflicto()
+        {
+            Nodo mejorNodo = null;
+            //Tabaja sobre reglas aplicables
+            foreach (Nodo reglaAplicable in this.reglasAplicables)
+            {
+                //NOSE XD supongo que depende de las constantes
+                mejorNodo = reglaAplicable;
+            }
+
+            return mejorNodo;
         }
 
         private List<Nodo> GetNodosInicio()
@@ -52,12 +111,15 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             return nodosInicio;
         }
 
-        private bool isAplicable(Nodo nodo)
+        private bool CheckRelacion(List<Relacion> antecedentes)
         {
-
-
+            foreach (Relacion relacion in antecedentes)
+            {
+                if (relacion.Nodo.Hecho.RespuestaFinal == "") return false;
+            }
             return true;
         }
+
 
         //Busco reglas aplicables, Una regla es aplicable si
         // (isPreguntable (es decir si no se ha recorrido o si responderla me lleva a una conclusion valida)

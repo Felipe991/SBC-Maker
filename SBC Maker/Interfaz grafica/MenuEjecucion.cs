@@ -43,6 +43,9 @@ namespace SBC_Maker.Interfaz_grafica
             Control controlRespuesta = this.panelRespuesta.Controls[0];
             string respuesta = getRespuesta();
             //asignar respuesta al hecho blablablabla
+            //llamar a chainforward en el motor
+                //(que recibe el nodo por el acabas de preguntar y devuelve el sgte a preguntar)
+            //RefreshPanelRespuesta(nodo.regla.pregunta)
         }
 
         private string getRespuesta()
