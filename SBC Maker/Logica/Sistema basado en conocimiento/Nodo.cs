@@ -11,6 +11,8 @@ namespace SBC_Maker.Logica
         private List<List<Relacion>> antecedentes;
         private List<Nodo> consecuentes;
         private Posicion posicion;
+        private bool premisasCumplidas;
+        private int indiceRelacionCumplida = -1;
 
         public Nodo(Regla regla, Hecho hecho, int nivel)
         {
@@ -20,6 +22,7 @@ namespace SBC_Maker.Logica
             this.Posicion = new Posicion();
             this.Antecedentes = new List<List<Relacion>>();
             this.Consecuentes = new List<Nodo>();
+            this.PremisasCumplidas = false;
         }
 
         public void GetRoots(List<Nodo> roots)
@@ -43,7 +46,7 @@ namespace SBC_Maker.Logica
                 }
             }
         }
-        public bool IsPreguntable()
+        public bool IsAlcanzable()
         {
             return this.Antecedentes.Count > 0;
         }
@@ -53,5 +56,7 @@ namespace SBC_Maker.Logica
         internal Regla Regla { get => regla; set => regla = value; }
         public Posicion Posicion { get => posicion; set => posicion = value; }
         public int Nivel { get => nivel; set => nivel = value; }
+        public bool PremisasCumplidas { get => premisasCumplidas; set => premisasCumplidas = value; }
+        public int IndiceRelacionCumplida { get => indiceRelacionCumplida; set => indiceRelacionCumplida = value; }
     }
 }

@@ -21,6 +21,7 @@ namespace SBC_Maker.Interfaz_grafica
         {
             InitializeComponent();
             this.motor = new MotorDeInferencia(sbc);
+            this.Text += " (" + sbc.Nombre + ")";
             //this.nodoActual = this.motor.ResolucionConflicto();
             //RefreshPanelRespuesta(this.nodoActual.Regla.Pregunta);
         }
@@ -71,6 +72,7 @@ namespace SBC_Maker.Interfaz_grafica
         private void buttonTerminar_Click(object sender, EventArgs e)
         {
             //Mostrar conclusiones y explicaciones alcanzadas
+            //Misma forma de subir que en resolucionMasInformacion??
         }
     }
 }

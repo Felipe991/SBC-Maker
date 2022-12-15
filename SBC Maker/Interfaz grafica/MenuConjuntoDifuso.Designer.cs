@@ -173,6 +173,7 @@
             // 
             // saveFileDialog1
             // 
+            this.saveFileDialog1.AddExtension = false;
             this.saveFileDialog1.InitialDirectory = "C:\\Users\\PIPEX\\Documents\\Conjuntos Difusos";
             // 
             // MenuConjuntoDifuso

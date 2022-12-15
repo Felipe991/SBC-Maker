@@ -139,8 +139,8 @@
             this.checkedListBoxMetodoResolucion.FormattingEnabled = true;
             this.checkedListBoxMetodoResolucion.Items.AddRange(new object[] {
             "Menor largo de camino",
-            "Mayor  profundidad",
-            "Mayor  informacion"});
+            "Mayor  informacion",
+            "Mayor  profundidad"});
             this.checkedListBoxMetodoResolucion.Location = new System.Drawing.Point(41, 95);
             this.checkedListBoxMetodoResolucion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkedListBoxMetodoResolucion.Name = "checkedListBoxMetodoResolucion";

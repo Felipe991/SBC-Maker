@@ -36,6 +36,7 @@ namespace SBC_Maker
             setDirectorys();
             this.sbc = sbc;
             rebuildNodos(sbc.BaseConocimiento);
+            this.Text += " (" + sbc.Nombre + ")";
             this.panelLienzo.Refresh();
         }
 
@@ -75,7 +76,8 @@ namespace SBC_Maker
 
         private void conjuntoDifusoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if(openFileDialogConjuntoDifuso.ShowDialog() == DialogResult.OK)
+            openFileDialogConjuntoDifuso.Filter = "CDF Conjunto Difuso (*.cdf)|*.cdf|All files (*.*)|*.*";
+            if (openFileDialogConjuntoDifuso.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -262,7 +264,7 @@ namespace SBC_Maker
         private void saveSBC()
         {
             saveFileDialogSBCs.FileName = this.sbc.Nombre;
-            saveFileDialogSBCs.Filter = "TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialogSBCs.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
             if (saveFileDialogSBCs.ShowDialog() == DialogResult.OK)
             {
                 File.Create(saveFileDialogSBCs.FileName).Close();
@@ -303,13 +305,14 @@ namespace SBC_Maker
             SBC sbc = new SBC();
             try
             {
-                openFileDialogSBC.Filter = "TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+                openFileDialogSBC.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
                 if (openFileDialogSBC.ShowDialog() == DialogResult.OK)
                 {
                     Stream stream = File.Open(openFileDialogSBC.FileName, FileMode.Open);
                     var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                     sbc = (SBC)bformatter.Deserialize(stream);
                     stream.Close();
+                    sbc.Nombre = openFileDialogSBC.FileName.Split('\\').Last().Split('.').First();
                 }
             }
             catch

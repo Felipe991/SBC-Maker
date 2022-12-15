@@ -48,6 +48,7 @@ namespace SBC_Maker
             }
             IniciarGrafico();
             IniciarMemoria();
+            this.Text += " (" + conjuntoDifuso.nombre + ")";
         }
 
         private void setDirectory()
@@ -179,7 +180,7 @@ namespace SBC_Maker
         private void archivarConjunto()
         {
             saveFileDialog1.FileName = this.conjuntoDifuso.nombre;
-            saveFileDialog1.Filter = "TXT files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "CDF Conjunto Difuso (*.cdf)|*.cdf|All files (*.*)|*.*";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 File.Create(saveFileDialog1.FileName).Close();
