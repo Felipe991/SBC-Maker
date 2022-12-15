@@ -35,16 +35,17 @@
             // 
             // trackBarRespuestaDifusa
             // 
-            this.trackBarRespuestaDifusa.Location = new System.Drawing.Point(56, 57);
+            this.trackBarRespuestaDifusa.Location = new System.Drawing.Point(27, 48);
             this.trackBarRespuestaDifusa.Name = "trackBarRespuestaDifusa";
-            this.trackBarRespuestaDifusa.Size = new System.Drawing.Size(301, 56);
+            this.trackBarRespuestaDifusa.Size = new System.Drawing.Size(357, 56);
             this.trackBarRespuestaDifusa.TabIndex = 0;
             this.trackBarRespuestaDifusa.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarRespuestaDifusa.Scroll += new System.EventHandler(this.trackBarRespuestaDifusa_Scroll);
             // 
             // labelUnidad
             // 
             this.labelUnidad.AutoSize = true;
-            this.labelUnidad.Location = new System.Drawing.Point(171, 129);
+            this.labelUnidad.Location = new System.Drawing.Point(171, 126);
             this.labelUnidad.Name = "labelUnidad";
             this.labelUnidad.Size = new System.Drawing.Size(71, 20);
             this.labelUnidad.TabIndex = 1;
