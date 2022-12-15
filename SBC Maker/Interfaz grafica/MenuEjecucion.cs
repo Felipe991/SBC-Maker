@@ -16,14 +16,20 @@ namespace SBC_Maker.Interfaz_grafica
     {
         private MotorDeInferencia motor;
         private Nodo nodoActual;
+        private bool MOSTRAREXPLICACION;
 
         public MenuEjecucion(SBC sbc)
         {
             InitializeComponent();
             this.motor = new MotorDeInferencia(sbc);
+            this.MOSTRAREXPLICACION = sbc.ConfiguracionMotor.Explicacion;
             this.Text += " (" + sbc.Nombre + ")";
-            //this.nodoActual = this.motor.ResolucionConflicto();
-            //RefreshPanelRespuesta(this.nodoActual.Regla.Pregunta);
+            this.nodoActual = this.motor.ResolucionConflicto();
+            RefreshPanelRespuesta(getPregunta());
+        }
+        private Pregunta getPregunta()
+        {
+            return ((ReglaInformacion)this.nodoActual.Regla).Pregunta;
         }
 
         private void RefreshPanelRespuesta(Pregunta pregunta)
@@ -50,8 +56,8 @@ namespace SBC_Maker.Interfaz_grafica
             this.nodoActual = this.motor.ChainForward(this.nodoActual);
 
             
-            /*if (this.nodoActual != null) RefreshPanelRespuesta(nodoActual.Regla.Pregunta);
-            else llamar al sgte menu*/
+            if (this.nodoActual != null) RefreshPanelRespuesta(getPregunta());
+            /*else llamar al menu conclusion*/
         }
 
         private string getRespuesta()
@@ -71,8 +77,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void buttonTerminar_Click(object sender, EventArgs e)
         {
-            //Mostrar conclusiones y explicaciones alcanzadas
-            //Misma forma de subir que en resolucionMasInformacion??
+            /*llamar al menu conclusion*/
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
     public class MotorDeInferencia
     {
         private int MAXCONCLUSIONES;
-        private bool MOSTRAREXPLICACION, MENORLARGOCAMINO, MAYORINFORMACION, MAYORPROFUNDIDAD; 
+        private bool MENORLARGOCAMINO, MAYORINFORMACION, MAYORPROFUNDIDAD; 
         private List<Nodo> baseConocimiento;
         private List<Nodo> reglasAplicables;
         private List<Nodo> conclusiones = new List<Nodo>();
@@ -17,7 +17,6 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
         public MotorDeInferencia(SBC sbc)
         {
             this.MAXCONCLUSIONES = sbc.ConfiguracionMotor.ConclusionesNecesarias;
-            this.MOSTRAREXPLICACION = sbc.ConfiguracionMotor.Explicacion;
             this.MENORLARGOCAMINO = sbc.ConfiguracionMotor.MetodoResolucion[0];
             this.MAYORINFORMACION = sbc.ConfiguracionMotor.MetodoResolucion[1];
             this.MAYORPROFUNDIDAD = sbc.ConfiguracionMotor.MetodoResolucion[2];
@@ -60,7 +59,11 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
                     {
                         if (CheckRelacion(antecedentes))
                         {
-                            if (consecuente.Regla is ReglaConclusion) this.conclusiones.Add(consecuente);
+                            if (consecuente.Regla is ReglaConclusion)
+                            {
+                                this.conclusiones.Add(consecuente);
+                                MessageBox.Show("Conclusión alcanzada");
+                            }
                             else this.reglasAplicables.Add(consecuente);
                             consecuente.IndiceRelacionCumplida = consecuente.Antecedentes.IndexOf(antecedentes);
                             break;
@@ -165,7 +168,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             this.reglasAplicables = aplicablesRemantentes;
         }
     
-        private Nodo ResolucionConflicto()
+        public Nodo ResolucionConflicto()
         {
             List<Nodo> reglasAplicablesAux = new List<Nodo>();
             reglasAplicablesAux.AddRange(this.reglasAplicables);
@@ -179,18 +182,106 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             
             return reglasAplicablesAux[0];
         }
+        private List<Nodo> resolucionMenorLargoCamino(List<Nodo> reglasAplicablesAux)
+        {
+            List<Nodo> aux = new List<Nodo>();
+            int menorLargoCamino = int.MaxValue;
+            foreach(Nodo nodoAplicable in reglasAplicablesAux)
+            {
+                List<int> cantidadInformacion = new();
+                List<Nodo> nodosRecorridos = new List<Nodo>(){nodoAplicable};
+                foreach(Nodo consecuente in nodoAplicable.Consecuentes)
+                {
+                    contarLargoCamino(nodoAplicable,consecuente,nodosRecorridos, cantidadInformacion);
+                }
 
-        //Dear Pelao:
-        //Para cada regla aplicable se selecciona la lista de relaciones que lo satisface
-        //Si es de inicio lo anterior no aplica y solamente se instancia una lista vacia
-        //A la par de esto se crea una lista de nodos que se recorren para evitar redundancias
-        //Una vez teniendo estos dos parametros listos se empieza a contar
-        //Por cada una de las relaciones antecedente de la lista se cuenta a partir del nodo
-        //Utilizo tu metodo para recorrer la estructura y rellenar la lista de nodos recorridos
-        //Una vez se termina el rellenado recursivo se utiliza .Count() de la lista para saber la cantidad de nodos de info
-        //Si es igual se agrega a la lista auxiliar
-        //Si es mayor se vacia la lista auxiliar y se agrega el nodo
-        //Una vez terminado el ciclo se retorna la lista auxiliar
+                cantidadInformacion = cantidadInformacion.OrderBy(x => x).ToList();
+                int infoMinima = cantidadInformacion[0];
+                if (infoMinima < menorLargoCamino)
+                {
+                    menorLargoCamino = infoMinima;
+                    aux.Clear();
+                    aux.Add(nodoAplicable);
+                }
+                else if (infoMinima == menorLargoCamino) aux.Add(nodoAplicable);
+            }
+            return aux;
+        }
+        
+        private void contarLargoCamino(Nodo antecedente, Nodo nodoActual, List<Nodo> nodosRecorridos, List<int> cantidadInformacion)
+        {
+            nodosRecorridos.Add(nodoActual);
+            contarCaminoAntecedentes(antecedente, nodoActual, nodosRecorridos);
+            if (nodoActual.Consecuentes.Count() == 0)
+            {
+                int i = clearNodosRecorridos(nodoActual, nodosRecorridos);
+                cantidadInformacion.Add(nodosRecorridos.Count()+i);
+                return;
+            }
+            foreach (Nodo consecuente in nodoActual.Consecuentes)
+            {
+                contarLargoCamino(nodoActual, consecuente, nodosRecorridos, cantidadInformacion);
+            }
+            clearNodosRecorridos(nodoActual, nodosRecorridos);
+        }
+        private int clearNodosRecorridos(Nodo nodo, List<Nodo> nodosRecorridos)
+        {
+            int i = 0;
+            while (true)
+            {
+                if (nodosRecorridos.Last().Equals(nodo))
+                {
+                    nodosRecorridos.Remove(nodo);
+                    break;
+                }
+                nodosRecorridos.Remove(nodosRecorridos.Last());
+                i++;
+            }
+            return i;
+        }
+
+        private void contarCaminoAntecedentes(Nodo antecedente, Nodo consecuente, List<Nodo> nodosRecorridos)
+        {
+            List<List<Relacion>> antecedentesRelevantes = consecuente.Antecedentes
+            .Where(x => x.Any(y => y.Nodo.Equals(antecedente))).ToList();
+            List<List<Nodo>> antecedentesRecorridos = new();
+
+            foreach (List<Relacion> antecedenteRelevante in antecedentesRelevantes)
+            {
+                foreach (Relacion relacionRelevante in antecedenteRelevante)
+                {
+                    if (nodosRecorridos.Contains(relacionRelevante.Nodo)) continue;
+                    antecedentesRecorridos.Add(new List<Nodo>() { relacionRelevante.Nodo });
+                    contarAntecedentes(relacionRelevante.Nodo, antecedentesRecorridos.Last());
+                }
+            }
+            if (antecedentesRecorridos.Count() > 0)
+            {
+                antecedentesRecorridos = antecedentesRecorridos.OrderBy(x => x.Count).ToList();
+                nodosRecorridos.AddRange(antecedentesRecorridos[0]);
+            }
+        }
+
+        private void contarAntecedentes(Nodo antecedente, List<Nodo> antecedentesRecorridos)
+        {   
+            List<List<Nodo>> relacionesRecorridas = new();
+
+            foreach (List<Relacion> antecedentes in antecedente.Antecedentes)
+            {
+                List<Nodo> antecedentesRecorridosAux = new();
+                foreach (Relacion anterior in antecedentes)
+                {
+                    if (anterior.Nodo.PremisasCumplidas) continue;
+                    antecedentesRecorridosAux.Add(anterior.Nodo);
+                    contarAntecedentes(anterior.Nodo, antecedentesRecorridosAux);
+                }
+                relacionesRecorridas.Add(antecedentesRecorridosAux);
+            }
+            if (relacionesRecorridas.Count() == 0) return;
+            relacionesRecorridas = relacionesRecorridas.OrderBy(x => x.Count).ToList();
+            antecedentesRecorridos.AddRange(relacionesRecorridas[0]);
+        }
+
         private List<Nodo> resolucionMayorInformacion(List<Nodo> reglasAplicablesAux)
         {
             List<Nodo> aux = new();
@@ -212,11 +303,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             }
             return aux;
         }
-
-        //Se recorren los nodos hacia arriba recursivamente, almacenando los recorridos en nodosRecorridos
-        //Al igual que el metodo de resolucionMayorInformacion se selecciona la lista de relaciones que satisfacen al nodo
-        //Siempre se tendrá una lista de relaciones que lo satisfacen porque se esta recorriendo hacia arriba
-        //Se detiene su recursión al encontrarse parado en una raiz
+        
         private void contarCantidadInformacion(Nodo nodo,List<Nodo> nodosRecorridos)
         {
             nodosRecorridos.Add(nodo);
@@ -229,33 +316,10 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             }
         }
 
-
-        /*  DE TODO ESTO A DOS MISERABLES LINEAS XD
-         *  Hay que aprender LINQ, está pana
-         *  List<Nodo> aux = new List<Nodo>();
-            int mayorNivel = 0;
-            foreach(Nodo aplicable in reglasAplicablesAux)
-            {
-                if (aplicable.Nivel == mayorNivel) aux.Add(aplicable);
-                else if(aplicable.Nivel > mayorNivel)
-                {
-                    aux.Clear();
-                    aux.Add(aplicable);
-                    mayorNivel = aplicable.Nivel;
-                }
-            }
-            return aux;
-         */
         private List<Nodo> resolucionMayorProfundidad(List<Nodo> reglasAplicablesAux)
         {
             var nodosPorNivel = reglasAplicablesAux.GroupBy(nodo => nodo.Nivel);
             return nodosPorNivel.OrderByDescending(nodos => nodos.Key).First().ToList();
-        }
-
-        private List<Nodo> resolucionMenorLargoCamino(List<Nodo> reglasAplicablesAux)
-        {
-            List<Nodo> aux = new List<Nodo>();
-            return aux;
         }
 
         private List<Nodo> GetNodosInicio()
