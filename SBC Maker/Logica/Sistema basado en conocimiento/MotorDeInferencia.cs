@@ -29,50 +29,54 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             foreach(Nodo consecuente in preguntado.Consecuentes)
             {
                 if (!consecuente.IsAlcanzable() || consecuente.PremisasCumplidas) continue;
-                List<List<Relacion>> antecedentesRemanentes = GetRemanentes(consecuente, preguntado);
-
-                if (reglasAplicables.Contains(consecuente) || conclusiones.Contains(consecuente))
+                List<List<Relacion>> antecedentesRemanentes = GetRemanentes(preguntado, consecuente);
+                if (!VerifyPremisas(antecedentesRemanentes,consecuente))
                 {
-                    consecuente.PremisasCumplidas = true;
-                }
-                else
-                {
-                    if (antecedentesRemanentes.Count() == 0) DeleteInalcanzable(preguntado, consecuente);
-                    else consecuente.Antecedentes = antecedentesRemanentes;
+                    
+                    
                 }
             }
+            Console.WriteLine("Aplicables antes de limpiar" + this.reglasAplicables.ToString());
             this.reglasAplicables.Remove(preguntado);
             CleanAplicables();
+            Console.WriteLine("Aplicables despues de limpiar" + this.reglasAplicables.ToString());
+
             if (this.reglasAplicables.Count() == 0 || conclusiones.Count() == this.MAXCONCLUSIONES) return null;
             return this.reglasAplicables.Count() > 1 ? ResolucionConflicto() : this.reglasAplicables[0];
         }
         
-        private List<List<Relacion>> GetRemanentes(Nodo consecuente, Nodo preguntado)
+        private List<List<Relacion>> GetRemanentes( Nodo preguntado, Nodo consecuente)
         {
             List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
             {
                 Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(preguntado));
-                if (relacion != null)
+                if (relacion == null) continue;
+                if (SatisfyRespuesta(preguntado, relacion))
                 {
-                    if (SatisfyRespuesta(preguntado, relacion))
-                    {
-                        if (CheckRelacion(antecedentes))
-                        {
-                            if (consecuente.Regla is ReglaConclusion)
-                            {
-                                this.conclusiones.Add(consecuente);
-                                MessageBox.Show("Conclusión alcanzada");
-                            }
-                            else this.reglasAplicables.Add(consecuente);
-                            consecuente.IndiceRelacionCumplida = consecuente.Antecedentes.IndexOf(antecedentes);
-                            break;
-                        }
-                        antecedentesRemanentes.Add(antecedentes);
-                    }
+                    antecedentesRemanentes.Add(antecedentes);
                 }
             }
             return antecedentesRemanentes;
+        }
+        private bool VerifyPremisas(List<List<Relacion>> antecedentesRemanentes, Nodo consecuente)
+        {
+            foreach (List<Relacion> antecedentes in antecedentesRemanentes)
+            {
+                if (CheckRelacion(antecedentes))
+                {
+                    if (consecuente.Regla is ReglaConclusion)
+                    {
+                        this.conclusiones.Add(consecuente);
+                        MessageBox.Show("Conclusión alcanzada");
+                    }
+                    else this.reglasAplicables.Add(consecuente);
+                    consecuente.PremisasCumplidas = true;
+                    consecuente.IndiceRelacionCumplida = consecuente.Antecedentes.IndexOf(antecedentes);
+                    return true;
+                }
+            }
+            return false;
         }
 
         private bool SatisfyRespuesta(Nodo preguntado, Relacion relacion)
@@ -88,15 +92,48 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             }
             return true;
         }
-        private void DeleteInalcanzable(Nodo antecedente,Nodo nodo)
+
+        private void DeleteInalcanzable(Nodo nodoActual, List<List<Relacion>> antecedentesRemanentes)
+        {
+            //Necesito saber cual fue la o las relaciones que se borraron
+            List<List<Relacion>> antecedentesEliminados = nodoActual.Antecedentes.Except(antecedentesRemanentes).ToList();
+            foreach(List<Relacion> antecedentes in antecedentesEliminados)
+            {
+                foreach(Relacion antecedente in antecedentes)
+                {
+
+                }
+            }
+            //Verifico hacia atras, en esas Relaciones, si el antecedente aun porta INFO, si no, se va a acostar y así sucesivamente
+            //Luego, si al consecuente no le quedan remanentes, significa que es inalcanzable, y por ende, todas las relaciones que dependan
+            //de él, deben ser eliminadas hacia abajo, siguiendo el mismo proceso desde el principio
+            //Finalmente se asignan los remanentes consecuente.Antecedentes = antecedentesRemanentes;
+        }
+
+        private void DeleteInAntecedentes(Nodo nodo, List<Nodo> recorridos, List<List<Relacion>> antecedentesEliminados)
+        {
+            foreach (List<Relacion> antecedentes in antecedentesEliminados)
+            {
+                foreach (Relacion antecedente in antecedentes)
+                {
+                    if (recorridos.Contains(antecedente.Nodo)) continue;
+                    recorridos.Add(antecedente.Nodo);
+
+                    if (AportaInfo(nodo, antecedente)) continue;
+                    /*DeleteInAntecedentes(antecedente.Nodo, recorridos);
+                    antecedente.Nodo.Antecedentes.Clear();*/
+                }
+            }
+        }
+        /*private void DeleteInalcanzable(Nodo antecedente,Nodo nodoActual)
         {
             List<Nodo> recorridos = new List<Nodo>();
             recorridos.Add(antecedente);
             
-            DeleteInAntecedentes(nodo,recorridos);
-            nodo.Antecedentes.Clear();
+            DeleteInAntecedentes(nodoActual, recorridos);
+            nodoActual.Antecedentes.Clear();    
 
-            DeleteInConsecuentes(nodo);
+            DeleteInConsecuentes(nodoActual);
         }
         
         private void DeleteInAntecedentes(Nodo nodo, List<Nodo> recorridos)
@@ -109,7 +146,8 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
                     recorridos.Add(antecedente.Nodo);
                     
                     if (AportaInfo(nodo,antecedente)) continue;
-                    DeleteAntecedente(antecedente, recorridos);
+                    DeleteInAntecedentes(antecedente.Nodo, recorridos);
+                    antecedente.Nodo.Antecedentes.Clear();
                 }
             }
         }
@@ -126,12 +164,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             }
             return aportaInfo;
         }
-        private void DeleteAntecedente(Relacion antecedente, List<Nodo> recorridos)
-        {
-            DeleteInAntecedentes(antecedente.Nodo, recorridos);
-            antecedente.Nodo.Antecedentes.Clear();
 
-        }
         private void DeleteInConsecuentes(Nodo nodo)
         {
             foreach (Nodo consecuente in nodo.Consecuentes)
@@ -139,7 +172,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
                 if (!consecuente.IsAlcanzable()) continue;
                 List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
                 foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
-                {
+                {   
                     Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(nodo));
                     if (relacion == null)
                     {
@@ -149,7 +182,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
                 if (antecedentesRemanentes.Count() == 0) DeleteInalcanzable(nodo,consecuente);
                 else consecuente.Antecedentes = antecedentesRemanentes;
             }
-        }
+        }*/
         private void CleanAplicables()
         {
             List<Nodo> aplicablesRemantentes = new List<Nodo>();
