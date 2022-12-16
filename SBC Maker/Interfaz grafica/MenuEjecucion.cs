@@ -43,6 +43,7 @@ namespace SBC_Maker.Interfaz_grafica
             this.nodoActual = this.motor.ResolucionConflicto();
             UpdateDatosForm();
         }
+
         private void UpdateDatosForm()
         {
             Pregunta pregunta = getPregunta();

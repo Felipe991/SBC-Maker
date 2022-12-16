@@ -269,17 +269,24 @@ namespace SBC_Maker.Interfaz_grafica
             relacion.RespuestasNecesarias = GetRespuestas();
             string error = "";
             if (!VerifyCycle(this.antecedente, this.consecuente)) error = "No se permiten ciclos";
-            if (!VerifyRespuestas()) error = "Seleccione al menos una respuesta";
-            if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
-            {
-                if (!VerifyNewRelacion(this.antecedente, this.consecuente, relacion)) error = "Nueva relación redundante";
-                else if (!VerifyInalcanzableNew(this.antecedente, this.consecuente, relacion)) error = "Regla inalcanzable";
-            }
             else
             {
-                if (!VerifyExistentRelacion(this.antecedente, this.consecuente, relacion)) error = "Relacion Redundante";
-                else if (!VerifyInalcanzable(this.antecedente, this.consecuente, relacion)) error = "Regla inalcanzable";
+                if (!VerifyRespuestas()) error = "Seleccione al menos una respuesta";
+                else
+                {
+                    if (this.numeroRelacion > this.consecuente.Antecedentes.Count())
+                    {
+                        if (!VerifyNewRelacion(this.antecedente, this.consecuente, relacion)) error = "Nueva relación redundante";
+                        else if (!VerifyInalcanzableNew(this.antecedente, this.consecuente, relacion)) error = "Regla inalcanzable";
+                    }
+                    else
+                    {
+                        if (!VerifyExistentRelacion(this.antecedente, this.consecuente, relacion)) error = "Relacion Redundante";
+                        else if (!VerifyInalcanzable(this.antecedente, this.consecuente, relacion)) error = "Regla inalcanzable";
+                    }
+                }
             }
+            
             return error;
         }
         private bool VerifyRespuestas()

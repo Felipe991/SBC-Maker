@@ -196,6 +196,7 @@ namespace SBC_Maker.Logica
                 {
                     foreach (Relacion relacionAnterior in relaciones)
                     {
+                        if (!relacionAnterior.Nodo.Equals(relacionAntecedente.Nodo)) continue;
                         if (relacionAnterior.respuestasNecesarias.SequenceEqual(relacionAntecedente.respuestasNecesarias)) return false;
                     }
                 }
@@ -232,13 +233,12 @@ namespace SBC_Maker.Logica
 
         public static bool VerifyInalcanzable(Nodo antecedente, Nodo consecuente, Relacion relacionAntecedente)
         {
-
             List<Relacion> relaciones = new List<Relacion>();
             relaciones.AddRange(consecuente.Antecedentes[relacionAntecedente.NumeroRelacion - 1]);
-
             List<Nodo> recorridos = new List<Nodo>();
             recorridos.Add(consecuente);
-            
+
+            if (!CompareAntecedentesInalcanzable(antecedente, relaciones)) return false;
             foreach (Relacion relacion in relaciones)
             {
                 if (!VerifyAntecedenteInalcanzable(antecedente, relacion.Nodo, relacionAntecedente)) return false;
@@ -246,6 +246,23 @@ namespace SBC_Maker.Logica
             }
             return true;
         }
+
+        private static bool CompareAntecedentesInalcanzable(Nodo antecedente, List<Relacion> relaciones)
+        {
+            foreach (List<Relacion> antecedentesAntecedente in antecedente.Antecedentes)
+            {
+                foreach (Relacion relacionAntecedente in antecedentesAntecedente)
+                {
+                    foreach (Relacion relacionAnterior in relaciones)
+                    {
+                        if (!relacionAnterior.Nodo.Equals(relacionAntecedente.Nodo)) continue;
+                        if (!relacionAnterior.respuestasNecesarias.SequenceEqual(relacionAntecedente.respuestasNecesarias)) return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private static bool VerifyAntecedenteInalcanzable(Nodo antecedente, Nodo consecuente, Relacion relacion)
         {
             if (!VerifyAntecedenteIndirectoInalcanzable( consecuente, relacion)) return false;
