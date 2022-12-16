@@ -39,5 +39,17 @@ namespace SBC_Maker.Interfaz_grafica
                 this.flowLayoutPanel1.Controls.Add(new RelacionUserControl(consecuente,relacionAntecedente, listaAdyacencia,relacionesEliminadas));
             }
         }
+
+        private void buttonEliminar_Click(object sender, EventArgs e)
+        {
+            int contador = relacionesAntecedente.Count() - 1;
+            foreach(Relacion relacionAntecedente in relacionesAntecedente)
+            {
+                this.flowLayoutPanel1.Controls.RemoveAt(contador);
+                relacionesEliminadas.Add((relacionAntecedente.Nodo, consecuente, relacionAntecedente));
+                contador--;
+            }
+            this.Dispose();
+        }
     }
 }

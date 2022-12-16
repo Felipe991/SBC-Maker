@@ -246,10 +246,9 @@ namespace SBC_Maker
             }
             
         }
-        
+    
         private void MenuConfeccion_FormClosed(object sender, FormClosedEventArgs e)
         {
-            askUserSaveSBC();
             if(volverPrincipal) instanceNewForm(new MenuPrincipal());
         }
 
@@ -284,7 +283,6 @@ namespace SBC_Maker
 
         private void proyectoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            askUserSaveSBC();
             SBC sbcAux = loadSBC();
             if (sbcAux != null) 
             {
@@ -333,6 +331,11 @@ namespace SBC_Maker
         private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveSBC();
+        }
+
+        private void MenuConfeccion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            askUserSaveSBC();
         }
     }
 }
