@@ -44,7 +44,7 @@ namespace SBC_Maker.Interfaz_grafica
 
         private SBC loadSBC()
         {
-            SBC sbc = new SBC();
+            SBC sbc = null;
             try
             {
                 openFileDialogSBC.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
@@ -60,7 +60,6 @@ namespace SBC_Maker.Interfaz_grafica
             catch
             {
                 MessageBox.Show("Archivo inválido");
-                return null;
             }
             return sbc;
         }
