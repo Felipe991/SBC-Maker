@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SBC_Maker.Logica.Utiles;
 using static SBC_Maker.Logica.FormListener;
+using SBC_Maker.Logica;
 
 namespace SBC_Maker.Interfaz_grafica
 {
@@ -21,22 +22,47 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void buttonConfeccion_Click(object sender, EventArgs e)
         {
-            MenuConfeccion menuConfeccion = new MenuConfeccion();
-            menuConfeccion.FormClosed += delForm;
-            addForm();
-            menuConfeccion.Show();
+            instanceNewForm(new MenuConfeccion());
             this.Close();
         }
 
         private void buttonEjecucion_Click(object sender, EventArgs e)
         {
-            //Cargar el archivo SBC
-            //VerifyStructure(sbc.listaadyacencia)
-            /*MenuEjecucion menuEjecucio = new MenuEjecucion(sbc);
-             * menuEjecucio.FormClosed += delForm;
-             * addForm();
-            menuConfeccion.Show();
-            this.Dispose();*/
+            SBC sbc = loadSBC();
+            if (sbc != null)
+            {
+                if (!VerifyStructure(sbc.BaseConocimiento)) MessageBox.Show("Base de conocimiento invalida", "Error");
+                else iniciarEjecucion(sbc);
+            }
+        }
+
+        private void iniciarEjecucion(SBC sbc)
+        {
+            instanceNewForm(new MenuEjecucion(sbc));
+            this.Close();
+        }
+
+        private SBC loadSBC()
+        {
+            SBC sbc = new SBC();
+            try
+            {
+                openFileDialogSBC.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
+                if (openFileDialogSBC.ShowDialog() == DialogResult.OK)
+                {
+                    Stream stream = File.Open(openFileDialogSBC.FileName, FileMode.Open);
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    sbc = (SBC)bformatter.Deserialize(stream);
+                    stream.Close();
+                    sbc.Nombre = openFileDialogSBC.FileName.Split('\\').Last().Split('.').First();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Archivo inválido");
+                return null;
+            }
+            return sbc;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SBC_Maker.Logica;
 using SBC_Maker.Logica.Sistema_basado_en_conocimiento;
+using static SBC_Maker.Logica.FormListener;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,16 +18,38 @@ namespace SBC_Maker.Interfaz_grafica
         private MotorDeInferencia motor;
         private Nodo nodoActual;
         private bool MOSTRAREXPLICACION;
+        private bool fromConfeccion = false;
+        private int MAXCONCLUSIONES;
 
         public MenuEjecucion(SBC sbc)
         {
             InitializeComponent();
             this.motor = new MotorDeInferencia(sbc);
             this.MOSTRAREXPLICACION = sbc.ConfiguracionMotor.Explicacion;
+            this.MAXCONCLUSIONES = sbc.ConfiguracionMotor.ConclusionesNecesarias;
             this.Text += " (" + sbc.Nombre + ")";
             this.nodoActual = this.motor.ResolucionConflicto();
-            RefreshPanelRespuesta(getPregunta());
+            UpdateDatosForm();
         }
+
+        public MenuEjecucion(SBC sbc, bool fromConfeccion)
+        {
+            InitializeComponent();
+            this.fromConfeccion = fromConfeccion;
+            this.motor = new MotorDeInferencia(sbc);
+            this.MOSTRAREXPLICACION = sbc.ConfiguracionMotor.Explicacion;
+            this.MAXCONCLUSIONES = sbc.ConfiguracionMotor.ConclusionesNecesarias;
+            this.Text += " (" + sbc.Nombre + ")";
+            this.nodoActual = this.motor.ResolucionConflicto();
+            UpdateDatosForm();
+        }
+        private void UpdateDatosForm()
+        {
+            Pregunta pregunta = getPregunta();
+            richTextBox1.Text = pregunta.Enunciado;
+            RefreshPanelRespuesta(pregunta);
+        }
+
         private Pregunta getPregunta()
         {
             return ((ReglaInformacion)this.nodoActual.Regla).Pregunta;
@@ -34,50 +57,53 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void RefreshPanelRespuesta(Pregunta pregunta)
         {
-            Control controlRespuesta = null;
             this.panelRespuesta.Controls.Clear();
             switch (pregunta)
             {
                 case PreguntaCerrada preguntaCerrada:
-                    controlRespuesta = new EjecucionRespuestaCerradaUserControl(preguntaCerrada.Alternativas);
+                    this.panelRespuesta.Controls.Add(new EjecucionRespuestaCerradaUserControl(preguntaCerrada.Alternativas));
                     break;
                 case PreguntaDifusa preguntaDifusa:
-                    controlRespuesta = new EjecucionRespuestaDifusaUserControl(preguntaDifusa.ConjuntoDifuso);
+                    this.panelRespuesta.Controls.Add(new EjecucionRespuestaDifusaUserControl(preguntaDifusa.ConjuntoDifuso));
                     break;
             }
-            this.panelRespuesta.Controls.Add(controlRespuesta);
         }
 
         private void buttonResponder_Click(object sender, EventArgs e)
         {
-            Control controlRespuesta = this.panelRespuesta.Controls[0];
             string respuesta = getRespuesta();
             this.nodoActual.Hecho.RespuestaFinal = respuesta;
             this.nodoActual = this.motor.ChainForward(this.nodoActual);
 
-            
-            if (this.nodoActual != null) RefreshPanelRespuesta(getPregunta());
-            /*else llamar al menu conclusion*/
+            if (motor.conclusiones.Count() < MAXCONCLUSIONES && this.nodoActual != null) UpdateDatosForm();
+            else finishEjecucion();
+        }
+
+        private void finishEjecucion()
+        {
+            if (motor.conclusiones.Count > 0) showResolucion();
+            else MessageBox.Show("No hay conclusiones", "Fin ejecución");
+            if(!fromConfeccion) instanceNewForm(new MenuPrincipal());
+            this.Close();
         }
 
         private string getRespuesta()
         {
             Control controlRespuesta = this.panelRespuesta.Controls[0];
-            string respuesta = "";
-            if (controlRespuesta is EjecucionRespuestaCerradaUserControl)
-            {
-                respuesta = ((EjecucionRespuestaCerradaUserControl)controlRespuesta).getRespuesta();
-            }
-            else if (controlRespuesta is EjecucionRespuestaDifusaUserControl)
-            {
-                respuesta = ((EjecucionRespuestaDifusaUserControl)controlRespuesta).getRespuesta();
-            }
-            return respuesta;
+            if (controlRespuesta is EjecucionRespuestaCerradaUserControl ERCUC) return ERCUC.getRespuesta();
+            return ((EjecucionRespuestaDifusaUserControl)controlRespuesta).getRespuesta();
         }
 
         private void buttonTerminar_Click(object sender, EventArgs e)
         {
-            /*llamar al menu conclusion*/
+            finishEjecucion();
+        }
+
+        private void showResolucion()
+        {
+            var menuResolucion = new MenuResolucion(motor.conclusiones, MOSTRAREXPLICACION);
+            menuResolucion.ShowDialog();
+            this.Close();
         }
     }
 }

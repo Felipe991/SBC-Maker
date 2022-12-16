@@ -15,7 +15,8 @@ namespace SBC_Maker.Interfaz_grafica
     {
         public MenuResolucion(List<Nodo> conclusiones, bool showExplicacion)
         {
-            foreach(Nodo conclusion in conclusiones)
+            InitializeComponent();
+            foreach (Nodo conclusion in conclusiones)
             {
                 flowLayoutPanelConclusiones.Controls.Add(new ConclusionUserControl(conclusion, showExplicacion));
             }

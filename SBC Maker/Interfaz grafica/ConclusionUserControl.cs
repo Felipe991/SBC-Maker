@@ -17,8 +17,19 @@ namespace SBC_Maker.Interfaz_grafica
         {
             InitializeComponent();
             this.nombreConclusionLabel.Text = conclusion.Regla.Nombre;
-            if (showExplicacion) this.richTextBox1.Text+= buildExplicaciones(conclusion);
-            else this.richTextBox1.Text+="Explicacion deshabilitada";
+            this.richTextBoxIndicacion.Text = ((ReglaConclusion)conclusion.Regla).Indicacion;
+            if (showExplicacion) fillTextBoxExplicaciones(conclusion);
+            else this.richTextBoxExplicacion.Text+="Explicacion deshabilitada";
+        }
+
+        private void fillTextBoxExplicaciones(Nodo conclusion)
+        {
+            List<string> explicaciones = buildExplicaciones(conclusion);
+            explicaciones.Reverse();
+            foreach (string explicacion in explicaciones)
+            {
+                this.richTextBoxExplicacion.Text += explicacion + Environment.NewLine;
+            }
         }
 
         private List<string>buildExplicaciones(Nodo conclusion)
@@ -47,13 +58,19 @@ namespace SBC_Maker.Interfaz_grafica
             string explicacion = "";
             List<Relacion> relacionesAntecedentes = nodo.Antecedentes[nodo.IndiceRelacionCumplida];
             explicacion += getTipoReglaString(nodo);
-            explicacion += nodo.Regla.Nombre + " -> ( ";
+            explicacion += nodo.Regla.Nombre + " <- ( ";
             foreach (Relacion relacionAntecedente in relacionesAntecedentes)
             {
+                explicacion += "( ";
                 explicacion += getTipoReglaString(relacionAntecedente.Nodo);
                 explicacion += relacionAntecedente.Nodo.Regla.Nombre + " ";
-                if (relacionAntecedente.Explicacion != "") explicacion += relacionAntecedente.Explicacion+" ";
-                else explicacion += "R:" + relacionAntecedente.Nodo.Hecho.RespuestaFinal+" ";
+                if (relacionAntecedente.Explicacion != "") explicacion += relacionAntecedente.Explicacion;
+                else
+                {
+                    string enunciado = ((ReglaInformacion)relacionAntecedente.Nodo.Regla).Pregunta.Enunciado;
+                    explicacion += "P: " + enunciado + " R: " + relacionAntecedente.Nodo.Hecho.RespuestaFinal;
+                }
+                explicacion += " ) ";
                 if (relacionesAntecedentes.IndexOf(relacionAntecedente) == relacionesAntecedentes.Count - 1) explicacion += ")";
                 else explicacion += "y ";
             }

@@ -23,12 +23,14 @@ namespace SBC_Maker.Interfaz_grafica
             int i = 0;
             foreach(string alternativa in alternativas)
             {
+                i++;
                 groupBoxAlternativas.Controls.Add(new RadioButton() {
                     Text = alternativa,
-                    Left = i % 3 == 0 ? groupBoxAlternativas.Controls[0].Left : Left,
-                    Top = i%3 == 0 ? (i / 3) * 20 : Top
-                    });
+                    Left = 5,
+                    Top = i!=1 ? i*20 : 5
+                });;
             }
+            ((RadioButton)groupBoxAlternativas.Controls[0]).Checked = true;
         }
 
         public string getRespuesta()

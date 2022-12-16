@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.nombreConclusionLabel = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxExplicacion = new System.Windows.Forms.RichTextBox();
             this.labelExplicación = new System.Windows.Forms.Label();
+            this.labelIndicacion = new System.Windows.Forms.Label();
+            this.richTextBoxIndicacion = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // nombreConclusionLabel
@@ -43,33 +45,55 @@
             this.nombreConclusionLabel.TabIndex = 0;
             this.nombreConclusionLabel.Text = "NombreConclusion";
             // 
-            // richTextBox1
+            // richTextBoxExplicacion
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(4, 43);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(449, 72);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.richTextBoxExplicacion.Location = new System.Drawing.Point(3, 127);
+            this.richTextBoxExplicacion.Name = "richTextBoxExplicacion";
+            this.richTextBoxExplicacion.Size = new System.Drawing.Size(449, 76);
+            this.richTextBoxExplicacion.TabIndex = 1;
+            this.richTextBoxExplicacion.Text = "";
+            this.richTextBoxExplicacion.WordWrap = false;
             // 
             // labelExplicación
             // 
             this.labelExplicación.AutoSize = true;
             this.labelExplicación.Font = new System.Drawing.Font("Segoe UI Historic", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.labelExplicación.Location = new System.Drawing.Point(4, 23);
+            this.labelExplicación.Location = new System.Drawing.Point(3, 107);
             this.labelExplicación.Name = "labelExplicación";
             this.labelExplicación.Size = new System.Drawing.Size(72, 17);
             this.labelExplicación.TabIndex = 2;
             this.labelExplicación.Text = "Explicación";
             // 
+            // labelIndicacion
+            // 
+            this.labelIndicacion.AutoSize = true;
+            this.labelIndicacion.Font = new System.Drawing.Font("Segoe UI Historic", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.labelIndicacion.Location = new System.Drawing.Point(3, 29);
+            this.labelIndicacion.Name = "labelIndicacion";
+            this.labelIndicacion.Size = new System.Drawing.Size(88, 23);
+            this.labelIndicacion.TabIndex = 3;
+            this.labelIndicacion.Text = "Indicación";
+            // 
+            // richTextBoxIndicacion
+            // 
+            this.richTextBoxIndicacion.Location = new System.Drawing.Point(3, 55);
+            this.richTextBoxIndicacion.Name = "richTextBoxIndicacion";
+            this.richTextBoxIndicacion.Size = new System.Drawing.Size(449, 49);
+            this.richTextBoxIndicacion.TabIndex = 4;
+            this.richTextBoxIndicacion.Text = "";
+            this.richTextBoxIndicacion.WordWrap = false;
+            // 
             // ConclusionUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.richTextBoxIndicacion);
+            this.Controls.Add(this.labelIndicacion);
             this.Controls.Add(this.labelExplicación);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.richTextBoxExplicacion);
             this.Controls.Add(this.nombreConclusionLabel);
             this.Name = "ConclusionUserControl";
-            this.Size = new System.Drawing.Size(458, 135);
+            this.Size = new System.Drawing.Size(458, 216);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -78,7 +102,9 @@
         #endregion
 
         private Label nombreConclusionLabel;
-        private RichTextBox richTextBox1;
+        private RichTextBox richTextBoxExplicacion;
         private Label labelExplicación;
+        private Label labelIndicacion;
+        private RichTextBox richTextBoxIndicacion;
     }
 }

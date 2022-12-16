@@ -12,7 +12,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
         private bool MENORLARGOCAMINO, MAYORINFORMACION, MAYORPROFUNDIDAD; 
         private List<Nodo> baseConocimiento;
         private List<Nodo> reglasAplicables;
-        private List<Nodo> conclusiones = new List<Nodo>();
+        public List<Nodo> conclusiones = new List<Nodo>();
 
         public MotorDeInferencia(SBC sbc)
         {

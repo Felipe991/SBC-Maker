@@ -31,6 +31,7 @@
             this.buttonEjecucion = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonConfeccion = new System.Windows.Forms.Button();
+            this.openFileDialogSBC = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // buttonEjecucion
@@ -64,6 +65,10 @@
             this.buttonConfeccion.UseVisualStyleBackColor = true;
             this.buttonConfeccion.Click += new System.EventHandler(this.buttonConfeccion_Click);
             // 
+            // openFileDialogSBC
+            // 
+            this.openFileDialogSBC.FileName = "openFileDialog";
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -86,5 +91,6 @@
         private Button buttonEjecucion;
         private Label label1;
         private Button buttonConfeccion;
+        private OpenFileDialog openFileDialogSBC;
     }
 }

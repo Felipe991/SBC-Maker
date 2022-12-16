@@ -247,12 +247,14 @@
             // 
             // treeViewRelaciones
             // 
+            this.treeViewRelaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.treeViewRelaciones.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.treeViewRelaciones.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.treeViewRelaciones.Location = new System.Drawing.Point(-2, -3);
             this.treeViewRelaciones.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.treeViewRelaciones.Name = "treeViewRelaciones";
-            this.treeViewRelaciones.Size = new System.Drawing.Size(149, 755);
+            this.treeViewRelaciones.Size = new System.Drawing.Size(149, 665);
             this.treeViewRelaciones.TabIndex = 0;
             this.treeViewRelaciones.Visible = false;
             // 

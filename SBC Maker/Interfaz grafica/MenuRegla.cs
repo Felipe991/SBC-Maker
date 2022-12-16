@@ -86,10 +86,7 @@ namespace SBC_Maker.Interfaz_grafica
         
         private void GuardarButton_Click(object sender, EventArgs e)
         {
-            if (VerifyRegla())
-            {
-                if (GuardarRegla()) DialogResult = DialogResult.OK;
-            }
+            if (VerifyRegla() && GuardarRegla()) DialogResult = DialogResult.OK;
         }
         private bool VerifyRegla()
         {

@@ -22,6 +22,7 @@ namespace SBC_Maker
     {
         private SBC sbc;
         private bool mouseDown = false;
+        private bool volverPrincipal = true;
         public MenuConfeccion()
         {
             InitializeComponent();
@@ -237,20 +238,19 @@ namespace SBC_Maker
 
         private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Cargar el archivo SBC
-            //VerifyStructure(sbc.listaadyacencia)
-            /*MenuEjecucion menuEjecucio = new MenuEjecucion(sbc);
-            menuConfeccion.Show();
-            this.Dispose();*/
+            if (!VerifyStructure(sbc.BaseConocimiento)) MessageBox.Show("Base de conocimiento invalida", "Error");
+            else 
+            {
+                var MenuEjecucion = new MenuEjecucion(sbc, true);
+                MenuEjecucion.ShowDialog();
+            }
+            
         }
-
+        
         private void MenuConfeccion_FormClosed(object sender, FormClosedEventArgs e)
         {
             askUserSaveSBC();
-            addForm();
-            MenuPrincipal menuPrincipal = new();
-            menuPrincipal.FormClosed += delForm;
-            menuPrincipal.Show();
+            if(volverPrincipal) instanceNewForm(new MenuPrincipal());
         }
 
         private void askUserSaveSBC()
@@ -286,10 +286,12 @@ namespace SBC_Maker
         {
             askUserSaveSBC();
             SBC sbcAux = loadSBC();
-            MenuConfeccion menuConfeccionNuevo = new MenuConfeccion(sbcAux);
-            menuConfeccionNuevo.FormClosed += delForm;
-            menuConfeccionNuevo.Show();
-            this.Dispose();
+            if (sbcAux != null) 
+            {
+                instanceNewForm(new MenuConfeccion(sbcAux));
+                volverPrincipal = false;
+                this.Close();
+            } 
         }
 
         private void rebuildNodos(List<Nodo> baseConocimiento)
@@ -318,6 +320,7 @@ namespace SBC_Maker
             catch
             {
                 MessageBox.Show("Archivo inválido");
+                return null;
             }
             return sbc;
         }

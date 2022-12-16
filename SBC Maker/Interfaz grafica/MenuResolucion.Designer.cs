@@ -56,6 +56,7 @@
             this.ClientSize = new System.Drawing.Size(482, 453);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanelConclusiones);
+            this.HelpButton = true;
             this.Name = "MenuResolucion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuResolucion";
