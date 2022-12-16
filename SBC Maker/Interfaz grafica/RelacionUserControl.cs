@@ -39,10 +39,5 @@ namespace SBC_Maker.Interfaz_grafica
             return respNecesarias+")";
         }
 
-        private void buttonEliminar_Click(object sender, EventArgs e)
-        {
-            relacionesEliminadas.Add((relacionAntecedente.Nodo,consecuente,relacionAntecedente));
-            this.Dispose();
-        }
     }
 }
