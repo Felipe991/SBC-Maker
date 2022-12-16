@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,30 +29,44 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
         {
             foreach(Nodo consecuente in preguntado.Consecuentes)
             {
-                if (!consecuente.IsAlcanzable() || consecuente.PremisasCumplidas) continue;
+                if (!consecuente.IsAlcanzable || consecuente.PremisasCumplidas) continue;
                 List<List<Relacion>> antecedentesRemanentes = GetRemanentes(preguntado, consecuente);
                 if (!VerifyPremisas(antecedentesRemanentes,consecuente))
                 {
-                    
-                    
+                    DeleteInalcanzable(preguntado, consecuente, antecedentesRemanentes);
                 }
             }
-            Console.WriteLine("Aplicables antes de limpiar" + this.reglasAplicables.ToString());
+            Debug.Print("Aplicables antes de limpiar" + printAplicables());
             this.reglasAplicables.Remove(preguntado);
             CleanAplicables();
-            Console.WriteLine("Aplicables despues de limpiar" + this.reglasAplicables.ToString());
+            Debug.Print("Aplicables despues de limpiar" + printAplicables());
 
             if (this.reglasAplicables.Count() == 0 || conclusiones.Count() == this.MAXCONCLUSIONES) return null;
             return this.reglasAplicables.Count() > 1 ? ResolucionConflicto() : this.reglasAplicables[0];
         }
+
+        private string printAplicables()
+        {
+            string aplicables = "";
+            foreach(Nodo aplicable in this.reglasAplicables)
+            {
+                aplicables += aplicable.Regla.Nombre;
+            }
+            return aplicables;
+        }
         
         private List<List<Relacion>> GetRemanentes( Nodo preguntado, Nodo consecuente)
         {
+            
             List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
             foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
             {
                 Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(preguntado));
-                if (relacion == null) continue;
+                if (relacion == null)
+                {
+                    antecedentesRemanentes.Add(antecedentes);
+                    continue;
+                }
                 if (SatisfyRespuesta(preguntado, relacion))
                 {
                     antecedentesRemanentes.Add(antecedentes);
@@ -93,96 +108,71 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             return true;
         }
 
-        private void DeleteInalcanzable(Nodo nodoActual, List<List<Relacion>> antecedentesRemanentes)
+        private void DeleteInalcanzable(Nodo preguntado,Nodo actual, List<List<Relacion>> antecedentesRemanentes)
         {
-            //Necesito saber cual fue la o las relaciones que se borraron
-            List<List<Relacion>> antecedentesEliminados = nodoActual.Antecedentes.Except(antecedentesRemanentes).ToList();
+            actual.IsAlcanzable = antecedentesRemanentes.Count() != 0;
+            List<List<Relacion>> antecedentesEliminados = actual.Antecedentes.Except(antecedentesRemanentes).ToList();
+
             foreach(List<Relacion> antecedentes in antecedentesEliminados)
             {
                 foreach(Relacion antecedente in antecedentes)
                 {
-
+                    if (antecedente.Nodo.Equals(preguntado)) continue;
+                    DeleteAntecedentes(actual,antecedente.Nodo, new List<Nodo>());
                 }
             }
-            //Verifico hacia atras, en esas Relaciones, si el antecedente aun porta INFO, si no, se va a acostar y así sucesivamente
-            //Luego, si al consecuente no le quedan remanentes, significa que es inalcanzable, y por ende, todas las relaciones que dependan
-            //de él, deben ser eliminadas hacia abajo, siguiendo el mismo proceso desde el principio
-            //Finalmente se asignan los remanentes consecuente.Antecedentes = antecedentesRemanentes;
+            if (!actual.IsAlcanzable)
+            {
+                DeleteConsecuentes(actual);
+            }
+            actual.Antecedentes = antecedentesRemanentes;
         }
 
-        private void DeleteInAntecedentes(Nodo nodo, List<Nodo> recorridos, List<List<Relacion>> antecedentesEliminados)
+        private void DeleteAntecedentes(Nodo anterior,Nodo actual, List<Nodo> recorridos)
         {
-            foreach (List<Relacion> antecedentes in antecedentesEliminados)
+            if (AportaInfo(anterior,actual)) return;
+            else actual.IsAlcanzable = false;
+
+            foreach (List<Relacion> antecedentes in actual.Antecedentes)
             {
                 foreach (Relacion antecedente in antecedentes)
                 {
                     if (recorridos.Contains(antecedente.Nodo)) continue;
                     recorridos.Add(antecedente.Nodo);
 
-                    if (AportaInfo(nodo, antecedente)) continue;
-                    /*DeleteInAntecedentes(antecedente.Nodo, recorridos);
-                    antecedente.Nodo.Antecedentes.Clear();*/
+                    DeleteAntecedentes(actual,antecedente.Nodo, recorridos);
                 }
             }
+            actual.Antecedentes.Clear();
         }
-        /*private void DeleteInalcanzable(Nodo antecedente,Nodo nodoActual)
+        private bool AportaInfo(Nodo anterior,Nodo actual)
         {
-            List<Nodo> recorridos = new List<Nodo>();
-            recorridos.Add(antecedente);
-            
-            DeleteInAntecedentes(nodoActual, recorridos);
-            nodoActual.Antecedentes.Clear();    
-
-            DeleteInConsecuentes(nodoActual);
-        }
-        
-        private void DeleteInAntecedentes(Nodo nodo, List<Nodo> recorridos)
-        {
-            foreach (List<Relacion> antecedentes in nodo.Antecedentes)
+            foreach (Nodo consecuente in actual.Consecuentes)
             {
-                foreach (Relacion antecedente in antecedentes)
+                if(consecuente.IsAlcanzable && !consecuente.Equals(anterior))
                 {
-                    if (recorridos.Contains(antecedente.Nodo)) continue;
-                    recorridos.Add(antecedente.Nodo);
-                    
-                    if (AportaInfo(nodo,antecedente)) continue;
-                    DeleteInAntecedentes(antecedente.Nodo, recorridos);
-                    antecedente.Nodo.Antecedentes.Clear();
+                    return true;
                 }
             }
-        }
-        private bool AportaInfo(Nodo nodo, Relacion antecedente)
-        {
-            bool aportaInfo = false;
-            foreach (Nodo consecuente in antecedente.Nodo.Consecuentes)
+            int i = 0;
+            foreach(List<Relacion> antecedentes in anterior.Antecedentes)
             {
-                if (!consecuente.Equals(nodo) && consecuente.IsAlcanzable())
-                {
-                    aportaInfo = true;
-                    break;
-                }
+                Relacion aux = antecedentes.Find(x => x.Nodo.Equals(actual));
+                if (aux != null) i++;
             }
-            return aportaInfo;
+            return i > 1;
         }
 
-        private void DeleteInConsecuentes(Nodo nodo)
+        private void DeleteConsecuentes(Nodo nodoActual)
         {
-            foreach (Nodo consecuente in nodo.Consecuentes)
+            foreach (Nodo consecuente in nodoActual.Consecuentes)
             {
-                if (!consecuente.IsAlcanzable()) continue;
-                List<List<Relacion>> antecedentesRemanentes = new List<List<Relacion>>();
-                foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
-                {   
-                    Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(nodo));
-                    if (relacion == null)
-                    {
-                        antecedentesRemanentes.Add(antecedentes);
-                    }
-                }
-                if (antecedentesRemanentes.Count() == 0) DeleteInalcanzable(nodo,consecuente);
-                else consecuente.Antecedentes = antecedentesRemanentes;
+                if (!consecuente.IsAlcanzable || consecuente.PremisasCumplidas) continue;
+                List<List<Relacion>> antecedentesRemanentes = GetRemanentes(nodoActual, consecuente);
+                DeleteInalcanzable(nodoActual, consecuente, antecedentesRemanentes);
             }
-        }*/
+        }
+       
         private void CleanAplicables()
         {
             List<Nodo> aplicablesRemantentes = new List<Nodo>();
@@ -190,12 +180,11 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             {
                 foreach(Nodo consecuente in aplicable.Consecuentes)
                 {
-                    if (consecuente.IsAlcanzable() && !consecuente.PremisasCumplidas)
+                    if (consecuente.IsAlcanzable && !consecuente.PremisasCumplidas)
                     {
                         aplicablesRemantentes.Add(aplicable);
                         break;
                     }
-                    
                 }
             }
             this.reglasAplicables = aplicablesRemantentes;
