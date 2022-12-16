@@ -106,5 +106,10 @@ namespace SBC_Maker.Interfaz_grafica
             menuResolucion.ShowDialog();
             this.Close();
         }
+
+        private void MenuEjecucion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!fromConfeccion) instanceNewForm(new MenuPrincipal());
+        }
     }
 }
