@@ -48,10 +48,7 @@ namespace SBC_Maker.Logica
                 }
             }
         }
-        /*public bool IsAlcanzable()
-        {
-            return this.Antecedentes.Count > 0;
-        }*/
+
         public Hecho Hecho { get => hecho; set => hecho = value; }
         public List<List<Relacion>> Antecedentes { get => antecedentes; set => antecedentes = value; }
         public List<Nodo> Consecuentes { get => consecuentes; set => consecuentes = value; }
