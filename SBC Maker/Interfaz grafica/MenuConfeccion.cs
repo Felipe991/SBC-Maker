@@ -238,13 +238,34 @@ namespace SBC_Maker
             if (!VerifyStructure(sbc.BaseConocimiento)) MessageBox.Show("Base de conocimiento invalida", "Error");
             else 
             {
-
+                CreateTemp(sbc);
                 var MenuEjecucion = new MenuEjecucion(sbc, true);
                 MenuEjecucion.ShowDialog();
+                volverPrincipal = false;
+                instanceNewForm(new MenuConfeccion(LoadTemp()));
+                this.Close();
             }
-            
         }
-    
+
+        private SBC LoadTemp()
+        {
+            Stream stream = File.Open("temp.sbc", FileMode.Open);
+            var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            SBC sbcAux = (SBC)bformatter.Deserialize(stream);
+            stream.Close();
+            File.Delete("temp.sbc");
+            return sbcAux;
+        }
+
+        private void CreateTemp(SBC sbc)
+        {
+            File.Create("temp.sbc").Close();
+            Stream stream = File.Open("temp.sbc", FileMode.Create);
+            var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            bformatter.Serialize(stream, sbc);
+            stream.Close();
+        }
+
         private void MenuConfeccion_FormClosed(object sender, FormClosedEventArgs e)
         {
             if(volverPrincipal) instanceNewForm(new MenuPrincipal());
