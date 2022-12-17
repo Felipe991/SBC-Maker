@@ -34,29 +34,32 @@
             // 
             // flowLayoutPanelConclusiones
             // 
-            this.flowLayoutPanelConclusiones.Location = new System.Drawing.Point(12, 58);
+            this.flowLayoutPanelConclusiones.AutoScroll = true;
+            this.flowLayoutPanelConclusiones.Location = new System.Drawing.Point(10, 44);
+            this.flowLayoutPanelConclusiones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanelConclusiones.Name = "flowLayoutPanelConclusiones";
-            this.flowLayoutPanelConclusiones.Size = new System.Drawing.Size(458, 352);
+            this.flowLayoutPanelConclusiones.Size = new System.Drawing.Size(401, 264);
             this.flowLayoutPanelConclusiones.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 27);
+            this.label1.Location = new System.Drawing.Point(10, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 28);
+            this.label1.Size = new System.Drawing.Size(106, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Conclusiones";
             // 
             // MenuResolucion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 453);
+            this.ClientSize = new System.Drawing.Size(422, 340);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanelConclusiones);
             this.HelpButton = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MenuResolucion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuResolucion";
