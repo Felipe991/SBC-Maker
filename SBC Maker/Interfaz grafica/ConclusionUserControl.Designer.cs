@@ -49,6 +49,7 @@
             // 
             this.richTextBoxExplicacion.Location = new System.Drawing.Point(3, 127);
             this.richTextBoxExplicacion.Name = "richTextBoxExplicacion";
+            this.richTextBoxExplicacion.ReadOnly = true;
             this.richTextBoxExplicacion.Size = new System.Drawing.Size(449, 76);
             this.richTextBoxExplicacion.TabIndex = 1;
             this.richTextBoxExplicacion.Text = "";
@@ -78,6 +79,7 @@
             // 
             this.richTextBoxIndicacion.Location = new System.Drawing.Point(3, 55);
             this.richTextBoxIndicacion.Name = "richTextBoxIndicacion";
+            this.richTextBoxIndicacion.ReadOnly = true;
             this.richTextBoxIndicacion.Size = new System.Drawing.Size(449, 49);
             this.richTextBoxIndicacion.TabIndex = 4;
             this.richTextBoxIndicacion.Text = "";
