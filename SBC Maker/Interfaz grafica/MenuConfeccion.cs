@@ -23,6 +23,7 @@ namespace SBC_Maker
         private SBC sbc;
         private bool mouseDown = false;
         private bool volverPrincipal = true;
+        private bool ejecutando = false;
         public MenuConfeccion()
         {
             InitializeComponent();
@@ -242,6 +243,7 @@ namespace SBC_Maker
                 var MenuEjecucion = new MenuEjecucion(sbc, true);
                 MenuEjecucion.ShowDialog();
                 volverPrincipal = false;
+                ejecutando = true;
                 instanceNewForm(new MenuConfeccion(LoadTemp()));
                 this.Close();
             }
@@ -353,7 +355,7 @@ namespace SBC_Maker
 
         private void MenuConfeccion_FormClosing(object sender, FormClosingEventArgs e)
         {
-            askUserSaveSBC();
+            if(!ejecutando) askUserSaveSBC();
         }
     }
 }
