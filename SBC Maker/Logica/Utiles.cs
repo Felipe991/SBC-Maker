@@ -101,7 +101,24 @@ namespace SBC_Maker.Logica
         private static bool VerifyAntecedentes (Nodo antecedente, Nodo consecuente, Relacion relacion)
         {
             if (!VerifyAntecedenteIndirecto(antecedente, consecuente, relacion)) return false;
-            if (!VerifyAntecedentesAntecedente(antecedente, consecuente)) return false;
+            if (!VerifyAntecedenteDirecto(antecedente, consecuente)) return false;
+            //if (!VerifyAntecedentesAntecedente(antecedente, consecuente)) return false;
+            return true;
+        }
+        private static bool VerifyAntecedenteDirecto(Nodo antecedente, Nodo consecuente)
+        {
+            foreach(List<Relacion> antecedentesAntecedente in antecedente.Antecedentes)
+            {
+                foreach(Relacion antecedenteAntecedente in antecedentesAntecedente)
+                {
+                    foreach(List<Relacion> antecedentesConsecuente in consecuente.Antecedentes)
+                    {
+                        Relacion antecedeDirecto = antecedentesConsecuente.Find(x => x.Nodo.Equals(antecedenteAntecedente.Nodo));
+                        if (antecedeDirecto == null) continue;
+                        if (antecedeDirecto.respuestasNecesarias.SequenceEqual(antecedenteAntecedente.respuestasNecesarias)) return false;
+                    }
+                }
+            }
             return true;
         }
         private static bool VerifyAntecedenteIndirecto(Nodo antecedente, Nodo consecuente, Relacion relacion)
