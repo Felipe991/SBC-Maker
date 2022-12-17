@@ -14,10 +14,7 @@ namespace SBC_Maker.Logica
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            var menu = new MenuPrincipal();
-            menu.FormClosed += delForm;
-            menu.Show();
-            addForm();
+            instanceNewForm(new MenuPrincipal());
             Application.Run();
         }
     }
