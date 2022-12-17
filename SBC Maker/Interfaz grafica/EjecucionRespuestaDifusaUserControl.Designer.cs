@@ -35,19 +35,20 @@
             // 
             // trackBarRespuestaDifusa
             // 
-            this.trackBarRespuestaDifusa.Location = new System.Drawing.Point(27, 48);
+            this.trackBarRespuestaDifusa.BackColor = System.Drawing.SystemColors.Control;
+            this.trackBarRespuestaDifusa.Location = new System.Drawing.Point(32, 48);
             this.trackBarRespuestaDifusa.Name = "trackBarRespuestaDifusa";
             this.trackBarRespuestaDifusa.Size = new System.Drawing.Size(357, 56);
             this.trackBarRespuestaDifusa.TabIndex = 0;
-            this.trackBarRespuestaDifusa.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBarRespuestaDifusa.Scroll += new System.EventHandler(this.trackBarRespuestaDifusa_Scroll);
             // 
             // labelUnidad
             // 
             this.labelUnidad.AutoSize = true;
-            this.labelUnidad.Location = new System.Drawing.Point(171, 126);
+            this.labelUnidad.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelUnidad.Location = new System.Drawing.Point(155, 107);
             this.labelUnidad.Name = "labelUnidad";
-            this.labelUnidad.Size = new System.Drawing.Size(71, 20);
+            this.labelUnidad.Size = new System.Drawing.Size(111, 31);
             this.labelUnidad.TabIndex = 1;
             this.labelUnidad.Text = "Unidades";
             // 
