@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace SBC_Maker.Interfaz_grafica
             Double min = getMin(conjuntoDifuso.funcionesPertenencia);
             Double max = getMax(conjuntoDifuso.funcionesPertenencia);
             factorDecimal = getFactorDecimal(min) > getFactorDecimal(max) ? getFactorDecimal(min):getFactorDecimal(max);
+            Debug.Print("Valor minimo de la barra:" + (int)min * factorDecimal);
+            Debug.Print("Valor maximo de la barra:" + (int)max * factorDecimal);
             trackBarRespuestaDifusa.Minimum = (int)min * factorDecimal;
             trackBarRespuestaDifusa.Maximum = (int)max * factorDecimal;
             trackBarRespuestaDifusa.Value = getMiddleValue();
@@ -62,6 +65,7 @@ namespace SBC_Maker.Interfaz_grafica
                         break;
                 }
             }
+            Debug.WriteLine("Valor maximo de las funciones=" + max);
             return max;
         }
 
@@ -83,6 +87,7 @@ namespace SBC_Maker.Interfaz_grafica
                         break;
                 }
             }
+            Debug.WriteLine("Valor minimo de las funciones="+min);
             return min;
         }
         
@@ -91,6 +96,7 @@ namespace SBC_Maker.Interfaz_grafica
             string[] partesDecimal = valorDouble.ToString().Split('.');
             int cantidadDecimales = 0;
             if (partesDecimal.Length != 1) cantidadDecimales = partesDecimal[1].Length;
+            Debug.Print("Factor decimal de: "+valorDouble+" = "+ (int)Math.Pow(10, cantidadDecimales));
             return (int)Math.Pow(10, cantidadDecimales);
         }
 
