@@ -88,7 +88,9 @@ namespace SBC_Maker.Interfaz_grafica
         
         private int getFactorDecimal(double valorDouble)
         {
-            int cantidadDecimales = valorDouble.ToString().Split('.')[1].Length;
+            string[] partesDecimal = valorDouble.ToString().Split('.');
+            int cantidadDecimales = 0;
+            if (partesDecimal.Length != 1) cantidadDecimales = partesDecimal[1].Length;
             return (int)Math.Pow(10, cantidadDecimales);
         }
 

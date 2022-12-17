@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace SBC_Maker.Interfaz_grafica
 {
@@ -390,7 +391,7 @@ namespace SBC_Maker.Interfaz_grafica
                     {
                         if (checkedListBoxRespuestaDifusa.GetItemChecked(i))
                         {
-                            respuestasNecesarias.Add(checkedListBoxRespuestaDifusa.GetItemText(i));
+                            respuestasNecesarias.Add(checkedListBoxRespuestaDifusa.Items[i].ToString());
                         }
                     }
                     break;

@@ -357,5 +357,22 @@ namespace SBC_Maker
         {
             if(!ejecutando) askUserSaveSBC();
         }
+
+        private void proyectoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            instanceNewForm(new MenuConfeccion());
+            volverPrincipal = false;
+            this.Close();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonAgregarRegla_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

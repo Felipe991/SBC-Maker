@@ -31,10 +31,10 @@ namespace SBC_Maker.Interfaz_grafica
         private string GetRespuestasNecesarias()
         {
             string respNecesarias = "(";
-            foreach(string respuestaNecesarioa in relacionAntecedente.RespuestasNecesarias)
+            foreach(string respuestaNecesaria in relacionAntecedente.RespuestasNecesarias)
             {
-                string aditivo = relacionAntecedente.RespuestasNecesarias.Last() == respuestaNecesarioa ? "" : ", ";
-                respNecesarias += respuestaNecesarioa + aditivo;
+                string aditivo = relacionAntecedente.RespuestasNecesarias.Last() == respuestaNecesaria ? "" : ", ";
+                respNecesarias += respuestaNecesaria + aditivo;
             }
             return respNecesarias+")";
         }

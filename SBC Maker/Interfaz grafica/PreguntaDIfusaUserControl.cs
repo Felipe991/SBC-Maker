@@ -22,6 +22,8 @@ namespace SBC_Maker.Interfaz_grafica
 
         private void buttonExaminar_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\Conjuntos Difusos";
+            openFileDialog1.Filter = "CDF Conjunto Difuso (*.cdf)|*.cdf|All files (*.*)|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
