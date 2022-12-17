@@ -357,6 +357,7 @@ namespace SBC_Maker.Logica
 
         public static bool VerifyStructure(List<Nodo> listaAdyacencia)
         {
+            if (listaAdyacencia.Count() == 0) return false;
             foreach (Nodo nodo in listaAdyacencia)
             {
                 switch (nodo.Regla)

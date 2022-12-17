@@ -29,6 +29,7 @@ namespace SBC_Maker
             setDirectorys();
             this.sbc = new SBC();
             this.SetStyle(ControlStyles.Opaque, true);
+            DoubleBuffered = true;
         }
         
         public MenuConfeccion(SBC sbc)
@@ -38,6 +39,7 @@ namespace SBC_Maker
             this.sbc = sbc;
             rebuildNodos(sbc.BaseConocimiento);
             this.Text += " (" + sbc.Nombre + ")";
+            DoubleBuffered = true;
             this.panelLienzo.Refresh();
         }
 
@@ -68,11 +70,6 @@ namespace SBC_Maker
                 Directory.CreateDirectory(path);
             }
             this.openFileDialogConjuntoDifuso.InitialDirectory = path;
-        }
-
-        private void MenuConfeccion_Load(object sender, EventArgs e)
-        {
-            DoubleBuffered = true;
         }
 
         private void conjuntoDifusoToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -180,9 +177,9 @@ namespace SBC_Maker
             Pen p = new Pen(Brushes.Black,5);
             p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             g.DrawLine(p,
-                       datos.Item2.Item1.X+45,
-                       datos.Item2.Item1.Y+45,
-                       datos.Item2.Item2.X+45,
+                       datos.Item2.Item1.X+70,
+                       datos.Item2.Item1.Y+30,
+                       datos.Item2.Item2.X+70,
                        datos.Item2.Item2.Y-3);
         }
 
@@ -241,6 +238,7 @@ namespace SBC_Maker
             if (!VerifyStructure(sbc.BaseConocimiento)) MessageBox.Show("Base de conocimiento invalida", "Error");
             else 
             {
+
                 var MenuEjecucion = new MenuEjecucion(sbc, true);
                 MenuEjecucion.ShowDialog();
             }

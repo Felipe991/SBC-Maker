@@ -42,12 +42,11 @@
             this.richTextBoxNombreRegla.BackColor = System.Drawing.SystemColors.Menu;
             this.richTextBoxNombreRegla.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxNombreRegla.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.richTextBoxNombreRegla.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBoxNombreRegla.Location = new System.Drawing.Point(5, 5);
-            this.richTextBoxNombreRegla.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.richTextBoxNombreRegla.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.richTextBoxNombreRegla.Location = new System.Drawing.Point(4, 4);
             this.richTextBoxNombreRegla.Name = "richTextBoxNombreRegla";
             this.richTextBoxNombreRegla.ReadOnly = true;
-            this.richTextBoxNombreRegla.Size = new System.Drawing.Size(80, 80);
+            this.richTextBoxNombreRegla.Size = new System.Drawing.Size(131, 51);
             this.richTextBoxNombreRegla.TabIndex = 0;
             this.richTextBoxNombreRegla.Text = "";
             this.richTextBoxNombreRegla.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxNombreRegla_MouseDoubleClick);
@@ -60,40 +59,39 @@
             this.editarRelacionesToolStripMenuItem,
             this.eliminarReglaToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 70);
             // 
             // editarReglaToolStripMenuItem
             // 
             this.editarReglaToolStripMenuItem.Name = "editarReglaToolStripMenuItem";
-            this.editarReglaToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.editarReglaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.editarReglaToolStripMenuItem.Text = "Editar regla";
             this.editarReglaToolStripMenuItem.Click += new System.EventHandler(this.editarReglaToolStripMenuItem_Click);
             // 
             // editarRelacionesToolStripMenuItem
             // 
             this.editarRelacionesToolStripMenuItem.Name = "editarRelacionesToolStripMenuItem";
-            this.editarRelacionesToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.editarRelacionesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.editarRelacionesToolStripMenuItem.Text = "Editar relaciones";
             this.editarRelacionesToolStripMenuItem.Click += new System.EventHandler(this.editarRelacionesToolStripMenuItem_Click);
             // 
             // eliminarReglaToolStripMenuItem
             // 
             this.eliminarReglaToolStripMenuItem.Name = "eliminarReglaToolStripMenuItem";
-            this.eliminarReglaToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.eliminarReglaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.eliminarReglaToolStripMenuItem.Text = "Eliminar regla";
             this.eliminarReglaToolStripMenuItem.Click += new System.EventHandler(this.eliminarReglaToolStripMenuItem_Click);
             // 
             // NodoUserControl
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Controls.Add(this.richTextBoxNombreRegla);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "NodoUserControl";
             this.Padding = new System.Windows.Forms.Padding(2);
-            this.Size = new System.Drawing.Size(90, 90);
+            this.Size = new System.Drawing.Size(140, 60);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NodoUserControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NodoUserControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NodoUserControl_MouseUp);

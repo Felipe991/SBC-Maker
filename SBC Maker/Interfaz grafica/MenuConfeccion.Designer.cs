@@ -278,7 +278,6 @@
             this.Text = "MenuPrincipal";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuConfeccion_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MenuConfeccion_FormClosed);
-            this.Load += new System.EventHandler(this.MenuConfeccion_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
