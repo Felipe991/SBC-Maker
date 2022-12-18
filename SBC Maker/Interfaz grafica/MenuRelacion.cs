@@ -37,6 +37,11 @@ namespace SBC_Maker.Interfaz_grafica
             this.numeroRelacion = relacionAntecedente.NumeroRelacion;
             this.relacionAntecedente = relacionAntecedente;
 
+            comboBoxConsecuente.Enabled = false;
+            comboBoxAntecedente.Enabled = false;
+            this.groupBoxRespuestaCerrada.Enabled = false;
+            this.comboBoxNRelacion.Enabled = false;
+            this.checkedListBoxRespuestaDifusa.Enabled = false;
             InitializeAntecedentes();
             InitializeComponentsValues();
             LoadRespuestas();

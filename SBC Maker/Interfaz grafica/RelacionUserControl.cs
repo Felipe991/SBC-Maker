@@ -39,5 +39,11 @@ namespace SBC_Maker.Interfaz_grafica
             return respNecesarias+")";
         }
 
+        private void buttonConfiguracion_Click(object sender, EventArgs e)
+        {
+            var menuRelacion = new MenuRelacion(this.listaAdyacencia,consecuente,relacionAntecedente);
+            if (menuRelacion.ShowDialog() == DialogResult.OK)
+                this.relacionAntecedente.Explicacion = menuRelacion.textBoxExplicacion.Text; 
+        }
     }
 }

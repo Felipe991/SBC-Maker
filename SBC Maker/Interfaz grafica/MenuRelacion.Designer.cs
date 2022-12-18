@@ -213,7 +213,7 @@
         private ComboBox comboBoxAntecedente;
         private ComboBox comboBoxConsecuente;
         private Label label2;
-        private RichTextBox textBoxExplicacion;
+        public RichTextBox textBoxExplicacion;
         private Label label3;
         private Label label4;
         private ComboBox comboBoxNRelacion;
