@@ -27,7 +27,7 @@ namespace SBC_Maker.Interfaz_grafica
                 groupBoxAlternativas.Controls.Add(new RadioButton() {
                     Text = alternativa,
                     Left = 5,
-                    Top = i!=1 ? i*20 : 5,
+                    Top = i*20,
                     Width = (TextRenderer.MeasureText(alternativa, Font)).Width + 20
                 });;
             }
