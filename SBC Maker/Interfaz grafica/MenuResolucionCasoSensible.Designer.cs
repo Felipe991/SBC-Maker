@@ -40,17 +40,19 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Enabled = false;
             this.richTextBox1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 11);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(409, 28);
+            this.richTextBox1.Size = new System.Drawing.Size(358, 21);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "RESPUESTA EN CONFLICTO";
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(7, 119);
+            this.panel1.Location = new System.Drawing.Point(10, 89);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(414, 158);
+            this.panel1.Size = new System.Drawing.Size(470, 118);
             this.panel1.TabIndex = 2;
             // 
             // richTextBox2
@@ -59,18 +61,18 @@
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox2.Enabled = false;
             this.richTextBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox2.Location = new System.Drawing.Point(12, 58);
+            this.richTextBox2.Location = new System.Drawing.Point(10, 52);
+            this.richTextBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(409, 55);
+            this.richTextBox2.Size = new System.Drawing.Size(470, 33);
             this.richTextBox2.TabIndex = 3;
             this.richTextBox2.Text = "¿Cual de las siguientes alternativas se ajusta más a su respuesta?";
             // 
             // enviarButton
             // 
-            this.enviarButton.Location = new System.Drawing.Point(319, 304);
-            this.enviarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.enviarButton.Location = new System.Drawing.Point(391, 226);
             this.enviarButton.Name = "enviarButton";
-            this.enviarButton.Size = new System.Drawing.Size(102, 31);
+            this.enviarButton.Size = new System.Drawing.Size(89, 23);
             this.enviarButton.TabIndex = 28;
             this.enviarButton.Text = "Responder";
             this.enviarButton.UseVisualStyleBackColor = true;
@@ -78,14 +80,15 @@
             // 
             // MenuResolucionCasoSensible
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 348);
+            this.ClientSize = new System.Drawing.Size(495, 261);
             this.Controls.Add(this.enviarButton);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MenuResolucionCasoSensible";
             this.Text = "MenuResolucionCasoSensible";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuResolucionCasoSensible_FormClosing);

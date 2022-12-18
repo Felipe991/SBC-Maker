@@ -38,7 +38,7 @@
             // 
             this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 35);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(395, 314);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(630, 450);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -52,7 +52,7 @@
             // 
             // CancelarButton
             // 
-            this.CancelarButton.Location = new System.Drawing.Point(225, 381);
+            this.CancelarButton.Location = new System.Drawing.Point(461, 492);
             this.CancelarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CancelarButton.Name = "CancelarButton";
             this.CancelarButton.Size = new System.Drawing.Size(86, 31);
@@ -63,7 +63,7 @@
             // 
             // GuardarButton
             // 
-            this.GuardarButton.Location = new System.Drawing.Point(318, 381);
+            this.GuardarButton.Location = new System.Drawing.Point(553, 492);
             this.GuardarButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(86, 31);
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 425);
+            this.ClientSize = new System.Drawing.Size(655, 532);
             this.Controls.Add(this.CancelarButton);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.label1);

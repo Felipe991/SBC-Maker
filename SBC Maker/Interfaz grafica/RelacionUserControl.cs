@@ -23,9 +23,9 @@ namespace SBC_Maker.Interfaz_grafica
             this.listaAdyacencia = listaAdyacencia;
             this.relacionesEliminadas = relacionesEliminadas;
             
-            this.labelConsecuente.Text = consecuente.Regla.Nombre;
-            this.labelAntecedente.Text = relacionAntecedente.Nodo.Regla.Nombre;
-            this.labelRespuesta.Text = GetRespuestasNecesarias();
+            this.richTextBoxConsecuente.Text = consecuente.Regla.Nombre;
+            this.richTextBoxAntecedente.Text = relacionAntecedente.Nodo.Regla.Nombre+Environment.NewLine;
+            this.richTextBoxAntecedente.Text+= GetRespuestasNecesarias();
         }
 
         private string GetRespuestasNecesarias()
@@ -45,5 +45,6 @@ namespace SBC_Maker.Interfaz_grafica
             if (menuRelacion.ShowDialog() == DialogResult.OK)
                 this.relacionAntecedente.Explicacion = menuRelacion.textBoxExplicacion.Text; 
         }
+        
     }
 }

@@ -37,7 +37,7 @@
             this.flowLayoutPanelConclusiones.AutoScroll = true;
             this.flowLayoutPanelConclusiones.Location = new System.Drawing.Point(12, 59);
             this.flowLayoutPanelConclusiones.Name = "flowLayoutPanelConclusiones";
-            this.flowLayoutPanelConclusiones.Size = new System.Drawing.Size(960, 350);
+            this.flowLayoutPanelConclusiones.Size = new System.Drawing.Size(993, 756);
             this.flowLayoutPanelConclusiones.TabIndex = 0;
             // 
             // label1
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 453);
+            this.ClientSize = new System.Drawing.Size(1017, 827);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanelConclusiones);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

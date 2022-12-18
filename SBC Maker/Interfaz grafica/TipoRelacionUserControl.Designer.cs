@@ -37,18 +37,18 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(5, 44);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 45);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(395, 110);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(580, 160);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(18, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 20);
+            this.label1.Size = new System.Drawing.Size(111, 25);
             this.label1.TabIndex = 2;
             this.label1.Text = "Relacion N°";
             // 
@@ -60,7 +60,7 @@
             this.buttonEliminar.FlatAppearance.BorderSize = 0;
             this.buttonEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEliminar.Image = ((System.Drawing.Image)(resources.GetObject("buttonEliminar.Image")));
-            this.buttonEliminar.Location = new System.Drawing.Point(365, 6);
+            this.buttonEliminar.Location = new System.Drawing.Point(563, 11);
             this.buttonEliminar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonEliminar.Name = "buttonEliminar";
             this.buttonEliminar.Size = new System.Drawing.Size(35, 32);
@@ -76,7 +76,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "TipoRelacionUserControl";
-            this.Size = new System.Drawing.Size(405, 165);
+            this.Size = new System.Drawing.Size(620, 231);
             this.ResumeLayout(false);
             this.PerformLayout();
 

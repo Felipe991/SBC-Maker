@@ -29,52 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelacionUserControl));
-            this.labelAntecedente = new System.Windows.Forms.Label();
-            this.labelConsecuente = new System.Windows.Forms.Label();
             this.labelFlecha = new System.Windows.Forms.Label();
-            this.labelRespuesta = new System.Windows.Forms.Label();
             this.buttonConfiguracion = new System.Windows.Forms.Button();
+            this.richTextBoxAntecedente = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxConsecuente = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // labelAntecedente
-            // 
-            this.labelAntecedente.AutoSize = true;
-            this.labelAntecedente.Font = new System.Drawing.Font("Segoe UI Semibold", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelAntecedente.Location = new System.Drawing.Point(50, 10);
-            this.labelAntecedente.Name = "labelAntecedente";
-            this.labelAntecedente.Size = new System.Drawing.Size(74, 15);
-            this.labelAntecedente.TabIndex = 0;
-            this.labelAntecedente.Text = "Antecedente";
-            // 
-            // labelConsecuente
-            // 
-            this.labelConsecuente.AutoSize = true;
-            this.labelConsecuente.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelConsecuente.Location = new System.Drawing.Point(211, 13);
-            this.labelConsecuente.Name = "labelConsecuente";
-            this.labelConsecuente.Size = new System.Drawing.Size(109, 23);
-            this.labelConsecuente.TabIndex = 1;
-            this.labelConsecuente.Text = "Consecuente";
             // 
             // labelFlecha
             // 
             this.labelFlecha.AutoSize = true;
             this.labelFlecha.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelFlecha.Location = new System.Drawing.Point(176, 13);
+            this.labelFlecha.Location = new System.Drawing.Point(230, 22);
             this.labelFlecha.Name = "labelFlecha";
-            this.labelFlecha.Size = new System.Drawing.Size(29, 23);
+            this.labelFlecha.Size = new System.Drawing.Size(25, 19);
             this.labelFlecha.TabIndex = 43;
             this.labelFlecha.Text = "🡺";
-            // 
-            // labelRespuesta
-            // 
-            this.labelRespuesta.AutoSize = true;
-            this.labelRespuesta.Font = new System.Drawing.Font("Segoe UI Semibold", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelRespuesta.Location = new System.Drawing.Point(50, 25);
-            this.labelRespuesta.Name = "labelRespuesta";
-            this.labelRespuesta.Size = new System.Drawing.Size(32, 15);
-            this.labelRespuesta.TabIndex = 44;
-            this.labelRespuesta.Text = "Resp";
             // 
             // buttonConfiguracion
             // 
@@ -84,36 +53,55 @@
             this.buttonConfiguracion.FlatAppearance.BorderSize = 0;
             this.buttonConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonConfiguracion.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfiguracion.Image")));
-            this.buttonConfiguracion.Location = new System.Drawing.Point(3, 9);
-            this.buttonConfiguracion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonConfiguracion.Location = new System.Drawing.Point(9, 10);
             this.buttonConfiguracion.Name = "buttonConfiguracion";
-            this.buttonConfiguracion.Size = new System.Drawing.Size(35, 32);
+            this.buttonConfiguracion.Size = new System.Drawing.Size(42, 39);
             this.buttonConfiguracion.TabIndex = 45;
             this.buttonConfiguracion.UseVisualStyleBackColor = false;
             this.buttonConfiguracion.Click += new System.EventHandler(this.buttonConfiguracion_Click);
             // 
+            // richTextBoxAntecedente
+            // 
+            this.richTextBoxAntecedente.BackColor = System.Drawing.SystemColors.Control;
+            this.richTextBoxAntecedente.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxAntecedente.Location = new System.Drawing.Point(62, 11);
+            this.richTextBoxAntecedente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richTextBoxAntecedente.Name = "richTextBoxAntecedente";
+            this.richTextBoxAntecedente.Size = new System.Drawing.Size(162, 39);
+            this.richTextBoxAntecedente.TabIndex = 46;
+            this.richTextBoxAntecedente.Text = "Antecedente\n(RESPUESTA)";
+            // 
+            // richTextBoxConsecuente
+            // 
+            this.richTextBoxConsecuente.BackColor = System.Drawing.SystemColors.Control;
+            this.richTextBoxConsecuente.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxConsecuente.Location = new System.Drawing.Point(261, 22);
+            this.richTextBoxConsecuente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richTextBoxConsecuente.Name = "richTextBoxConsecuente";
+            this.richTextBoxConsecuente.Size = new System.Drawing.Size(193, 28);
+            this.richTextBoxConsecuente.TabIndex = 47;
+            this.richTextBoxConsecuente.Text = "CONSECUENTE";
+            // 
             // RelacionUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.richTextBoxConsecuente);
+            this.Controls.Add(this.richTextBoxAntecedente);
             this.Controls.Add(this.buttonConfiguracion);
-            this.Controls.Add(this.labelRespuesta);
             this.Controls.Add(this.labelFlecha);
-            this.Controls.Add(this.labelConsecuente);
-            this.Controls.Add(this.labelAntecedente);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RelacionUserControl";
-            this.Size = new System.Drawing.Size(394, 47);
+            this.Size = new System.Drawing.Size(468, 60);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Label labelAntecedente;
-        private Label labelConsecuente;
         private Label labelFlecha;
-        private Label labelRespuesta;
         private Button buttonConfiguracion;
+        private RichTextBox richTextBoxAntecedente;
+        private RichTextBox richTextBoxConsecuente;
     }
 }

@@ -33,20 +33,25 @@
             // 
             // groupBoxAlternativas
             // 
-            this.groupBoxAlternativas.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxAlternativas.AutoSize = true;
+            this.groupBoxAlternativas.Location = new System.Drawing.Point(14, 11);
+            this.groupBoxAlternativas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxAlternativas.Name = "groupBoxAlternativas";
-            this.groupBoxAlternativas.Size = new System.Drawing.Size(414, 158);
+            this.groupBoxAlternativas.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxAlternativas.Size = new System.Drawing.Size(342, 100);
             this.groupBoxAlternativas.TabIndex = 0;
             this.groupBoxAlternativas.TabStop = false;
             // 
             // EjecucionRespuestaCerradaUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBoxAlternativas);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "EjecucionRespuestaCerradaUserControl";
-            this.Size = new System.Drawing.Size(420, 164);
+            this.Size = new System.Drawing.Size(368, 123);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

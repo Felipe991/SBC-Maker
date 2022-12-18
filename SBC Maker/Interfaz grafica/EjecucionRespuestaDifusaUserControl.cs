@@ -34,7 +34,7 @@ namespace SBC_Maker.Interfaz_grafica
         {
             List<Double> valoresPrincipales = getValoresPrincipales(conjuntoDifuso.funcionesPertenencia);
             int factorAux = getMayorFactorDecimal(valoresPrincipales);
-            return  factorAux <= 1 ? 1000 : factorAux;
+            return  factorAux <= 100 ? 1000 : factorAux;
         }
 
         private int getMayorFactorDecimal(List<double> valoresPrincipales)
@@ -255,12 +255,12 @@ namespace SBC_Maker.Interfaz_grafica
         private List<FuncionPertenencia> getFuncionesMayorPertenencia(List<FuncionPertenencia> funcionesPertenencia, List<double> valoresPertenencia, double mayorPertenencia)
         {
             List<FuncionPertenencia> funcionesMayorPertenencia= new();
+            int contador = 0;
             foreach (Double valorPertenencia in valoresPertenencia)
             {
                 if (valorPertenencia == mayorPertenencia)
-                {
-                    funcionesMayorPertenencia.Add(funcionesPertenencia[valoresPertenencia.IndexOf(valorPertenencia)]);
-                }
+                    funcionesMayorPertenencia.Add(funcionesPertenencia[contador]);
+                contador++;
             }
             return funcionesMayorPertenencia;
         }

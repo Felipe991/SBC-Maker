@@ -92,6 +92,7 @@ namespace SBC_Maker.Interfaz_grafica
                     Text = respuesta,
                     AutoSize = true,
                     Location = new Point(10, 10 + 20 * i),
+                    Width = (TextRenderer.MeasureText(respuesta, Font)).Width + 20
                 };
                 if (this.relacionAntecedente.RespuestasNecesarias[0]==radioButton.Text) radioButton.Checked = true;
                 this.groupBoxRespuestaCerrada.Controls.Add(radioButton);

@@ -13,7 +13,7 @@ namespace SBC_Maker.Interfaz_grafica
 {
     public partial class MenuConfiguracionSBC : Form
     {
-        private ConfiguracionMotor configuracionMotor;
+        public ConfiguracionMotor configuracionMotor;
         public MenuConfiguracionSBC(ConfiguracionMotor configuracionMotor)
         {
             InitializeComponent();
