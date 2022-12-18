@@ -251,6 +251,7 @@ namespace SBC_Maker.Logica.Sistema_basado_en_conocimiento
             int i = 0;
             while (true)
             {
+                if (nodosRecorridos.Count() == 0) break;
                 if (nodosRecorridos.Last().Equals(nodo))
                 {
                     nodosRecorridos.Remove(nodo);
