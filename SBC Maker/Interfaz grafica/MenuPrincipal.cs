@@ -47,6 +47,7 @@ namespace SBC_Maker.Interfaz_grafica
             SBC sbc = null;
             try
             {
+                openFileDialogSBC.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SBCs";
                 openFileDialogSBC.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
                 if (openFileDialogSBC.ShowDialog() == DialogResult.OK)
                 {

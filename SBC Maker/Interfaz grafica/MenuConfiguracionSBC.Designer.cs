@@ -169,6 +169,7 @@
             this.Controls.Add(this.CancelarButton);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MenuConfiguracionSBC";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

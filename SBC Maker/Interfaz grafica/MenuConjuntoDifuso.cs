@@ -180,6 +180,7 @@ namespace SBC_Maker
         private void archivarConjunto()
         {
             saveFileDialog1.FileName = this.conjuntoDifuso.nombre;
+            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos";
             saveFileDialog1.Filter = "CDF Conjunto Difuso (*.cdf)|*.cdf|All files (*.*)|*.*";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {

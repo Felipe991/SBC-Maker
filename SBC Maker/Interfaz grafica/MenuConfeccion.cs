@@ -59,7 +59,7 @@ namespace SBC_Maker
                 Directory.CreateDirectory(path);
             }
             this.openFileDialogSBC.InitialDirectory = path;
-            this.saveFileDialogSBCs.InitialDirectory = path;
+            this.saveFileDialogSBC.InitialDirectory = path;
         }
 
         private void setDirectoryConjuntoDifuso()
@@ -75,6 +75,7 @@ namespace SBC_Maker
 
         private void conjuntoDifusoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            openFileDialogConjuntoDifuso.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Conjuntos Difusos";
             openFileDialogConjuntoDifuso.Filter = "CDF Conjunto Difuso (*.cdf)|*.cdf|All files (*.*)|*.*";
             if (openFileDialogConjuntoDifuso.ShowDialog() == DialogResult.OK)
             {
@@ -283,12 +284,13 @@ namespace SBC_Maker
 
         private void saveSBC()
         {
-            saveFileDialogSBCs.FileName = this.sbc.Nombre;
-            saveFileDialogSBCs.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
-            if (saveFileDialogSBCs.ShowDialog() == DialogResult.OK)
+            saveFileDialogSBC.FileName = this.sbc.Nombre;
+            saveFileDialogSBC.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SBCs";
+            saveFileDialogSBC.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
+            if (saveFileDialogSBC.ShowDialog() == DialogResult.OK)
             {
-                File.Create(saveFileDialogSBCs.FileName).Close();
-                Stream stream = File.Open(saveFileDialogSBCs.FileName, FileMode.Create);
+                File.Create(saveFileDialogSBC.FileName).Close();
+                Stream stream = File.Open(saveFileDialogSBC.FileName, FileMode.Create);
                 var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                 bformatter.Serialize(stream, this.sbc);
                 stream.Close();
@@ -326,6 +328,7 @@ namespace SBC_Maker
             SBC sbc = null;
             try
             {
+                openFileDialogSBC.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SBCs";
                 openFileDialogSBC.Filter = "SBC Sistema Basado en Conocimiento (*.sbc)|*.sbc|All files (*.*)|*.*";
                 if (openFileDialogSBC.ShowDialog() == DialogResult.OK)
                 {
@@ -365,14 +368,5 @@ namespace SBC_Maker
             this.Close();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void toolStripButtonAgregarRegla_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

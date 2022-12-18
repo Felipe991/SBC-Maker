@@ -85,6 +85,7 @@
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MenuResolucionCasoSensible";
             this.Text = "MenuResolucionCasoSensible";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuResolucionCasoSensible_FormClosing);

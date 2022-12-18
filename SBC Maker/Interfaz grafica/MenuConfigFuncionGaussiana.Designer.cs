@@ -150,6 +150,7 @@
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MenuConfigFuncionGaussiana";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuConfigFuncionGaussiana";

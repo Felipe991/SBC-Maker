@@ -77,6 +77,7 @@
             this.Controls.Add(this.buttonEjecucion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonConfeccion);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MenuPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

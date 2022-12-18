@@ -96,6 +96,7 @@
             this.Controls.Add(this.buttonResponder);
             this.Controls.Add(this.buttonTerminar);
             this.Controls.Add(this.richTextBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MenuEjecucion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuEjecucion";
