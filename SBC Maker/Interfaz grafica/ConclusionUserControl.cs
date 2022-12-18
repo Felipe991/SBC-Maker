@@ -74,7 +74,7 @@ namespace SBC_Maker.Interfaz_grafica
             explicacionProposicional += nodo.Regla.Nombre + " <- ( ";
             foreach (Relacion relacionAntecedente in relacionesAntecedentes)
             {
-                if (relacionAntecedente.Explicacion != "") explicacionNatural += relacionAntecedente.Explicacion + " y ";
+                if (relacionAntecedente.Explicacion != "") explicacionNatural += relacionAntecedente.Explicacion;
                 explicacionProposicional += "( ";
                 explicacionProposicional += getTipoReglaString(relacionAntecedente.Nodo);
                 explicacionProposicional += relacionAntecedente.Nodo.Regla.Nombre + " ";
