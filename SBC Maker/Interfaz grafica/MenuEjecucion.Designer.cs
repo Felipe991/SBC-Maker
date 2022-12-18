@@ -43,15 +43,16 @@
             this.richTextBox1.Location = new System.Drawing.Point(40, 25);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(420, 120);
+            this.richTextBox1.Size = new System.Drawing.Size(420, 327);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "¿ESTÁ O ESTUVO USTED EMBARAZADA EN LOS ULTIMOS 30 DIAS?";
             // 
             // buttonTerminar
             // 
-            this.buttonTerminar.Location = new System.Drawing.Point(40, 380);
+            this.buttonTerminar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonTerminar.Location = new System.Drawing.Point(509, 296);
             this.buttonTerminar.Name = "buttonTerminar";
-            this.buttonTerminar.Size = new System.Drawing.Size(109, 49);
+            this.buttonTerminar.Size = new System.Drawing.Size(127, 56);
             this.buttonTerminar.TabIndex = 8;
             this.buttonTerminar.Text = "Terminar";
             this.buttonTerminar.UseVisualStyleBackColor = true;
@@ -59,9 +60,10 @@
             // 
             // buttonResponder
             // 
-            this.buttonResponder.Location = new System.Drawing.Point(351, 380);
+            this.buttonResponder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonResponder.Location = new System.Drawing.Point(802, 296);
             this.buttonResponder.Name = "buttonResponder";
-            this.buttonResponder.Size = new System.Drawing.Size(109, 49);
+            this.buttonResponder.Size = new System.Drawing.Size(127, 56);
             this.buttonResponder.TabIndex = 9;
             this.buttonResponder.Text = "Responder";
             this.buttonResponder.UseVisualStyleBackColor = true;
@@ -69,7 +71,7 @@
             // 
             // panelRespuesta
             // 
-            this.panelRespuesta.Location = new System.Drawing.Point(40, 201);
+            this.panelRespuesta.Location = new System.Drawing.Point(509, 92);
             this.panelRespuesta.Name = "panelRespuesta";
             this.panelRespuesta.Size = new System.Drawing.Size(420, 164);
             this.panelRespuesta.TabIndex = 10;
@@ -77,9 +79,10 @@
             // labelRespuesta
             // 
             this.labelRespuesta.AutoSize = true;
-            this.labelRespuesta.Location = new System.Drawing.Point(40, 178);
+            this.labelRespuesta.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelRespuesta.Location = new System.Drawing.Point(509, 25);
             this.labelRespuesta.Name = "labelRespuesta";
-            this.labelRespuesta.Size = new System.Drawing.Size(76, 20);
+            this.labelRespuesta.Size = new System.Drawing.Size(157, 41);
             this.labelRespuesta.TabIndex = 11;
             this.labelRespuesta.Text = "Respuesta";
             // 
@@ -87,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 453);
+            this.ClientSize = new System.Drawing.Size(982, 378);
             this.Controls.Add(this.labelRespuesta);
             this.Controls.Add(this.panelRespuesta);
             this.Controls.Add(this.buttonResponder);

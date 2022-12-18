@@ -18,63 +18,73 @@ namespace SBC_Maker.Interfaz_grafica
             InitializeComponent();
             this.nombreConclusionLabel.Text = conclusion.Regla.Nombre;
             this.richTextBoxIndicacion.Text = ((ReglaConclusion)conclusion.Regla).Indicacion;
-            if (showExplicacion) fillTextBoxExplicaciones(conclusion);
-            else this.richTextBoxExplicacion.Text+="Explicacion deshabilitada";
+            if (showExplicacion) fillTextBoxesExplicaciones(conclusion);
+            else 
+            {
+                this.richTextBoxExplicacionProposicional.Text += "Explicación deshabilitada";
+                this.richTextBoxExplicacionNatural.Text += "Explicación deshabilitada";
+            } 
         }
 
-        private void fillTextBoxExplicaciones(Nodo conclusion)
+        private void fillTextBoxesExplicaciones(Nodo conclusion)
         {
-            List<string> explicaciones = buildExplicaciones(conclusion);
-            explicaciones.Reverse();
-            foreach (string explicacion in explicaciones)
+            (List<string>,List<string>) explicaciones = getExplicaciones(conclusion);
+            List<string> explicacionesProposicionales = explicaciones.Item1;
+            List<string> explicacionesNaturales = explicaciones.Item2;
+            
+            explicacionesNaturales.Reverse();
+            explicacionesProposicionales.Reverse();
+            for (int i = 0; i < explicacionesProposicionales.Count; i++)
             {
-                this.richTextBoxExplicacion.Text += explicacion + Environment.NewLine;
+                this.richTextBoxExplicacionProposicional.Text += explicacionesProposicionales[i]+Environment.NewLine;
+                if (explicacionesNaturales[i]!="") this.richTextBoxExplicacionNatural.Text += explicacionesNaturales[i]+Environment.NewLine;
             }
         }
-
-        private List<string>buildExplicaciones(Nodo conclusion)
+        
+        private (List<string>,List<string>)getExplicaciones(Nodo conclusion)
         {
-            List<string> explicaciones = new();
+            List<string> explicacionesProposicionales = new();
+            List<string> explicacionesNaturales = new();
             List<Nodo> nodosRecorridos = new();
-            recorrerHaciaArriba(conclusion,nodosRecorridos,explicaciones);
-            return explicaciones;
+            recorrerHaciaArriba(conclusion,nodosRecorridos,explicacionesProposicionales,explicacionesNaturales);
+            return (explicacionesProposicionales,explicacionesNaturales);
         }
         
-        private void recorrerHaciaArriba(Nodo nodo, List<Nodo> nodosRecorridos,List<string> explicaciones)
+        private void recorrerHaciaArriba(Nodo nodo, List<Nodo> nodosRecorridos,List<string> explicacionesProp, List<string> explicacionesNat)
         {
             nodosRecorridos.Add(nodo);
             if (nodo.Nivel == 0) return;
-            explicaciones.Add(buildExplicacion(nodo));
+            (string , string) aux = buildExplicaciones(nodo);
+            explicacionesProp.Add(aux.Item1);
+            explicacionesNat.Add(aux.Item2);
             List<Relacion> relacionesAntecedentes = nodo.Antecedentes[nodo.IndiceRelacionCumplida];
             foreach (Relacion relacionAntecedente in relacionesAntecedentes)
             {
                 if (!nodosRecorridos.Contains(relacionAntecedente.Nodo))
-                    recorrerHaciaArriba(relacionAntecedente.Nodo, nodosRecorridos, explicaciones);
+                    recorrerHaciaArriba(relacionAntecedente.Nodo, nodosRecorridos, explicacionesProp,explicacionesNat);
             }
         }
         
-        private string buildExplicacion(Nodo nodo)
+        private (string,string) buildExplicaciones(Nodo nodo)
         {
-            string explicacion = "";
+            string explicacionProposicional = "";
+            string explicacionNatural = "";
             List<Relacion> relacionesAntecedentes = nodo.Antecedentes[nodo.IndiceRelacionCumplida];
-            explicacion += getTipoReglaString(nodo);
-            explicacion += nodo.Regla.Nombre + " <- ( ";
+            explicacionProposicional += getTipoReglaString(nodo);
+            explicacionProposicional += nodo.Regla.Nombre + " <- ( ";
             foreach (Relacion relacionAntecedente in relacionesAntecedentes)
             {
-                explicacion += "( ";
-                explicacion += getTipoReglaString(relacionAntecedente.Nodo);
-                explicacion += relacionAntecedente.Nodo.Regla.Nombre + " ";
-                if (relacionAntecedente.Explicacion != "") explicacion += relacionAntecedente.Explicacion;
-                else
-                {
-                    string enunciado = ((ReglaInformacion)relacionAntecedente.Nodo.Regla).Pregunta.Enunciado;
-                    explicacion += "P: " + enunciado + " R: " + relacionAntecedente.Nodo.Hecho.RespuestaFinal;
-                }
-                explicacion += " ) ";
-                if (relacionesAntecedentes.IndexOf(relacionAntecedente) == relacionesAntecedentes.Count - 1) explicacion += ")";
-                else explicacion += "y ";
+                if (relacionAntecedente.Explicacion != "") explicacionNatural += relacionAntecedente.Explicacion + " y ";
+                explicacionProposicional += "( ";
+                explicacionProposicional += getTipoReglaString(relacionAntecedente.Nodo);
+                explicacionProposicional += relacionAntecedente.Nodo.Regla.Nombre + " ";
+                string enunciado = ((ReglaInformacion)relacionAntecedente.Nodo.Regla).Pregunta.Enunciado;
+                explicacionProposicional += "P: " + enunciado + " R: " + relacionAntecedente.Nodo.Hecho.RespuestaFinal;
+                explicacionProposicional += " ) ";
+                if (relacionesAntecedentes.IndexOf(relacionAntecedente) == relacionesAntecedentes.Count - 1) explicacionProposicional += ")";
+                else explicacionProposicional += "y ";
             }
-            return explicacion;
+            return (explicacionProposicional, explicacionNatural);
         }
 
         private string getTipoReglaString(Nodo nodo)
