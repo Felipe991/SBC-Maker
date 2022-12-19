@@ -179,9 +179,29 @@ namespace SBC_Maker.Interfaz_grafica
             List<string> idsRelaciones = new();
             idsRelaciones.AddRange(getIdsRelacionesAntecedentes(nodo));
             idsRelaciones.AddRange(getIdsRelacionesConsecuentes(nodo));
+            idsRelaciones.AddRange(getIdsRelacionesColaterales(nodo));
             return idsRelaciones;
         }
-        
+
+        private List<string> getIdsRelacionesColaterales(Nodo nodo)
+        {
+            List<string> idsRelaciones = new();
+            foreach (Nodo consecuente in nodo.Consecuentes)
+            {
+                foreach (List<Relacion> antecedentes in consecuente.Antecedentes)
+                {
+                    Relacion relacion = antecedentes.Find(x => x.Nodo.Equals(nodo));
+                    if (relacion == null) continue;
+                    foreach(Relacion antecedente in antecedentes)
+                    {
+                        if (antecedente.Nodo.Equals(nodo)) continue;
+                        idsRelaciones.Add(antecedente.Nodo.Regla.Nombre + consecuente.Regla.Nombre);
+                    }
+                }
+            }
+            return idsRelaciones;
+        }
+
         private List<string> getIdsRelacionesConsecuentes(Nodo nodoAntecedente)
         {
             List<string> idsRelacionesConsecuentes = new();
