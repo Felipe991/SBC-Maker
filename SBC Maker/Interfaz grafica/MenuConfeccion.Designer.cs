@@ -204,7 +204,7 @@
             this.treeViewRelaciones.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.treeViewRelaciones.Location = new System.Drawing.Point(0, 0);
             this.treeViewRelaciones.Name = "treeViewRelaciones";
-            this.treeViewRelaciones.Size = new System.Drawing.Size(131, 507);
+            this.treeViewRelaciones.Size = new System.Drawing.Size(267, 507);
             this.treeViewRelaciones.TabIndex = 0;
             this.treeViewRelaciones.Visible = false;
             // 
