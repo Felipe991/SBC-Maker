@@ -38,25 +38,22 @@ namespace SBC_Maker.Interfaz_grafica
             this.relacionAntecedente = relacionAntecedente;
             this.textBoxExplicacion.Text = relacionAntecedente.Explicacion;
 
-            comboBoxConsecuente.Enabled = false;
-            comboBoxAntecedente.Enabled = false;
-            this.groupBoxRespuestaCerrada.Enabled = false;
-            this.comboBoxNRelacion.Enabled = false;
-            this.checkedListBoxRespuestaDifusa.Enabled = false;
-            InitializeAntecedentes();
             InitializeComponentsValues();
             LoadRespuestas();
         }
 
         private void InitializeComponentsValues()
         {
-            this.comboBoxAntecedente.SelectedItem = this.antecedente.Regla.Nombre;
-            this.comboBoxConsecuente.SelectedItem = this.consecuente.Regla.Nombre;
-            this.comboBoxNRelacion.SelectedItem = this.numeroRelacion;
+            this.comboBoxAntecedente.Text = this.antecedente.Regla.Nombre;
+            this.comboBoxConsecuente.Text = this.consecuente.Regla.Nombre;
+            this.comboBoxNRelacion.Text = this.numeroRelacion.ToString();
+            this.textBoxExplicacion.Text = relacionAntecedente.Explicacion;
 
             this.comboBoxAntecedente.Enabled = false;
             this.comboBoxConsecuente.Enabled = false;
             this.comboBoxNRelacion.Enabled = false;
+            this.groupBoxRespuestaCerrada.Enabled = false;
+            this.checkedListBoxRespuestaDifusa.Enabled = false;
         }
 
         private void LoadRespuestas()
