@@ -71,9 +71,9 @@
             this.configuracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1165, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1019, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,7 +86,7 @@
             this.guardarComoToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // nuevoToolStripMenuItem
@@ -95,20 +95,20 @@
             this.proyectoToolStripMenuItem,
             this.conjuntoDifusoToolStripMenuItem});
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             // 
             // proyectoToolStripMenuItem
             // 
             this.proyectoToolStripMenuItem.Name = "proyectoToolStripMenuItem";
-            this.proyectoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.proyectoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.proyectoToolStripMenuItem.Text = "Proyecto";
             this.proyectoToolStripMenuItem.Click += new System.EventHandler(this.proyectoToolStripMenuItem_Click);
             // 
             // conjuntoDifusoToolStripMenuItem
             // 
             this.conjuntoDifusoToolStripMenuItem.Name = "conjuntoDifusoToolStripMenuItem";
-            this.conjuntoDifusoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.conjuntoDifusoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.conjuntoDifusoToolStripMenuItem.Text = "Conjunto difuso";
             this.conjuntoDifusoToolStripMenuItem.Click += new System.EventHandler(this.conjuntoDifusoToolStripMenuItem_Click);
             // 
@@ -118,55 +118,55 @@
             this.proyectoToolStripMenuItem1,
             this.conjuntoDifusoToolStripMenuItem1});
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             // 
             // proyectoToolStripMenuItem1
             // 
             this.proyectoToolStripMenuItem1.Name = "proyectoToolStripMenuItem1";
-            this.proyectoToolStripMenuItem1.Size = new System.Drawing.Size(199, 26);
+            this.proyectoToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.proyectoToolStripMenuItem1.Text = "Proyecto";
             this.proyectoToolStripMenuItem1.Click += new System.EventHandler(this.proyectoToolStripMenuItem1_Click);
             // 
             // conjuntoDifusoToolStripMenuItem1
             // 
             this.conjuntoDifusoToolStripMenuItem1.Name = "conjuntoDifusoToolStripMenuItem1";
-            this.conjuntoDifusoToolStripMenuItem1.Size = new System.Drawing.Size(199, 26);
+            this.conjuntoDifusoToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.conjuntoDifusoToolStripMenuItem1.Text = "Conjunto Difuso";
             this.conjuntoDifusoToolStripMenuItem1.Click += new System.EventHandler(this.conjuntoDifusoToolStripMenuItem1_Click);
             // 
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
             // guardarComoToolStripMenuItem
             // 
             this.guardarComoToolStripMenuItem.Name = "guardarComoToolStripMenuItem";
-            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.guardarComoToolStripMenuItem.Text = "Guardar como...";
             this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.guardarComoToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // ejecutarToolStripMenuItem
             // 
             this.ejecutarToolStripMenuItem.Name = "ejecutarToolStripMenuItem";
-            this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.ejecutarToolStripMenuItem.Text = "Ejecutar";
             this.ejecutarToolStripMenuItem.Click += new System.EventHandler(this.ejecutarToolStripMenuItem_Click);
             // 
             // configuracionToolStripMenuItem
             // 
             this.configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
-            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(116, 24);
+            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.configuracionToolStripMenuItem.Text = "Configuracion";
             this.configuracionToolStripMenuItem.Click += new System.EventHandler(this.configuracionToolStripMenuItem_Click);
             // 
@@ -174,10 +174,9 @@
             // 
             this.panel2.AutoSize = true;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 30);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1165, 0);
+            this.panel2.Size = new System.Drawing.Size(1019, 0);
             this.panel2.TabIndex = 2;
             // 
             // panelLienzo
@@ -190,9 +189,8 @@
             this.panelLienzo.Controls.Add(this.treeViewRelaciones);
             this.panelLienzo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLienzo.Location = new System.Drawing.Point(0, 0);
-            this.panelLienzo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelLienzo.Name = "panelLienzo";
-            this.panelLienzo.Size = new System.Drawing.Size(1159, 682);
+            this.panelLienzo.Size = new System.Drawing.Size(1014, 511);
             this.panelLienzo.TabIndex = 3;
             this.panelLienzo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLienzo_Paint);
             this.panelLienzo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelLienzo_MouseDown);
@@ -205,9 +203,8 @@
             this.treeViewRelaciones.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeViewRelaciones.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.treeViewRelaciones.Location = new System.Drawing.Point(0, 0);
-            this.treeViewRelaciones.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.treeViewRelaciones.Name = "treeViewRelaciones";
-            this.treeViewRelaciones.Size = new System.Drawing.Size(149, 678);
+            this.treeViewRelaciones.Size = new System.Drawing.Size(131, 507);
             this.treeViewRelaciones.TabIndex = 0;
             this.treeViewRelaciones.Visible = false;
             // 
@@ -221,8 +218,9 @@
             this.toolStripButtonAgregarRegla.Image = global::SBC_Maker.Properties.Resources._1491254405_plusaddmoredetail_82972;
             this.toolStripButtonAgregarRegla.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAgregarRegla.Name = "toolStripButtonAgregarRegla";
-            this.toolStripButtonAgregarRegla.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonAgregarRegla.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAgregarRegla.Text = "toolStripButtonAgregarRegla";
+            this.toolStripButtonAgregarRegla.ToolTipText = "Agregar Regla";
             this.toolStripButtonAgregarRegla.Click += new System.EventHandler(this.toolStripButtonAgregarRegla_Click);
             // 
             // toolStripButtonAgregarRelacion
@@ -231,8 +229,9 @@
             this.toolStripButtonAgregarRelacion.Image = global::SBC_Maker.Properties.Resources.arrow_arrows_back_direction_left_navigation_right_icon_123236;
             this.toolStripButtonAgregarRelacion.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAgregarRelacion.Name = "toolStripButtonAgregarRelacion";
-            this.toolStripButtonAgregarRelacion.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonAgregarRelacion.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAgregarRelacion.Text = "toolStripButtonAgregarRelacion";
+            this.toolStripButtonAgregarRelacion.ToolTipText = "Agregar relación";
             this.toolStripButtonAgregarRelacion.Click += new System.EventHandler(this.toolStripButtonAgregarRelacion_Click);
             // 
             // toolStripButtonVerRelaciones
@@ -242,8 +241,9 @@
             this.toolStripButtonVerRelaciones.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonVerRelaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonVerRelaciones.Name = "toolStripButtonVerRelaciones";
-            this.toolStripButtonVerRelaciones.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonVerRelaciones.Size = new System.Drawing.Size(23, 24);
             this.toolStripButtonVerRelaciones.Text = "toolStripButton1";
+            this.toolStripButtonVerRelaciones.ToolTipText = "Mostrar arbol de relaciones";
             this.toolStripButtonVerRelaciones.Click += new System.EventHandler(this.toolStripButtonVerRelaciones_Click);
             // 
             // toolStrip1
@@ -255,7 +255,7 @@
             this.toolStripButtonVerRelaciones});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1165, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1019, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -265,9 +265,10 @@
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 30);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1165, 715);
+            this.panel1.Size = new System.Drawing.Size(1019, 535);
             this.panel1.TabIndex = 4;
             // 
             // panel3
@@ -276,23 +277,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.panelLienzo);
-            this.panel3.Location = new System.Drawing.Point(3, 30);
+            this.panel3.Location = new System.Drawing.Point(3, 22);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1159, 682);
+            this.panel3.Size = new System.Drawing.Size(1014, 511);
             this.panel3.TabIndex = 4;
             // 
             // MenuConfeccion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1165, 745);
+            this.ClientSize = new System.Drawing.Size(1019, 559);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MenuConfeccion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuPrincipal";
