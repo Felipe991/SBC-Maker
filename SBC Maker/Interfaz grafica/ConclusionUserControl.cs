@@ -34,13 +34,27 @@ namespace SBC_Maker.Interfaz_grafica
             
             explicacionesNaturales.Reverse();
             explicacionesProposicionales.Reverse();
-            for (int i = 0; i < explicacionesProposicionales.Count; i++)
-            {
-                this.richTextBoxExplicacionProposicional.Text += explicacionesProposicionales[i]+Environment.NewLine;
-                if (explicacionesNaturales[i]!="") this.richTextBoxExplicacionNatural.Text += explicacionesNaturales[i]+Environment.NewLine;
-            }
+            addExplicaciones(explicacionesNaturales,explicacionesProposicionales);
         }
-        
+
+        private void addExplicaciones(List<string> explicacionesNaturales, List<string> explicacionesProposicionales)
+        {
+            addExplicacionesNaturales(explicacionesNaturales);
+            addExplicacionesProposicionales(explicacionesProposicionales);
+        }
+
+        private void addExplicacionesProposicionales(List<string> explicacionesProposicionales)
+        {
+            foreach (string explicacionProposicional in explicacionesProposicionales)
+                this.richTextBoxExplicacionProposicional.Text += explicacionProposicional + Environment.NewLine; 
+        }
+
+        private void addExplicacionesNaturales(List<string> explicacionesNaturales)
+        {
+            foreach (string explicacionesNatural in explicacionesNaturales)
+                this.richTextBoxExplicacionNatural.Text += explicacionesNatural + Environment.NewLine;
+        }
+
         private (List<string>,List<string>)getExplicaciones(Nodo conclusion)
         {
             List<string> explicacionesProposicionales = new();
@@ -55,8 +69,8 @@ namespace SBC_Maker.Interfaz_grafica
             nodosRecorridos.Add(nodo);
             if (nodo.Nivel == 0) return;
             (string , string) aux = buildExplicaciones(nodo);
-            explicacionesProp.Add(aux.Item1);
-            explicacionesNat.Add(aux.Item2);
+            if(!explicacionesProp.Contains(aux.Item1)) explicacionesProp.Add(aux.Item1);
+            if(!explicacionesNat.Contains(aux.Item2)) explicacionesNat.Add(aux.Item2);
             List<Relacion> relacionesAntecedentes = nodo.Antecedentes[nodo.IndiceRelacionCumplida];
             foreach (Relacion relacionAntecedente in relacionesAntecedentes)
             {
